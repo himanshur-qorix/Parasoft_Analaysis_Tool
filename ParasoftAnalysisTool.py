@@ -3,7 +3,13 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 import pandas as pd
 from collections import Counter
-
+#------------------------------------------------
+# Parasoft_Analysis_Tool
+# Version:V1.0.0
+# Developer: Himanshu R
+# Platform: Windows
+# CodeSet: Python
+#------------------------------------------------
 
 # -------------------------------------------------
 # 1. Parse Parasoft HTML
