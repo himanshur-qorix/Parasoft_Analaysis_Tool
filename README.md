@@ -1,8 +1,12 @@
 # Parasoft_Analaysis_Tool
 Parasoft_Analysis_Tool
+
 Version:1.0.0
+
 Developer: Himanshu R
+
 Platform: Windows
+
 CodeSet: Python
 
 How to:
