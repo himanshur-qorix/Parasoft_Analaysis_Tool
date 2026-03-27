@@ -1,5 +1,5 @@
-# Parasoft_Analaysis_Tool
-Parasoft_Analysis_Tool
+
+Tool: **Parasoft_Analysis_Tool**
 
 Version:1.0.0
 
@@ -9,7 +9,7 @@ Platform: Windows
 
 CodeSet: Python
 
-How to:
+**How to use the tool:**
 
 Step1: Copy and past the report_dev1.html from the parsoft report to the tool folder
 
