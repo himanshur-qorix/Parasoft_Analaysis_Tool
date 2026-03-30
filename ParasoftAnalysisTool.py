@@ -59,6 +59,68 @@ def parse_parasoft_report(report_path):
 # -------------------------------------------------
 # 2. Load Qorix deviations (CERT & MISRA only)
 # -------------------------------------------------
+# 3. Knowledge Base for Fixes (RAG)
+# -------------------------------------------------
+import json
+
+KNOWLEDGE_BASE_PATH = "fix_knowledge_base.json"
+
+def load_knowledge_base():
+    if Path(KNOWLEDGE_BASE_PATH).exists():
+        with open(KNOWLEDGE_BASE_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return []
+
+def save_knowledge_base(kb):
+    with open(KNOWLEDGE_BASE_PATH, "w", encoding="utf-8") as f:
+        json.dump(kb, f, indent=2)
+
+def retrieve_similar_fix(violation_id, violation_text):
+    kb = load_knowledge_base()
+    # Simple retrieval: match by violation ID
+    for entry in kb:
+        if entry["Violation ID"] == violation_id:
+            return entry["Fix"]
+    return None
+
+def log_fix(violation, fix):
+    kb = load_knowledge_base()
+    kb.append({
+        "Violation": violation["Violation"],
+        "Violation ID": violation["Violation ID"],
+        "File": violation["File"],
+        "Line number": violation["Line number"],
+        "Fix": fix
+    })
+    save_knowledge_base(kb)
+
+# -------------------------------------------------
+# 4. Main RAG Workflow
+# -------------------------------------------------
+def analyze_and_fix(report_path, apply_fixes=False):
+    violations = parse_parasoft_report(report_path)
+    for v in violations:
+        fix = retrieve_similar_fix(v["Violation ID"], v["Violation"])
+        if fix:
+            print(f"Suggested fix for {v['Violation ID']} at {v['File']}:{v['Line number']}: {fix}")
+            if apply_fixes:
+                # Placeholder: apply fix logic here
+                print(f"Applying fix: {fix}")
+                log_fix(v, fix)
+        else:
+            print(f"No fix found for {v['Violation ID']} at {v['File']}:{v['Line number']}. Please fix manually and log.")
+
+# -------------------------------------------------
+# 5. CLI Entry Point
+# -------------------------------------------------
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python ParasoftAnalysisTool.py <parasoft_report.html> [--apply]")
+        sys.exit(1)
+    report = sys.argv[1]
+    apply = "--apply" in sys.argv
+    analyze_and_fix(report, apply_fixes=apply)
+# -------------------------------------------------
 def load_justifiable_mapping(qorix_excel):
     sheets = ["CERT Rule analysis", "MISRA Rule analysis"]
     mapping = {}
