@@ -10,15 +10,10 @@ echo.
 
 color 00
 
-echo.
-echo ==================================================
-echo Analysis completed successfully.
-
 echo Starting analysis...
 echo.
 
-REM Usage: Run with or without --apply to auto-fix where possible
-python ParasoftAnalysisTool.py report_dev1.html --apply
+python ParasoftAnalysisTool.py report_dev1.html Qorix_CP_Common_Deviations.xlsx
 
 echo.
 echo ==================================================
