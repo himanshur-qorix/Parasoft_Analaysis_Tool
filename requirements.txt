@@ -1,0 +1,19 @@
+# Parasoft AI Agent Requirements
+# Version: 2.0.0
+
+# Core dependencies
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+pandas>=2.0.0
+openpyxl>=3.1.0
+
+# Optional dependencies for enhanced functionality
+# Uncomment if you want to use AI integrations
+# openai>=1.0.0
+# anthropic>=0.18.0
+# langchain>=0.1.0
+
+# Development dependencies (optional)
+# pytest>=7.4.0
+# black>=23.0.0
+# flake8>=6.0.0

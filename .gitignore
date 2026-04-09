@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+src/__pycache__/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+parasoft_agent.log
+
+# Reports (optional - uncomment if you don't want to track reports)
+# reports/
+# fixes/
+
+# Knowledge Base (optional - uncomment if you don't want to track knowledge base)
+# knowledge_base/
+
+# Parasoft Reports
+report_dev1.html
+report_dev*.html
+*.html
+
+# Excel files (optional - uncomment if you don't want to track Excel outputs)
+# *.xlsx
+# *.xls
+
+# Temporary files
+*.tmp
+*.temp
+~*
+
+# OS specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backup files
+*.bak
+*.backup
+*_backup/
+
+# Test files
+test_*.py
+tests/
+
+# Configuration (uncomment if you don't want to track config)
+# config/config.json

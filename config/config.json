@@ -1,0 +1,66 @@
+{
+  "agent_config": {
+    "version": "2.0.0",
+    "name": "Parasoft AI Agent",
+    "description": "AI-powered agent for Parasoft analysis with knowledge database management"
+  },
+  "workspace": {
+    "default_knowledge_base_dir": "knowledge_base",
+    "default_reports_dir": "reports",
+    "default_fixes_dir": "fixes"
+  },
+  "analysis": {
+    "auto_generate_fixes": true,
+    "auto_generate_justifications": false,
+    "severity_threshold": "MEDIUM",
+    "max_files_per_violation": 100
+  },
+  "git_integration": {
+    "enabled": true,
+    "track_commits": true,
+    "create_analysis_branches": false
+  },
+  "knowledge_database": {
+    "auto_save": true,
+    "backup_enabled": true,
+    "max_backup_count": 5,
+    "export_format": "json"
+  },
+  "reporting": {
+    "generate_summary": true,
+    "export_to_excel": true,
+    "include_statistics": true
+  },
+  "violation_categories": {
+    "CERT": {
+      "priority": "HIGH",
+      "auto_fix": false
+    },
+    "MISRA": {
+      "priority": "HIGH",
+      "auto_fix": false
+    },
+    "CWE": {
+      "priority": "HIGH",
+      "auto_fix": false
+    },
+    "OTHER": {
+      "priority": "MEDIUM",
+      "auto_fix": false
+    }
+  },
+  "ai_integration": {
+    "enabled": false,
+    "provider": "none",
+    "model": "",
+    "api_key_env_var": "AI_API_KEY",
+    "max_tokens": 2000,
+    "temperature": 0.3
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "parasoft_agent.log",
+    "max_size_mb": 10,
+    "backup_count": 3
+  }
+}
