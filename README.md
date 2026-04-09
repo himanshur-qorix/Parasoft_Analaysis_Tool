@@ -17,10 +17,11 @@
 1. **Git Integration** - Seamlessly integrated with Visual Studio Code and Git repositories
 2. **Intelligent Analysis** - AI-powered analysis of report_dev1 reports for each module
 3. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
-4. **Unique Violation Tracking** - Identifies and tracks unique violations across analyses
-5. **Code Fix Generation** - Provides automated fix suggestions for violations
-6. **Parasoft Justifications** - Generates Parasoft-formatted justification comments
-7. **Query Tool** - Comprehensive tool to analyze and export knowledge database
+4. **Excel Report Generation** - Automatically generates comprehensive Excel reports with violation details
+5. **Unique Violation Tracking** - Identifies and tracks unique violations across analyses
+6. **Code Fix Generation** - Provides automated fix suggestions for violations
+7. **Parasoft Justifications** - Generates Parasoft-formatted justification comments
+8. **Query Tool** - Comprehensive tool to analyze and export knowledge database
 
 ### Knowledge Database Features
 - **Module-Specific Storage**: Each module gets its own `{Module}_KnowledgeDatabase.json`
@@ -171,8 +172,9 @@ knowledge_base/                  # Module-specific databases
 ├── ModuleB_KnowledgeDatabase.json
 └── ...
 
-reports/                         # Analysis summaries
+reports/                         # Analysis summaries and Excel reports
 ├── Mka_analysis_summary.json
+├── Mka_violations_report.xlsx  # Excel report with violations
 └── ...
 
 fixes/                           # Fix suggestions
@@ -181,6 +183,12 @@ fixes/                           # Fix suggestions
 │   └── Mka_justifications_20260409_143025.txt
 └── ...
 ```
+
+### Excel Report Contents
+The generated Excel report (`{Module}_violations_report.xlsx`) contains:
+- **Summary Sheet**: Analysis statistics and metrics
+- **Unique Violations Sheet**: Count of each violation type (sorted by frequency)
+- **Detailed Violations Sheet**: All violations with file and line number information
 
 ### Knowledge Database Format
 Each `{Module}_KnowledgeDatabase.json` contains:

@@ -29,7 +29,28 @@ See [STRUCTURE.md](../STRUCTURE.md) for complete details.
 
 ---
 
-## 🏗️ Technical Documentation
+## � Direct Violation Capture (New!)
+
+| Document | Purpose | When to Read |
+|----------|---------|--------------|
+| [VIOLATION_CAPTURE_GUIDE.md](VIOLATION_CAPTURE_GUIDE.md) | Direct source code scanning | Scan code without Parasoft |
+| [EXCEL_REPORT_GUIDE.md](EXCEL_REPORT_GUIDE.md) | Excel report generation | Professional violation reports |
+| [capture_violations.py](../capture_violations.py) | Standalone scanning tool | Detect violations directly |
+
+**What's New:** The violation capture tool scans C/C++ source files directly to detect buffer overflows, memory leaks, MISRA/CERT violations - **without requiring Parasoft**. Generate reports in JSON, Text, CSV, or **Excel** format!
+
+**Quick Usage:**
+```bash
+# Scan and generate Excel report
+python capture_violations.py src/ --format excel
+
+# Scan with knowledge base export
+python capture_violations.py src/ --module MyModule --kb
+```
+
+---
+
+## �🏗️ Technical Documentation
 
 | Document | Purpose | Audience |
 |----------|---------|----------|
@@ -114,6 +135,12 @@ See [STRUCTURE.md](../STRUCTURE.md) for complete details.
 ### Task: Generate Reports
 - [README.md](README.md) - "Understanding the Analysis" section
 - [EXAMPLE_WORKFLOW.md](EXAMPLE_WORKFLOW.md) - Step 4: Export for Team Review
+- [EXCEL_REPORT_GUIDE.md](EXCEL_REPORT_GUIDE.md) - **NEW:** Excel report generation
+
+### Task: Scan Source Code Directly
+- [VIOLATION_CAPTURE_GUIDE.md](VIOLATION_CAPTURE_GUIDE.md) - Complete scanning guide
+- [EXCEL_REPORT_GUIDE.md](EXCEL_REPORT_GUIDE.md) - Excel output format
+- [capture_violations.py](../capture_violations.py) - Scanning tool
 
 ### Task: Apply Fixes to Code
 - [EXAMPLE_WORKFLOW.md](EXAMPLE_WORKFLOW.md) - Step 6: Apply Fixes

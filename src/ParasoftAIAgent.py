@@ -129,6 +129,8 @@ class ParasoftAIAgent:
         """
         from KnowledgeDatabaseManager import KnowledgeDatabaseManager
         from ViolationAnalyzer import ViolationAnalyzer
+        import pandas as pd
+        from collections import Counter
         
         logger.info(f"Starting analysis for module: {module_name}")
         logger.info(f"Report: {report_path}")
@@ -147,6 +149,11 @@ class ParasoftAIAgent:
         
         logger.info(f"Found {len(violations)} total violations")
         
+        # Generate Excel report
+        excel_path = self.reports_dir / f"{module_name}_violations_report.xlsx"
+        self._generate_excel_report(violations, excel_path, module_name)
+        logger.info(f"Excel report generated: {excel_path}")
+        
         # Analyze violations and update knowledge base
         analysis_results = analyzer.analyze_violations(violations)
         
@@ -161,8 +168,62 @@ class ParasoftAIAgent:
             'new_unique_violations': analysis_results['new_unique_count'],
             'existing_violations': analysis_results['existing_count'],
             'knowledge_base_path': str(kb_path),
+            'excel_report_path': str(excel_path),
             'timestamp': datetime.now().isoformat()
         }
+    
+    def _generate_excel_report(self, violations, output_path, module_name):
+        """
+        Generate an Excel report from violations data
+        
+        Args:
+            violations: List of violation dictionaries
+            output_path: Path to save the Excel file
+            module_name: Name of the module
+        """
+        import pandas as pd
+        from collections import Counter
+        
+        df = pd.DataFrame(violations)
+        
+        # Create detailed violations sheet (sorted by file and line number)
+        detailed_df = df[["Violation", "Violation ID", "File", "Line number"]].sort_values(
+            by=["File", "Line number"]
+        )
+        
+        # Create unique violations summary sheet
+        counter = Counter(zip(df["Violation"], df["Violation ID"]))
+        unique_df = pd.DataFrame(
+            [{"Violation": v, "Violation ID": r, "Violation Count": c}
+             for (v, r), c in counter.items()]
+        ).sort_values(by="Violation Count", ascending=False)
+        
+        # Create summary statistics sheet
+        stats_data = {
+            'Metric': [
+                'Total Violations',
+                'Unique Violation Types',
+                'Files Affected',
+                'Module Name',
+                'Analysis Date'
+            ],
+            'Value': [
+                len(violations),
+                len(unique_df),
+                df['File'].nunique(),
+                module_name,
+                datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            ]
+        }
+        stats_df = pd.DataFrame(stats_data)
+        
+        # Write to Excel with multiple sheets
+        with pd.ExcelWriter(output_path, engine="openpyxl") as writer:
+            stats_df.to_excel(writer, sheet_name="Summary", index=False)
+            unique_df.to_excel(writer, sheet_name="Unique Violations", index=False)
+            detailed_df.to_excel(writer, sheet_name="Detailed Violations", index=False)
+        
+        logger.info(f"Excel report created with {len(violations)} violations across {df['File'].nunique()} files")
     
     def generate_fixes(self, module_name, violation_ids=None):
         """
@@ -325,6 +386,7 @@ def main():
         print(f"  Total violations: {results['analysis'].get('total_violations', 0)}")
         print(f"  New unique violations: {results['analysis'].get('new_unique_violations', 0)}")
         print(f"  Knowledge base: {results['analysis'].get('knowledge_base_path', 'N/A')}")
+        print(f"  Excel report: {results['analysis'].get('excel_report_path', 'N/A')}")
         
         if results.get('fixes'):
             print(f"  Fixes generated: {results['fixes'].get('fixes_generated', 0)}")

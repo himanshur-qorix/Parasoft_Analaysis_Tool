@@ -167,12 +167,12 @@ def generate_excel(records, output_excel, qorix_excel):
 # 6. Main
 # -------------------------------------------------
 def main():
-    if len(sys.argv) != 3:
-        print("Usage: python Tool_3.py report.html Qorix_CP_Common_Deviations.xlsx")
+
+    if len(sys.argv) < 2:
+        print("Usage: python ParasoftAnalysisTool.py <report.html> [Qorix_CP_Common_Deviations.xlsx]")
         sys.exit(1)
 
     report = Path(sys.argv[1])
-    qorix = Path(sys.argv[2])
     output_excel = report.with_name(report.stem + "_output.xlsx")
 
     records = parse_parasoft_report(report)
@@ -180,8 +180,22 @@ def main():
         print("No violations found.")
         return
 
-    generate_excel(records, output_excel, qorix)
-    print(f"✅ Excel generated: {output_excel}")
+    if len(sys.argv) >= 3:
+        qorix = Path(sys.argv[2])
+        generate_excel(records, output_excel, qorix)
+    else:
+        # Generate Excel without justifiable mapping
+        df = pd.DataFrame(records)
+        detailed_df = df[["Violation", "Violation ID", "File", "Line number"]].sort_values(by=["File", "Line number"])
+        counter = Counter(zip(df["Violation"], df["Violation ID"]))
+        unique_df = pd.DataFrame(
+            [{"Violation": v, "Violation ID": r, "Violation Count": c}
+             for (v, r), c in counter.items()]
+        )
+        with pd.ExcelWriter(output_excel, engine="openpyxl") as writer:
+            unique_df.to_excel(writer, "Unique Violations", index=False)
+            detailed_df.to_excel(writer, "Detailed Violations", index=False)
+        print(f"✅ Excel generated (without justifiable mapping): {output_excel}")
 
 
 if __name__ == "__main__":
