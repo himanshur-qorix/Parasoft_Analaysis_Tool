@@ -11,12 +11,14 @@ All Python scripts have been moved to the `scripts/` folder for better organizat
 
 ### Files Moved
 
-| File | Old Location | New Location |
-|------|-------------|--------------|
-| run_agent.py | Root | `scripts/run_agent.py` |
-| run_query.py | Root | `scripts/run_query.py` |
-| apply_suppress_comments.py | Root | `scripts/apply_suppress_comments.py` |
-| capture_violations.py | Root | `scripts/capture_violations.py` |
+| File | Old Location | New Location | Status |
+|------|-------------|--------------|--------|
+| run_agent.py | Root | `scripts/run_agent.py` | ✅ Updated |
+| run_query.py | Root | `scripts/run_query.py` | ✅ Updated |
+| apply_suppress_comments.py | Root | `scripts/apply_suppress_comments.py` | ✅ Working |
+| capture_violations.py | Root | `scripts/capture_violations.py` | ✅ Working |
+
+**Technical Update:** Path resolution updated in launcher scripts to correctly locate the `src/` folder from the new location.
 
 ### Files That Stayed in Root
 
