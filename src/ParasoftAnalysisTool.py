@@ -102,7 +102,7 @@ def resolve_justifiable(violation_id, mapping):
 
 
 # -------------------------------------------------
-# 4. Generate AI prompt file ✅
+# 4. Generate AI prompt file
 # -------------------------------------------------
 def generate_ai_prompts(df, output_file="ai_prompts.txt"):
     with open(output_file, "w", encoding="utf-8") as f:
@@ -131,7 +131,7 @@ def generate_ai_prompts(df, output_file="ai_prompts.txt"):
                     f"{'-'*50}\n\n"
                 )
 
-    print(f"✅ AI prompt file generated: {output_file}")
+    print(f"[OK] AI prompt file generated: {output_file}")
 
 
 # -------------------------------------------------
@@ -159,7 +159,6 @@ def generate_excel(records, output_excel, qorix_excel):
         unique_df.to_excel(writer, "Unique Violations", index=False)
         detailed_df.to_excel(writer, "Detailed Violations", index=False)
 
-    # ✅ THIS WAS MISSING BEFORE
     generate_ai_prompts(detailed_df)
 
 
@@ -195,7 +194,7 @@ def main():
         with pd.ExcelWriter(output_excel, engine="openpyxl") as writer:
             unique_df.to_excel(writer, "Unique Violations", index=False)
             detailed_df.to_excel(writer, "Detailed Violations", index=False)
-        print(f"✅ Excel generated (without justifiable mapping): {output_excel}")
+        print(f"[OK] Excel generated (without justifiable mapping): {output_excel}")
 
 
 if __name__ == "__main__":

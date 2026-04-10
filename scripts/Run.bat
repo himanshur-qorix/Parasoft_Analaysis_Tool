@@ -42,6 +42,16 @@ if not exist "report_dev1.html" (
     exit /b 1
 )
 
+REM Check if Qorix deviations file exists
+if not exist "data\Qorix_CP_Common_Deviations.xlsx" (
+    echo Warning: Qorix_CP_Common_Deviations.xlsx not found in data\ folder
+    echo The analysis will continue but violations will not be checked against Qorix deviations
+    echo Status column will show "Analysis Required" for all violations
+    echo.
+    echo Press any key to continue or Ctrl+C to cancel...
+    pause >nul
+)
+
 REM Prompt for module name
 set /p MODULE_NAME="Enter module name (e.g., Mka): "
 
@@ -52,7 +62,20 @@ if "%MODULE_NAME%"=="" (
 )
 
 REM Run the AI Agent
-python run_agent.py report_dev1.html %MODULE_NAME%
+echo.
+echo Running analysis with Qorix integration...
+echo.
+python scripts\run_agent.py report_dev1.html %MODULE_NAME%
+
+if errorlevel 1 (
+    echo.
+    echo ==================================================
+    echo Error: Analysis failed!
+    echo ==================================================
+    echo Please check the error messages above
+    pause
+    exit /b 1
+)
 
 echo.
 echo ==================================================
@@ -60,25 +83,27 @@ echo Analysis completed successfully!
 echo ==================================================
 echo.
 echo Check the following directories for results:
-echo   - knowledge_base\%MODULE_NAME%_KnowledgeDatabase.json
+echo   - reports\%MODULE_NAME%_violations_report.xlsx (Excel with Status column)
 echo   - reports\%MODULE_NAME%_analysis_summary.json
+echo   - knowledge_base\%MODULE_NAME%_KnowledgeDatabase.json
+echo   - justifications\%MODULE_NAME%_suppress_comments_*.txt (Parasoft suppress comments)
 echo   - fixes\%MODULE_NAME%\
+echo.
+echo Excel Report includes:
+echo   - Status: Justified / Needs Code Update / Analysis Required
+echo   - Filtered by Qorix_CP_Common_Deviations.xlsx
+echo.
+echo.
+echo ==================================================
+echo Next Step: Apply Suppress Comments to Code
+echo ==================================================
+echo.
+echo To automatically insert suppress comments into your source code:
+echo   1. Run: scripts\Apply_Suppressions.bat
+echo   2. Select the suppress comments file
+echo   3. Provide path to your source code repository
+echo   4. Review and approve each change interactively
 echo.
 
 pause
-
-
-set /p TARGET_REPO="Enter the full path to your testing repository: "
-
-REM Usage: Run with or without --apply to auto-fix where possible
-python ParasoftAnalysisTool.py report_dev1.html --apply --target-repo "%TARGET_REPO%"
-
-echo.
-echo ==================================================
-echo Analysis completed successfully.
-echo Command window will close in 5 seconds...
-echo ==================================================
-
-pause >nul
-REM timeout /t 5 /nobreak >nul
-exit
+exit /b 0

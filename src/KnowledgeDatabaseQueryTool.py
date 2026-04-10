@@ -496,7 +496,7 @@ def main():
             idx = sys.argv.index('--summary')
             output_file = Path(sys.argv[idx + 1]) if idx + 1 < len(sys.argv) else Path('summary_report.json')
             report = query_tool.generate_summary_report(output_file)
-            print(f"\n✓ Summary report generated: {output_file}")
+            print(f"\n[SUCCESS] Summary report generated: {output_file}")
             print(f"  Total modules: {report['total_modules']}")
             print(f"  Total unique violations: {report['total_unique_violations']}")
             print(f"  Percentage fixed: {report['fix_status']['percentage_fixed']}%")
@@ -512,7 +512,7 @@ def main():
                 module_name = sys.argv[mod_idx + 1] if mod_idx + 1 < len(sys.argv) else None
             
             query_tool.export_to_excel(output_file, module_name)
-            print(f"\n✓ Excel file generated: {output_file}")
+            print(f"\n[SUCCESS] Excel file generated: {output_file}")
         
         else:
             # Default: show summary
@@ -527,7 +527,7 @@ def main():
     
     except Exception as e:
         logger.error(f"Error: {str(e)}", exc_info=True)
-        print(f"\n✗ Error: {str(e)}")
+        print(f"\n[ERROR] {str(e)}")
         sys.exit(1)
 
 

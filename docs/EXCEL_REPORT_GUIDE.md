@@ -246,7 +246,7 @@ python capture_violations.py src/ --module Mka --format excel --kb
 
 **Step 3:** Process with AI Agent
 ```bash
-python run_agent.py
+python scripts\run_agent.py
 # Uses Mka_ViolationCapture.json knowledge base
 ```
 

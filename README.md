@@ -15,13 +15,24 @@
 
 ### Core Capabilities
 1. **Git Integration** - Seamlessly integrated with Visual Studio Code and Git repositories
-2. **Intelligent Analysis** - AI-powered analysis of report_dev1 reports for each module
-3. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
-4. **Excel Report Generation** - Automatically generates comprehensive Excel reports with violation details
-5. **Unique Violation Tracking** - Identifies and tracks unique violations across analyses
-6. **Code Fix Generation** - Provides automated fix suggestions for violations
-7. **Parasoft Justifications** - Generates Parasoft-formatted justification comments
-8. **Query Tool** - Comprehensive tool to analyze and export knowledge database
+2. **AI-Powered Analysis** - Local LLM integration via Ollama for intelligent fix suggestions
+3. **Qorix Deviations Integration** - Automatically checks violations against Qorix_CP_Common_Deviations.xlsx
+4. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
+5. **Excel Report Generation** - Automatically generates comprehensive Excel reports with violation status
+6. **Parasoft Suppress Comments** - Generates properly formatted suppress comments for justified violations
+7. **Interactive Code Application** - Apply suppress comments to source code with user approval for each change
+8. **Unique Violation Tracking** - Identifies and tracks unique violations across analyses
+9. **Hybrid Fix Generation** - AI for complex cases, rule-based for standard violations (optimal performance)
+10. **Parasoft Justifications** - Generates Parasoft-formatted justification comments
+11. **Query Tool** - Comprehensive tool to analyze and export knowledge database
+
+### AI Integration (Ollama)
+- **Lightweight & Local**: Runs small models (2-4GB) with minimal resource usage
+- **Zero Cost**: No API fees, completely free
+- **Data Privacy**: All analysis happens on your machine
+- **Offline Capable**: Works without internet connection
+- **Smart Hybrid Mode**: Uses AI only for complex violations, rules for standard cases
+- **Auto Fallback**: Seamlessly falls back to rule-based if AI unavailable
 
 ### Knowledge Database Features
 - **Module-Specific Storage**: Each module gets its own `{Module}_KnowledgeDatabase.json`
@@ -66,6 +77,99 @@ Edit `config.json` to customize agent behavior:
 - Reporting options
 - AI integration (if available)
 
+### Step 4: AI Setup with Ollama (Optional - Recommended)
+
+**Ollama** provides local LLM integration for enhanced fix suggestions with **zero cost** and **data privacy**.
+
+#### Why Ollama?
+- ✅ **Lightweight**: Small models (~2-4GB) with low CPU/RAM usage
+- ✅ **No API Costs**: Runs locally, no cloud fees
+- ✅ **Data Privacy**: All code stays on your machine
+- ✅ **Offline**: Works without internet connection
+- ✅ **Simple Setup**: 3 commands to get running
+
+#### Installation Steps
+
+**1. Install Ollama**
+```bash
+# Windows (download installer from ollama.com)
+# Or use winget:
+winget install Ollama.Ollama
+
+# Linux / WSL
+curl -fsSL https://ollama.com/install.sh | sh
+
+# macOS
+brew install ollama
+```
+
+**2. Pull a Lightweight Model**
+
+For low resource consumption, use one of these models:
+
+```bash
+# Option 1: Qwen 2.5 Coder 1.5B (Recommended - Code-specialized, ~900MB)
+ollama pull qwen2.5-coder:1.5b-base
+
+# Option 2: Phi3 Mini (3.8B params, ~2.3GB)
+ollama pull phi3:mini
+
+# Option 3: Qwen 2.5 3B (~2GB, general purpose)
+ollama pull qwen2.5:3b
+```
+
+**3. Start Ollama Server**
+```bash
+# Start the server (runs in background)
+ollama serve
+```
+
+**4. Verify Installation**
+```bash
+# Test the model
+ollama run phi3:mini "Write a hello world in C"
+```
+
+**5. Enable in Config**
+
+The tool is pre-configured for Ollama! Check `config/config.json`:
+```json
+{
+  "ai_integration": {
+    "enabled": true,
+    "provider": "ollama",
+    "ollama": {
+      "base_url": "http://localhost:11434",
+      "model": "qwen2.5-coder:1.5b-base",
+      "fallback_to_rules": true
+    }
+  }
+}
+```
+
+**To disable AI:** Set `"enabled": false` in config.json
+
+#### Resource Requirements
+
+| Model | Size | RAM | Speed | Quality |
+|-------|------|-----|-------|---------|
+| qwen2.5-coder:1.5b-base | 900MB | 2GB | Very Fast | Excellent for code |
+| phi3:mini | 2.3GB | 4GB | Fast | Good |
+| qwen2.5:3b | 2.0GB | 4GB | Fast | Excellent |
+| llama3.2:3b | 2.0GB | 4GB | Fast | Good |
+
+**Recommended for Teams:** `qwen2.5-coder:1.5b-base` (fastest, code-optimized)
+
+#### How It Works
+
+The tool uses AI **only when beneficial**:
+- ✅ Complex/unknown violations → AI analysis
+- ✅ Ambiguous patterns → AI suggestions
+- ❌ Standard MISRA/CERT rules → Fast rule-based fixes
+- ❌ Ollama unavailable → Automatic fallback to rules
+
+This **hybrid approach** keeps resource usage low while providing AI benefits where needed.
+
 ---
 
 ## 📖 How to Use
@@ -81,32 +185,94 @@ Edit `config.json` to customize agent behavior:
 
 #### Basic Analysis
 ```bash
-python run_agent.py <report_path> <module_name>
+python scripts\run_agent.py <report_path> <module_name>
 ```
 
 **Example:**
 ```bash
-python run_agent.py report_dev1.html Mka
+python scripts\run_agent.py report_dev1.html Mka
 ```
 
 #### Advanced Options
 ```bash
 # Skip code fix generation
-python run_agent.py report_dev1.html Mka --no-fixes
+python scripts\run_agent.py report_dev1.html Mka --no-fixes
 
 # Skip justification generation
-python run_agent.py report_dev1.html Mka --no-justifications
+python scripts\run_agent.py report_dev1.html Mka --no-justifications
 
 # Specify custom workspace
-python run_agent.py report_dev1.html Mka --workspace D:/MyProject
+python scripts\run_agent.py report_dev1.html Mka --workspace D:/MyProject
+
+# Specify custom Qorix deviations file
+python scripts\run_agent.py report_dev1.html Mka --qorix custom_deviations.xlsx
 
 # Combine options
-python run_agent.py report_dev1.html Mka --no-justifications --workspace D:/MyProject
+python scripts\run_agent.py report_dev1.html Mka --no-justifications --workspace D:/MyProject --qorix data/Qorix.xlsx
 ```
 
 ---
 
-## 📂 Project Structure
+## � Complete Workflow
+
+### Step 1: Run Analysis
+```bash
+# Option A: Using batch file (recommended for Windows)
+scripts\Run.bat
+
+# Option B: Using command line
+python scripts\run_agent.py report_dev1.html Mka
+```
+
+**Outputs:**
+- Excel report with violation status (Justified/Needs Code Update/Analysis Required)
+- Suppress comments file for justified violations
+- Knowledge database
+- Fix suggestions
+
+### Step 2: Apply Suppress Comments (Interactive)
+```bash
+# Option A: Using batch file (easiest)
+scripts\Apply_Suppressions.bat
+
+# Option B: Using command line
+python scripts\apply_suppress_comments.py justifications\Mka_suppress_comments_20260410_143022.txt D:\Path\To\SourceCode
+```
+
+**Process:**
+1. Tool shows preview of each suppression
+2. You review the code context
+3. Choose: `y` (apply), `n` (skip), `a` (apply all), `q` (quit)
+4. Automatic backup created for each modified file
+
+**Example Session:**
+```
+File: Mka_Internal.c, Line: 3454
+Current code:
+    3451:     uint8_t result;
+    3452:     result = calculate_value(param1, param2);
+>>> 3453:     return (int16_t)result;
+    3454: }
+
+Proposed changes:
+     ADD: /* parasoft-begin-suppress CERT_C-INT02-b-2 "Reason: Mka_Parasoft_REF_3453" */
+     3453:     return (int16_t)result;
+     ADD: /* parasoft-end-suppress CERT_C-INT02-b-2 */
+
+Apply this suppression? (y=yes, n=no, a=yes to all, q=quit): y
+[SUCCESS] Suppression applied successfully
+[INFO] Backup created: src/Mka_Internal.c
+```
+
+### Step 3: Review and Commit
+1. Review modified files in your source code
+2. Check backup folder (`parasoft_backups_YYYYMMDD_HHMMSS/`) if you need to revert
+3. Test your code
+4. Commit changes to Git
+
+---
+
+## �📂 Project Structure
 
 The project is organized into the following folders:
 
@@ -132,7 +298,8 @@ Parasoft_Analaysis_Tool/
 │   └── config.json
 │
 ├── scripts/                      # Automation scripts
-│   └── Run.bat
+│   ├── Run.bat
+│   └── Apply_Suppressions.bat   # Interactive suppress comment applicator
 │
 ├── assets/                       # Images and diagrams
 │   └── FlowDiagram_V1.0.0.png
@@ -157,6 +324,7 @@ Parasoft_Analaysis_Tool/
 │
 ├── run_agent.py                 # Main launcher script
 ├── run_query.py                 # Query tool launcher
+├── apply_suppress_comments.py   # Interactive suppress comment applicator
 ├── requirements.txt             # Python dependencies
 ├── .gitignore                   # Git ignore rules
 └── README.md                    # This file
@@ -177,6 +345,10 @@ reports/                         # Analysis summaries and Excel reports
 ├── Mka_violations_report.xlsx  # Excel report with violations
 └── ...
 
+justifications/                  # Generated suppress comments
+├── Mka_suppress_comments_20260410_143022.txt
+└── ...
+
 fixes/                           # Fix suggestions
 ├── Mka/
 │   ├── Mka_fixes_20260409_143022.txt
@@ -186,9 +358,54 @@ fixes/                           # Fix suggestions
 
 ### Excel Report Contents
 The generated Excel report (`{Module}_violations_report.xlsx`) contains:
-- **Summary Sheet**: Analysis statistics and metrics
+- **Summary Sheet**: Analysis statistics and metrics including:
+  - Total violations count
+  - Unique violation types
+  - Files affected
+  - Status breakdown (Justified, Needs Code Update, Analysis Required)
 - **Unique Violations Sheet**: Count of each violation type (sorted by frequency)
-- **Detailed Violations Sheet**: All violations with file and line number information
+- **Detailed Violations Sheet**: All violations with:
+  - Violation description
+  - Violation ID
+  - File name
+  - Line number
+  - **Status** (Justified / Needs Code Update / Analysis Required)
+
+### Parasoft Suppress Comments
+For violations marked as "Justified" in the Qorix deviations file, the tool automatically generates suppress comments in the format:
+```c
+/* parasoft-begin-suppress CERT_C-INT02-b-2 CERT_C-EXP14-a-3 "Reason: Module_Parasoft_REF_123" */
+... (your code at line 123) ...
+/* parasoft-end-suppress CERT_C-INT02-b-2 CERT_C-EXP14-a-3 */
+```
+These comments are saved in `justifications/{Module}_suppress_comments_{timestamp}.txt`
+
+### Interactive Suppress Comment Application
+The tool includes an interactive applicator to insert suppress comments directly into your source code:
+
+**Usage:**
+```bash
+# Run the interactive batch file
+scripts\Apply_Suppressions.bat
+
+# Or use Python directly
+python scripts\apply_suppress_comments.py justifications\Module_suppress_comments_timestamp.txt D:\Path\To\SourceCode
+```
+
+**Features:**
+- Shows preview of each change before applying
+- Interactive: approve/reject each suppression individually
+- Automatic backup creation in dedicated folder (`parasoft_backups_timestamp/`)
+- Options: y=apply, n=skip, a=apply all, q=quit
+- Searches for files recursively in your repository
+- Handles multiple files with the same name
+- **Smart detection**: Automatically skips lines inside comment blocks (prevents incorrect placement)
+
+**Important Notes:**
+- The tool will **NOT** insert suppress comments inside comment blocks (`/* ... */` or `/****...****/`)
+- If a violation is reported on a line that's inside a comment, it will be auto-skipped
+- This prevents incorrect placements like adding suppressions inside function header comments
+- Such violations should be addressed in the actual code, not in documentation
 
 ### Knowledge Database Format
 Each `{Module}_KnowledgeDatabase.json` contains:
@@ -206,7 +423,7 @@ Use the Knowledge Database Query Tool to analyze violations:
 
 ### Interactive Mode
 ```bash
-python run_query.py knowledge_base --interactive
+python scripts\run_query.py knowledge_base --interactive
 ```
 
 **Available Commands:**
@@ -223,16 +440,16 @@ python run_query.py knowledge_base --interactive
 
 ### Generate Summary Report
 ```bash
-python run_query.py knowledge_base --summary report.json
+python scripts\run_query.py knowledge_base --summary report.json
 ```
 
 ### Export to Excel
 ```bash
 # Export all modules
-python run_query.py knowledge_base --excel violations.xlsx
+python scripts\run_query.py knowledge_base --excel violations.xlsx
 
 # Export specific module
-python run_query.py knowledge_base --excel violations.xlsx --module Mka
+python scripts\run_query.py knowledge_base --excel violations.xlsx --module Mka
 ```
 
 ---
@@ -318,12 +535,12 @@ Generated justifications follow Parasoft standards:
 
 1. **Initial Analysis**
    ```bash
-   python run_agent.py report_dev1.html Mka
+   python scripts\run_agent.py report_dev1.html Mka
    ```
 
 2. **Query High Priority Issues**
    ```bash
-   python run_query.py knowledge_base --interactive
+   python scripts\run_query.py knowledge_base --interactive
    # Then select option 3 and choose "HIGH" severity
    ```
 
@@ -341,7 +558,7 @@ Generated justifications follow Parasoft standards:
 
 6. **Export Reports**
    ```bash
-   python run_query.py knowledge_base --excel status_report.xlsx
+   python scripts\\run_query.py knowledge_base --excel status_report.xlsx
    ```
 
 ---

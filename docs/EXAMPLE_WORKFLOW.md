@@ -25,7 +25,7 @@ copy \\server\reports\Mka_report_dev1.html D:\Development\GitHub\Parasoft_Analay
 cd D:\Development\GitHub\Parasoft_Analaysis_Tool
 
 # Run the AI Agent
-python run_agent.py report_dev1.html Mka
+python scripts\run_agent.py report_dev1.html Mka
 ```
 
 **Expected Output:**
@@ -60,7 +60,7 @@ ANALYSIS COMPLETED SUCCESSFULLY
 
 ```bash
 # Launch interactive query tool
-python run_query.py knowledge_base --interactive
+python scripts\run_query.py knowledge_base --interactive
 ```
 
 **Interactive Session:**
@@ -89,7 +89,7 @@ Found 15 violations
 
 ```bash
 # Export to Excel for easy sharing
-python run_query.py knowledge_base --excel Mka_violations_review.xlsx --module Mka
+python scripts\run_query.py knowledge_base --excel Mka_violations_review.xlsx --module Mka
 ```
 
 **Excel File Created:**
@@ -187,7 +187,7 @@ void* allocate_legacy_buffer(size_t size) {
 copy \\server\reports\Mka_report_dev1_v2.html report_dev1.html
 
 # Run analysis again
-python run_agent.py report_dev1.html Mka
+python scripts\run_agent.py report_dev1.html Mka
 ```
 
 **Expected Output:**
@@ -200,7 +200,7 @@ Analysis complete: 2 new, 118 existing violations
 
 ```bash
 # Generate summary report to track progress
-python run_query.py knowledge_base --summary Mka_progress_report.json
+python scripts\run_query.py knowledge_base --summary Mka_progress_report.json
 ```
 
 **Progress Report (Mka_progress_report.json):**
@@ -226,7 +226,7 @@ python run_query.py knowledge_base --summary Mka_progress_report.json
 
 ```bash
 # Create final report
-python run_query.py knowledge_base --excel Mka_Final_Report_Week16.xlsx --module Mka
+python scripts\run_query.py knowledge_base --excel Mka_Final_Report_Week16.xlsx --module Mka
 ```
 
 Share `Mka_Final_Report_Week16.xlsx` with the team showing:
@@ -292,7 +292,7 @@ REM Run analysis
 python run_agent.py report_dev1.html Mka
 
 REM Export results
-python run_query.py knowledge_base --excel Weekly_Report_%DATE%.xlsx --module Mka
+python scripts\run_query.py knowledge_base --excel Weekly_Report_%DATE%.xlsx --module Mka
 
 REM Email results to team
 echo Analysis complete! Check Weekly_Report_%DATE%.xlsx

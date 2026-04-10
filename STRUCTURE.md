@@ -1,4 +1,4 @@
-# Project Structure - Parasoft AI Agent v2.0.0
+# Project Structure - Parasoft AI Agent v2.2.0
 
 ## 📁 Organized Folder Structure
 
@@ -7,16 +7,26 @@ The project has been reorganized into a clean, professional folder structure:
 ```
 Parasoft_Analaysis_Tool/
 │
+├── 📁 scripts/                       # Scripts & Launchers
+│   ├── run_agent.py                  # Main launcher script
+│   ├── run_query.py                  # Query tool launcher
+│   ├── apply_suppress_comments.py    # Suppress comment applicator
+│   ├── capture_violations.py         # Violation capture utility
+│   ├── Run.bat                       # Windows batch launcher
+│   └── Apply_Suppressions.bat        # Windows suppress applicator
+│
 ├── 📁 src/                           # Source Code
 │   ├── ParasoftAIAgent.py            # Main AI agent orchestrator
 │   ├── KnowledgeDatabaseManager.py   # Database management
 │   ├── ViolationAnalyzer.py          # Intelligent analysis
-│   ├── CodeFixGenerator.py           # Fix generation
+│   ├── CodeFixGenerator.py           # Fix generation with AI
+│   ├── OllamaIntegration.py          # AI integration (Ollama)
 │   ├── KnowledgeDatabaseQueryTool.py # Query tool
 │   └── ParasoftAnalysisTool.py       # HTML parser (legacy)
 │
 ├── 📁 docs/                          # Documentation
 │   ├── QUICKSTART.md                 # Quick start guide
+│   ├── OLLAMA_SETUP.md               # AI setup guide
 │   ├── EXAMPLE_WORKFLOW.md           # Real-world examples
 │   ├── ARCHITECTURE.md               # System architecture
 │   ├── CHANGELOG.md                  # Version history
@@ -24,10 +34,7 @@ Parasoft_Analaysis_Tool/
 │   └── INDEX.md                      # Documentation index
 │
 ├── 📁 config/                        # Configuration
-│   └── config.json                   # Agent configuration
-│
-├── 📁 scripts/                       # Automation Scripts
-│   └── Run.bat                       # Windows batch script
+│   └── config.json                   # Agent configuration (AI enabled)
 │
 ├── 📁 assets/                        # Images & Diagrams
 │   └── FlowDiagram_V1.0.0.png        # Flow diagram
@@ -41,6 +48,11 @@ Parasoft_Analaysis_Tool/
 │
 ├── 📁 reports/                       # Analysis Reports
 │   ├── Mka_analysis_summary.json
+│   ├── Mka_violations_report.xlsx
+│   └── ...
+│
+├── 📁 justifications/                # Suppress Comments
+│   ├── Mka_suppress_comments_*.txt
 │   └── ...
 │
 ├── 📁 fixes/                         # Generated Fixes

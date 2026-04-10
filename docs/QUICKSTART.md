@@ -27,10 +27,10 @@ git init
 ### Running Analysis
 ```bash
 # Basic usage
-python run_agent.py report_dev1.html YourModule
+python scripts\run_agent.py report_dev1.html YourModule
 
 # View results
-python run_query.py knowledge_base --interactive
+python scripts\run_query.py knowledge_base --interactive
 ```
 
 ---
@@ -40,22 +40,22 @@ python run_query.py knowledge_base --interactive
 ### Use Case 1: First-Time Analysis
 ```bash
 # Run full analysis
-python run_agent.py report_dev1.html Mka
+python scripts\run_agent.py report_dev1.html Mka
 
 # Check what violations were found
-python run_query.py knowledge_base --module Mka --summary
+python scripts\run_query.py knowledge_base --module Mka --summary
 ```
 
 ### Use Case 2: Export for Review
 ```bash
 # Export to Excel for team review
-python run_query.py knowledge_base --excel violations.xlsx --module Mka
+python scripts\run_query.py knowledge_base --excel violations.xlsx --module Mka
 ```
 
 ### Use Case 3: Find High Priority Issues
 ```bash
 # Interactive mode to query high severity issues
-python run_query.py knowledge_base --interactive
+python scripts\run_query.py knowledge_base --interactive
 # Select option 3 (Query by severity)
 # Enter "HIGH"
 ```
@@ -63,7 +63,7 @@ python run_query.py knowledge_base --interactive
 ### Use Case 4: Track Progress Over Time
 ```bash
 # Run analysis periodically
-python run_agent.py report_dev1_latest.html Mka
+python scripts\run_agent.py report_dev1_latest.html Mka
 
 # The knowledge database will automatically:
 # - Track new violations
@@ -96,22 +96,22 @@ python run_agent.py report_dev1_latest.html Mka
 
 ```bash
 # Full analysis with all features
-python run_agent.py report_dev1.html Mka
+python scripts\run_agent.py report_dev1.html Mka
 
 # Analysis without fixes
-python run_agent.py report_dev1.html Mka --no-fixes
+python scripts\run_agent.py report_dev1.html Mka --no-fixes
 
 # Analysis without justifications
-python run_agent.py report_dev1.html Mka --no-justifications
+python scripts\run_agent.py report_dev1.html Mka --no-justifications
 
 # Interactive query tool
-python run_query.py knowledge_base --interactive
+python scripts\run_query.py knowledge_base --interactive
 
 # Generate summary report
-python run_query.py knowledge_base --summary report.json
+python scripts\run_query.py knowledge_base --summary report.json
 
 # Export to Excel
-python run_query.py knowledge_base --excel output.xlsx
+python scripts\run_query.py knowledge_base --excel output.xlsx
 ```
 
 ---

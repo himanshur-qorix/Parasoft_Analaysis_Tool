@@ -50,12 +50,22 @@
     }
   },
   "ai_integration": {
-    "enabled": false,
-    "provider": "none",
-    "model": "",
-    "api_key_env_var": "AI_API_KEY",
-    "max_tokens": 2000,
-    "temperature": 0.3
+    "enabled": true,
+    "provider": "ollama",
+    "ollama": {
+      "base_url": "http://localhost:11434",
+      "model": "qwen2.5-coder:1.5b-base",
+      "timeout": 120,
+      "fallback_to_rules": true
+    },
+    "max_tokens": 1000,
+    "temperature": 0.3,
+    "use_ai_for": {
+      "complex_violations": true,
+      "unknown_patterns": true,
+      "cert_violations": false,
+      "misra_violations": false
+    }
   },
   "logging": {
     "level": "INFO",

@@ -4,10 +4,12 @@ Generates code fixes and justifications for Parasoft violations
 """
 
 import logging
+import json
 from pathlib import Path
 from typing import Dict, List, Optional
 from datetime import datetime
 from KnowledgeDatabaseManager import KnowledgeDatabaseManager
+from OllamaIntegration import OllamaIntegration
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +17,8 @@ logger = logging.getLogger(__name__)
 class CodeFixGenerator:
     """Generates fixes and justifications for Parasoft violations"""
     
-    def __init__(self, module_name: str, kb_manager: KnowledgeDatabaseManager, fixes_dir: Path):
+    def __init__(self, module_name: str, kb_manager: KnowledgeDatabaseManager, 
+                 fixes_dir: Path, config: Optional[Dict] = None):
         """
         Initialize the Code Fix Generator
         
@@ -23,6 +26,7 @@ class CodeFixGenerator:
             module_name: Name of the module
             kb_manager: Knowledge database manager instance
             fixes_dir: Directory to store generated fixes
+            config: Optional configuration dictionary
         """
         self.module_name = module_name
         self.kb_manager = kb_manager
@@ -33,6 +37,26 @@ class CodeFixGenerator:
         # Create module-specific fixes directory
         self.module_fixes_dir = self.fixes_dir / module_name
         self.module_fixes_dir.mkdir(exist_ok=True)
+        
+        # Initialize Ollama integration
+        if config is None:
+            # Load config from file
+            config_path = Path(__file__).parent.parent / 'config' / 'config.json'
+            if config_path.exists():
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+            else:
+                config = {}
+        
+        ai_config = config.get('ai_integration', {})
+        self.ollama = OllamaIntegration(ai_config)
+        
+        # Log AI status
+        status = self.ollama.get_status()
+        if status['enabled']:
+            logger.info(f"[OK] AI enabled: {status['model']} at {status['base_url']}")
+        else:
+            logger.info("[INFO] AI disabled - using rule-based fixes")
         
         logger.info(f"Code Fix Generator initialized for module: {module_name}")
     
@@ -134,6 +158,7 @@ class CodeFixGenerator:
     def _get_fix_suggestion(self, violation_id: str, violation_text: str, category: str) -> Optional[Dict]:
         """
         Get fix suggestion based on violation type
+        Try AI first (if enabled), then fall back to rule-based
         
         Args:
             violation_id: Violation ID
@@ -143,6 +168,23 @@ class CodeFixGenerator:
         Returns:
             Fix suggestion dictionary
         """
+        # Try AI generation first (if enabled and appropriate)
+        if self.ollama.should_use_ai(category, violation_text):
+            violation_dict = {
+                'violation_id': violation_id,
+                'violation_text': violation_text,
+                'category': category,
+                'severity': 'MEDIUM'  # Default severity
+            }
+            
+            ai_fix = self.ollama.generate_fix_suggestion(violation_dict)
+            if ai_fix:
+                logger.info(f"[AI] Using AI-generated fix for {violation_id}")
+                return ai_fix
+            else:
+                logger.info(f"[FALLBACK] Using rule-based fix for {violation_id}")
+        
+        # Fallback to rule-based fixes
         text_upper = violation_text.upper()
         
         # Common MISRA fixes
