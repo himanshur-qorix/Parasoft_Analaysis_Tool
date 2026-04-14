@@ -12,7 +12,7 @@ The project has been reorganized with a clean folder structure:
 - **assets/** - Images and diagrams
 - **data/** - Reference data files
 
-See [STRUCTURE.md](../STRUCTURE.md) for complete details.
+See [STRUCTURE.md](STRUCTURE.md) for complete details.
 
 ---
 
@@ -23,13 +23,28 @@ See [STRUCTURE.md](../STRUCTURE.md) for complete details.
 | [README.md](../README.md) | Complete user documentation | First-time setup, comprehensive guide |
 | [QUICKSTART.md](QUICKSTART.md) | Quick start guide | Want to start in 30 seconds |
 | [EXAMPLE_WORKFLOW.md](EXAMPLE_WORKFLOW.md) | Real-world usage example | Learning by example |
-| [STRUCTURE.md](../STRUCTURE.md) | New folder organization | Understanding project layout |
+| [STRUCTURE.md](STRUCTURE.md) | New folder organization | Understanding project layout |
 
 **Recommendation:** Start with [QUICKSTART.md](QUICKSTART.md), then move to [README.md](../README.md) for details.
 
 ---
 
-## � Direct Violation Capture (New!)
+## 🤖 AI Configuration
+
+| Document | Purpose | When to Read |
+|----------|---------|--------------|
+| [AI_MODES.md](AI_MODES.md) | AI mode selection guide | Choosing AI vs rules |
+| [OLLAMA_SETUP.md](OLLAMA_SETUP.md) | Ollama installation guide | Setting up local AI |
+| [AI_QUICKSTART.md](AI_QUICKSTART.md) | Quick AI setup | Fast AI configuration |
+
+**AI Modes Available:**
+- **AI Only** - Use Ollama for all violations (requires Ollama)
+- **Hybrid** - Smart: AI for complex, rules for standard (recommended)
+- **Rules Only** - Only rule-based fixes (no AI needed)
+
+---
+
+## 📊 Direct Violation Capture (New!)
 
 | Document | Purpose | When to Read |
 |----------|---------|--------------|

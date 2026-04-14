@@ -500,10 +500,16 @@ def main():
         print("  --no-justifications Skip justification generation")
         print("  --workspace <path>  Specify workspace path")
         print("  --qorix <path>      Specify Qorix deviations file path")
+        print("  --ai-mode <mode>    AI mode: ai_only | hybrid | rules_only (default: hybrid)")
+        print("\nAI Modes:")
+        print("  ai_only     - Use Ollama AI for all violations (requires Ollama running)")
+        print("  hybrid      - Smart: AI for complex, rules for standard (recommended)")
+        print("  rules_only  - Use only rule-based fixes (no AI required)")
         print("\nExample:")
         print("  python ParasoftAIAgent.py report_dev1.html Mka")
         print("  python ParasoftAIAgent.py report_dev1.html Mka --workspace D:/MyProject")
         print("  python ParasoftAIAgent.py report_dev1.html Mka --qorix data/Qorix.xlsx")
+        print("  python ParasoftAIAgent.py report_dev1.html Mka --ai-mode hybrid")
         sys.exit(1)
     
     report_path = Path(sys.argv[1])
@@ -525,6 +531,19 @@ def main():
         if idx + 1 < len(sys.argv):
             qorix_file = sys.argv[idx + 1]
     
+    ai_mode = 'hybrid'  # Default mode
+    if '--ai-mode' in sys.argv:
+        idx = sys.argv.index('--ai-mode')
+        if idx + 1 < len(sys.argv):
+            mode = sys.argv[idx + 1].lower()
+            if mode in ['ai_only', 'hybrid', 'rules_only']:
+                ai_mode = mode
+                print(f"[INFO] AI Mode: {ai_mode}")
+            else:
+                print(f"[WARNING] Invalid AI mode '{mode}'. Using default: hybrid")
+    else:
+        print(f"[INFO] AI Mode: {ai_mode} (default)")
+    
     # Validate report exists
     if not report_path.exists():
         print(f"[ERROR] Report file not found: {report_path}")
@@ -532,6 +551,13 @@ def main():
     
     # Initialize agent
     agent = ParasoftAIAgent(workspace_path)
+    
+    # Set AI mode in agent config
+    if not hasattr(agent, 'config') or agent.config is None:
+        agent.config = {}
+    if 'ai_integration' not in agent.config:
+        agent.config['ai_integration'] = {}
+    agent.config['ai_integration']['ai_mode'] = ai_mode
     
     # Run full analysis
     try:

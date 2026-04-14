@@ -53,10 +53,14 @@ class CodeFixGenerator:
         
         # Log AI status
         status = self.ollama.get_status()
+        ai_mode = status.get('ai_mode', 'hybrid')
         if status['enabled']:
-            logger.info(f"[OK] AI enabled: {status['model']} at {status['base_url']}")
+            logger.info(f"[OK] AI Mode: {ai_mode} | Model: {status['model']} at {status['base_url']}")
         else:
-            logger.info("[INFO] AI disabled - using rule-based fixes")
+            if ai_mode == 'rules_only':
+                logger.info(f"[INFO] AI Mode: {ai_mode} - Using rule-based fixes only")
+            else:
+                logger.info(f"[INFO] AI disabled - Using rule-based fixes")
         
         logger.info(f"Code Fix Generator initialized for module: {module_name}")
     

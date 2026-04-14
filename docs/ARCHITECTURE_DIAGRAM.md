@@ -517,7 +517,8 @@
 │  │  │    └─► Write modified file                           │ │  │
 │  │  │                                                        │ │  │
 │  │  │ 6. create_backup(file_path)                           │ │  │
-│  │  │    ├─► Create parasoft_backups_{timestamp}/ folder   │ │  │
+│  │  │    ├─► Create backups/{timestamp}/ in project root  │ │  │
+│  │  │    ├─► Store outside source repo (avoid conflicts)  │ │  │
 │  │  │    ├─► Maintain directory structure                  │ │  │
 │  │  │    └─► Copy original file                            │ │  │
 │  │  │                                                        │ │  │
@@ -1193,4 +1194,4 @@ EXTERNAL DEPENDENCIES (from requirements.txt):
 
 For implementation details, see source code in `src/` folder.
 For usage examples, see `docs/EXAMPLE_WORKFLOW.md`.
-For project structure, see `STRUCTURE.md`.
+For project structure, see [STRUCTURE.md](STRUCTURE.md).

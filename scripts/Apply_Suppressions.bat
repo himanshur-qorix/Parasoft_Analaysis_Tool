@@ -28,7 +28,36 @@ if exist "venv\Scripts\activate.bat" (
 
 echo This tool will help you apply Parasoft suppress comments to your source code.
 echo.
-echo Step 1: Select the suppress comments file
+
+REM Step 2: Get target repository path (ask once at the beginning)
+echo Step 1: Specify the target repository
+echo.
+set /p TARGET_REPO="Enter the full path to your source code repository: "
+
+if "!TARGET_REPO!"=="" (
+    echo Error: Target repository path is required
+    pause
+    exit /b 1
+)
+
+if not exist "!TARGET_REPO!" (
+    echo Error: Target repository path does not exist: !TARGET_REPO!
+    pause
+    exit /b 1
+)
+
+echo.
+echo Target repository set to: !TARGET_REPO!
+echo.
+
+REM Track processed files for summary
+set TOTAL_FILES_PROCESSED=0
+
+:FILE_SELECTION_LOOP
+
+echo ==================================================
+echo Step 2: Select the suppress comments file
+echo ==================================================
 echo.
 
 REM List available suppress comment files
@@ -56,7 +85,12 @@ if !count!==0 (
 )
 
 echo.
-set /p FILE_CHOICE="Enter file number (1-!count!): "
+set /p FILE_CHOICE="Enter file number (1-!count!) or 'q' to quit: "
+
+REM Check for quit
+if /i "!FILE_CHOICE!"=="q" (
+    goto :END_PROCESSING
+)
 
 REM Validate choice
 if "!FILE_CHOICE!"=="" (
@@ -89,25 +123,6 @@ if "!SUPPRESS_FILE!"=="" (
 echo.
 echo Selected file: !SUPPRESS_FILE!
 echo.
-
-REM Step 2: Get target repository path
-echo Step 2: Specify the target repository
-echo.
-set /p TARGET_REPO="Enter the full path to your source code repository: "
-
-if "!TARGET_REPO!"=="" (
-    echo Error: Target repository path is required
-    pause
-    exit /b 1
-)
-
-if not exist "!TARGET_REPO!" (
-    echo Error: Target repository path does not exist: !TARGET_REPO!
-    pause
-    exit /b 1
-)
-
-echo.
 echo ==================================================
 echo Starting interactive application...
 echo ==================================================
@@ -126,21 +141,39 @@ python scripts\apply_suppress_comments.py "!SUPPRESS_FILE!" "!TARGET_REPO!"
 if errorlevel 1 (
     echo.
     echo ==================================================
-    echo Error: Application failed!
+    echo Error: Application failed for this file!
     echo ==================================================
     echo Please check the error messages above
-    pause
-    exit /b 1
+    echo.
+) else (
+    set /a TOTAL_FILES_PROCESSED+=1
+    echo.
+    echo ==================================================
+    echo File processing completed!
+    echo ==================================================
+    echo.
 )
+
+REM Ask if user wants to process another file
+echo.
+set /p CONTINUE="Do you want to process another suppress file? (y/n): "
+
+if /i "!CONTINUE!"=="y" (
+    echo.
+    goto :FILE_SELECTION_LOOP
+)
+
+:END_PROCESSING
 
 echo.
 echo ==================================================
-echo Application process completed!
+echo All processing completed!
 echo ==================================================
 echo.
-echo All backups have been saved in a timestamped folder.
-echo Check your source code repository for: parasoft_backups_YYYYMMDD_HHMMSS\
-echo Review the changes in your source code.
+echo Total files processed: !TOTAL_FILES_PROCESSED!
+echo Backups saved in: backups\parasoft_backups_YYYYMMDD_HHMMSS\
+echo (Located in project root, not in your source code)
+echo Review the changes in your source code repository.
 echo.
 
 pause

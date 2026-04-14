@@ -83,7 +83,9 @@ Parasoft_Analaysis_Tool/
     ├── knowledge_base/
     ├── reports/
     ├── fixes/
-    └── justifications/
+    ├── justifications/
+    └── backups/                  ← Suppress comment backups stored here
+        └── parasoft_backups_*/  ← Timestamped backup folders
 ```
 
 ---

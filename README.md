@@ -2,6 +2,18 @@
 
 **AI-powered agent for Parasoft analysis with intelligent knowledge database management**
 
+## 📖 Documentation
+
+For comprehensive documentation, see the [`docs/`](docs/) folder:
+
+- **[Quick Start Guide](docs/AI_QUICKSTART.md)** - Get started in 5 minutes
+- **[Architecture Diagram](docs/ARCHITECTURE_DIAGRAM.md)** - System architecture and workflow
+- **[Project Structure](docs/STRUCTURE.md)** - Complete folder organization
+- **[Reorganization Summary](docs/REORGANIZATION_SUMMARY.md)** - Latest structural changes
+- **[Documentation Index](docs/INDEX.md)** - Complete documentation catalog
+
+---
+
 ## Version
 - **2.0.0** - AI Agent with Knowledge Database
 - Version 1.0.0 - Basic Report Analysis
@@ -243,7 +255,7 @@ python scripts\apply_suppress_comments.py justifications\Mka_suppress_comments_2
 1. Tool shows preview of each suppression
 2. You review the code context
 3. Choose: `y` (apply), `n` (skip), `a` (apply all), `q` (quit)
-4. Automatic backup created for each modified file
+4. Automatic backup created for each modified file in `backups/` folder (outside source code)
 
 **Example Session:**
 ```
@@ -395,7 +407,8 @@ python scripts\apply_suppress_comments.py justifications\Module_suppress_comment
 **Features:**
 - Shows preview of each change before applying
 - Interactive: approve/reject each suppression individually
-- Automatic backup creation in dedicated folder (`parasoft_backups_timestamp/`)
+- Automatic backup creation in dedicated folder (`backups/parasoft_backups_timestamp/`)
+- **Backups stored outside source repository** to avoid search conflicts
 - Options: y=apply, n=skip, a=apply all, q=quit
 - Searches for files recursively in your repository
 - Handles multiple files with the same name

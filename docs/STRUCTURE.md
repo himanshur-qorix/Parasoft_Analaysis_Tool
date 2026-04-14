@@ -55,6 +55,10 @@ Parasoft_Analaysis_Tool/
 │   ├── Mka_suppress_comments_*.txt
 │   └── ...
 │
+├── 📁 backups/                       # Code Backups (Suppress Applicator)
+│   └── parasoft_backups_*/           # Timestamped backup folders
+│       └── [Preserved directory structure from source repo]
+│
 ├── 📁 fixes/                         # Generated Fixes
 │   ├── Mka/
 │   │   ├── Mka_fixes_*.txt

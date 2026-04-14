@@ -52,6 +52,7 @@
   "ai_integration": {
     "enabled": true,
     "provider": "ollama",
+    "ai_mode": "hybrid",
     "ollama": {
       "base_url": "http://localhost:11434",
       "model": "qwen2.5-coder:1.5b-base",

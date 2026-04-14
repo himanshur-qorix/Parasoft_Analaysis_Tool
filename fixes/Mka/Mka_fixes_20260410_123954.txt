@@ -1,0 +1,3090 @@
+================================================================================
+PARASOFT FIXES - Module: Mka
+Generated: 2026-04-10 12:39:54
+Total Fixes: 109
+================================================================================
+
+FIX #1
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-i-2
+Severity: LOW
+Category: CERT
+
+Description:
+The expression of the 'essentially Enum' type is assigned to an object with the 'essentially unsigned' type
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: The expression of the 'essentially Enum' type is assigned to an object with the 'essentially unsigned' type
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Cfg.c:93
+  - Mka_Cfg.c:99
+  - Mka_Cfg.c:105
+  - Mka_Cfg.c:111
+  - Mka_Cfg.c:117
+  ... and 625 more files
+
+================================================================================
+
+FIX #2
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_3-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The expression of the 'essentially Enum' type is assigned to an object with the 'essentially unsigned' type
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The expression of the 'essentially Enum' type is assigned to an object with the 'essentially unsigned' type
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cfg.c:93
+  - Mka_Cfg.c:99
+  - Mka_Cfg.c:105
+  - Mka_Cfg.c:111
+  - Mka_Cfg.c:117
+  ... and 625 more files
+
+================================================================================
+
+FIX #3
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_20_1-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Do not precede the #include directive with executable code
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Do not precede the #include directive with executable code
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cfg.c:691
+  - Mka_Cfg.c:753
+  - Mka_Cfg.c:762
+  - Mka_Cfg.c:772
+  - Mka_Cfg.c:786
+  ... and 247 more files
+
+================================================================================
+
+FIX #4
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_5_4-c-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The 'MKA_START_SEC_CONST_UNSPECIFIED' macro has the same name (or the first 31 characters of the name) as the 'MKA_START_SEC_CONST_UNSPECIFIED'
+macro previously defined in the current file
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The 'MKA_START_SEC_CONST_UNSPECIFIED' macro has the same name (or the first 31 characters of the name) as the 'MKA_START_SEC_CONST_UNSPECIFIED'
+macro previously defined in the current file
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cfg.c:693
+  - Mka_Cfg.c:752
+  - Mka_Cfg.c:764
+  - Mka_Cfg.c:771
+  - Mka_Cfg.c:774
+  ... and 475 more files
+
+================================================================================
+
+FIX #5
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_5_4-d-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The 'MKA_START_SEC_CONST_UNSPECIFIED' macro has the same name (or the first 63 characters of the name) as the 'MKA_START_SEC_CONST_UNSPECIFIED'
+macro previously defined in the current file
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The 'MKA_START_SEC_CONST_UNSPECIFIED' macro has the same name (or the first 63 characters of the name) as the 'MKA_START_SEC_CONST_UNSPECIFIED'
+macro previously defined in the current file
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cfg.c:693
+  - Mka_Cfg.c:752
+  - Mka_Cfg.c:764
+  - Mka_Cfg.c:771
+  - Mka_Cfg.c:774
+  ... and 475 more files
+
+================================================================================
+
+FIX #6
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_2_8-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The 'Mka_GaaPaeConfigurations' variable is not used in the testing scope
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The 'Mka_GaaPaeConfigurations' variable is not used in the testing scope
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cfg.c:695
+  - Mka_Cfg.c:805
+  - Mka_Cfg.c:1080
+  - Mka.c:209
+  - Mka.c:215
+  ... and 43 more files
+
+================================================================================
+
+FIX #7
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_8_4-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Declaration of object 'Mka_GaaMkaBypassEtherType' does not precede its definition
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Declaration of object 'Mka_GaaMkaBypassEtherType' does not precede its definition
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cfg.c:757
+  - Mka_Cfg.c:767
+  - Mka_Cfg.c:777
+  - Mka_Cfg.c:791
+  - Mka_Cfg.c:993
+  ... and 115 more files
+
+================================================================================
+
+FIX #8
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL15-a-3
+Severity: HIGH
+Category: CERT
+
+Description:
+Global variable 'Mka_GaaMkaBypassEtherType' has external linkage and is not declared in the header
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Global variable 'Mka_GaaMkaBypassEtherType' has external linkage and is not declared in the header
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Cfg.c:757
+  - Mka_Cfg.c:767
+  - Mka_Cfg.c:777
+  - Mka_Cfg.c:791
+  - Mka_Cfg.c:993
+  ... and 115 more files
+
+================================================================================
+
+FIX #9
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_8_7-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The object 'Mka_GaaMkaBypassEtherType' is referenced only in the translation unit where it is defined
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The object 'Mka_GaaMkaBypassEtherType' is referenced only in the translation unit where it is defined
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cfg.c:757
+  - Mka_Cfg.c:767
+  - Mka_Cfg.c:777
+  - Mka_Cfg.c:791
+  - Mka_Cfg.c:993
+  ... and 373 more files
+
+================================================================================
+
+FIX #10
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL06-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Do not use the literal constant '6'
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Do not use the literal constant '6'
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Cfg.c:777
+  - Mka_Cfg.c:791
+  - Mka_Internal.c:377
+  - Mka_Internal.c:379
+  - Mka_Internal.c:559
+  ... and 535 more files
+
+================================================================================
+
+FIX #11
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_9_3-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The array of type 'const uint8 [6]' shall not be partially initialized
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The array of type 'const uint8 [6]' shall not be partially initialized
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cfg.c:780
+  - Mka_Cfg.c:781
+  - Mka_Cfg.c:782
+  - Mka_Cfg.c:794
+  - Mka_Cfg.c:795
+  ... and 31 more files
+
+================================================================================
+
+FIX #12
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_1_1-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+More than 31 initial characters in an external identifier: 64
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: More than 31 initial characters in an external identifier: 64
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cfg.c:993
+  - Mka_Cfg.c:1037
+  - Mka_Cfg.c:1063
+  - Mka_Cbk.c:230
+  - Mka_Cbk.c:530
+  ... and 133 more files
+
+================================================================================
+
+FIX #13
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_1_1-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+More than 31 initial characters in an external identifier: 64
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: More than 31 initial characters in an external identifier: 64
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cfg.c:993
+  - Mka_Cfg.c:1037
+  - Mka_Cfg.c:1063
+  - Mka_Cbk.c:230
+  - Mka_Cbk.c:530
+  ... and 133 more files
+
+================================================================================
+
+FIX #14
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_5_1-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The identifier 'Mka_GaaCipherSuites_MkaCryptoAlgoConfig_1_MacSecCryptoAlgoConfig' has the same first 31 characters of the
+name as the identifier 'Mka_GaaCipherSuites_MkaCryptoAlgoConfig_0_MacSecCryptoAlgoConfig' defined in the 'Mka_Cfg.c' file
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The identifier 'Mka_GaaCipherSuites_MkaCryptoAlgoConfig_1_MacSecCryptoAlgoConfig' has the same first 31 characters of the
+name as the identifier 'Mka_GaaCipherSuites_MkaCryptoAlgoConfig_0_MacSecCryptoAlgoConfig' defined in the 'Mka_Cfg.c' file
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cfg.c:1037
+  - Mka_Cfg.c:1063
+  - Mka_Cfg.c:1063
+  - Mka_Cbk.c:705
+  - Mka_Cbk.c:768
+  ... and 289 more files
+
+================================================================================
+
+FIX #15
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_1_5-c-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Function 'Mka_Init' is not in prototype form
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Function 'Mka_Init' is not in prototype form
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka.c:262
+  - Mka_Internal.c:2461
+  - Mka.c:262
+  - Mka_Internal.c:2461
+  - Mka.c:262
+  ... and 7 more files
+
+================================================================================
+
+FIX #16
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_8_2-c-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Function 'Mka_Init' is not in prototype form
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Function 'Mka_Init' is not in prototype form
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka.c:262
+  - Mka_Internal.c:2461
+  - Mka.c:262
+  - Mka_Internal.c:2461
+  - Mka.c:262
+  ... and 7 more files
+
+================================================================================
+
+FIX #17
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_14_2-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The loop counter is modified inside the 'for' loop body
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The loop counter is modified inside the 'for' loop body
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka.c:272
+  - Mka.c:272
+  - Mka.c:272
+  - Mka.c:272
+  - Mka.c:272
+  ... and 1 more files
+
+================================================================================
+
+FIX #18
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_14_2-c-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The second clause of a 'for' statement contains an object that is modified inside the loop body:  'Luscount'
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The second clause of a 'for' statement contains an object that is modified inside the loop body:  'Luscount'
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka.c:272
+  - Mka_Internal.c:1132
+  - Mka.c:272
+  - Mka_Internal.c:1132
+  - Mka.c:272
+  ... and 7 more files
+
+================================================================================
+
+FIX #19
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_14_2-d-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The third clause of a 'for' statement contains an object that is modified in the 'for' loop body
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The third clause of a 'for' statement contains an object that is modified in the 'for' loop body
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka.c:272
+  - Mka.c:272
+  - Mka.c:272
+  - Mka.c:272
+  - Mka.c:272
+  ... and 1 more files
+
+================================================================================
+
+FIX #20
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-DIR_4_4-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Section of code should not be 'commented out'
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Section of code should not be 'commented out'
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka.c:294
+  - Mka.c:357
+  - Mka.c:733
+  - Mka.c:753
+  - Mka_Cbk.c:296
+  ... and 103 more files
+
+================================================================================
+
+FIX #21
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_8_13-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Pass parameter "VersionInfoPtr" with const specifier
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Pass parameter "VersionInfoPtr" with const specifier
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka.c:316
+  - Mka.c:405
+  - Mka.c:470
+  - Mka.c:502
+  - Mka.c:596
+  ... and 55 more files
+
+================================================================================
+
+FIX #22
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL13-a-3
+Severity: HIGH
+Category: CERT
+
+Description:
+Pass parameter "VersionInfoPtr" with const specifier
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Pass parameter "VersionInfoPtr" with const specifier
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka.c:316
+  - Mka.c:405
+  - Mka.c:470
+  - Mka.c:502
+  - Mka.c:596
+  ... and 55 more files
+
+================================================================================
+
+FIX #23
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_14_4-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Test of a value against zero should be made explicit
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Test of a value against zero should be made explicit
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka.c:317
+  - Mka.c:565
+  - Mka.c:672
+  - Mka_Internal.c:617
+  - Mka_Internal.c:1076
+  ... and 127 more files
+
+================================================================================
+
+FIX #24
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP20-b-1
+Severity: LOW
+Category: CERT
+
+Description:
+Test of a value against zero should be made explicit
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Test of a value against zero should be made explicit
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka.c:317
+  - Mka.c:565
+  - Mka.c:672
+  - Mka_Internal.c:617
+  - Mka_Internal.c:1076
+  ... and 127 more files
+
+================================================================================
+
+FIX #25
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_1-i-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Do not use the expression of pointer type 'const uint8 *' as the operand of the logical operator '&&'
+
+Fix Type: pointer_cast
+Priority: HIGH
+
+Fix Description:
+Use proper pointer casting or avoid incompatible pointer types
+
+Example:
+
+// Before:
+int* ptr = (int*)some_void_ptr;
+
+// After:
+int* ptr = (int*)(uintptr_t)some_void_ptr;  // Use intermediate cast
+
+
+Files Affected:
+  - Mka.c:353
+  - Mka.c:406
+  - Mka.c:406
+  - Mka.c:471
+  - Mka.c:503
+  ... and 115 more files
+
+================================================================================
+
+FIX #26
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT36-b-3
+Severity: LOW
+Category: CERT
+
+Description:
+The 'const uint8 *' pointer to object type should not be implicitly converted to the  integral type '_Bool'
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: The 'const uint8 *' pointer to object type should not be implicitly converted to the  integral type '_Bool'
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka.c:353
+  - Mka.c:406
+  - Mka.c:406
+  - Mka.c:471
+  - Mka.c:503
+  ... and 109 more files
+
+================================================================================
+
+FIX #27
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+The right hand operand of the logical operator '&&' should have essentially Boolean type
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: The right hand operand of the logical operator '&&' should have essentially Boolean type
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka.c:353
+  - Mka.c:406
+  - Mka.c:406
+  - Mka.c:437
+  - Mka.c:471
+  ... and 295 more files
+
+================================================================================
+
+FIX #28
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_1-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The right hand operand of the logical operator '&&' should have essentially Boolean type
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The right hand operand of the logical operator '&&' should have essentially Boolean type
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka.c:353
+  - Mka.c:406
+  - Mka.c:406
+  - Mka.c:437
+  - Mka.c:471
+  ... and 295 more files
+
+================================================================================
+
+FIX #29
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC09-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Undefined character was found inside comment: '\xe2', '\x80', '\x99'
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Undefined character was found inside comment: '\xe2', '\x80', '\x99'
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka.c:605
+  - Mka.c:686
+  - Mka_Cbk.c:317
+  - Mka_Internal.c:275
+  - Mka_Internal.c:319
+  ... and 31 more files
+
+================================================================================
+
+FIX #30
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL22-a-3
+Severity: MEDIUM
+Category: CERT
+
+Description:
+Value of "LddReturnValue" is never used
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Value of "LddReturnValue" is never used
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka.c:636
+  - Mka_Cbk.c:406
+  - Mka_Internal.c:841
+  - Mka_Internal.c:953
+  - Mka_Internal.c:1327
+  ... and 127 more files
+
+================================================================================
+
+FIX #31
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_2_2-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Value of "LddReturnValue" is never used
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Value of "LddReturnValue" is never used
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka.c:636
+  - Mka_Cbk.c:291
+  - Mka_Cbk.c:406
+  - Mka_Internal.c:841
+  - Mka_Internal.c:953
+  ... and 133 more files
+
+================================================================================
+
+FIX #32
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_17_7-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Unused function's "Det_ReportError" return value
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Unused function's "Det_ReportError" return value
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka.c:641
+  - Mka.c:677
+  - Mka_Cbk.c:313
+  - Mka_Internal.c:392
+  - Mka_Internal.c:417
+  ... and 115 more files
+
+================================================================================
+
+FIX #33
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP12-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Unused function's "Det_ReportError" return value
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Unused function's "Det_ReportError" return value
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka.c:641
+  - Mka.c:677
+  - Mka_Cbk.c:313
+  - Mka_Internal.c:392
+  - Mka_Internal.c:417
+  ... and 115 more files
+
+================================================================================
+
+FIX #34
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC12-j-3
+Severity: LOW
+Category: CERT
+
+Description:
+Condition "!LddReturnValue" always evaluates to true
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Condition "!LddReturnValue" always evaluates to true
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka.c:655
+  - Mka.c:672
+  - Mka_Internal.c:1843
+  - Mka.c:655
+  - Mka.c:672
+  ... and 13 more files
+
+================================================================================
+
+FIX #35
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_14_3-ac-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Condition "!LddReturnValue" always evaluates to true
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Condition "!LddReturnValue" always evaluates to true
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka.c:655
+  - Mka.c:672
+  - Mka.c:655
+  - Mka.c:672
+  - Mka.c:655
+  ... and 7 more files
+
+================================================================================
+
+FIX #36
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP46-b-2
+Severity: LOW
+Category: CERT
+
+Description:
+The LHS operand of binary operator is effectively boolean
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: The LHS operand of binary operator is effectively boolean
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka.c:672
+  - Mka.c:672
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:2517
+  ... and 43 more files
+
+================================================================================
+
+FIX #37
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_1-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The left hand operand of the '&' operator has essentially Boolean type
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The left hand operand of the '&' operator has essentially Boolean type
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka.c:672
+  - Mka.c:672
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:2517
+  ... and 43 more files
+
+================================================================================
+
+FIX #38
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-b-2
+Severity: LOW
+Category: CERT
+
+Description:
+The left hand operand of the '&' operator has essentially Boolean type
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: The left hand operand of the '&' operator has essentially Boolean type
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka.c:672
+  - Mka.c:672
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:2517
+  ... and 43 more files
+
+================================================================================
+
+FIX #39
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT13-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+The left-hand-side operand of bitwise operator '&' should be unsigned
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: The left-hand-side operand of bitwise operator '&' should be unsigned
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka.c:672
+  - Mka.c:673
+  - Mka_Cbk.c:402
+  - Mka_Cbk.c:402
+  - Mka_Internal.c:444
+  ... and 385 more files
+
+================================================================================
+
+FIX #40
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-API00-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Parameter 'CtrlIdx' is not validated before use
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Parameter 'CtrlIdx' is not validated before use
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Cbk.c:263
+  - Mka_Cbk.c:264
+  - Mka_Cbk.c:266
+  - Mka_Cbk.c:266
+  - Mka_Internal.c:350
+  ... and 703 more files
+
+================================================================================
+
+FIX #41
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-POS54-a-1
+Severity: LOW
+Category: CERT
+
+Description:
+The value returned by the POSIX library function 'memcpy' should be used
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: The value returned by the POSIX library function 'memcpy' should be used
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Cbk.c:313
+  - Mka_Internal.c:392
+  - Mka_Internal.c:417
+  - Mka_Internal.c:478
+  - Mka_Internal.c:736
+  ... and 97 more files
+
+================================================================================
+
+FIX #42
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MEM07-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Values "PhysAddrPtr" passed to library function "memcpy" without being checked
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Values "PhysAddrPtr" passed to library function "memcpy" without being checked
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Cbk.c:313
+  - Mka_Internal.c:392
+  - Mka_Internal.c:736
+  - Mka_Internal.c:742
+  - Mka_Internal.c:743
+  ... and 31 more files
+
+================================================================================
+
+FIX #43
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MEM04-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Values "PhysAddrPtr" passed to library function "memcpy" without being checked
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Values "PhysAddrPtr" passed to library function "memcpy" without being checked
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Cbk.c:313
+  - Mka_Internal.c:392
+  - Mka_Internal.c:736
+  - Mka_Internal.c:742
+  - Mka_Internal.c:743
+  ... and 31 more files
+
+================================================================================
+
+FIX #44
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT02-b-2
+Severity: LOW
+Category: CERT
+
+Description:
+Different types of operands: LHS type 'int', RHS type 'short'
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Different types of operands: LHS type 'int', RHS type 'short'
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:402
+  - Mka_Cbk.c:405
+  - Mka_Cbk.c:405
+  - Mka_Cbk.c:649
+  ... and 145 more files
+
+================================================================================
+
+FIX #45
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP14-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Different types of operands: LHS type 'int', RHS type 'short'
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Different types of operands: LHS type 'int', RHS type 'short'
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:402
+  - Mka_Cbk.c:405
+  - Mka_Cbk.c:405
+  - Mka_Cbk.c:649
+  ... and 145 more files
+
+================================================================================
+
+FIX #46
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-j-2
+Severity: LOW
+Category: CERT
+
+Description:
+Operands of the '+' operator have different essential types: 'unsigned char' and 'signed char'
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Operands of the '+' operator have different essential types: 'unsigned char' and 'signed char'
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:402
+  - Mka_Cbk.c:402
+  - Mka_Internal.c:420
+  ... and 601 more files
+
+================================================================================
+
+FIX #47
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_4-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Operands of the '+' operator have different essential types: 'unsigned char' and 'signed char'
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Operands of the '+' operator have different essential types: 'unsigned char' and 'signed char'
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:402
+  - Mka_Cbk.c:402
+  - Mka_Internal.c:420
+  ... and 601 more files
+
+================================================================================
+
+FIX #48
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_12_1-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The left hand operand of the '<=' operator should be in parentheses
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The left hand operand of the '<=' operator should be in parentheses
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:405
+  - Mka_Internal.c:383
+  - Mka_Internal.c:420
+  - Mka_Internal.c:742
+  ... and 121 more files
+
+================================================================================
+
+FIX #49
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP00-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Use parenthesis to clarify order ('+' is the first operand of '<=')
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Use parenthesis to clarify order ('+' is the first operand of '<=')
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:405
+  - Mka_Internal.c:383
+  - Mka_Internal.c:420
+  - Mka_Internal.c:908
+  ... and 97 more files
+
+================================================================================
+
+FIX #50
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-e-2
+Severity: LOW
+Category: CERT
+
+Description:
+The left hand operand of the '|' operator has essentially signed type: int
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: The left hand operand of the '|' operator has essentially signed type: int
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Cbk.c:402
+  - Mka_Cbk.c:402
+  - Mka_Internal.c:444
+  - Mka_Internal.c:444
+  - Mka_Internal.c:446
+  ... and 433 more files
+
+================================================================================
+
+FIX #51
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_1-e-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The left hand operand of the '|' operator has essentially signed type: int
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The left hand operand of the '|' operator has essentially signed type: int
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cbk.c:402
+  - Mka_Cbk.c:402
+  - Mka_Internal.c:444
+  - Mka_Internal.c:444
+  - Mka_Internal.c:446
+  ... and 433 more files
+
+================================================================================
+
+FIX #52
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT16-b-3
+Severity: LOW
+Category: CERT
+
+Description:
+The right-hand operand of the '&' bitwise operator should have an unsigned type
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: The right-hand operand of the '&' bitwise operator should have an unsigned type
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Cbk.c:402
+  - Mka_Internal.c:436
+  - Mka_Internal.c:444
+  - Mka_Internal.c:446
+  - Mka_Internal.c:446
+  ... and 463 more files
+
+================================================================================
+
+FIX #53
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_16_4-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Missing statement or comment before terminating 'break'
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Missing statement or comment before terminating 'break'
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cbk.c:454
+  - Mka_Internal.c:897
+  - Mka_Internal.c:1009
+  - Mka_Internal.c:2690
+  - Mka_Internal.c:2858
+  ... and 37 more files
+
+================================================================================
+
+FIX #54
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_16_1-f-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Missing statement or comment before terminating 'break'
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Missing statement or comment before terminating 'break'
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Cbk.c:454
+  - Mka_Internal.c:897
+  - Mka_Internal.c:1009
+  - Mka_Internal.c:2690
+  - Mka_Internal.c:2858
+  ... and 37 more files
+
+================================================================================
+
+FIX #55
+--------------------------------------------------------------------------------
+Violation ID: CDD-DUPC-3
+Severity: MEDIUM
+Category: OTHER
+
+Description:
+Duplicated code: 'uint8 Luscount;  if (Result == E_OK) {/*Rationale for using ...'
+
+Fix Type: generic
+Priority: MEDIUM
+
+Fix Description:
+Duplicated code: 'uint8 Luscount;  if (Result == E_OK) {/*Rationale for using ...'
+
+Example:
+Review the violation and apply appropriate fix based on context
+
+Files Affected:
+  - Mka_Cbk.c:710
+  - Mka_Internal.c:836
+  - Mka_Internal.c:2060
+  - Mka_Internal.c:4646
+  - Mka_Internal.c:4774
+  ... and 25 more files
+
+================================================================================
+
+FIX #56
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_5_8-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The 'Mka_MI_Value' object with external linkage is not a unique identifier in the testing scope
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The 'Mka_MI_Value' object with external linkage is not a unique identifier in the testing scope
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:235
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:235
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:235
+  ... and 7 more files
+
+================================================================================
+
+FIX #57
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP05-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Cast from 'const uint8 *const *' removes 'const' qualifier
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Cast from 'const uint8 *const *' removes 'const' qualifier
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  ... and 7 more files
+
+================================================================================
+
+FIX #58
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP40-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Cast from 'const uint8 *const *' removes 'const' qualifier
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Cast from 'const uint8 *const *' removes 'const' qualifier
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  ... and 7 more files
+
+================================================================================
+
+FIX #59
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP32-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Cast from 'const uint8 *const *' removes 'const' qualifier
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Cast from 'const uint8 *const *' removes 'const' qualifier
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  ... and 7 more files
+
+================================================================================
+
+FIX #60
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP39-b-3
+Severity: LOW
+Category: CERT
+
+Description:
+Do not perform a cast between a pointer to 'unsigned char' type and a pointer to 'const uint8 *' type
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Do not perform a cast between a pointer to 'unsigned char' type and a pointer to 'const uint8 *' type
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:389
+  - Mka_Internal.c:401
+  - Mka_Internal.c:407
+  - Mka_Internal.c:467
+  - Mka_Internal.c:468
+  ... and 247 more files
+
+================================================================================
+
+FIX #61
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_11_8-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Do not use a conversion from the 'const uint8 *const *' type to the 'uint8 *' type which removes the 'const' qualification
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Do not use a conversion from the 'const uint8 *const *' type to the 'uint8 *' type which removes the 'const' qualification
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  ... and 7 more files
+
+================================================================================
+
+FIX #62
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT02-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Implicit conversion from 'unsigned long' type to 'unsigned int' type in function's argument
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Implicit conversion from 'unsigned long' type to 'unsigned int' type in function's argument
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:392
+  - Mka_Internal.c:430
+  - Mka_Internal.c:432
+  - Mka_Internal.c:435
+  - Mka_Internal.c:438
+  ... and 367 more files
+
+================================================================================
+
+FIX #63
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_21_15-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+In the call of the function 'memcpy' the first argument type 'unsigned char**' is not compatible with the second argument
+type 'unsigned char*'
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: In the call of the function 'memcpy' the first argument type 'unsigned char**' is not compatible with the second argument
+type 'unsigned char*'
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:392
+  - Mka_Internal.c:743
+  - Mka_Internal.c:745
+  - Mka_Internal.c:4191
+  - Mka_Internal.c:4820
+  ... and 31 more files
+
+================================================================================
+
+FIX #64
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_13_3-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The '++' operator should cause the only side effect in an expression
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The '++' operator should cause the only side effect in an expression
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:399
+  - Mka_Internal.c:400
+  - Mka_Internal.c:402
+  - Mka_Internal.c:403
+  - Mka_Internal.c:404
+  ... and 1801 more files
+
+================================================================================
+
+FIX #65
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_11_3-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Pointer to object type 'uint8 *' is cast to pointer to different object type 'uint16 *'
+
+Fix Type: pointer_cast
+Priority: HIGH
+
+Fix Description:
+Use proper pointer casting or avoid incompatible pointer types
+
+Example:
+
+// Before:
+int* ptr = (int*)some_void_ptr;
+
+// After:
+int* ptr = (int*)(uintptr_t)some_void_ptr;  // Use intermediate cast
+
+
+Files Affected:
+  - Mka_Internal.c:401
+  - Mka_Internal.c:407
+  - Mka_Internal.c:1727
+  - Mka_Internal.c:1734
+  - Mka_Internal.c:2046
+  ... and 73 more files
+
+================================================================================
+
+FIX #66
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP36-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+The 'uint8 *' type should not be cast to the 'uint16 *' type
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: The 'uint8 *' type should not be cast to the 'uint16 *' type
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:401
+  - Mka_Internal.c:407
+  - Mka_Internal.c:1727
+  - Mka_Internal.c:1734
+  - Mka_Internal.c:2046
+  ... and 73 more files
+
+================================================================================
+
+FIX #67
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP08-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Do not apply pointer arithmetic to expression of pointer type
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Do not apply pointer arithmetic to expression of pointer type
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:413
+  - Mka_Internal.c:739
+  - Mka_Internal.c:742
+  - Mka_Internal.c:743
+  - Mka_Internal.c:745
+  ... and 61 more files
+
+================================================================================
+
+FIX #68
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-ARR39-b-2
+Severity: LOW
+Category: CERT
+
+Description:
+Do not apply pointer arithmetic to expression of pointer type
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Do not apply pointer arithmetic to expression of pointer type
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:413
+  - Mka_Internal.c:739
+  - Mka_Internal.c:742
+  - Mka_Internal.c:743
+  - Mka_Internal.c:745
+  ... and 61 more files
+
+================================================================================
+
+FIX #69
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_18_4-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The left hand side operand of the '+' operator has a pointer type
+
+Fix Type: pointer_cast
+Priority: HIGH
+
+Fix Description:
+Use proper pointer casting or avoid incompatible pointer types
+
+Example:
+
+// Before:
+int* ptr = (int*)some_void_ptr;
+
+// After:
+int* ptr = (int*)(uintptr_t)some_void_ptr;  // Use intermediate cast
+
+
+Files Affected:
+  - Mka_Internal.c:413
+  - Mka_Internal.c:739
+  - Mka_Internal.c:742
+  - Mka_Internal.c:743
+  - Mka_Internal.c:745
+  ... and 61 more files
+
+================================================================================
+
+FIX #70
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_3-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The expression of the 'unsigned long' essential type (4 byte) is assigned to an object with a narrower essential type (1 byte)
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The expression of the 'unsigned long' essential type (4 byte) is assigned to an object with a narrower essential type (1 byte)
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:430
+  - Mka_Internal.c:432
+  - Mka_Internal.c:435
+  - Mka_Internal.c:438
+  - Mka_Internal.c:443
+  ... and 361 more files
+
+================================================================================
+
+FIX #71
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-h-2
+Severity: LOW
+Category: CERT
+
+Description:
+The expression of the 'unsigned long' essential type (4 byte) is assigned to an object with a narrower essential type (1 byte)
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: The expression of the 'unsigned long' essential type (4 byte) is assigned to an object with a narrower essential type (1 byte)
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:430
+  - Mka_Internal.c:432
+  - Mka_Internal.c:435
+  - Mka_Internal.c:438
+  - Mka_Internal.c:443
+  ... and 361 more files
+
+================================================================================
+
+FIX #72
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT16-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+The left-hand operand of the '&' bitwise operator should have an unsigned type
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: The left-hand operand of the '&' bitwise operator should have an unsigned type
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:444
+  - Mka_Internal.c:446
+  - Mka_Internal.c:448
+  - Mka_Internal.c:456
+  - Mka_Internal.c:456
+  ... and 241 more files
+
+================================================================================
+
+FIX #73
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_1-d-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The left hand operand of the '<<' operator has essentially enum type: ETag_Mka_RoleType
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: The left hand operand of the '<<' operator has essentially enum type: ETag_Mka_RoleType
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:456
+  - Mka_Internal.c:458
+  - Mka_Internal.c:1777
+  - Mka_Internal.c:1779
+  - Mka_Internal.c:4145
+  ... and 55 more files
+
+================================================================================
+
+FIX #74
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-d-2
+Severity: LOW
+Category: CERT
+
+Description:
+The left hand operand of the '<<' operator has essentially enum type: ETag_Mka_RoleType
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: The left hand operand of the '<<' operator has essentially enum type: ETag_Mka_RoleType
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:456
+  - Mka_Internal.c:458
+  - Mka_Internal.c:1777
+  - Mka_Internal.c:1779
+  - Mka_Internal.c:4145
+  ... and 55 more files
+
+================================================================================
+
+FIX #75
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_7-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Essential type of RHS operand (16 bit) is wider than essential type of composite expression in LHS operand (8 bit)
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Essential type of RHS operand (16 bit) is wider than essential type of composite expression in LHS operand (8 bit)
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:463
+  - Mka_Internal.c:465
+  - Mka_Internal.c:1784
+  - Mka_Internal.c:1785
+  - Mka_Internal.c:4152
+  ... and 55 more files
+
+================================================================================
+
+FIX #76
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-m-2
+Severity: LOW
+Category: CERT
+
+Description:
+Essential type of RHS operand (16 bit) is wider than essential type of composite expression in LHS operand (8 bit)
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Essential type of RHS operand (16 bit) is wider than essential type of composite expression in LHS operand (8 bit)
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:463
+  - Mka_Internal.c:465
+  - Mka_Internal.c:1784
+  - Mka_Internal.c:1785
+  - Mka_Internal.c:4152
+  ... and 55 more files
+
+================================================================================
+
+FIX #77
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-ARR30-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 7 more files
+
+================================================================================
+
+FIX #78
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-ARR39-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 7 more files
+
+================================================================================
+
+FIX #79
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP08-b-2
+Severity: LOW
+Category: CERT
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 7 more files
+
+================================================================================
+
+FIX #80
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-FIO37-a-1
+Severity: LOW
+Category: CERT
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 7 more files
+
+================================================================================
+
+FIX #81
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC19-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 7 more files
+
+================================================================================
+
+FIX #82
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-STR31-a-1
+Severity: LOW
+Category: CERT
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 7 more files
+
+================================================================================
+
+FIX #83
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-DIR_4_1-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 7 more files
+
+================================================================================
+
+FIX #84
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_18_1-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 7 more files
+
+================================================================================
+
+FIX #85
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL39-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+A pointer to a structure should not be passed as the second argument to the 'memcpy()' function
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: A pointer to a structure should not be passed as the second argument to the 'memcpy()' function
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:743
+  - Mka_Internal.c:745
+  - Mka_Internal.c:743
+  - Mka_Internal.c:745
+  - Mka_Internal.c:743
+  ... and 7 more files
+
+================================================================================
+
+FIX #86
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_17_8-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Parameter 'data' is modified in function 'Mka_Intr_be7bit'
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Parameter 'data' is modified in function 'Mka_Intr_be7bit'
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:1327
+  - Mka_Internal.c:1727
+  - Mka_Internal.c:1327
+  - Mka_Internal.c:1727
+  - Mka_Internal.c:1327
+  ... and 7 more files
+
+================================================================================
+
+FIX #87
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL00-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Declare local variable 'length' as const
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Declare local variable 'length' as const
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:1371
+  - Mka_Internal.c:2242
+  - Mka_Internal.c:2792
+  - Mka_Internal.c:1371
+  - Mka_Internal.c:2242
+  ... and 13 more files
+
+================================================================================
+
+FIX #88
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP33-a-1
+Severity: LOW
+Category: CERT
+
+Description:
+Non-initialized "LddReturnValue" is used
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Non-initialized "LddReturnValue" is used
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:2192
+  - Mka_Internal.c:2193
+  - Mka_Internal.c:2802
+  - Mka_Internal.c:1638
+  ... and 19 more files
+
+================================================================================
+
+FIX #89
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_1_3-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Non-initialized "LddReturnValue" is used
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Non-initialized "LddReturnValue" is used
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:2192
+  - Mka_Internal.c:2193
+  - Mka_Internal.c:2802
+  - Mka_Internal.c:1638
+  ... and 19 more files
+
+================================================================================
+
+FIX #90
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_9_1-a-1
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Non-initialized "LddReturnValue" is used
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Non-initialized "LddReturnValue" is used
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:2192
+  - Mka_Internal.c:2193
+  - Mka_Internal.c:2802
+  - Mka_Internal.c:1638
+  ... and 19 more files
+
+================================================================================
+
+FIX #91
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC07-b-3
+Severity: LOW
+Category: CERT
+
+Description:
+Unreachable code detected after 'break'
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Unreachable code detected after 'break'
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  ... and 1 more files
+
+================================================================================
+
+FIX #92
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC12-b-3
+Severity: LOW
+Category: CERT
+
+Description:
+Unreachable code detected after 'break'
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Unreachable code detected after 'break'
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  ... and 1 more files
+
+================================================================================
+
+FIX #93
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_2_1-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Unreachable code detected after 'break'
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Unreachable code detected after 'break'
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  ... and 1 more files
+
+================================================================================
+
+FIX #94
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_16_1-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Avoid using nested 'default' statement
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Avoid using nested 'default' statement
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  ... and 1 more files
+
+================================================================================
+
+FIX #95
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_16_2-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Avoid using nested 'default' statement
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Avoid using nested 'default' statement
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  ... and 1 more files
+
+================================================================================
+
+FIX #96
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL01-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Identifier 'Mka_MI_Value' is hiding an identifier from global or namespace scope
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Identifier 'Mka_MI_Value' is hiding an identifier from global or namespace scope
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  ... and 1 more files
+
+================================================================================
+
+FIX #97
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_5_3-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Identifier 'Mka_MI_Value' is hiding an identifier from global or namespace scope
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Identifier 'Mka_MI_Value' is hiding an identifier from global or namespace scope
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  ... and 1 more files
+
+================================================================================
+
+FIX #98
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_8-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Composite expression with 'signed' essential type category shall not be cast to different essential type category 'unsigned'
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Composite expression with 'signed' essential type category shall not be cast to different essential type category 'unsigned'
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:2607
+  - Mka_Internal.c:2607
+  - Mka_Internal.c:2607
+  - Mka_Internal.c:2607
+  - Mka_Internal.c:2607
+  ... and 1 more files
+
+================================================================================
+
+FIX #99
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL00-b-3
+Severity: LOW
+Category: CERT
+
+Description:
+Declare parameter 'PaeInst' as const
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Declare parameter 'PaeInst' as const
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:2646
+  - Mka_Internal.c:2726
+  - Mka_Internal.c:2789
+  - Mka_Internal.c:2965
+  - Mka_Internal.c:3122
+  ... and 301 more files
+
+================================================================================
+
+FIX #100
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_16_1-c-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Every non empty case clause in a switch statement shall be terminated with a break statement
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Every non empty case clause in a switch statement shall be terminated with a break statement
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  ... and 1 more files
+
+================================================================================
+
+FIX #101
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_16_3-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Every non empty case clause in a switch statement shall be terminated with a break statement
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Every non empty case clause in a switch statement shall be terminated with a break statement
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  ... and 1 more files
+
+================================================================================
+
+FIX #102
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC17-a-1
+Severity: LOW
+Category: CERT
+
+Description:
+Possible missing break statement in 'case' label
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Possible missing break statement in 'case' label
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  ... and 1 more files
+
+================================================================================
+
+FIX #103
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_15_7-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Provide 'else' after the last 'else-if' construct
+
+Fix Type: misra_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review MISRA rule and apply appropriate fix: Provide 'else' after the last 'else-if' construct
+
+Example:
+Refer to MISRA C guidelines for specific rule details
+
+Files Affected:
+  - Mka_Internal.c:3000
+  - Mka_Internal.c:4600
+  - Mka_Internal.c:3000
+  - Mka_Internal.c:4600
+  - Mka_Internal.c:3000
+  ... and 7 more files
+
+================================================================================
+
+FIX #104
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC01-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Provide 'else' after the last 'else-if' construct
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Provide 'else' after the last 'else-if' construct
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:3000
+  - Mka_Internal.c:4600
+  - Mka_Internal.c:3000
+  - Mka_Internal.c:4600
+  - Mka_Internal.c:3000
+  ... and 7 more files
+
+================================================================================
+
+FIX #105
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL19-a-3
+Severity: HIGH
+Category: CERT
+
+Description:
+Variable "LpMkaKayParticipants" should be declared as locally as possible
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Variable "LpMkaKayParticipants" should be declared as locally as possible
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:3219
+  - Mka_Internal.c:3622
+  - Mka_Internal.c:3624
+  - Mka_Internal.c:3625
+  - Mka_Internal.c:4243
+  ... and 31 more files
+
+================================================================================
+
+FIX #106
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_7_4-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+String literal "IEEE8021 KEK" is passed to function 'Mka_Callout_ICK_KDF' as pointer to non-const object
+
+Fix Type: pointer_cast
+Priority: HIGH
+
+Fix Description:
+Use proper pointer casting or avoid incompatible pointer types
+
+Example:
+
+// Before:
+int* ptr = (int*)some_void_ptr;
+
+// After:
+int* ptr = (int*)(uintptr_t)some_void_ptr;  // Use intermediate cast
+
+
+Files Affected:
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  - Mka_Internal.c:5070
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  ... and 13 more files
+
+================================================================================
+
+FIX #107
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-STR05-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+String literal "IEEE8021 KEK" is passed to function 'Mka_Callout_ICK_KDF' as pointer to non-const object
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: String literal "IEEE8021 KEK" is passed to function 'Mka_Callout_ICK_KDF' as pointer to non-const object
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  - Mka_Internal.c:5070
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  ... and 13 more files
+
+================================================================================
+
+FIX #108
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-STR30-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+String literal "IEEE8021 KEK" is passed to function 'Mka_Callout_ICK_KDF' as pointer to non-const object
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: String literal "IEEE8021 KEK" is passed to function 'Mka_Callout_ICK_KDF' as pointer to non-const object
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  - Mka_Internal.c:5070
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  ... and 13 more files
+
+================================================================================
+
+FIX #109
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC41-a-1
+Severity: LOW
+Category: CERT
+
+Description:
+The string literal is embedded directly in the code: IEEE8021 KEK
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: The string literal is embedded directly in the code: IEEE8021 KEK
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  - Mka_Internal.c:5070
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  ... and 13 more files
+
+================================================================================
+

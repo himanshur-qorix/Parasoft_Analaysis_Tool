@@ -31,6 +31,7 @@ class OllamaIntegration:
         """
         self.enabled = config.get('enabled', False) and OLLAMA_AVAILABLE
         self.provider = config.get('provider', 'none')
+        self.ai_mode = config.get('ai_mode', 'hybrid')  # ai_only, hybrid, rules_only
         
         if self.provider == 'ollama':
             ollama_config = config.get('ollama', {})
@@ -42,6 +43,16 @@ class OllamaIntegration:
             self.max_tokens = config.get('max_tokens', 1000)
             self.temperature = config.get('temperature', 0.3)
             self.use_ai_for = config.get('use_ai_for', {})
+            
+            # Adjust behavior based on mode
+            if self.ai_mode == 'rules_only':
+                self.enabled = False
+                logger.info("[INFO] AI Mode: Rules Only - AI disabled")
+            elif self.ai_mode == 'ai_only':
+                self.enabled = self.enabled and OLLAMA_AVAILABLE
+                logger.info("[INFO] AI Mode: AI Only - Will use AI for all violations")
+            else:  # hybrid
+                logger.info("[INFO] AI Mode: Hybrid - Smart AI + rule-based fixes")
             
             # Test connection
             if self.enabled:
@@ -89,19 +100,29 @@ class OllamaIntegration:
         if not self.enabled:
             return False
         
-        # Check category-based rules
-        if 'CERT' in category and self.use_ai_for.get('cert_violations', False):
+        # AI Only mode - use AI for everything
+        if self.ai_mode == 'ai_only':
             return True
         
-        if 'MISRA' in category and self.use_ai_for.get('misra_violations', False):
-            return True
+        # Rules Only mode - never use AI
+        if self.ai_mode == 'rules_only':
+            return False
         
-        # Use AI for unknown/complex patterns
-        if self.use_ai_for.get('unknown_patterns', True):
-            # Simple heuristic: if violation text is long or contains "complex" keywords
-            if len(violation_text) > 100 or any(kw in violation_text.lower() for kw in 
-                ['complex', 'undefined', 'unknown', 'ambiguous', 'context']):
+        # Hybrid mode - intelligent selection
+        if self.ai_mode == 'hybrid':
+            # Check category-based rules
+            if 'CERT' in category and self.use_ai_for.get('cert_violations', False):
                 return True
+            
+            if 'MISRA' in category and self.use_ai_for.get('misra_violations', False):
+                return True
+            
+            # Use AI for unknown/complex patterns
+            if self.use_ai_for.get('unknown_patterns', True):
+                # Simple heuristic: if violation text is long or contains "complex" keywords
+                if len(violation_text) > 100 or any(kw in violation_text.lower() for kw in 
+                    ['complex', 'undefined', 'unknown', 'ambiguous', 'context']):
+                    return True
         
         return False
     
@@ -283,6 +304,7 @@ Keep response under 200 words. Focus on C/C++ code."""
         return {
             'enabled': self.enabled,
             'provider': self.provider,
+            'ai_mode': self.ai_mode if hasattr(self, 'ai_mode') else 'hybrid',
             'model': self.model if hasattr(self, 'model') else 'N/A',
             'base_url': self.base_url if hasattr(self, 'base_url') else 'N/A',
             'ollama_available': OLLAMA_AVAILABLE

@@ -61,11 +61,40 @@ if "%MODULE_NAME%"=="" (
     exit /b 1
 )
 
+REM Prompt for AI mode
+echo.
+echo ==================================================
+echo AI Mode Selection
+echo ==================================================
+echo.
+echo Choose fix generation mode:
+echo   [1] AI Only      - Use Ollama AI for all violations (requires Ollama)
+echo   [2] Hybrid       - Smart: AI for complex, rules for standard (recommended)
+echo   [3] Rules Only   - Use only rule-based fixes (no AI required)
+echo.
+set /p AI_MODE_CHOICE="Enter choice (1-3) [default: 2]: "
+
+if "%AI_MODE_CHOICE%"=="" set AI_MODE_CHOICE=2
+
+if "%AI_MODE_CHOICE%"=="1" (
+    set AI_MODE=ai_only
+    echo [INFO] Selected: AI Only mode
+) else if "%AI_MODE_CHOICE%"=="2" (
+    set AI_MODE=hybrid
+    echo [INFO] Selected: Hybrid mode (AI + Rules)
+) else if "%AI_MODE_CHOICE%"=="3" (
+    set AI_MODE=rules_only
+    echo [INFO] Selected: Rules Only mode
+) else (
+    echo Invalid choice. Using default: Hybrid mode
+    set AI_MODE=hybrid
+)
+
 REM Run the AI Agent
 echo.
 echo Running analysis with Qorix integration...
 echo.
-python scripts\run_agent.py report_dev1.html %MODULE_NAME%
+python scripts\run_agent.py report_dev1.html %MODULE_NAME% --ai-mode %AI_MODE%
 
 if errorlevel 1 (
     echo.
