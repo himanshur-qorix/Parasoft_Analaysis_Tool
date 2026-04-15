@@ -239,7 +239,7 @@ The tool automatically:
 - Detects if report_dev1.html exists
 - If not found but source code path provided → generates MISRA/CERT report
 - Uses the generated report for complete analysis workflow
-- Applies Qorix deviations and generates fixes
+- Applies Qorix deviations and creates knowledge database
 2. **Run the batch file**: Double-click `scripts\Run.bat` (or run from project root)
 3. **Enter module name**: When prompted, enter the module name (e.g., "Mka")
 4. **Review results**: Check the generated directories for outputs
@@ -258,9 +258,6 @@ python src\run_agent.py report_dev1.html Mka
 
 #### Advanced Options
 ```bash
-# Skip code fix generation
-python src\run_agent.py report_dev1.html Mka --no-fixes
-
 # Skip justification generation
 python src\run_agent.py report_dev1.html Mka --no-justifications
 
@@ -274,11 +271,15 @@ python src\run_agent.py report_dev1.html Mka --qorix custom_deviations.xlsx
 python src\run_agent.py report_dev1.html Mka --no-justifications --workspace D:/MyProject --qorix data/Qorix.xlsx
 ```
 
+**Note:** Code fix generation is now a separate step (see Step 2 below).
+
 ---
 
 ## � Complete Workflow
 
-### Step 1: Run Analysis
+**Important:** The workflow is now separated into two distinct steps for better clarity and control:
+
+### Step 1: Run Analysis (NO Code Fixes)
 ```bash
 # Option A: Using batch file (recommended for Windows)
 scripts\Run.bat
@@ -287,35 +288,75 @@ scripts\Run.bat
 python src\run_agent.py report_dev1.html Mka
 ```
 
-**Outputs:**
-- Excel report with violation status (Justified/Needs Code Update/Analysis Required)
-- Suppress comments file for justified violations
-- Knowledge database
-- Fix suggestions (Parasoft DB + AI + Rules)
+**What it does:**
+- Parses Parasoft report or generates MISRA/CERT report from source code
+- Creates/updates knowledge database
+- Generates Excel report with violation status (Justified/Needs Code Update/Analysis Required)
+- Creates suppress comments file for justified violations
+- Adds justification comments to code
+- **Does NOT generate code fixes** (separate step below)
 
-### Step 2: (Optional) Regenerate Code Fix Suggestions
+**Outputs:**
+- `knowledge_base/{Module}_KnowledgeDatabase.json` - Analysis data
+- `reports/{Module}_violations_report.xlsx` - Excel summary with status
+- `justifications/{Module}_suppress_comments_{timestamp}.txt` - Suppression comments
+- Analysis summary and statistics
+
+### Step 2: Generate Code Fix Suggestions (Separate Step)
 ```bash
-# NEW! Regenerate fixes without re-running full analysis
+# Generate fixes using the knowledge database from Step 1
 scripts\Generate_Code_Fixes.bat
 
-# Try different AI modes for comparison
-# - Hybrid (default): Parasoft DB → AI → Rules
-# - AI Only: Pure AI suggestions
+# Try different AI modes:
+# - Hybrid (recommended): Parasoft DB → AI → Rules
+# - AI Only: Pure AI suggestions  
 # - Rules Only: Parasoft DB + Patterns (no AI)
 ```
 
+**What it does:**
+- Uses existing knowledge database (from Step 1)
+- Generates code fix suggestions with priority: Parasoft DB → AI → Pattern-based
+- Creates both text and HTML fix reports
+- Offers interactive viewing options
+- Much faster than full re-analysis (10-30 seconds vs 2-5 minutes)
+
 **When to use:**
-- Want to try different AI modes
+- After completing Step 1 analysis
+- Want to try different AI modes for comparison
 - After building/updating Parasoft Rules Database
-- Need fresh fix suggestions without re-analysis
-- Faster than full Run.bat (10-30 seconds vs 2-5 minutes)
+- Need to regenerate fixes without re-running full analysis
 
 **Outputs:**
-- Updated fix suggestions with official Parasoft examples
-- Before/after code snippets
-- Security relevance and CWE mappings
+- `fixes/{Module}/{Module}_fixes_{timestamp}.txt` - Text format with all fixes
+- `fixes/{Module}/{Module}_fixes_{timestamp}.html` - Professional HTML report with filtering
+- Interactive viewer option for browsing fixes
+- Before/after code snippets with security relevance and CWE mappings
 
-### Step 3: Apply Suppress Comments (Interactive)
+### Step 3: View Code Fixes (Multiple Options)
+```bash
+# After Step 2, view the generated fixes:
+
+# Option 1: Interactive Terminal Viewer (recommended)
+python src\view_fixes_interactive.py fixes\Mka\Mka_fixes_*.txt
+# - Keyboard navigation (Arrow keys, A/D)
+# - Search violations (S key)
+# - Color-coded display
+# - Open HTML report (H key)
+
+# Option 2: HTML Report in Browser
+# Open: fixes\Mka\Mka_fixes_*.html
+# - Filterable by priority, type, search
+# - Syntax highlighting
+# - Qorix branding
+# - Collapsible fix cards
+
+# Option 3: Text File
+# Open: fixes\Mka\Mka_fixes_*.txt in any text editor
+```
+
+**See [FIX_VIEWING_OPTIONS.md](docs/FIX_VIEWING_OPTIONS.md) for complete guide on viewing options.**
+
+### Step 4: Apply Suppress Comments (Interactive)
 ```bash
 # Option A: Using batch file (easiest)
 scripts\Apply_Suppressions.bat
@@ -349,7 +390,7 @@ Apply this suppression? (y=yes, n=no, a=yes to all, q=quit): y
 [INFO] Backup created: src/Mka_Internal.c
 ```
 
-### Step 4: Review and Commit
+### Step 5: Review and Commit
 1. Review modified files in your source code
 2. Check backup folder (`parasoft_backups_YYYYMMDD_HHMMSS/`) if you need to revert
 3. Test your code
@@ -387,9 +428,9 @@ Parasoft_Analaysis_Tool/
 ├── config/                       # Configuration files
 │   └── config.json
 │
-├── scripts/                      # Batch automation scripts
-│   ├── Run.bat                   # Main analysis workflow
-│   ├── Generate_Code_Fixes.bat   # Regenerate fix suggestions (NEW!)
+├── scripts/                      # Batch automation scripts (Windows)
+│   ├── Run.bat                   # Main analysis workflow (NO code fixes)
+│   ├── Generate_Code_Fixes.bat   # Generate code fix suggestions (SEPARATE)
 │   ├── Apply_Suppressions.bat    # Interactive suppress comment applicator
 │   ├── Build_Parasoft_Rules_Database.bat  # Build official rules DB
 │   ├── Consolidate_Knowledge.bat  # Merge module knowledge bases

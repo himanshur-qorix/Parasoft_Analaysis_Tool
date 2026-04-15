@@ -159,22 +159,23 @@ if "%AI_MODE_CHOICE%"=="1" (
     set AI_MODE=hybrid
 )
 
-REM Run the AI Agent
+REM Run the AI Agent (without code fix generation)
 echo.
 echo Running analysis with Qorix integration...
+echo Note: Code fix generation is now separate - use Generate_Code_Fixes.bat
 echo.
 
 if not "%SOURCE_CODE_PATH%"=="" (
     if "%GENERATED_REPORT%"=="yes" (
         REM Report was generated from MISRA/CERT, source code already analyzed
-        python src\run_agent.py "%REPORT_FILE%" %MODULE_NAME% --ai-mode %AI_MODE%
+        python src\run_agent.py "%REPORT_FILE%" %MODULE_NAME% --ai-mode %AI_MODE% --no-fixes
     ) else (
         REM Using Parasoft report with MISRA/CERT pre-analysis
-        python src\run_agent.py "%REPORT_FILE%" %MODULE_NAME% --source-code "%SOURCE_CODE_PATH%" --ai-mode %AI_MODE%
+        python src\run_agent.py "%REPORT_FILE%" %MODULE_NAME% --source-code "%SOURCE_CODE_PATH%" --ai-mode %AI_MODE% --no-fixes
     )
 ) else (
     REM No source code path, just analyze the report
-    python src\run_agent.py "%REPORT_FILE%" %MODULE_NAME% --ai-mode %AI_MODE%
+    python src\run_agent.py "%REPORT_FILE%" %MODULE_NAME% --ai-mode %AI_MODE% --no-fixes
 )
 
 if errorlevel 1 (
@@ -198,7 +199,6 @@ echo   - reports\%MODULE_NAME%_violations_report_UPDATED.xlsx (Excel with Justif
 echo   - reports\%MODULE_NAME%_analysis_summary.json
 echo   - knowledge_base\%MODULE_NAME%_KnowledgeDatabase.json
 echo   - justifications\%MODULE_NAME%_suppress_comments_*.txt (Parasoft suppress comments)
-echo   - fixes\%MODULE_NAME%\ (Text + HTML fix suggestions)
 echo.
 echo Excel Report includes:
 echo   - Status: Justified / Needs Code Update / Analysis Required
@@ -207,43 +207,13 @@ echo   - Filtered by Qorix_CP_Common_Deviations.xlsx
 echo.
 echo.
 echo ==================================================
-echo View Code Fix Suggestions?
-echo ==================================================
-echo.
-echo   [Y] Yes - Open interactive viewer
-echo   [H] HTML - Open HTML report in browser
-echo   [N] No - Skip for now
-echo.
-set /p VIEW_FIXES="View fixes now? (Y/H/N) [default: Y]: "
-
-if "%VIEW_FIXES%"=="" set VIEW_FIXES=Y
-
-if /I "%VIEW_FIXES%"=="Y" (
-    echo.
-    echo [INFO] Starting Interactive Fix Viewer...
-    echo.
-    for /f "delims=" %%i in ('dir /b /o-d "fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.txt" 2^>nul') do (
-        python src\view_fixes_interactive.py "fixes\%MODULE_NAME%\%%i"
-        goto :after_view
-    )
-) else if /I "%VIEW_FIXES%"=="H" (
-    echo.
-    echo [INFO] Opening HTML report in browser...
-    for /f "delims=" %%i in ('dir /b /o-d "fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.html" 2^>nul') do (
-        start "" "fixes\%MODULE_NAME%\%%i"
-        goto :after_view
-    )
-)
-
-:after_view
-echo.
-echo ==================================================
 echo Next Steps
 echo ==================================================
 echo.
-echo To view fixes again:
-echo   - Interactive: python src\view_fixes_interactive.py fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.txt
-echo   - HTML: Open fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.html in browser
+echo Analysis Complete! Next, generate code fix suggestions:
+echo   1. Run: scripts\Generate_Code_Fixes.bat
+echo   2. Select AI mode (hybrid recommended)
+echo   3. View fixes interactively or in HTML
 echo.
 echo To apply suppress comments:
 echo   1. Run: scripts\Apply_Suppressions.bat

@@ -1,0 +1,6649 @@
+================================================================================
+PARASOFT FIXES - Module: Mka
+Generated: 2026-04-15 14:03:03
+Total Fixes: 111
+================================================================================
+
+FIX #1
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-i-2
+Severity: LOW
+Category: CERT
+
+Description:
+The expression of the 'essentially Enum' type is assigned to an object with the 'essentially unsigned' type
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The C language allows the programmer considerable freedom and will permit
+assignments between different arithmetic types to be performed automatically.
+However, the use of these implicit conversions ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void short_int( int i){ };
+
+double foo(int i)
+{
+    char ch = 10;             /* Violation - character and signed */
+    i = 20.0;                 /* Violation - signed and floating */
+    short_int(1UL);           /* Violation - signed and unsigned */
+    switch(i)
+    {
+        case 'a':          
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+/* Examples of correct code */
+
+void short_int(unsigned long i){ };
+
+double foo1(int i)
+{
+    char ch = 'a';            /* OK */
+    i = (int)20.0;            /* OK */
+    short_int(1UL);           /* OK */
+    switch(i)
+    {
+        case 0:               /* OK */
+            ch = 'a' + 1;     /* OK */
+        case 1:               /* OK */
+            ch = 'a' - 1;     /* OK */
+    }
+    return (double)i;         /* OK */
+}
+
+void foo2(unsigned char uc1)
+{
+    unsigned char uc2 = 10u;  /* OK */
+... (truncated)
+
+
+Files Affected:
+  - Mka_Cfg.c:93
+  - Mka_Cfg.c:99
+  - Mka_Cfg.c:105
+  - Mka_Cfg.c:111
+  - Mka_Cfg.c:117
+  ... and 1150 more files
+
+================================================================================
+
+FIX #2
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_3-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The expression of the 'essentially Enum' type is assigned to an object with the 'essentially unsigned' type
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The C language allows the programmer considerable freedom and will permit
+assignments between different arithmetic types to be performed automatically.
+However, the use of these implicit conversions ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void short_int( int i){ };
+
+double foo(int i)
+{
+    char ch = 10;             /* Violation - character and signed */
+    i = 20.0;                 /* Violation - signed and floating */
+    short_int(1UL);           /* Violation - signed and unsigned */
+    switch(i)
+    {
+        case 'a':          
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+/* Examples of correct code */
+
+void short_int(unsigned long i){ };
+
+double foo1(int i)
+{
+    char ch = 'a';            /* OK */
+    i = (int)20.0;            /* OK */
+    short_int(1UL);           /* OK */
+    switch(i)
+    {
+        case 0:               /* OK */
+            ch = 'a' + 1;     /* OK */
+        case 1:               /* OK */
+            ch = 'a' - 1;     /* OK */
+    }
+    return (double)i;         /* OK */
+}
+
+void foo2(unsigned char uc1)
+{
+    unsigned char uc2 = 10u;  /* OK */
+... (truncated)
+
+
+Files Affected:
+  - Mka_Cfg.c:93
+  - Mka_Cfg.c:99
+  - Mka_Cfg.c:105
+  - Mka_Cfg.c:111
+  - Mka_Cfg.c:117
+  ... and 1150 more files
+
+================================================================================
+
+FIX #3
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_20_1-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Do not precede the #include directive with executable code
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects when an #include directive in a file is preceded by code
+other than preprocessor directives....
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+// file.h
+x = 0;
+
+// file1.c
+#include <stdint.h>     // OK - only a comment before this #include
+int32_ t
+#include "file.h"       // Violation
+
+// file2.cpp
+extern "C"
+{
+    #include "file2.h"  // OK - linkage specification tokens are allowed before
+                        //      the #include direc
+... (truncated)
+
+
+Files Affected:
+  - Mka_Cfg.c:691
+  - Mka_Cfg.c:753
+  - Mka_Cfg.c:762
+  - Mka_Cfg.c:772
+  - Mka_Cfg.c:786
+  ... and 457 more files
+
+================================================================================
+
+FIX #4
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_5_4-c-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The 'MKA_START_SEC_CONST_UNSPECIFIED' macro has the same name (or the first 31 characters of the name) as the 'MKA_START_SEC_CONST_UNSPECIFIED'
+macro previously defined in the current file
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "This rule requires that, when a macro is being defined, its name be distinct
+from:
+- the names of the other macros that are currently defined; and
+- the names of their parameters.
+
+It also requires t...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+#define macro1        10
+#define macro1(X) X + 10                       /* Violation */
+
+#define macro2(param1_01) param1_01
+#define param1_01 10                           /* Violation */
+
+#define param2_02 10
+#define macro3(param2_02) param2_02            /* Violation */
+
+/*      123456789012345678
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+#define macro1        10
+#undef macro1
+#define macro1(X) X + 10                       /* OK */
+
+#define macro2(param2_01) param2_01
+#define param1_01 10                           /* OK */
+
+#define param2_02 10
+#define macro3(param3_01) param3_01            /* OK */
+
+/*      1234567890123456789012345678901********* Characters */
+#define macro4_01____________________01X XX
+#define macro4_01____________________02Y YY    /* OK */
+
+
+Files Affected:
+  - Mka_Cfg.c:693
+  - Mka_Cfg.c:752
+  - Mka_Cfg.c:764
+  - Mka_Cfg.c:771
+  - Mka_Cfg.c:774
+  ... and 875 more files
+
+================================================================================
+
+FIX #5
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_5_4-d-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The 'MKA_START_SEC_CONST_UNSPECIFIED' macro has the same name (or the first 63 characters of the name) as the 'MKA_START_SEC_CONST_UNSPECIFIED'
+macro previously defined in the current file
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "This rule requires that, when a macro is being defined, its name be distinct
+from:
+- the names of the other macros that are currently defined; and
+- the names of their parameters.
+
+It also requires t...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+#define macro1        10
+#define macro1(X) X + 10                       /* Violation */
+
+#define macro2(param1_01) param1_01
+#define param1_01 10                           /* Violation */
+
+#define param2_02 10
+#define macro3(param2_02) param2_02            /* Violation */
+
+/*      123456789012345678
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+#define macro1        10
+#undef macro1
+#define macro1(X) X + 10                       /* OK */
+
+#define macro2(param2_01) param2_01
+#define param1_01 10                           /* OK */
+
+#define param2_02 10
+#define macro3(param3_01) param3_01            /* OK */
+
+/*      123456789012345678901234567890123456789012345678901234567890123**** */
+#define macro4_01____________________________________________________01X XX
+#define macro4_01____________________________________________________02Y YY /*
+... (truncated)
+
+
+Files Affected:
+  - Mka_Cfg.c:693
+  - Mka_Cfg.c:752
+  - Mka_Cfg.c:764
+  - Mka_Cfg.c:771
+  - Mka_Cfg.c:774
+  ... and 875 more files
+
+================================================================================
+
+FIX #6
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_2_8-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The 'Mka_GaaPaeConfigurations' variable is not used in the testing scope
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Variables declared and never used in a project constitute noise and may
+indicate that the wrong name has been used somewhere. Removing these
+declarations reduces the possibility that they may later b...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+// header.h
+
+int var1;                         /* Violation */
+int var2;                         /* Violation */
+
+// file1.cpp
+
+#include "header.h"
+
+int addVar1toParam(int param)
+{
+  return param + param;
+}
+
+// file2.cpp
+
+#include "header.h"
+
+int var3 = 0;                     /* Violation */
+
+int fo
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+/* You can fix the code by removing the unused variable or by using it */
+
+// header.h
+
+int var1;                         /* OK */
+
+// file1.cpp
+
+#include "header.h"
+
+int addVar1toParam(int param)
+{
+  return var1 + param;
+}
+
+// file2.cpp
+
+#include "header.h"
+
+int var3 = 0;                     /* OK */
+
+void foo(void)
+{
+  return var3;
+}
+
+
+Files Affected:
+  - Mka_Cfg.c:695
+  - Mka_Cfg.c:805
+  - Mka_Cfg.c:1080
+  - Mka.c:209
+  - Mka.c:215
+  ... and 83 more files
+
+================================================================================
+
+FIX #7
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_8_4-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Declaration of object 'Mka_GaaMkaBypassEtherType' does not precede its definition
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "If a declaration for an object or function is visible when that object
+or function is defined, a compiler must check that the declaration
+and definition are compatible. In the presence of function pr...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+/* file.c */
+int i1;                   /* Violation - no declaration */
+extern int ei1 = 1;       /* Violation - no declaration */
+void foo1(int x){}        /* Violation - no declaration */
+void foo2(int x){}        /* Violation - declaration after definition */
+void foo2(int x);
+
+--- OFFICIAL REPAIR ---
+/* file.h */
+extern int i1;
+extern int ei1;
+extern void foo1(int x);
+extern void foo2(int x);
+
+/* file.c */
+#include "file.h"
+int i1;                   /* OK */
+int ei1 = 1;              /* OK */
+void foo1(int x){}        /* OK */
+void foo2(int x){}        /* OK */
+
+
+Files Affected:
+  - Mka_Cfg.c:757
+  - Mka_Cfg.c:767
+  - Mka_Cfg.c:777
+  - Mka_Cfg.c:791
+  - Mka_Cfg.c:993
+  ... and 215 more files
+
+================================================================================
+
+FIX #8
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL15-a-3
+Severity: HIGH
+Category: CERT
+
+Description:
+Global variable 'Mka_GaaMkaBypassEtherType' has external linkage and is not declared in the header
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Declarations at file scope are external by default. Therefore if two files
+both declare an identifier with the same name at file scope, the linker will
+either give an error, or they will be the same ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+// file.cpp
+int i1;        // Violation
+int i2 = 0;    // Violation
+
+void foo1(){}  // Violation
+void foo2(){}  // Violation
+
+--- OFFICIAL REPAIR ---
+// file.h
+extern int i2;
+extern void foo2();
+
+// file.cpp
+#include "file.h"
+
+static int i1; // OK - declared as static
+int i2 = 0;    // OK - declared in a header file
+
+static void foo1();
+static void foo1(){} // OK - declared as static
+void foo2(){}        // OK - declared in a header file
+
+// Exceptions
+extern int ex;     // OK - declaration
+extern void fun(); // OK - declaration
+
+namespace {
+    int iN;        // OK - member of unnamed namespace
+    void fooN(){}  // OK - member of unnamed na
+... (truncated)
+
+
+Files Affected:
+  - Mka_Cfg.c:757
+  - Mka_Cfg.c:767
+  - Mka_Cfg.c:777
+  - Mka_Cfg.c:791
+  - Mka_Cfg.c:993
+  ... and 215 more files
+
+================================================================================
+
+FIX #9
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_8_7-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The object 'Mka_GaaMkaBypassEtherType' is referenced only in the translation unit where it is defined
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects cases when identifiers with external linkage (objects
+or functions) are used only in the translation unit in which they are
+defined. Such identifiers should not have external linkage...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+Assumption: testing scope contains only 'test1.c', 'test2.c' and 'test.h'.
+
+/* test.h */
+void bar(void);
+extern void bar2(void);
+
+/* test1.c */
+#include "test.h"
+int i = 0;                  /* Violation - the object 'i' is referenced
+                               only in the translation unit 'test1
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+Assumption: testing scope contains only 'test1.c', 'test2.c' and 'test.h'.
+
+/* test.h */
+extern void bar2(void);
+
+/* test1.c */
+#include "test.h"
+static void foo1(int x) {
+    int i = 0;              /* OK - the object has no linkage */
+    for(; i < x; i++) { /* ... */ }
+    bar2();
+}
+
+/* test2.c */
+#include "test.h"
+static void bar(void) {     /* OK - the function 'bar()' has an internal
+    /* ... */                  linkage */
+}
+
+void bar2(void) {           /* OK - the function 'bar2()' is r
+... (truncated)
+
+
+Files Affected:
+  - Mka_Cfg.c:757
+  - Mka_Cfg.c:767
+  - Mka_Cfg.c:777
+  - Mka_Cfg.c:791
+  - Mka_Cfg.c:993
+  ... and 688 more files
+
+================================================================================
+
+FIX #10
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL06-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Do not use the literal constant '6'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "When used in program logic, literals can reduce the readability of source code.
+As a result, literals, in general, and integer constants, in particular,
+are frequently called magic numbers because th...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int array[255];       // Violation
+
+void f(int i)
+{
+  if ( i > 20 ) {     // Violation
+    // ...
+  }
+}
+
+--- OFFICIAL REPAIR ---
+#define SIZE 255      // OK - exception
+
+int array[SIZE] = {   // OK
+    10, 20, 30        // OK - exception
+};
+
+const int limit = 20; // OK - exception
+
+void f(int i)
+{
+  if ( i > limit ) {  // OK
+    // ...
+  }
+
+  for (i = 0; i < limit; i++) { // OK - exception
+    //...
+  }
+
+  if ( i > -1 && i < 1 ) {      // OK - exception
+    // ...
+  }
+}
+
+
+Files Affected:
+  - Mka_Cfg.c:777
+  - Mka_Cfg.c:791
+  - Mka_Internal.c:377
+  - Mka_Internal.c:379
+  - Mka_Internal.c:559
+  ... and 985 more files
+
+================================================================================
+
+FIX #11
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_9_3-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The array of type 'const uint8 [6]' shall not be partially initialized
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "If any element of an array object or subobject is explicitly initialized,
+then the entire object or subobject shall be explicitly initialized."
+[MISRA C:2012 Rule 9.3]
+
+This rule detects when an aggr...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int arr1[3] = { 1, 2 };                       /* Violation */
+int arr2[3][2] = { {1, 2}, {5, 6} };          /* Violation */
+int arr3[3][2] = { {1}, {3, 4}, {5, 6} };     /* Violation */
+
+--- OFFICIAL REPAIR ---
+int arr1[3] = { 1, 2, 3 };                    /* OK */
+int arr2[3][2] = { {1, 2}, {3, 4}, {5, 6} };  /* OK */
+
+
+Files Affected:
+  - Mka_Cfg.c:780
+  - Mka_Cfg.c:781
+  - Mka_Cfg.c:782
+  - Mka_Cfg.c:794
+  - Mka_Cfg.c:795
+  ... and 61 more files
+
+================================================================================
+
+FIX #12
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_1_1-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+More than 31 initial characters in an external identifier: 64
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "A program shall not exceed the translation limits imposed by the
+implementation. The minimum translation limits are specified
+by The Standard but an implementation may provide higher limits."
+[MISRA ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+/* Violation - More than 511 external identifiers in one translation unit */
+extern int e1;
+/* ... */
+extern int e512();
+
+/* More than 31 characters in an external identifier */
+int i2345678901234567890123456789012;      /* Violation */
+
+/* More than 32767 bytes in an object */
+char a1[32768];      
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+Do not exceed translation limits of an implementation.
+
+
+Files Affected:
+  - Mka_Cfg.c:993
+  - Mka_Cfg.c:1037
+  - Mka_Cfg.c:1063
+  - Mka_Cbk.c:230
+  - Mka_Cbk.c:530
+  ... and 248 more files
+
+================================================================================
+
+FIX #13
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_1_1-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+More than 31 initial characters in an external identifier: 64
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "A program shall not exceed the translation limits imposed by the
+implementation. The minimum translation limits are specified
+by The Standard but an implementation may provide higher limits."
+[MISRA ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+/* Violation - More than 4095 external identifiers in one translation unit */
+extern int e1;
+/* ... */
+extern int e4096();
+
+/* More than 31 characters in an external identifier */
+int i2345678901234567890123456789012;                         /* Violation */
+
+/* More than 65535 bytes in an object */
+
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+Do not exceed translation limits of an implementation.
+
+
+Files Affected:
+  - Mka_Cfg.c:993
+  - Mka_Cfg.c:1037
+  - Mka_Cfg.c:1063
+  - Mka_Cbk.c:230
+  - Mka_Cbk.c:530
+  ... and 248 more files
+
+================================================================================
+
+FIX #14
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_5_1-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The identifier 'Mka_GaaCipherSuites_MkaCryptoAlgoConfig_1_MacSecCryptoAlgoConfig' has the same first 31 characters of the
+name as the identifier 'Mka_GaaCipherSuites_MkaCryptoAlgoConfig_0_MacSecCryptoAlgoConfig' defined in the 'Mka_Cfg.c' file
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "This rule requires that different external identifiers be distinct within the
+limits imposed by the implementation.
+
+The definition of distinct depends on the implementation and on the version of
+the...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int ID1_global_identifier_number_01_1;
+int ID1_global_identifier_number_01_2;               /* Violation */
+
+extern void ID2_global_identifier_number_01_1();
+extern void ID2_global_identifier_number_01_2();     /* Violation */
+
+void ID2_global_identifier_number_01_2()             /* Violation */
+{
+ 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+/* External identifiers should be distinct in first 31 characters */
+int ID1_global_identifier_number_01;
+int ID1_global_identifier_number_02;                   /* OK */
+
+
+Files Affected:
+  - Mka_Cfg.c:1037
+  - Mka_Cfg.c:1063
+  - Mka_Cfg.c:1063
+  - Mka_Cbk.c:705
+  - Mka_Cbk.c:768
+  ... and 534 more files
+
+================================================================================
+
+FIX #15
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_1_5-c-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Function 'Mka_Init' is not in prototype form
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule checks if a function types are in prototype form.
+It reports a violations if a declaration of a function type:
+- is in K&R style, or
+- has an empty parameter list
+
+See also: MISRA2004-16_3, ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int func1();   /* Violation - not in prototype form */
+
+int func2(n)   /* Violation - K&R style identifier and declaration list */
+int n;
+{
+    return n;
+}
+
+void (*fp1)(); /* Violation - not in prototype form */
+
+--- OFFICIAL REPAIR ---
+int func1(void);    /* OK - prototype specifies 0 parameters */
+
+int func2(int n)    /* OK */
+{
+    return n;
+}
+
+void (*fp1)(void);  /* OK */
+
+
+Files Affected:
+  - Mka.c:262
+  - Mka_Internal.c:2461
+  - Mka.c:262
+  - Mka_Internal.c:2461
+  - Mka.c:262
+  ... and 17 more files
+
+================================================================================
+
+FIX #16
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_8_2-c-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Function 'Mka_Init' is not in prototype form
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule checks if a function types are in prototype form.
+It reports a violations if a declaration of a function type:
+- is in K&R style, or
+- has an empty parameter list
+
+See also: MISRA2004-16_3, ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int func1();   /* Violation - not in prototype form */
+
+int func2(n)   /* Violation - K&R style identifier and declaration list */
+int n;
+{
+    return n;
+}
+
+void (*fp1)(); /* Violation - not in prototype form */
+
+--- OFFICIAL REPAIR ---
+int func1(void);    /* OK - prototype specifies 0 parameters */
+
+int func2(int n)    /* OK */
+{
+    return n;
+}
+
+void (*fp1)(void);  /* OK */
+
+
+Files Affected:
+  - Mka.c:262
+  - Mka_Internal.c:2461
+  - Mka.c:262
+  - Mka_Internal.c:2461
+  - Mka.c:262
+  ... and 17 more files
+
+================================================================================
+
+FIX #17
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_14_2-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The loop counter is modified inside the 'for' loop body
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "A for loop shall be well-formed" [MISRA C:2012 Rule 14.2]
+
+"A loop counter is defined as an object, array element or member of a structure
+or union which satisfies the following:
+
+1. It has a scalar ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int incr(int* ptr){
+  ++(*ptr);
+  return *ptr;
+}
+
+void foo()
+{
+    int i, j;
+    int a[3];
+
+    for(i = 0; i < 10; ++i)     /* Violation  */
+        i -= 1;                 /* a loop counter 'i' is modified in body */
+
+    for(; a[i] < 10; incr(&i))  /* Violation */
+        ++i;                    /
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+int incr(int* ptr){
+  ++(*ptr);
+  return *ptr;
+}
+
+void foo()
+{
+    int i, j;
+    int a[3];
+
+    for(i = 0; i < 10; ++i)      /* OK  */
+        j -= i;
+
+    for(; a[i] < 10; incr(&i)){  /* OK */
+        j = i;
+        j++;
+    }
+    for(; i < 10; ++i){          /* OK */
+      for(; j < 10; --j){}       /* OK */
+    }
+}
+
+
+Files Affected:
+  - Mka.c:272
+  - Mka.c:272
+  - Mka.c:272
+  - Mka.c:272
+  - Mka.c:272
+  ... and 6 more files
+
+================================================================================
+
+FIX #18
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_14_2-c-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The second clause of a 'for' statement contains an object that is modified inside the loop body:  'Luscount'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "A for loop shall be well-formed" [MISRA C:2012 Rule 14.2]
+
+"A loop counter is defined as an object, array element or member of a structure
+or union which satisfies the following:
+1. It has a scalar t...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo()
+{
+    int i, j;
+
+    /* The second clause of a 'for' statement contains an object
+     * that is modified inside the loop body: 'j' */
+    for (i = 0; i < j; i++) {                                  /* Violation */
+        j += 2;
+    }
+
+    /* The second clause of a 'for' statement contai
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+typedef enum {false, true} Bool;
+
+void foo()
+{
+    int i, j;
+    Bool flag = false;
+
+    for(i = 0; i < 10; i++) { }            /* OK */
+
+    for (i = 0; i < 10 && flag; i++) {     /* OK */
+        flag = true;
+    }
+}
+
+
+Files Affected:
+  - Mka.c:272
+  - Mka_Internal.c:1132
+  - Mka.c:272
+  - Mka_Internal.c:1132
+  - Mka.c:272
+  ... and 17 more files
+
+================================================================================
+
+FIX #19
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_14_2-d-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The third clause of a 'for' statement contains an object that is modified in the 'for' loop body
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "A for loop shall be well-formed" [MISRA C:2012 Rule 14.2]
+
+"A loop counter is defined as an object, array element or member of a structure
+or union which satisfies the following:
+
+1. It has a scalar ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo()
+{
+    int i;
+    int j;
+
+    for(i = 0, j = 100; i < 50 && j > 50; i++, j--){ /* Violation */
+        /* The third clause contains a comma operator */
+    }
+
+    for (i = 0; i < 1024; i += j ) {                 /* Violation */
+        j = 2;  /* The third clause contains an object modifie
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void foo()
+{
+    int i;
+    int j;
+
+    for (i = 0; i < 1024; i += j ) {                /* OK */
+        /* 'j' is not modified inside a loop body */
+    }
+
+    for (i = 100;  i < 1024; i++ ) {                /* OK */
+    }
+}
+
+
+Files Affected:
+  - Mka.c:272
+  - Mka.c:272
+  - Mka.c:272
+  - Mka.c:272
+  - Mka.c:272
+  ... and 6 more files
+
+================================================================================
+
+FIX #20
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-DIR_4_4-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Section of code should not be 'commented out'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects when a comment contains C or C++ code....
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo()
+{
+    int x = 5;
+    /*  Section of code     // Violation
+        commented out
+    if (x==0){
+        x++;
+    }
+    */
+}
+
+--- OFFICIAL REPAIR ---
+void foo()
+{
+    int x = 5;
+/* Comment without          // OK
+   code within */
+#if 0
+    if (x==0){
+        x++;
+    }
+#endif
+}
+
+
+Files Affected:
+  - Mka.c:294
+  - Mka.c:357
+  - Mka.c:733
+  - Mka.c:753
+  - Mka_Cbk.c:296
+  ... and 193 more files
+
+================================================================================
+
+FIX #21
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_8_13-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Pass parameter "VersionInfoPtr" with const specifier
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+
+
+Example:
+
+
+Files Affected:
+  - Mka.c:316
+  - Mka.c:405
+  - Mka.c:470
+  - Mka.c:502
+  - Mka.c:596
+  ... and 105 more files
+
+================================================================================
+
+FIX #22
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL13-a-3
+Severity: HIGH
+Category: CERT
+
+Description:
+Pass parameter "VersionInfoPtr" with const specifier
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "A pointer parameter in a function prototype should be declared as pointer to
+const if the pointer is not used to modify the addressed object. The const
+qualification should be applied to the object p...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int function(int* ptr)       // Violation
+{
+    return (*ptr) + 1;
+}
+
+--- OFFICIAL REPAIR ---
+int function(const int* ptr) // OK
+{
+    return (*ptr) + 1;
+}
+
+
+Files Affected:
+  - Mka.c:316
+  - Mka.c:405
+  - Mka.c:470
+  - Mka.c:502
+  - Mka.c:596
+  ... and 105 more files
+
+================================================================================
+
+FIX #23
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_14_4-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Test of a value against zero should be made explicit
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Where a data value is to be tested against zero then the test should be made
+explicit. The exception to this rule is when data represents a Boolean value,
+even though in C this will in practice be an...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int goo()
+{
+    return 1;
+}
+
+void foo( int x, int y )
+{
+  if (goo()) {}	// Violation
+  if (y) {}     // Violation
+}
+
+--- OFFICIAL REPAIR ---
+int goo()
+{
+    return 1;
+}
+
+void foo( int x, int y )
+{
+  if (goo() != 0) {}	// OK
+  if (y != 0) {}        // OK
+}
+
+
+Files Affected:
+  - Mka.c:317
+  - Mka.c:565
+  - Mka.c:672
+  - Mka_Internal.c:617
+  - Mka_Internal.c:1076
+  ... and 237 more files
+
+================================================================================
+
+FIX #24
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP20-b-1
+Severity: LOW
+Category: CERT
+
+Description:
+Test of a value against zero should be made explicit
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Where a data value is to be tested against zero then the test should be made
+explicit. The exception to this rule is when data represents a Boolean value,
+even though in C this will in practice be an...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int goo()
+{
+    return 1;
+}
+
+void foo( int x, int y )
+{
+  if (goo()) {}	// Violation
+  if (y) {}     // Violation
+}
+
+--- OFFICIAL REPAIR ---
+int goo()
+{
+    return 1;
+}
+
+void foo( int x, int y )
+{
+  if (goo() != 0) {}	// OK
+  if (y != 0) {}        // OK
+}
+
+
+Files Affected:
+  - Mka.c:317
+  - Mka.c:565
+  - Mka.c:672
+  - Mka_Internal.c:617
+  - Mka_Internal.c:1076
+  ... and 237 more files
+
+================================================================================
+
+FIX #25
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_1-i-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Do not use the expression of pointer type 'const uint8 *' as the operand of the logical operator '&&'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects when a pointer type is converted to a boolean type
+or used in a context where a boolean value is expected,
+resulting in an implicit comparison to NULL....
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+typedef _Bool bool;
+int *p;
+
+void f(void) {
+  bool b;
+
+  b = p;                // Violation - if the "Report implicit conversions from
+                        // a pointer type to a boolean type" parameter is enabled
+  b = (bool)p;          // Violation - if the "Report explicit conversions from
+   
+... (truncated)
+
+
+Files Affected:
+  - Mka.c:353
+  - Mka.c:406
+  - Mka.c:406
+  - Mka.c:471
+  - Mka.c:503
+  ... and 215 more files
+
+================================================================================
+
+FIX #26
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT36-b-3
+Severity: LOW
+Category: CERT
+
+Description:
+The 'const uint8 *' pointer to object type should not be implicitly converted to the  integral type '_Bool'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "An integer may be converted to any pointer type. The result is
+implementation-defined, might not be correctly aligned, might not point to an
+entity of the referenced type, and might be a trap represe...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+/* Examples of incorrect code */
+void f1 (int*);
+void f2 (int );
+
+int foo (int* ptr1)
+{
+    int i;
+    unsigned char c = ptr1;  /* Violation - an implicit conversion
+                                from a pointer to int type to an unsigned
+                                char type in initialization 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+/* Examples of code not reported by the rule */
+#include <stdint.h>
+
+#ifndef NULL
+#define NULL 0
+#endif
+
+void f1 (int );
+
+int foo (int* ptr1, void* vptr, intptr_t pint, uintptr_t u)
+{
+    signed int* ptr2 = NULL; /* OK - exception for null pointer constant */
+    u = (uintptr_t)ptr1;     /* OK - exception - explicit cast from a pointer
+                                     type to 'uintptr_t' is allowed */
+
+    f2(ptr1 - ptr2);         /* OK - the expression passed as argument to
+                
+... (truncated)
+
+
+Files Affected:
+  - Mka.c:353
+  - Mka.c:406
+  - Mka.c:406
+  - Mka.c:471
+  - Mka.c:503
+  ... and 204 more files
+
+================================================================================
+
+FIX #27
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+The right hand operand of the logical operator '&&' should have essentially Boolean type
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects cases when the following operands are expressed as integers,
+or floating types different than "essentially Boolean" type:
+  - the operand of the logical operator '!'
+  - the right ha...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+typedef enum {false, true} bool; /* essentially Boolean type */
+
+void foo( void )
+{
+    bool b;
+    int  i;
+    char ch;
+
+    if(!i);                  /* Violation */
+    !( b ? 1 : 2);           /* Violation */
+
+    if(i && ch);             /* Violation */
+    b = (i != b) || (i);     /* Violation 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+#define FALSE 0
+#define TRUE  1
+typedef enum {false, true} bool; /* essentially Boolean type */
+
+void foo( void )
+{
+    bool b;
+    int  i;
+    char ch;
+
+    if(i == 0);                   /* OK */
+    !( b ? TRUE : FALSE);         /* OK */
+
+    if((i > 0) && (ch == 'a'));   /* OK */
+    b = (i != b) || (i > 0);      /* OK */
+}
+
+
+Files Affected:
+  - Mka.c:353
+  - Mka.c:406
+  - Mka.c:406
+  - Mka.c:437
+  - Mka.c:471
+  ... and 545 more files
+
+================================================================================
+
+FIX #28
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_1-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The right hand operand of the logical operator '&&' should have essentially Boolean type
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects cases when the following operands are expressed as integers,
+or floating types different than "essentially Boolean" type:
+  - the operand of the logical operator '!'
+  - the right ha...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+typedef enum {false, true} bool; /* essentially Boolean type */
+
+void foo( void )
+{
+    bool b;
+    int  i;
+    char ch;
+
+    if(!i);                  /* Violation */
+    !( b ? 1 : 2);           /* Violation */
+
+    if(i && ch);             /* Violation */
+    b = (i != b) || (i);     /* Violation 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+#define FALSE 0
+#define TRUE  1
+typedef enum {false, true} bool; /* essentially Boolean type */
+
+void foo( void )
+{
+    bool b;
+    int  i;
+    char ch;
+
+    if(i == 0);                   /* OK */
+    !( b ? TRUE : FALSE);         /* OK */
+
+    if((i > 0) && (ch == 'a'));   /* OK */
+    b = (i != b) || (i > 0);      /* OK */
+}
+
+
+Files Affected:
+  - Mka.c:353
+  - Mka.c:406
+  - Mka.c:406
+  - Mka.c:437
+  - Mka.c:471
+  ... and 545 more files
+
+================================================================================
+
+FIX #29
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC09-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Undefined character was found inside comment: '\xe2', '\x80', '\x99'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: Only those characters and escape sequences which are defined in the ISO C
+standard shall be used.
+
+Section 5.2.1 of the ISO C standard defines 91 characters which are
+the minimum source character set ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo() {
+    char c1 = '$';  /* Violation */
+    char c2 = '`';  /* Violation */
+}
+
+--- OFFICIAL REPAIR ---
+Do not use characters not defined in the ISO C standard.
+
+
+Files Affected:
+  - Mka.c:605
+  - Mka.c:686
+  - Mka_Cbk.c:317
+  - Mka_Internal.c:275
+  - Mka_Internal.c:319
+  ... and 61 more files
+
+================================================================================
+
+FIX #30
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL22-a-3
+Severity: MEDIUM
+Category: CERT
+
+Description:
+Value of "LddReturnValue" is never used
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects when a local variable or function parameter is assigned with 
+a value that is never subsequently read because either:
+- variable is unused, i.e. there is no possible path on which th...
+
+Security Impact: "This weakness could be an indication of a bug in the program or a deprecated
+variable that was not removed and is an indication of poor quality. This...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+Here is sample code that triggers a violation:
+
+extern int fun1();
+extern int fun2();
+
+int fun(int a)
+{
+    int b;
+    if (a > 0) {
+        b = fun1(); // VIOLATION
+    }
+    b = fun2();
+    return b;
+}
+
+--- OFFICIAL REPAIR ---
+extern int fun1();
+extern int fun2();
+
+int fun(int a)
+{
+    /* when fun1 does not produce any side effects */
+    return fun2();
+}
+
+
+Files Affected:
+  - Mka.c:636
+  - Mka_Cbk.c:406
+  - Mka_Internal.c:841
+  - Mka_Internal.c:953
+  - Mka_Internal.c:1327
+  ... and 237 more files
+
+================================================================================
+
+FIX #31
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_2_2-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Value of "LddReturnValue" is never used
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects when a local variable or function parameter is assigned with 
+a value that is never subsequently read because either:
+- variable is unused, i.e. there is no possible path on which th...
+
+Security Impact: "This weakness could be an indication of a bug in the program or a deprecated
+variable that was not removed and is an indication of poor quality. This...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+Here is sample code that triggers a violation:
+
+extern int fun1();
+extern int fun2();
+
+int fun(int a)
+{
+    int b;
+    if (a > 0) {
+        b = fun1(); // VIOLATION
+    }
+    b = fun2();
+    return b;
+}
+
+--- OFFICIAL REPAIR ---
+extern int fun1();
+extern int fun2();
+
+int fun(int a)
+{
+    /* when fun1 does not produce any side effects */
+    return fun2();
+}
+
+
+Files Affected:
+  - Mka.c:636
+  - Mka_Cbk.c:291
+  - Mka_Cbk.c:406
+  - Mka_Internal.c:841
+  - Mka_Internal.c:953
+  ... and 248 more files
+
+================================================================================
+
+FIX #32
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_17_7-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Unused function's "Det_ReportError" return value
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "It is possible to call a function without using the return value, which may be
+an error. If the return value of a function is intended not to be used
+explicitly, it should be cast to the void type." ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+/* Examples of unused function return value: */
+int foo ();
+void bar ()
+{
+  foo ( );                /* Violation */
+  foo ( ) + foo ( );      /* Violation */
+  foo ( ) && foo ( );     /* Violation */
+}
+
+--- OFFICIAL REPAIR ---
+/* Examples of used function value: */
+int foo ();
+void goo ( int i );
+int bar ( int i )
+{
+  i = foo ( );                  /* OK - assigned */
+  goo ( foo ( ) + foo ( ) );    /* OK - passed to a function */
+  if ( foo ( ) )                /* OK - used in selection statement */
+  {
+    ( void ) foo ( );           /* OK - cast to void */
+  }
+  return foo ( ) && foo ( );    /* OK - returned */
+}
+
+
+Files Affected:
+  - Mka.c:641
+  - Mka.c:677
+  - Mka_Cbk.c:313
+  - Mka_Internal.c:392
+  - Mka_Internal.c:417
+  ... and 215 more files
+
+================================================================================
+
+FIX #33
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP12-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Unused function's "Det_ReportError" return value
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "It is possible to call a function without using the return value, which may be
+an error. If the return value of a function is intended not to be used
+explicitly, it should be cast to the void type." ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+/* Examples of unused function return value: */
+int foo ();
+void bar ()
+{
+  foo ( );                /* Violation */
+  foo ( ) + foo ( );      /* Violation */
+  foo ( ) && foo ( );     /* Violation */
+}
+
+--- OFFICIAL REPAIR ---
+/* Examples of used function value: */
+int foo ();
+void goo ( int i );
+int bar ( int i )
+{
+  i = foo ( );                  /* OK - assigned */
+  goo ( foo ( ) + foo ( ) );    /* OK - passed to a function */
+  if ( foo ( ) )                /* OK - used in selection statement */
+  {
+    ( void ) foo ( );           /* OK - cast to void */
+  }
+  return foo ( ) && foo ( );    /* OK - returned */
+}
+
+
+Files Affected:
+  - Mka.c:641
+  - Mka.c:677
+  - Mka_Cbk.c:313
+  - Mka_Internal.c:392
+  - Mka_Internal.c:417
+  ... and 215 more files
+
+================================================================================
+
+FIX #34
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC12-j-3
+Severity: LOW
+Category: CERT
+
+Description:
+Condition "!LddReturnValue" always evaluates to true
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule identifies conditions that always evaluate to the same value. Such conditions
+often appear in the course of refactoring and during code evolution - especially when
+code is edited by multiple...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+Here is an example which triggers a violation:
+
+#include "stdio.h"
+
+void processHexValue(char*);
+
+static void checkRange(char* cur)
+{
+    if ((*cur < '0') || (*cur > '9')) {
+        printf("Error: only digits are permitted");
+        return;
+    }
+    // obviously dead code
+    if ((*cur >= 'a') && 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+To repair the code, remove the redundant check:
+
+#include "stdio.h"
+
+static void checkRange(char* cur)
+{
+    if ((*cur < '0') || (*cur > '9')) {
+        printf("Error: only decimal digits are permitted");
+        return;
+    }
+}
+
+
+Files Affected:
+  - Mka.c:655
+  - Mka.c:672
+  - Mka_Internal.c:1843
+  - Mka.c:655
+  - Mka.c:672
+  ... and 28 more files
+
+================================================================================
+
+FIX #35
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_14_3-ac-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Condition "!LddReturnValue" always evaluates to true
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule identifies conditions that always evaluate to the same value. Such conditions
+often appear in the course of refactoring and during code evolution - especially when
+code is edited by multiple...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+Here is an example which triggers a violation:
+
+#include "stdio.h"
+
+void processHexValue(char*);
+
+static void checkRange(char* cur)
+{
+    if ((*cur < '0') || (*cur > '9')) {
+        printf("Error: only digits are permitted");
+        return;
+    }
+    // obviously dead code
+    if ((*cur >= 'a') && 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+To repair the code, remove the redundant check:
+
+#include "stdio.h"
+
+static void checkRange(char* cur)
+{
+    if ((*cur < '0') || (*cur > '9')) {
+        printf("Error: only decimal digits are permitted");
+        return;
+    }
+}
+
+
+Files Affected:
+  - Mka.c:655
+  - Mka.c:672
+  - Mka.c:655
+  - Mka.c:672
+  - Mka.c:655
+  ... and 17 more files
+
+================================================================================
+
+FIX #36
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP46-b-2
+Severity: LOW
+Category: CERT
+
+Description:
+The LHS operand of binary operator is effectively boolean
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Expressions that are effectively Boolean should not be used as operands
+ to operators other than (&&, ||, !, =, ==, !=, ?:).
+An 'effectively Boolean' expression which is either 'Boolean-by-construct'...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int goo();
+void foo()
+{
+    int x, y, z;
+
+    z = (x > y) & (goo()); // Violation
+    z = x | (goo() != 0);  // Violation
+    z = ~(x == y);         // Violation
+}
+
+--- OFFICIAL REPAIR ---
+int goo();
+void foo()
+{
+    int x, y, z;
+    int tmp;
+
+    tmp = x > y;
+    z = tmp & goo();     // OK
+
+    tmp = goo() != 0;
+    z = x | tmp;         // OK
+
+    tmp = x == y;
+    z = ~tmp;            // OK
+}
+
+
+Files Affected:
+  - Mka.c:672
+  - Mka.c:672
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:2517
+  ... and 83 more files
+
+================================================================================
+
+FIX #37
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_1-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The left hand operand of the '&' operator has essentially Boolean type
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects cases when the operands of the following operators
+have "essentially Boolean" type:
+[], +, +=, ++, --, -, -=, *, *=, /, /=, %, %=, <, >, <=, >=, >>, >>=,
+<<, <<=, ~, &, &=, |, |=, ^,...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+typedef enum {false, true} bool; /* essentially Boolean type */
+void foo( int res )
+{
+    bool bb;
+    int arr[2];
+    int i1, i2;
+
+    arr[bb];          /* Violation */
+    res & (i1 > i2);  /* Violation */
+    --bb;             /* Violation */
+    false + 1;        /* Violation */
+}
+
+--- OFFICIAL REPAIR ---
+/* Examples of correct code */
+typedef enum {false, true} bool; /* essentially Boolean type */
+void foo( void )
+{
+    bool bb;
+    int arr[2];
+    int i1, i2;
+
+    !bb;              /* OK */
+    arr[1];           /* OK */
+    --i1;             /* OK */
+}
+
+
+Files Affected:
+  - Mka.c:672
+  - Mka.c:672
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:2517
+  ... and 83 more files
+
+================================================================================
+
+FIX #38
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-b-2
+Severity: LOW
+Category: CERT
+
+Description:
+The left hand operand of the '&' operator has essentially Boolean type
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects cases when the operands of the following operators
+have "essentially Boolean" type:
+[], +, +=, ++, --, -, -=, *, *=, /, /=, %, %=, <, >, <=, >=, >>, >>=,
+<<, <<=, ~, &, &=, |, |=, ^,...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+typedef enum {false, true} bool; /* essentially Boolean type */
+void foo( int res )
+{
+    bool bb;
+    int arr[2];
+    int i1, i2;
+
+    arr[bb];          /* Violation */
+    res & (i1 > i2);  /* Violation */
+    --bb;             /* Violation */
+    false + 1;        /* Violation */
+}
+
+--- OFFICIAL REPAIR ---
+/* Examples of correct code */
+typedef enum {false, true} bool; /* essentially Boolean type */
+void foo( void )
+{
+    bool bb;
+    int arr[2];
+    int i1, i2;
+
+    !bb;              /* OK */
+    arr[1];           /* OK */
+    --i1;             /* OK */
+}
+
+
+Files Affected:
+  - Mka.c:672
+  - Mka.c:672
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:2517
+  ... and 83 more files
+
+================================================================================
+
+FIX #39
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT13-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+The left-hand-side operand of bitwise operator '&' should be unsigned
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule reports when the operands of bitwise operators and complement operator
+do not have an unsigned type.
+
+The following operators are checked:
+* the binary bitwise operators and their compound v...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo(int p, unsigned int q)
+{
+    p & 1u;         // Violation - left-hand-side operand is not unsigned
+    2 | 3;          // Violation 2x - neither of the operands is unsigned
+    q ^ p;          // Violation - right-hand-side operand is not unsigned
+    ~p;             // Violation - operand 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+Examples of correct code:
+
+void foo(int p, unsigned int q, unsigned short r)
+{
+    q & 1u;                 // OK - both operands are unsigned
+    2u | 3u;                // OK - both operands are unsigned
+    q ^ r;                  // OK - both operands are unsigned
+    ~((unsigned int)p);     // OK - operand is unsigned
+
+    p << 3;                 // OK - rule does not check shift operators
+}
+
+enum E : unsigned long { V };
+void bar(unsigned char p)
+{
+    V & 1u;                 // OK - both o
+... (truncated)
+
+
+Files Affected:
+  - Mka.c:672
+  - Mka.c:673
+  - Mka_Cbk.c:402
+  - Mka_Cbk.c:402
+  - Mka_Internal.c:444
+  ... and 710 more files
+
+================================================================================
+
+FIX #40
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-API00-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Parameter 'CtrlIdx' is not validated before use
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The validity of parameters must be checked inside each function."
+The rule reports a violation if a parameter is not checked before the first
+use inside function....
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int foo3(int p, int q){   // Violation
+    p++;
+    q++;
+    return p + q;
+}
+
+--- OFFICIAL REPAIR ---
+int foo4(int p, int q){   // OK
+    if(p == 0 || q == 0){
+        return 0;
+    }
+    p++;
+    q++;
+    return p + q;
+}
+
+
+Files Affected:
+  - Mka_Cbk.c:263
+  - Mka_Cbk.c:264
+  - Mka_Cbk.c:266
+  - Mka_Cbk.c:266
+  - Mka_Internal.c:350
+  ... and 1293 more files
+
+================================================================================
+
+FIX #41
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-POS54-a-1
+Severity: LOW
+Category: CERT
+
+Description:
+The value returned by the POSIX library function 'memcpy' should be used
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "All standard library functions, including I/O functions and memory allocation
+functions, return either a valid value or a value of the correct return type
+that indicates an error (for example, −1 or ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+/* Examples of unused function return value: */
+#include <stdio.h>
+void bar (void *p)
+{
+    posix_memalign(&p, 128, 128);                  /* Violation */
+}
+
+--- OFFICIAL REPAIR ---
+/* Examples of used function value: */
+#include <stdio.h>
+int bar (void *p)
+{
+    if(0 != posix_memalign(&p, 128, 128))          /* OK */
+    {
+        return 1;
+    }
+    return 0;
+}
+
+
+Files Affected:
+  - Mka_Cbk.c:313
+  - Mka_Internal.c:392
+  - Mka_Internal.c:417
+  - Mka_Internal.c:478
+  - Mka_Internal.c:736
+  ... and 182 more files
+
+================================================================================
+
+FIX #42
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MEM07-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Values "PhysAddrPtr" passed to library function "memcpy" without being checked
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Many functions in the standard C libraries are not required by the
+ISO standard to check the validity of parameters passed to them.
+Even where checking is required by the standard, or where
+compiler ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void* memcpy( void *, void*, int n );
+
+void test( void *v ) {}
+
+int getSomeIntValue( ) {
+    return 0;
+}
+
+void foo( void *p, void *q ) {
+    int n;
+    memcpy( p, q, n );    /* Violation - complain about p, q and n */
+    test( q );            /* consider it a validation of q */
+    memcpy( p, q, n 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void* memcpy( void *, void*, int n );
+
+void test( void *v ) {}
+
+int getSomeIntValue( ) {
+    return 0;
+}
+
+void foo( void *p, void *q ) {
+    int n;
+    test( p );            /* consider it a validation of p */
+    test( q );            /* consider it a validation of q */
+    if (n != 0) {
+        memcpy( p, q, n );    /* OK */
+        memcpy( p, q, n );    /* OK */
+    }
+    switch( n ) {         /* consider it a validation of n */
+    case 0:
+        break;
+    }
+    if (p == 0) {}        /* co
+... (truncated)
+
+
+Files Affected:
+  - Mka_Cbk.c:313
+  - Mka_Internal.c:392
+  - Mka_Internal.c:736
+  - Mka_Internal.c:742
+  - Mka_Internal.c:743
+  ... and 61 more files
+
+================================================================================
+
+FIX #43
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MEM04-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Values "PhysAddrPtr" passed to library function "memcpy" without being checked
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Many functions in the standard C libraries are not required by the
+ISO standard to check the validity of parameters passed to them.
+Even where checking is required by the standard, or where
+compiler ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void* memcpy( void *, void*, int n );
+
+void test( void *v ) {}
+
+int getSomeIntValue( ) {
+    return 0;
+}
+
+void foo( void *p, void *q ) {
+    int n;
+    memcpy( p, q, n );    /* Violation - complain about p, q and n */
+    test( q );            /* consider it a validation of q */
+    memcpy( p, q, n 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void* memcpy( void *, void*, int n );
+
+void test( void *v ) {}
+
+int getSomeIntValue( ) {
+    return 0;
+}
+
+void foo( void *p, void *q ) {
+    int n;
+    test( p );            /* consider it a validation of p */
+    test( q );            /* consider it a validation of q */
+    if (n != 0) {
+        memcpy( p, q, n );    /* OK */
+        memcpy( p, q, n );    /* OK */
+    }
+    switch( n ) {         /* consider it a validation of n */
+    case 0:
+        break;
+    }
+    if (p == 0) {}        /* co
+... (truncated)
+
+
+Files Affected:
+  - Mka_Cbk.c:313
+  - Mka_Internal.c:392
+  - Mka_Internal.c:736
+  - Mka_Internal.c:742
+  - Mka_Internal.c:743
+  ... and 61 more files
+
+================================================================================
+
+FIX #44
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT02-b-2
+Severity: LOW
+Category: CERT
+
+Description:
+Different types of operands: LHS type 'int', RHS type 'short'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "C performs many type conversions implicitly and silently, so as to harmonize
+types within an expression before evaluating it. Some of these conversions can
+result in loss of information. Such implici...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo(){
+    int i;
+    short s1, s2, s3;
+    float f;
+    double d;
+
+    s1 = i + s2;        // Violation
+    i = s1 + (s2 - s3); // Violation - due to integral promotion
+    if( i > s1 ){       // Violation
+        //...
+    }
+
+    d = f - d;          // Violation
+}
+
+--- OFFICIAL REPAIR ---
+void foo(unsigned int ui){
+    int i;
+    short s1, s2, s3;
+    float f;
+    double d;
+
+    s1 = i + (int)s2;          // OK
+    i = s1 + (short)(s2 - s3); // OK
+    if( i > (int)s1 ){         // OK
+
+        //...
+    }
+
+    d = (double)f - d;         // OK
+
+    /* exceptions */
+    f = f + i;          // OK
+    s1 = s2 + 10;       // OK
+    ui = ui + i;        // OK
+    s1 >>= i;           // OK
+}
+
+
+Files Affected:
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:402
+  - Mka_Cbk.c:405
+  - Mka_Cbk.c:405
+  - Mka_Cbk.c:649
+  ... and 270 more files
+
+================================================================================
+
+FIX #45
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP14-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Different types of operands: LHS type 'int', RHS type 'short'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "C performs many type conversions implicitly and silently, so as to harmonize
+types within an expression before evaluating it. Some of these conversions can
+result in loss of information. Such implici...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo(){
+    int i;
+    short s1, s2, s3;
+    float f;
+    double d;
+
+    s1 = i + s2;        // Violation
+    i = s1 + (s2 - s3); // Violation - due to integral promotion
+    if( i > s1 ){       // Violation
+        //...
+    }
+
+    d = f - d;          // Violation
+}
+
+--- OFFICIAL REPAIR ---
+void foo(unsigned int ui){
+    int i;
+    short s1, s2, s3;
+    float f;
+    double d;
+
+    s1 = i + (int)s2;          // OK
+    i = s1 + (short)(s2 - s3); // OK
+    if( i > (int)s1 ){         // OK
+
+        //...
+    }
+
+    d = (double)f - d;         // OK
+
+    /* exceptions */
+    f = f + i;          // OK
+    s1 = s2 + 10;       // OK
+    ui = ui + i;        // OK
+    s1 >>= i;           // OK
+}
+
+
+Files Affected:
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:402
+  - Mka_Cbk.c:405
+  - Mka_Cbk.c:405
+  - Mka_Cbk.c:649
+  ... and 270 more files
+
+================================================================================
+
+FIX #46
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-j-2
+Severity: LOW
+Category: CERT
+
+Description:
+Operands of the '+' operator have different essential types: 'unsigned char' and 'signed char'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The C language allows the programmer considerable freedom and will permit
+conversions between different arithmetic types to be performed automatically.
+However, the use of these implicit conversions ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+typedef enum {EN1, EN2} TE1;        /* essentially enum type */
+enum EN{ EN11, EN12 };              /* essentially enum type */
+enum {E1, E2};                      /* essentially signed type */
+typedef unsigned short      ushort; /* essentially unsigned type */
+typedef enum {false, true}  bool;   /*
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+/* Examples of correct code */
+typedef enum {EN1, EN2} TE1;        /* essentially enum type */
+enum {E1, E2};                      /* essentially signed type */
+typedef enum {false, true}  bool;   /* essentially Boolean type */
+
+void foo()
+{
+    TE1 te1;
+    float fl;
+    double d;
+    bool   b;
+    unsigned short ush;
+    _Complex float cf;
+
+    '1' - '0';      /* OK - "character" - "character" */
+    10  + '1';      /* OK - "signed"    + "character" - Exception */
+    E1  + E2;       /* OK - "
+... (truncated)
+
+
+Files Affected:
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:402
+  - Mka_Cbk.c:402
+  - Mka_Internal.c:420
+  ... and 1106 more files
+
+================================================================================
+
+FIX #47
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_4-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Operands of the '+' operator have different essential types: 'unsigned char' and 'signed char'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The C language allows the programmer considerable freedom and will permit
+conversions between different arithmetic types to be performed automatically.
+However, the use of these implicit conversions ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+typedef enum {EN1, EN2} TE1;        /* essentially enum type */
+enum EN{ EN11, EN12 };              /* essentially enum type */
+enum {E1, E2};                      /* essentially signed type */
+typedef unsigned short      ushort; /* essentially unsigned type */
+typedef enum {false, true}  bool;   /*
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+/* Examples of correct code */
+typedef enum {EN1, EN2} TE1;        /* essentially enum type */
+enum {E1, E2};                      /* essentially signed type */
+typedef enum {false, true}  bool;   /* essentially Boolean type */
+
+void foo()
+{
+    TE1 te1;
+    float fl;
+    double d;
+    bool   b;
+    unsigned short ush;
+    _Complex float cf;
+
+    '1' - '0';      /* OK - "character" - "character" */
+    10  + '1';      /* OK - "signed"    + "character" - Exception */
+    E1  + E2;       /* OK - "
+... (truncated)
+
+
+Files Affected:
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:402
+  - Mka_Cbk.c:402
+  - Mka_Internal.c:420
+  ... and 1106 more files
+
+================================================================================
+
+FIX #48
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_12_1-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The left hand operand of the '<=' operator should be in parentheses
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The C language has a relatively large number of operators and their relative
+precedences are not intuitive. This can lead less experienced programmers to
+make mistakes. Using parentheses to make oper...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo(int p1, int p2) {
+    int a = p1 * p2 + 1;     // Violation
+    if(p1 + p2 != p1 - p2);  // Violation
+    if(p1 == 1 && p2 > 1 );  // Violation
+}
+
+--- OFFICIAL REPAIR ---
+To fix the code add parenthesis around the operands.
+
+void foo(int p1, int p2) {
+    int a = p1 * (p2 + 1);       // OK
+    if((p1 + p2) != (p1 - p2));  // OK
+    if((p1 == 1) && (p2 > 1));   // OK
+}
+
+// Examples not reported by rule
+void foo2(int p1, int p2) {
+    int a = p1 * -p2;       // OK - operand is a unary operator
+    a = p1 + p2 - 1;        // OK - expressions with the same precedence
+}
+
+
+Files Affected:
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:405
+  - Mka_Internal.c:383
+  - Mka_Internal.c:420
+  - Mka_Internal.c:742
+  ... and 226 more files
+
+================================================================================
+
+FIX #49
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP00-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Use parenthesis to clarify order ('+' is the first operand of '<=')
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "No dependence shall be placed on operator precedence rules,
+below arithmetic operators, in expressions. Parentheses should
+be used to clarify operator precedence rules to enhance readability
+and redu...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int bar(int);
+int foo(int a, int b, int c)
+{
+    int x;
+    // The expression is interpreted as a >> (1 + b)
+    x = a >> 1 + b;     // Violation - "+" is operand of ">>" operator
+    // The expression is interpreted as (a & b) | c
+    x = a & b | c;      // Violation - "&" is operand of "|" operato
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+int bar(int);
+int foo(int a, int b, int c)
+{
+    int x;
+    // Review the code to check if the evaluation order is correct.
+    // Clarify the order of operations by splitting more complicated
+    // expressions into several simpler expression or by adding
+    // parenthesis. For example:
+
+    // Original expression: x = a >> 1 + b;
+    x = a >> (1 + b);   // OK - order made clear by adding parenthesis
+    x = (a >> 1) + b;   // OK - a different order was imposed
+
+    x = (a & b) | c;    // OK
+ 
+... (truncated)
+
+
+Files Affected:
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:405
+  - Mka_Internal.c:383
+  - Mka_Internal.c:420
+  - Mka_Internal.c:908
+  ... and 182 more files
+
+================================================================================
+
+FIX #50
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-e-2
+Severity: LOW
+Category: CERT
+
+Description:
+The left hand operand of the '|' operator has essentially signed type: int
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Shift and bitwise operations should only be performed on operands
+of essentially unsigned type. The numeric value resulting from their
+use on essentially signed types may be undefined or implementati...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+typedef enum { EN1, EN2 } TE1;   // Essentially enum type
+void foo( void )
+{
+    signed char sc;
+    signed int si;
+    TE1 te1;
+
+    te1 >> 10u;        // Violation
+    ~(sc + 1);         // Violation
+    si | 10;           // Violation x 2
+}
+
+--- OFFICIAL REPAIR ---
+void foo( void )
+{
+    unsigned char uc;
+    unsigned int ui;
+    unsigned int *pui;
+
+    //Examples of correct code
+    ui >> 10u;        // OK
+    ~(uc + 1u);       // OK
+    *pui | 10u;       // OK
+}
+
+
+Files Affected:
+  - Mka_Cbk.c:402
+  - Mka_Cbk.c:402
+  - Mka_Internal.c:444
+  - Mka_Internal.c:444
+  - Mka_Internal.c:446
+  ... and 798 more files
+
+================================================================================
+
+FIX #51
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_1-e-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The left hand operand of the '|' operator has essentially signed type: int
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Shift and bitwise operations should only be performed on operands
+of essentially unsigned type. The numeric value resulting from their
+use on essentially signed types may be undefined or implementati...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+typedef enum { EN1, EN2 } TE1;   // Essentially enum type
+void foo( void )
+{
+    signed char sc;
+    signed int si;
+    TE1 te1;
+
+    te1 >> 10u;        // Violation
+    ~(sc + 1);         // Violation
+    si | 10;           // Violation x 2
+}
+
+--- OFFICIAL REPAIR ---
+void foo( void )
+{
+    unsigned char uc;
+    unsigned int ui;
+    unsigned int *pui;
+
+    //Examples of correct code
+    ui >> 10u;        // OK
+    ~(uc + 1u);       // OK
+    *pui | 10u;       // OK
+}
+
+
+Files Affected:
+  - Mka_Cbk.c:402
+  - Mka_Cbk.c:402
+  - Mka_Internal.c:444
+  - Mka_Internal.c:444
+  - Mka_Internal.c:446
+  ... and 798 more files
+
+================================================================================
+
+FIX #52
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT16-b-3
+Severity: LOW
+Category: CERT
+
+Description:
+The right-hand operand of the '&' bitwise operator should have an unsigned type
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects when an operand of a bitwise operator (~, <<, <<=, >>, >>=,
+&, &=, ^, ^=, |, |=) is a positive signed integer-literal constant
+or a positive enumeration constant....
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+enum E {E1 = 3, E2 = 4};
+const signed int CI = 2;
+
+void f1(unsigned short us1, unsigned short us2)
+{
+    us1 = us2 & 10;       // Violation
+    us1 = 10 | us2;       // Violation
+    us1 = ~0;             // Violation
+    us1 = us2 >> E2;      // Violation
+
+    us1 = us2 >> -1;      // OK - detected
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+enum E {E1 = 3, E2 = 4};
+
+void f1(unsigned short us1, unsigned short us2)
+{
+    us1 = us2 & 10u;                  // OK
+    us1 = 10u | us2;                  // OK
+    us1 = (unsigned short)~0u;        // OK
+    us1 = us2 >> (unsigned short)E2;  // OK
+}
+
+
+Files Affected:
+  - Mka_Cbk.c:402
+  - Mka_Internal.c:436
+  - Mka_Internal.c:444
+  - Mka_Internal.c:446
+  - Mka_Internal.c:446
+  ... and 853 more files
+
+================================================================================
+
+FIX #53
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_16_4-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Missing statement or comment before terminating 'break'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The switch-clause following the 'default' label shall, prior to the terminating
+'break' statement, contain either:
+* A statement, or
+* A comment." [MISRA C:2012 Rule 16.4]...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void fn1 ( int i )
+{
+  switch ( i )
+  {
+    /* No comment nor statement before terminating 'break' */
+    default:
+      break;    /* Violation */
+  }
+}
+
+--- OFFICIAL REPAIR ---
+/* Examples of code which is compliant with this rule: */
+void fn1 ( int i )
+{
+  switch ( i )
+  {
+    /* There is a statement before terminating break: */
+    default:
+      ++i;
+      break;    /* OK */
+  }
+  switch ( i )
+  {
+    /* There is a comment before terminating break: */
+    default:
+      /* A comment which explains why the default can be empty */
+      break;    /* OK */
+  }
+  switch ( i )
+  {
+    /* 'case' is not checked: */
+    case 1:
+      break;
+    default:
+      ++i;
+      bre
+... (truncated)
+
+
+Files Affected:
+  - Mka_Cbk.c:454
+  - Mka_Internal.c:897
+  - Mka_Internal.c:1009
+  - Mka_Internal.c:2690
+  - Mka_Internal.c:2858
+  ... and 72 more files
+
+================================================================================
+
+FIX #54
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_16_1-f-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Missing statement or comment before terminating 'break'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The switch-clause following the 'default' label shall, prior to the terminating
+'break' statement, contain either:
+* A statement, or
+* A comment." [MISRA C:2012 Rule 16.4]...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void fn1 ( int i )
+{
+  switch ( i )
+  {
+    /* No comment nor statement before terminating 'break' */
+    default:
+      break;    /* Violation */
+  }
+}
+
+--- OFFICIAL REPAIR ---
+/* Examples of code which is compliant with this rule: */
+void fn1 ( int i )
+{
+  switch ( i )
+  {
+    /* There is a statement before terminating break: */
+    default:
+      ++i;
+      break;    /* OK */
+  }
+  switch ( i )
+  {
+    /* There is a comment before terminating break: */
+    default:
+      /* A comment which explains why the default can be empty */
+      break;    /* OK */
+  }
+  switch ( i )
+  {
+    /* 'case' is not checked: */
+    case 1:
+      break;
+    default:
+      ++i;
+      bre
+... (truncated)
+
+
+Files Affected:
+  - Mka_Cbk.c:454
+  - Mka_Internal.c:897
+  - Mka_Internal.c:1009
+  - Mka_Internal.c:2690
+  - Mka_Internal.c:2858
+  ... and 72 more files
+
+================================================================================
+
+FIX #55
+--------------------------------------------------------------------------------
+Violation ID: CDD-DUPC-3
+Severity: MEDIUM
+Category: OTHER
+
+Description:
+Duplicated code: 'uint8 Luscount;  if (Result == E_OK) {/*Rationale for using ...'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule identifies duplicated code. The rule finds duplicated fragments across 
+all tested code, whether or not the duplicated code appears in the same file.
+
+Code duplication detection is focused o...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+Parameters: Ignore identifiers turned on, minimum duplicated tokens size set to 20.
+
+int foo(int a, int b)
+{
+    int r;
+    if (a < b) {      // duplicated code
+        r = b - a;    // duplicated code
+    } else {          // duplicated code
+        r = a - b;    // duplicated code
+    }           
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+int foo(int a, int b)
+{
+    int r;
+    if (a < b) {      
+        r = b - a;  
+    } else {          
+        r = a - b;    
+    }                 
+    return r;
+}
+
+int bar(int p, int q, bool v)
+{
+    int result;
+    if (v) {
+        result = foo(p, q);   // use foo function here
+    } else {
+        result =  p + q;
+    }
+    return result;
+}
+
+
+Files Affected:
+  - Mka_Cbk.c:710
+  - Mka_Internal.c:836
+  - Mka_Internal.c:2060
+  - Mka_Internal.c:4646
+  - Mka_Internal.c:4774
+  ... and 50 more files
+
+================================================================================
+
+FIX #56
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_5_8-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The 'Mka_MI_Value' object with external linkage is not a unique identifier in the testing scope
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Regardless of scope, no identifier with static storage duration should
+be re-used across any source files in the project. This includes objects
+or functions with external linkage and any objects or f...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+The following example assumes that the testing scope contains only
+'test1.cpp' and 'test2.cpp'.
+
+// test1.cpp
+
+int counter;                                 // Violation
+
+int status;                                  // Violation
+
+char c;                                      // Violation
+
+// test2.cpp
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+To fix your code ensure the uniqueness of identifiers.
+
+The following example of code which does not result in a violation assumes
+that the testing scope contains only 'test.h', 'test1.cpp' and 'test2.cpp'.
+
+// test.h
+
+extern int counter;                          // OK
+
+// test1.cpp
+
+#include "test.h"
+
+int counter1;                                // OK
+
+int gStatus;                                 // OK
+
+char lastChar;                               // OK
+
+// test2.cpp
+
+#include "test.h"
+
+int cou
+... (truncated)
+
+
+Files Affected:
+  - Mka_Internal.c:235
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:235
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:235
+  ... and 17 more files
+
+================================================================================
+
+FIX #57
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP05-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Cast from 'const uint8 *const *' removes 'const' qualifier
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Any attempt to remove the qualification associated with the addressed type
+by using casting is a violation of the principle of type qualification."
+[MISRA-C:2004]
+
+This rule detects when a const or v...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void f1( const int* cp, volatile short* vp )
+{
+    const int** cpp = 0;
+    volatile short** vpp = 0;
+
+    int* ip1 = (int*)cp;                 /* Violation */
+    short* ip2 = (short*)vp;             /* Violation */
+    int** ip3 = (int**)cpp;              /* Violation */
+    short** ip4 = (short**
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void f1( int* cp, short* vp )
+{
+    int* ip1 = cp;               /* OK */
+    short* ip2 = vp;             /* OK */
+}
+
+// C++ code
+void f2( int cp, short& vp )
+{
+    int ip1 = cp;               // OK
+    short ip2 = vp;             // OK
+}
+
+/* Removing const or volatile qualifiers from the pointer is allowed */
+void f3( int* const cp, short* volatile vp )
+{
+    int* ip1 = (int*)cp;       /* OK - const removed from the pointer,
+                                       not the pointed type */
+    sh
+... (truncated)
+
+
+Files Affected:
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  ... and 17 more files
+
+================================================================================
+
+FIX #58
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP40-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Cast from 'const uint8 *const *' removes 'const' qualifier
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Any attempt to remove the qualification associated with the addressed type
+by using casting is a violation of the principle of type qualification."
+[MISRA-C:2004]
+
+This rule detects when a const or v...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void f1( const int* cp, volatile short* vp )
+{
+    const int** cpp = 0;
+    volatile short** vpp = 0;
+
+    int* ip1 = (int*)cp;                 /* Violation */
+    short* ip2 = (short*)vp;             /* Violation */
+    int** ip3 = (int**)cpp;              /* Violation */
+    short** ip4 = (short**
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void f1( int* cp, short* vp )
+{
+    int* ip1 = cp;               /* OK */
+    short* ip2 = vp;             /* OK */
+}
+
+// C++ code
+void f2( int cp, short& vp )
+{
+    int ip1 = cp;               // OK
+    short ip2 = vp;             // OK
+}
+
+/* Removing const or volatile qualifiers from the pointer is allowed */
+void f3( int* const cp, short* volatile vp )
+{
+    int* ip1 = (int*)cp;       /* OK - const removed from the pointer,
+                                       not the pointed type */
+    sh
+... (truncated)
+
+
+Files Affected:
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  ... and 17 more files
+
+================================================================================
+
+FIX #59
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP32-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Cast from 'const uint8 *const *' removes 'const' qualifier
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Any attempt to remove the qualification associated with the addressed type
+by using casting is a violation of the principle of type qualification."
+[MISRA-C:2004]
+
+This rule detects when a const or v...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void f1( const int* cp, volatile short* vp )
+{
+    const int** cpp = 0;
+    volatile short** vpp = 0;
+
+    int* ip1 = (int*)cp;                 /* Violation */
+    short* ip2 = (short*)vp;             /* Violation */
+    int** ip3 = (int**)cpp;              /* Violation */
+    short** ip4 = (short**
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void f1( int* cp, short* vp )
+{
+    int* ip1 = cp;               /* OK */
+    short* ip2 = vp;             /* OK */
+}
+
+// C++ code
+void f2( int cp, short& vp )
+{
+    int ip1 = cp;               // OK
+    short ip2 = vp;             // OK
+}
+
+/* Removing const or volatile qualifiers from the pointer is allowed */
+void f3( int* const cp, short* volatile vp )
+{
+    int* ip1 = (int*)cp;       /* OK - const removed from the pointer,
+                                       not the pointed type */
+    sh
+... (truncated)
+
+
+Files Affected:
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  ... and 17 more files
+
+================================================================================
+
+FIX #60
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP39-b-3
+Severity: LOW
+Category: CERT
+
+Description:
+Do not perform a cast between a pointer to 'unsigned char' type and a pointer to 'const uint8 *' type
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "A cast should not be performed between a pointer to object type and a different
+pointer to object type. Conversions of this type may be invalid if the new
+pointer type requires a stricter alignment.
+...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo( )
+{
+    unsigned int* ui;
+    signed char*  sc;
+
+    /* Examples of incorrect code */
+    ui = (unsigned int*) sc;          /* Violation */
+    ui = (unsigned int*) &sc;         /* Violation */
+}
+
+--- OFFICIAL REPAIR ---
+typedef unsigned int uint32_t;
+void foo( )
+{
+    unsigned int* ui;
+    uint32_t*  ui_t;
+
+    /* Examples of correct code */
+    ui = (unsigned int*) ui_t;         /* OK */
+    ui = (unsigned int* const) ui_t;   /* OK */
+}
+
+
+Files Affected:
+  - Mka_Internal.c:389
+  - Mka_Internal.c:401
+  - Mka_Internal.c:407
+  - Mka_Internal.c:467
+  - Mka_Internal.c:468
+  ... and 457 more files
+
+================================================================================
+
+FIX #61
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_11_8-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Do not use a conversion from the 'const uint8 *const *' type to the 'uint8 *' type which removes the 'const' qualification
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects when a 'const', 'volatile' or '_Atomic' qualification is
+removed by a conversion from the type accessed via a pointer
+or by reference. Both implicit conversions and explicit casts ar...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+// C language
+
+volatile int* v1;
+const volatile int* v2;
+void bar(int*);
+
+int* foo1(_Atomic int* v3) {
+    const int* v4 = v1;         // Violation (volatile removed)
+    v4 = v2;                    // Violation (volatile removed)
+    bar(v3);                    // Violation (_Atomic removed)
+    re
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+// C language
+
+volatile int* v1;
+const volatile int* v2;
+void bar(_Atomic int*);
+const volatile int* foo1(_Atomic int* v3) {
+    const volatile int* v4 = v1;    // OK
+    v4 = v2;                        // OK
+    bar(v3);                        // OK
+    return v2;                      // OK
+}
+
+// C++ language
+
+volatile int* v1;
+const volatile int* v2;
+void bar(const int*);
+
+const volatile int* foo(const int& v3) {
+    const volatile int* v4 = v1;   // OK
+    v4 = v2;                       // OK
+... (truncated)
+
+
+Files Affected:
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  - Mka_Internal.c:1837
+  - Mka_Internal.c:389
+  ... and 17 more files
+
+================================================================================
+
+FIX #62
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT02-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Implicit conversion from 'unsigned long' type to 'unsigned int' type in function's argument
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "C and C++ perform many type conversions implicitly and silently,
+so as to harmonize types within an expression before evaluating it.
+Some of these conversions can result in loss of information.
+Such ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void bar(unsigned char c);
+
+long sl;
+int foo(unsigned int ui, short s)
+{
+    signed int si;
+    signed char sc;
+    unsigned short us = ui; /* Violation: int assigned to short */
+    sc = s;                 /* Violation: short assigned to char */
+    bar(ui);                /* Violation: int assigne
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void bar(unsigned char c);
+
+long sl;
+int foo(unsigned int ui, short s)
+{
+    signed int si;
+    signed char sc;
+
+    /* Some hints on how to handle conversions which may result
+     * in information loss: */
+
+    /* Use explicit cast if you are sure no information loss is possible */
+    unsigned short us = (unsigned short)ui; /* OK (explicit cast) */
+
+    /* Check if value can be assigned without loss of information.
+     * The example below uses some arbitrary chosen values. */
+    if (s >= 0 
+... (truncated)
+
+
+Files Affected:
+  - Mka_Internal.c:392
+  - Mka_Internal.c:430
+  - Mka_Internal.c:432
+  - Mka_Internal.c:435
+  - Mka_Internal.c:438
+  ... and 677 more files
+
+================================================================================
+
+FIX #63
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_21_15-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+In the call of the function 'memcpy' the first argument type 'unsigned char**' is not compatible with the second argument
+type 'unsigned char*'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+
+
+Example:
+
+
+Files Affected:
+  - Mka_Internal.c:392
+  - Mka_Internal.c:743
+  - Mka_Internal.c:745
+  - Mka_Internal.c:4191
+  - Mka_Internal.c:4820
+  ... and 61 more files
+
+================================================================================
+
+FIX #64
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_13_3-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The '++' operator should cause the only side effect in an expression
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The use of increment and decrement operators in combination
+with other operators is not recommended because:
+  - It can significantly impair the readability of the code;
+  - It introduces additional ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int fooint(int);
+
+void foo(){
+    int a, b, c;
+    a = ++b + c--;             /* Violation */
+
+    if (a++ > fooint(2))       /* Violation */
+    {
+        //...
+    }
+
+    c = fooint(--b);           /* Violation */
+}
+
+--- OFFICIAL REPAIR ---
+int fooint(int);
+
+void foo(){
+    int a, b, c;
+    ++b;                       /* OK */
+    a = b + c;
+    c--;                       /* OK */
+
+    ++a;                       /* OK */
+    if (a > fooint(2))         /* OK */
+    {
+        //...
+    }
+
+    b--;                       /* OK */
+    c = fooint(b);             /* OK */
+}
+
+
+Files Affected:
+  - Mka_Internal.c:399
+  - Mka_Internal.c:400
+  - Mka_Internal.c:402
+  - Mka_Internal.c:403
+  - Mka_Internal.c:404
+  ... and 3306 more files
+
+================================================================================
+
+FIX #65
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_11_3-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Pointer to object type 'uint8 *' is cast to pointer to different object type 'uint16 *'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Conversion of a pointer to object into a pointer to a different object may
+result in a pointer that is not correctly aligned, resulting in undefined
+behaviour.
+Even if conversion is known to produce ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void func()
+{
+    unsigned char* uc;
+    unsigned int*  ui;
+    const int* const* cpci;
+
+    (unsigned int*)uc;       /* Violation */
+    (signed int*)ui;         /* Violation */
+    (int* const*)cpci;       /* Violation */
+}
+
+--- OFFICIAL REPAIR ---
+void func()
+{
+    unsigned char* uc;
+    signed int* si;
+    const int* const* cpci;
+
+    (char*)uc;               /* OK - Exception */
+    (int*)si;                /* OK - the same types */
+    (const int**)cpci;       /* OK - the rule is applied to unqualified types */
+    (int)si;                 /* OK - the cast is not to the pointer type */
+}
+
+
+Files Affected:
+  - Mka_Internal.c:401
+  - Mka_Internal.c:407
+  - Mka_Internal.c:1727
+  - Mka_Internal.c:1734
+  - Mka_Internal.c:2046
+  ... and 138 more files
+
+================================================================================
+
+FIX #66
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP36-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+The 'uint8 *' type should not be cast to the 'uint16 *' type
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "A pointer to an object or incomplete type may be converted to a pointer to
+a different object or incomplete type. If the resulting pointer is not
+correctly aligned for the referenced type, the behavi...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void func()
+{
+    char c = 'x';
+    int *ip = (int *)&c;        // Violation
+}
+
+--- OFFICIAL REPAIR ---
+void func()
+{
+    char c = 'x';
+    int i = c;
+    int *ip = &i;               // OK
+}
+
+
+Files Affected:
+  - Mka_Internal.c:401
+  - Mka_Internal.c:407
+  - Mka_Internal.c:1727
+  - Mka_Internal.c:1734
+  - Mka_Internal.c:2046
+  ... and 138 more files
+
+================================================================================
+
+FIX #67
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP08-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Do not apply pointer arithmetic to expression of pointer type
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "This rule refers to explicitly calculating pointer values. Any such pointer
+value then has the potential to access unintended or invalid memory addresses.
+This is an area where there is a danger of s...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int* foo(int* par) {
+    int* ptr1 = 0;
+    int arr[10];
+
+    ptr1 = par + 1;  // Violation
+    ptr1++;          // Violation
+    ptr1 = arr - 1;  // Violation
+    return ptr1;
+}
+
+--- OFFICIAL REPAIR ---
+"If pointer arithmetic is necessary, then appropriate reviews and/or dynamic
+checking code will be required to ensure that the resulting pointer can not
+point to unintended or invalid memory addresses"
+
+
+Files Affected:
+  - Mka_Internal.c:413
+  - Mka_Internal.c:739
+  - Mka_Internal.c:742
+  - Mka_Internal.c:743
+  - Mka_Internal.c:745
+  ... and 116 more files
+
+================================================================================
+
+FIX #68
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-ARR39-b-2
+Severity: LOW
+Category: CERT
+
+Description:
+Do not apply pointer arithmetic to expression of pointer type
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "This rule refers to explicitly calculating pointer values. Any such pointer
+value then has the potential to access unintended or invalid memory addresses.
+This is an area where there is a danger of s...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int* foo(int* par) {
+    int* ptr1 = 0;
+    int arr[10];
+
+    ptr1 = par + 1;  // Violation
+    ptr1++;          // Violation
+    ptr1 = arr - 1;  // Violation
+    return ptr1;
+}
+
+--- OFFICIAL REPAIR ---
+"If pointer arithmetic is necessary, then appropriate reviews and/or dynamic
+checking code will be required to ensure that the resulting pointer can not
+point to unintended or invalid memory addresses"
+
+
+Files Affected:
+  - Mka_Internal.c:413
+  - Mka_Internal.c:739
+  - Mka_Internal.c:742
+  - Mka_Internal.c:743
+  - Mka_Internal.c:745
+  ... and 116 more files
+
+================================================================================
+
+FIX #69
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_18_4-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The left hand side operand of the '+' operator has a pointer type
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Array indexing using the array subscript syntax, ptr[expr], is the preferred
+form of pointer arithmetic because it is often clearer and hence less error
+prone than pointer manipulation. Any explicitl...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo(int* ptr)
+{
+    int a[10];
+    int index = 1;
+
+    ptr = a;
+    ptr += 10;             /* Violation */
+    ptr = ptr + index;     /* Violation */
+    *( ptr + index ) = 0;  /* Violation */
+}
+
+--- OFFICIAL REPAIR ---
+void foo(int* ptr)
+{
+    int a[10];
+    int index = 1;
+
+    ptr = a;
+    ptr[10] = 0;             /* OK */
+    ptr[index] = 1;          /* OK */
+
+    /* Examples not reported by this rule */
+    ptr++;                   /* OK */
+    ptr - a;                 /* OK - Exception */
+}
+
+
+Files Affected:
+  - Mka_Internal.c:413
+  - Mka_Internal.c:739
+  - Mka_Internal.c:742
+  - Mka_Internal.c:743
+  - Mka_Internal.c:745
+  ... and 116 more files
+
+================================================================================
+
+FIX #70
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_3-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The expression of the 'unsigned long' essential type (4 byte) is assigned to an object with a narrower essential type (1 byte)
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The C language allows the programmer considerable freedom and will permit
+assignments between different arithmetic types to be performed automatically.
+However, the use of these implicit conversions ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void short_int(unsigned int i){ };
+
+signed char foo(int i)
+{
+    signed char sch = 128;      /* Violation */
+    sch = i;                    /* Violation */
+    short_int(1ULL);            /* Violation */
+    switch(sch)
+    {
+        case 1000:  ;           /* Violation */
+        case 2L:  ;      
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+/* Examples of correct code */
+void short_int(unsigned int i){ };
+
+signed char foo(int i)
+{
+    signed short sch = 128;     /* OK */
+    sch = (signed char)i;       /* OK */
+    short_int(1U);              /* OK */
+    switch(sch)
+    {
+        case 1000:  ;           /* OK */
+    }
+    return (signed char)i;      /* OK */
+}
+
+
+Files Affected:
+  - Mka_Internal.c:430
+  - Mka_Internal.c:432
+  - Mka_Internal.c:435
+  - Mka_Internal.c:438
+  - Mka_Internal.c:443
+  ... and 666 more files
+
+================================================================================
+
+FIX #71
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-h-2
+Severity: LOW
+Category: CERT
+
+Description:
+The expression of the 'unsigned long' essential type (4 byte) is assigned to an object with a narrower essential type (1 byte)
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The C language allows the programmer considerable freedom and will permit
+assignments between different arithmetic types to be performed automatically.
+However, the use of these implicit conversions ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void short_int(unsigned int i){ };
+
+signed char foo(int i)
+{
+    signed char sch = 128;      /* Violation */
+    sch = i;                    /* Violation */
+    short_int(1ULL);            /* Violation */
+    switch(sch)
+    {
+        case 1000:  ;           /* Violation */
+        case 2L:  ;      
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+/* Examples of correct code */
+void short_int(unsigned int i){ };
+
+signed char foo(int i)
+{
+    signed short sch = 128;     /* OK */
+    sch = (signed char)i;       /* OK */
+    short_int(1U);              /* OK */
+    switch(sch)
+    {
+        case 1000:  ;           /* OK */
+    }
+    return (signed char)i;      /* OK */
+}
+
+
+Files Affected:
+  - Mka_Internal.c:430
+  - Mka_Internal.c:432
+  - Mka_Internal.c:435
+  - Mka_Internal.c:438
+  - Mka_Internal.c:443
+  ... and 666 more files
+
+================================================================================
+
+FIX #72
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT16-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+The left-hand operand of the '&' bitwise operator should have an unsigned type
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects when the type of an operand of a bitwise operator (~, <<,
+<<=, >>, >>=, &, &=, ^, ^=, |, |=) is different than the unsigned underlying
+type....
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void f1(signed short s1, unsigned short us1, unsigned short us2)
+{
+    us1 = us2 & s1;   // Violation
+    us1 = s1 | us2;   // Violation
+    us1 = ~s1;        // Violation
+    us1 = us2 >> -1;  // Violation
+
+    us1 = us2 >> 4;   // OK - Exception detected by CODSTA-63_a
+
+    us1 = 2 | 3 & 4;  // Vi
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void f1(signed short s1, unsigned short us1, unsigned short us2)
+{
+    us1 = us2 & (unsigned short)s1;   // OK
+    us1 = (unsigned short)s1 | us2;   // OK
+    us1 = ~us2;                       // OK
+    us1 = us2 >> 7u;                  // OK
+    us1 = 2u | 3u & 4u;               // OK
+}
+
+
+Files Affected:
+  - Mka_Internal.c:444
+  - Mka_Internal.c:446
+  - Mka_Internal.c:448
+  - Mka_Internal.c:456
+  - Mka_Internal.c:456
+  ... and 446 more files
+
+================================================================================
+
+FIX #73
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_1-d-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+The left hand operand of the '<<' operator has essentially enum type: ETag_Mka_RoleType
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "An operand of essentially enum type should not be used in an arithmetic
+operation because an enum object uses an implementation-defined integer type.
+An operation involving an enum object may therefo...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+typedef enum {EN1, EN2} TE1;   /* essentially enum type */
+enum { EN11, EN12 } en1;       /* essentially enum type */
+
+void foo( int res )
+{
+    TE1 te1;
+    EN1 * 10;           /* Violation */
+    en1--;              /* Violation */
+    te1 >>= 1u;         /* Violation */
+    10 + EN11;          /*
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+/* Examples of correct code */
+typedef enum {EN1, EN2} TE1;   /* essentially enum type */
+enum { EN11, EN12 };           /* EN11, EN22 have essentially signed type */
+
+void foo( int res )
+{
+    TE1 te1;
+    if (EN1 == te1);    /* OK */
+    10 + EN11;          /* OK */
+}
+
+
+Files Affected:
+  - Mka_Internal.c:456
+  - Mka_Internal.c:458
+  - Mka_Internal.c:1777
+  - Mka_Internal.c:1779
+  - Mka_Internal.c:4145
+  ... and 105 more files
+
+================================================================================
+
+FIX #74
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-d-2
+Severity: LOW
+Category: CERT
+
+Description:
+The left hand operand of the '<<' operator has essentially enum type: ETag_Mka_RoleType
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "An operand of essentially enum type should not be used in an arithmetic
+operation because an enum object uses an implementation-defined integer type.
+An operation involving an enum object may therefo...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+typedef enum {EN1, EN2} TE1;   /* essentially enum type */
+enum { EN11, EN12 } en1;       /* essentially enum type */
+
+void foo( int res )
+{
+    TE1 te1;
+    EN1 * 10;           /* Violation */
+    en1--;              /* Violation */
+    te1 >>= 1u;         /* Violation */
+    10 + EN11;          /*
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+/* Examples of correct code */
+typedef enum {EN1, EN2} TE1;   /* essentially enum type */
+enum { EN11, EN12 };           /* EN11, EN22 have essentially signed type */
+
+void foo( int res )
+{
+    TE1 te1;
+    if (EN1 == te1);    /* OK */
+    10 + EN11;          /* OK */
+}
+
+
+Files Affected:
+  - Mka_Internal.c:456
+  - Mka_Internal.c:458
+  - Mka_Internal.c:1777
+  - Mka_Internal.c:1779
+  - Mka_Internal.c:4145
+  ... and 105 more files
+
+================================================================================
+
+FIX #75
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_7-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Essential type of RHS operand (16 bit) is wider than essential type of composite expression in LHS operand (8 bit)
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Restricting implicit conversions on composite expressions means that sequences
+of arithmetic operations within an expression must be conducted in the same
+essential type, with the exception that esse...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo1( ) {
+    unsigned short u16a,u16b;
+    unsigned int u32a, u32b;
+
+    u32a = u16b + u16a + u32b;                            /* Violation */
+    u32a = u32b * (u16a + u16b);                          /* Violation */
+    u32a += u16b >> 4;                                    /* Violation */
+}
+
+
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void foo1ok( ) {
+    unsigned short u16a,u16b;
+    unsigned int u32a, u32b;
+
+    u32a = u16b + (u16a + u32b);                          /* OK */
+    u32a = u32b * ((unsigned int)u16a + u16b);            /* OK */
+    u32a += (unsigned int)u16b >> 4;                      /* OK */
+}
+
+void foo2ok(int x) {
+    float f32a, f32b;
+    double f64a, f64b;
+
+    f64a = f32a + f32b + 10.0f;                           /* OK */
+    f64a = f64a + ((x > 0) ? (double)f32a + f32b : 0.1f); /* OK */
+}
+
+
+Files Affected:
+  - Mka_Internal.c:463
+  - Mka_Internal.c:465
+  - Mka_Internal.c:1784
+  - Mka_Internal.c:1785
+  - Mka_Internal.c:4152
+  ... and 105 more files
+
+================================================================================
+
+FIX #76
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-m-2
+Severity: LOW
+Category: CERT
+
+Description:
+Essential type of RHS operand (16 bit) is wider than essential type of composite expression in LHS operand (8 bit)
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Restricting implicit conversions on composite expressions means that sequences
+of arithmetic operations within an expression must be conducted in the same
+essential type, with the exception that esse...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo1( ) {
+    unsigned short u16a,u16b;
+    unsigned int u32a, u32b;
+
+    u32a = u16b + u16a + u32b;                            /* Violation */
+    u32a = u32b * (u16a + u16b);                          /* Violation */
+    u32a += u16b >> 4;                                    /* Violation */
+}
+
+
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void foo1ok( ) {
+    unsigned short u16a,u16b;
+    unsigned int u32a, u32b;
+
+    u32a = u16b + (u16a + u32b);                          /* OK */
+    u32a = u32b * ((unsigned int)u16a + u16b);            /* OK */
+    u32a += (unsigned int)u16b >> 4;                      /* OK */
+}
+
+void foo2ok(int x) {
+    float f32a, f32b;
+    double f64a, f64b;
+
+    f64a = f32a + f32b + 10.0f;                           /* OK */
+    f64a = f64a + ((x > 0) ? (double)f32a + f32b : 0.1f); /* OK */
+}
+
+
+Files Affected:
+  - Mka_Internal.c:463
+  - Mka_Internal.c:465
+  - Mka_Internal.c:1784
+  - Mka_Internal.c:1785
+  - Mka_Internal.c:4152
+  ... and 105 more files
+
+================================================================================
+
+FIX #77
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-ARR30-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects array access operations which may result in out of bounds access.
+Specifically, a violation is reported if an execution path with obvious out-of-bounds
+access is possible. This occur...
+
+Security Impact: The potential to access arrays beyond their boundaries is a severe security threat.
+If an application has a vulnerability of this kind, it can be expl...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+Here is an example that will trigger a violation:
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i <= size; i++) { // iterate from 0 to 100
+        array[i] = 0; // VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+--- OFFICIAL REPAIR ---
+In order to get rid of the violation, replace '<=' comparison operator with '<':
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i < size; i++) { // iterate from 0 to 99
+        array[i] = 0; // NO VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 17 more files
+
+================================================================================
+
+FIX #78
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-ARR39-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects array access operations which may result in out of bounds access.
+Specifically, a violation is reported if an execution path with obvious out-of-bounds
+access is possible. This occur...
+
+Security Impact: The potential to access arrays beyond their boundaries is a severe security threat.
+If an application has a vulnerability of this kind, it can be expl...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+Here is an example that will trigger a violation:
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i <= size; i++) { // iterate from 0 to 100
+        array[i] = 0; // VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+--- OFFICIAL REPAIR ---
+In order to get rid of the violation, replace '<=' comparison operator with '<':
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i < size; i++) { // iterate from 0 to 99
+        array[i] = 0; // NO VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 17 more files
+
+================================================================================
+
+FIX #79
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP08-b-2
+Severity: LOW
+Category: CERT
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects array access operations which may result in out of bounds access.
+Specifically, a violation is reported if an execution path with obvious out-of-bounds
+access is possible. This occur...
+
+Security Impact: The potential to access arrays beyond their boundaries is a severe security threat.
+If an application has a vulnerability of this kind, it can be expl...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+Here is an example that will trigger a violation:
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i <= size; i++) { // iterate from 0 to 100
+        array[i] = 0; // VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+--- OFFICIAL REPAIR ---
+In order to get rid of the violation, replace '<=' comparison operator with '<':
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i < size; i++) { // iterate from 0 to 99
+        array[i] = 0; // NO VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 17 more files
+
+================================================================================
+
+FIX #80
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-FIO37-a-1
+Severity: LOW
+Category: CERT
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects array access operations which may result in out of bounds access.
+Specifically, a violation is reported if an execution path with obvious out-of-bounds
+access is possible. This occur...
+
+Security Impact: The potential to access arrays beyond their boundaries is a severe security threat.
+If an application has a vulnerability of this kind, it can be expl...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+Here is an example that will trigger a violation:
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i <= size; i++) { // iterate from 0 to 100
+        array[i] = 0; // VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+--- OFFICIAL REPAIR ---
+In order to get rid of the violation, replace '<=' comparison operator with '<':
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i < size; i++) { // iterate from 0 to 99
+        array[i] = 0; // NO VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 17 more files
+
+================================================================================
+
+FIX #81
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC19-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects array access operations which may result in out of bounds access.
+Specifically, a violation is reported if an execution path with obvious out-of-bounds
+access is possible. This occur...
+
+Security Impact: The potential to access arrays beyond their boundaries is a severe security threat.
+If an application has a vulnerability of this kind, it can be expl...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+Here is an example that will trigger a violation:
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i <= size; i++) { // iterate from 0 to 100
+        array[i] = 0; // VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+--- OFFICIAL REPAIR ---
+In order to get rid of the violation, replace '<=' comparison operator with '<':
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i < size; i++) { // iterate from 0 to 99
+        array[i] = 0; // NO VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 17 more files
+
+================================================================================
+
+FIX #82
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-STR31-a-1
+Severity: LOW
+Category: CERT
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects array access operations which may result in out of bounds access.
+Specifically, a violation is reported if an execution path with obvious out-of-bounds
+access is possible. This occur...
+
+Security Impact: The potential to access arrays beyond their boundaries is a severe security threat.
+If an application has a vulnerability of this kind, it can be expl...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+Here is an example that will trigger a violation:
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i <= size; i++) { // iterate from 0 to 100
+        array[i] = 0; // VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+--- OFFICIAL REPAIR ---
+In order to get rid of the violation, replace '<=' comparison operator with '<':
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i < size; i++) { // iterate from 0 to 99
+        array[i] = 0; // NO VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 17 more files
+
+================================================================================
+
+FIX #83
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-DIR_4_1-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects array access operations which may result in out of bounds access.
+Specifically, a violation is reported if an execution path with obvious out-of-bounds
+access is possible. This occur...
+
+Security Impact: The potential to access arrays beyond their boundaries is a severe security threat.
+If an application has a vulnerability of this kind, it can be expl...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+Here is an example that will trigger a violation:
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i <= size; i++) { // iterate from 0 to 100
+        array[i] = 0; // VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+--- OFFICIAL REPAIR ---
+In order to get rid of the violation, replace '<=' comparison operator with '<':
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i < size; i++) { // iterate from 0 to 99
+        array[i] = 0; // NO VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 17 more files
+
+================================================================================
+
+FIX #84
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_18_1-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Possibly accessing array "Mka_Dst" out of bounds at index [1...5]. Correct index(es): [0...4]
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule detects array access operations which may result in out of bounds access.
+Specifically, a violation is reported if an execution path with obvious out-of-bounds
+access is possible. This occur...
+
+Security Impact: The potential to access arrays beyond their boundaries is a severe security threat.
+If an application has a vulnerability of this kind, it can be expl...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+Here is an example that will trigger a violation:
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i <= size; i++) { // iterate from 0 to 100
+        array[i] = 0; // VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+--- OFFICIAL REPAIR ---
+In order to get rid of the violation, replace '<=' comparison operator with '<':
+
+void fillArray(int array[], int size)
+{
+    int i;
+    for (i = 0; i < size; i++) { // iterate from 0 to 99
+        array[i] = 0; // NO VIOLATION
+    }
+}
+
+void example()
+{
+    int array[100];
+    fillArray(array, 100);
+    // ...
+}
+
+
+Files Affected:
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  - Mka_Internal.c:2051
+  - Mka_Internal.c:739
+  ... and 17 more files
+
+================================================================================
+
+FIX #85
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL39-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+A pointer to a structure should not be passed as the second argument to the 'memcpy()' function
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "When passing a pointer to a structure across a trust boundary to a different
+trusted domain, the programmer must ensure that the padding bytes and bit-field
+storage unit padding bits of such a struct...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+#include <string.h>
+struct sData
+{
+    int   a;
+    char  b;
+};
+
+void foo(void *buff)
+{
+    struct sData  s = {0};
+    memcpy(buff, &s,  sizeof(sData));        /* Violation */
+}
+
+--- OFFICIAL REPAIR ---
+#include <string.h>
+struct sData
+{
+    int   a;
+    char  b;
+};
+
+void foo(void *buff)
+{
+    struct sData  s = {0};
+    memcpy(buff, &s.a,  sizeof(s.a));        /* OK */
+    memcpy(buff, &s.b,  sizeof(s.b));        /* OK */
+}
+
+
+Files Affected:
+  - Mka_Internal.c:743
+  - Mka_Internal.c:745
+  - Mka_Internal.c:743
+  - Mka_Internal.c:745
+  - Mka_Internal.c:743
+  ... and 17 more files
+
+================================================================================
+
+FIX #86
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_17_8-a-4
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Parameter 'data' is modified in function 'Mka_Intr_be7bit'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "A function parameter behaves in the same manner as an object that has automatic
+storage duration. While the C language permits parameters to be modified, such
+use can be confusing and conflict with p...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo1 ( int i ) {
+  i++;                    /* Violation - parameter 'i' is modified */
+}
+
+void foo2 ( int i ) {
+  i += 10;                /* Violation - parameter 'i' is modified */
+}
+
+void foo3 ( int* i ) {
+  for ( ; i < 10; i++ ) { /* Violation - parameter 'i' is modified */
+    /* ... */
+  }
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void foo1 ( int i ) {             /* OK */
+  int a = i;
+  a++;
+}
+
+void foo2 ( int i ) {             /* OK */
+  int a = i;
+  a += 10;
+}
+
+void foo3 ( int* i ) {
+  for ( ; *i < 10; ( *i )++ ) {   /* OK */
+    /* ... */
+  }
+}
+
+/* Address of a parameter could be taken and used to modify the parameter.
+ * Such cases are not supported - no violation will be reported */
+void takesPtr ( int* ptr );
+void foo4 ( int i )               /* OK */
+{
+  int * ptr = &i;
+  *ptr = 0;
+  takesPtr ( &i );
+}
+
+
+Files Affected:
+  - Mka_Internal.c:1327
+  - Mka_Internal.c:1727
+  - Mka_Internal.c:1327
+  - Mka_Internal.c:1727
+  - Mka_Internal.c:1327
+  ... and 17 more files
+
+================================================================================
+
+FIX #87
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL00-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Declare local variable 'length' as const
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "If data is declared to be const or constexpr then its value can not be changed
+by mistake. Also, such declaration can offer the compiler optimization
+opportunities." [AUTOSAR A7-1-1]
+
+The rule detect...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int foo1(){
+    int var1 = 0;             // Violation
+    const int* var2 = 0;      // Violation - const is applied to the
+                              // pointed object, not to the pointer
+    return  1;
+}
+
+int foo2(){
+    int var1 = 0;             // OK - var1 is modified
+    const int* var2 = 0
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+// Fixed violations - const added
+int foo1(){
+    const int var1 = 0;        // OK
+    const int* const var2 = 0; // OK
+    return  1;
+}
+
+
+Files Affected:
+  - Mka_Internal.c:1371
+  - Mka_Internal.c:2242
+  - Mka_Internal.c:2792
+  - Mka_Internal.c:1371
+  - Mka_Internal.c:2242
+  ... and 28 more files
+
+================================================================================
+
+FIX #88
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-EXP33-a-1
+Severity: LOW
+Category: CERT
+
+Description:
+Non-initialized "LddReturnValue" is used
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: Objects with static storage duration are always initialized - either explicitly or implicitly.
+Objects with automatic storage duration, if not initialized explicitly, have indeterminate value.
+Reading...
+
+Security Impact: Reading the value of a non-initialized object results in undefined behavior.
+Additionally, it can allow an attacker to control the behavior of the pro...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int i;
+    char c[100];
+Here, "i" and "c" are non-initialized.
+ 
+For the purpose of this rule, an object is partially-initialized when:
+ - it is a class/struct object with some, but not all, initialized non-static members, or
+ - it is an array with some initialized elements, but the analyzer cannot 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+Always initialize a variable before its use.
+
+struct S {
+    int a;
+    const char* b;
+    int c;
+};
+
+int test01(int a)
+{
+    int i = 1;
+    return a + i; // NO VIOLATION
+}
+
+int test02(int a)
+{
+    int tab[2];
+    tab[0] = 1;
+    tab[1] = 1;
+    return tab[1]; // NO VIOLATION
+}
+
+int test03()
+{
+    struct S s = { 1, "ABC", 1 };
+    return s.c; // NO VIOLATION
+}
+
+void test04()
+{
+    struct S s1;
+    s1.a = 1;
+    s1.b = "ABC";
+    s1.c = 1;
+    struct S s2 = s1; // NO VIOLATION
+}
+
+
+Files Affected:
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:2192
+  - Mka_Internal.c:2193
+  - Mka_Internal.c:2802
+  - Mka_Internal.c:1638
+  ... and 39 more files
+
+================================================================================
+
+FIX #89
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_1_3-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Non-initialized "LddReturnValue" is used
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: Objects with static storage duration are always initialized - either explicitly or implicitly.
+Objects with automatic storage duration, if not initialized explicitly, have indeterminate value.
+Reading...
+
+Security Impact: Reading the value of a non-initialized object results in undefined behavior.
+Additionally, it can allow an attacker to control the behavior of the pro...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int i;
+    char c[100];
+Here, "i" and "c" are non-initialized.
+ 
+For the purpose of this rule, an object is partially-initialized when:
+ - it is a class/struct object with some, but not all, initialized non-static members, or
+ - it is an array with some initialized elements, but the analyzer cannot 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+Always initialize a variable before its use.
+
+struct S {
+    int a;
+    const char* b;
+    int c;
+};
+
+int test01(int a)
+{
+    int i = 1;
+    return a + i; // NO VIOLATION
+}
+
+int test02(int a)
+{
+    int tab[2];
+    tab[0] = 1;
+    tab[1] = 1;
+    return tab[1]; // NO VIOLATION
+}
+
+int test03()
+{
+    struct S s = { 1, "ABC", 1 };
+    return s.c; // NO VIOLATION
+}
+
+void test04()
+{
+    struct S s1;
+    s1.a = 1;
+    s1.b = "ABC";
+    s1.c = 1;
+    struct S s2 = s1; // NO VIOLATION
+}
+
+
+Files Affected:
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:2192
+  - Mka_Internal.c:2193
+  - Mka_Internal.c:2802
+  - Mka_Internal.c:1638
+  ... and 39 more files
+
+================================================================================
+
+FIX #90
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_9_1-a-1
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Non-initialized "LddReturnValue" is used
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: Objects with static storage duration are always initialized - either explicitly or implicitly.
+Objects with automatic storage duration, if not initialized explicitly, have indeterminate value.
+Reading...
+
+Security Impact: Reading the value of a non-initialized object results in undefined behavior.
+Additionally, it can allow an attacker to control the behavior of the pro...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int i;
+    char c[100];
+Here, "i" and "c" are non-initialized.
+ 
+For the purpose of this rule, an object is partially-initialized when:
+ - it is a class/struct object with some, but not all, initialized non-static members, or
+ - it is an array with some initialized elements, but the analyzer cannot 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+Always initialize a variable before its use.
+
+struct S {
+    int a;
+    const char* b;
+    int c;
+};
+
+int test01(int a)
+{
+    int i = 1;
+    return a + i; // NO VIOLATION
+}
+
+int test02(int a)
+{
+    int tab[2];
+    tab[0] = 1;
+    tab[1] = 1;
+    return tab[1]; // NO VIOLATION
+}
+
+int test03()
+{
+    struct S s = { 1, "ABC", 1 };
+    return s.c; // NO VIOLATION
+}
+
+void test04()
+{
+    struct S s1;
+    s1.a = 1;
+    s1.b = "ABC";
+    s1.c = 1;
+    struct S s2 = s1; // NO VIOLATION
+}
+
+
+Files Affected:
+  - Mka_Internal.c:1638
+  - Mka_Internal.c:2192
+  - Mka_Internal.c:2193
+  - Mka_Internal.c:2802
+  - Mka_Internal.c:1638
+  ... and 39 more files
+
+================================================================================
+
+FIX #91
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC07-b-3
+Severity: LOW
+Category: CERT
+
+Description:
+Unreachable code detected after 'break'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "This rule refers to code which cannot under any circumstances be reached,
+and which can be identified as such at compile-time. Code that can be reached
+but may never be executed is excluded from the ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo();
+int myFunction(int i, int j)
+{
+    switch(i)
+    {
+        case 1:
+            j = 5;
+            break;    // Violation
+            foo();
+        case 2:
+            j = 3;
+            return j; // Violation
+            foo();
+    }
+}
+
+--- OFFICIAL REPAIR ---
+void foo();
+int myFunction(int i, int j)
+{
+    switch(i)
+    {
+        case 1:
+            j = 5;
+            break;    // OK
+        case 2:
+            j = 3;
+            return j; // OK
+    }
+    foo();
+}
+
+
+Files Affected:
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  ... and 6 more files
+
+================================================================================
+
+FIX #92
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC12-b-3
+Severity: LOW
+Category: CERT
+
+Description:
+Unreachable code detected after 'break'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "This rule refers to code which cannot under any circumstances be reached,
+and which can be identified as such at compile-time. Code that can be reached
+but may never be executed is excluded from the ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo();
+int myFunction(int i, int j)
+{
+    switch(i)
+    {
+        case 1:
+            j = 5;
+            break;    // Violation
+            foo();
+        case 2:
+            j = 3;
+            return j; // Violation
+            foo();
+    }
+}
+
+--- OFFICIAL REPAIR ---
+void foo();
+int myFunction(int i, int j)
+{
+    switch(i)
+    {
+        case 1:
+            j = 5;
+            break;    // OK
+        case 2:
+            j = 3;
+            return j; // OK
+    }
+    foo();
+}
+
+
+Files Affected:
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  ... and 6 more files
+
+================================================================================
+
+FIX #93
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_2_1-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Unreachable code detected after 'break'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "This rule refers to code which cannot under any circumstances be reached,
+and which can be identified as such at compile-time. Code that can be reached
+but may never be executed is excluded from the ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo();
+int myFunction(int i, int j)
+{
+    switch(i)
+    {
+        case 1:
+            j = 5;
+            break;    // Violation
+            foo();
+        case 2:
+            j = 3;
+            return j; // Violation
+            foo();
+    }
+}
+
+--- OFFICIAL REPAIR ---
+void foo();
+int myFunction(int i, int j)
+{
+    switch(i)
+    {
+        case 1:
+            j = 5;
+            break;    // OK
+        case 2:
+            j = 3;
+            return j; // OK
+    }
+    foo();
+}
+
+
+Files Affected:
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  - Mka_Internal.c:1655
+  ... and 6 more files
+
+================================================================================
+
+FIX #94
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_16_1-b-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Avoid using nested 'default' statement
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The Standard permits a switch label, i.e. a case label or default label,
+to be placed before any statement contained in the body of a switch statement,
+potentially leading to unstructured code. In or...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo( int a, int b )
+{
+    switch(a)
+    {
+        case 1:
+        {
+            case 6:       /* Violation */
+                ;
+            default:      /* Violation */
+                break;
+        }
+            break;
+
+        case 2:
+            if (b == 1)
+            {
+                 c
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+Do not use nested 'case'/'default' statements.
+
+
+Files Affected:
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  ... and 6 more files
+
+================================================================================
+
+FIX #95
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_16_2-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Avoid using nested 'default' statement
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The Standard permits a switch label, i.e. a case label or default label,
+to be placed before any statement contained in the body of a switch statement,
+potentially leading to unstructured code. In or...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo( int a, int b )
+{
+    switch(a)
+    {
+        case 1:
+        {
+            case 6:       /* Violation */
+                ;
+            default:      /* Violation */
+                break;
+        }
+            break;
+
+        case 2:
+            if (b == 1)
+            {
+                 c
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+Do not use nested 'case'/'default' statements.
+
+
+Files Affected:
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  - Mka_Internal.c:1657
+  ... and 6 more files
+
+================================================================================
+
+FIX #96
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL01-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+Identifier 'Mka_MI_Value' is hiding an identifier from global or namespace scope
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "If an identifier is declared in an inner scope but is not distinct
+from an identifier that already exists in an outer scope, then the inner-most
+declaration will 'hide' the outer one. This may lead t...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int x = 10;
+typedef enum {value1, value2} E;
+void func();
+
+void foo( ) {
+    int x;             // Violation
+    int value1;        // Violation
+    void(*func)();     // Violation
+}
+
+struct S {int i;};
+
+void foo2(){
+    int S;   // Violation - 'S' does not hide struct name,
+             // but can 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+int x = 10;
+typedef enum {value1, value2} E;
+void func();
+
+void foo( ) {
+    extern int x;      // OK - 'x' refers to global 'x'
+    int foo_value1;    // OK - the name was changed
+    void(*p_func)();   // OK - the name was changed
+}
+
+typedef struct {int i;}ST;
+
+void foo2(){
+    int S;         // OK - the name of struct was changed
+}
+
+void foo1(){
+    int var1;      // OK - 'var1' does not hide global variable
+}
+
+int var1;
+
+#ifdef __cplusplus
+namespace N1{
+    struct NS {};
+}
+
+namespace N2{
+   
+... (truncated)
+
+
+Files Affected:
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  ... and 6 more files
+
+================================================================================
+
+FIX #97
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_5_3-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Identifier 'Mka_MI_Value' is hiding an identifier from global or namespace scope
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "If an identifier is declared in an inner scope but is not distinct
+from an identifier that already exists in an outer scope, then the inner-most
+declaration will 'hide' the outer one. This may lead t...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int x = 10;
+typedef enum {value1, value2} E;
+void func();
+
+void foo( ) {
+    int x;             // Violation
+    int value1;        // Violation
+    void(*func)();     // Violation
+}
+
+struct S {int i;};
+
+void foo2(){
+    int S;   // Violation - 'S' does not hide struct name,
+             // but can 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+int x = 10;
+typedef enum {value1, value2} E;
+void func();
+
+void foo( ) {
+    extern int x;      // OK - 'x' refers to global 'x'
+    int foo_value1;    // OK - the name was changed
+    void(*p_func)();   // OK - the name was changed
+}
+
+typedef struct {int i;}ST;
+
+void foo2(){
+    int S;         // OK - the name of struct was changed
+}
+
+void foo1(){
+    int var1;      // OK - 'var1' does not hide global variable
+}
+
+int var1;
+
+#ifdef __cplusplus
+namespace N1{
+    struct NS {};
+}
+
+namespace N2{
+   
+... (truncated)
+
+
+Files Affected:
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  - Mka_Internal.c:1700
+  ... and 6 more files
+
+================================================================================
+
+FIX #98
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_10_8-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Composite expression with 'signed' essential type category shall not be cast to different essential type category 'unsigned'
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: This rule reports a violation if the value of a "composite expression" is cast
+to a type that has different "essential type category", or is a wider "essential
+type".
+
+The terms "composite expression"...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+/* Examples of code which results in violation */
+/* This example assumes 'short' has 16 bits and 'int' has 32 bits */
+void foo(int s32a, int s32b, unsigned short u16a, unsigned short u16b)
+{
+    /* Cast to a different essential type category ("signed" to "unsigned") */
+    (unsigned short) (s32a + 
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+/* Examples of code which does not result in violation */
+/* This example assumes 'short' has 16 bits and 'int' has 32 bits */
+void foo(unsigned int u32a, unsigned int u32b, int s32a)
+{
+     /* Cast to same essential type category (unsigned) to a narrower type */
+    (unsigned short) (u32a + u32b);
+
+    /* s32a is not a composite expression */
+    (unsigned short) s32a;
+}
+
+
+Files Affected:
+  - Mka_Internal.c:2607
+  - Mka_Internal.c:2607
+  - Mka_Internal.c:2607
+  - Mka_Internal.c:2607
+  - Mka_Internal.c:2607
+  ... and 6 more files
+
+================================================================================
+
+FIX #99
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL00-b-3
+Severity: LOW
+Category: CERT
+
+Description:
+Declare parameter 'PaeInst' as const
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "If data is declared to be const or constexpr then its value can not be changed
+by mistake. Also, such declaration can offer the compiler optimization
+opportunities." [AUTOSAR A7-1-1]
+
+The rule detect...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo1(int param1,         // Violation
+         int* param2,         // Violation
+         const int* param3)   // Violation - const is applied to the
+                              // pointed object, not to the pointer
+{}
+
+void foo2(int param1,         // OK - param1 is modified
+         int* pa
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+// Fixed violations - const added
+int foo1(const int param1,          // OK
+         int* const param2,         // OK - const is applied to the pointer
+         const int* const param3)   // OK - const is applied to the pointed
+                                    // object and to the pointer
+{}
+
+
+Files Affected:
+  - Mka_Internal.c:2646
+  - Mka_Internal.c:2726
+  - Mka_Internal.c:2789
+  - Mka_Internal.c:2965
+  - Mka_Internal.c:3122
+  ... and 556 more files
+
+================================================================================
+
+FIX #100
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_16_1-c-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Every non empty case clause in a switch statement shall be terminated with a break statement
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The last statement in every switch clause shall be a break statement,
+or if the switch clause is a compound statement, then the last statement
+in the compound statement shall be a break statement."
+
+...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo( int i )
+{
+    switch( i )
+    {
+        case 0 :         // Violation
+            i = 4;
+            break;
+            i++;
+        case 1 :         // Violation
+            i = 7;
+            if (i > 0)
+            {
+                i = 5;
+                break;
+            }
+        cas
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void foo( int i )
+{
+    switch( i )
+    {
+        case 0 :         // OK
+            i = 4;
+            i++;
+            break;
+        case 1 :         // OK
+            i = 7;
+            if (i > 0)
+            {
+                i = 5;
+            }
+            break;
+        case 2 :         // OK
+            {
+                i = 3;
+                break;
+            }
+        case 3 :         // OK
+            {
+                i = 3;
+            }
+            break;
+        case 4 :       
+... (truncated)
+
+
+Files Affected:
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  ... and 6 more files
+
+================================================================================
+
+FIX #101
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_16_3-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Every non empty case clause in a switch statement shall be terminated with a break statement
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The last statement in every switch clause shall be a break statement,
+or if the switch clause is a compound statement, then the last statement
+in the compound statement shall be a break statement."
+
+...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo( int i )
+{
+    switch( i )
+    {
+        case 0 :         // Violation
+            i = 4;
+            break;
+            i++;
+        case 1 :         // Violation
+            i = 7;
+            if (i > 0)
+            {
+                i = 5;
+                break;
+            }
+        cas
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void foo( int i )
+{
+    switch( i )
+    {
+        case 0 :         // OK
+            i = 4;
+            i++;
+            break;
+        case 1 :         // OK
+            i = 7;
+            if (i > 0)
+            {
+                i = 5;
+            }
+            break;
+        case 2 :         // OK
+            {
+                i = 3;
+                break;
+            }
+        case 3 :         // OK
+            {
+                i = 3;
+            }
+            break;
+        case 4 :       
+... (truncated)
+
+
+Files Affected:
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  ... and 6 more files
+
+================================================================================
+
+FIX #102
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC17-a-1
+Severity: LOW
+Category: CERT
+
+Description:
+Possible missing break statement in 'case' label
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: A switch statement consists of several 'case' labels, plus an optional 'default'
+label. A series of statements following those labels conventionally ends with
+a break statement; if omitted, control fl...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+// Example of code which results in a rule violation:
+int foo(int i, int j)
+{
+    int x;
+    switch (i)
+    {
+        case 1:                  // Violation - missing break
+            x = i + 1;
+        case 2:                  // Violation - missing break
+            x = i + 2;
+        case 3:     
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+// Example of code which does not result in rule violation:
+int foo(int i, int j)
+{
+    int x;
+    do
+    {
+        switch (i)
+        {
+            case 0:                     // OK (empty label)
+            case 1:                     // OK ("fall through" comment found)
+                x = i + 1;
+                // Control falls through
+            case 2:                     // OK ('break' found)
+                x = i + 2;
+                break;
+            case 3:                     // OK 
+... (truncated)
+
+
+Files Affected:
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  - Mka_Internal.c:2850
+  ... and 6 more files
+
+================================================================================
+
+FIX #103
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_15_7-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+Provide 'else' after the last 'else-if' construct
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "This rule applies whenever an 'if' statement is followed by one or more
+'else-if' statements; the final 'else-if' shall be followed by an 'else'
+statement. In the case of a simple 'if' statement then...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo(int a)
+{
+    if(a > 0)
+    {
+    }
+    else if (a > 10)   // Violation
+    {
+    }
+}
+
+--- OFFICIAL REPAIR ---
+void foo(int a)
+{
+    if(a > 0)
+    {
+    }
+    else if (a > 10)   // OK
+    {
+    }
+    else
+    {
+        // comment or action
+    }
+}
+
+
+Files Affected:
+  - Mka_Internal.c:3000
+  - Mka_Internal.c:4600
+  - Mka_Internal.c:3000
+  - Mka_Internal.c:4600
+  - Mka_Internal.c:3000
+  ... and 17 more files
+
+================================================================================
+
+FIX #104
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC01-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+Provide 'else' after the last 'else-if' construct
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "This rule applies whenever an 'if' statement is followed by one or more
+'else-if' statements; the final 'else-if' shall be followed by an 'else'
+statement. In the case of a simple 'if' statement then...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void foo(int a)
+{
+    if(a > 0)
+    {
+    }
+    else if (a > 10)   // Violation
+    {
+    }
+}
+
+--- OFFICIAL REPAIR ---
+void foo(int a)
+{
+    if(a > 0)
+    {
+    }
+    else if (a > 10)   // OK
+    {
+    }
+    else
+    {
+        // comment or action
+    }
+}
+
+
+Files Affected:
+  - Mka_Internal.c:3000
+  - Mka_Internal.c:4600
+  - Mka_Internal.c:3000
+  - Mka_Internal.c:4600
+  - Mka_Internal.c:3000
+  ... and 17 more files
+
+================================================================================
+
+FIX #105
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-DCL19-a-3
+Severity: HIGH
+Category: CERT
+
+Description:
+Variable "LpMkaKayParticipants" should be declared as locally as possible
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: The rule detects when a local variable is used only within a block that is
+inside the block in which it was declared....
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+int foo1(int x){
+
+    int a;           // Violation
+
+    if (x > 0){
+        a = 0;
+        return a;
+    }
+}
+
+--- OFFICIAL REPAIR ---
+int foo1(int x){
+    if (x > 0){
+        int a;       // OK
+        a = 0;
+        return a;
+    }
+}
+
+int foo2(int x){
+
+    int a;           // OK - variable is used inside two different blocks
+
+    if (x > 0){
+        a = 0;
+        return a;
+    } else {
+        a = 1;
+        return a;
+    }
+}
+
+int foo3(int x){
+
+    int a = 0;       // OK - variable is used in the same block
+
+    if (x > 0){
+        a = 1;
+    } else {
+        return x;
+    }
+
+    return a;
+}
+
+
+Files Affected:
+  - Mka_Internal.c:3219
+  - Mka_Internal.c:3622
+  - Mka_Internal.c:3624
+  - Mka_Internal.c:3625
+  - Mka_Internal.c:4243
+  ... and 61 more files
+
+================================================================================
+
+FIX #106
+--------------------------------------------------------------------------------
+Violation ID: MISRAC2012-RULE_7_4-a-2
+Severity: MEDIUM
+Category: MISRA
+
+Description:
+String literal "IEEE8021 KEK" is passed to function 'Mka_Callout_ICK_KDF' as pointer to non-const object
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The declaration
+
+      char s[] = "abc", t[3] = "abc";
+
+ defines 'plain' char array objects 's' and 't' whose elements are initialized
+ with character string literals. This declaration is identical t...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void getcharptr(char* ptc);
+void getchararr(char arr[]);
+
+char* foo() {
+  char* c1 = "Hello";    // Violation
+  char* c2;
+  int* p1;
+  c2 = "Hello";          // Violation
+  p1 = (int*)"Hello";    // Violation
+  getcharptr("Hello");   // Violation
+  getchararr("Hello");   // Violation
+
+  return "Hell
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void getcharptr(const char* ptc);
+void getchararr(const char arr[]);
+
+const char* foo() {
+  const char* c1 = "Hello"; // OK
+  char arr1[] = "Hello";    // OK
+  char arr2[6] = "Hello";   // OK
+  const char* c2;
+  c2 = "Hello";             // OK
+  getcharptr("Hello");      // OK
+  getchararr("Hello");      // OK
+
+  return "Hello";           // OK
+}
+
+
+Files Affected:
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  - Mka_Internal.c:5070
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  ... and 28 more files
+
+================================================================================
+
+FIX #107
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-STR05-a-3
+Severity: LOW
+Category: CERT
+
+Description:
+String literal "IEEE8021 KEK" is passed to function 'Mka_Callout_ICK_KDF' as pointer to non-const object
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The declaration
+
+      char s[] = "abc", t[3] = "abc";
+
+ defines 'plain' char array objects 's' and 't' whose elements are initialized
+ with character string literals. This declaration is identical t...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void getcharptr(char* ptc);
+void getchararr(char arr[]);
+
+char* foo() {
+  char* c1 = "Hello";    // Violation
+  char* c2;
+  int* p1;
+  c2 = "Hello";          // Violation
+  p1 = (int*)"Hello";    // Violation
+  getcharptr("Hello");   // Violation
+  getchararr("Hello");   // Violation
+
+  return "Hell
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void getcharptr(const char* ptc);
+void getchararr(const char arr[]);
+
+const char* foo() {
+  const char* c1 = "Hello"; // OK
+  char arr1[] = "Hello";    // OK
+  char arr2[6] = "Hello";   // OK
+  const char* c2;
+  c2 = "Hello";             // OK
+  getcharptr("Hello");      // OK
+  getchararr("Hello");      // OK
+
+  return "Hello";           // OK
+}
+
+
+Files Affected:
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  - Mka_Internal.c:5070
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  ... and 28 more files
+
+================================================================================
+
+FIX #108
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-STR30-a-2
+Severity: LOW
+Category: CERT
+
+Description:
+String literal "IEEE8021 KEK" is passed to function 'Mka_Callout_ICK_KDF' as pointer to non-const object
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "The declaration
+
+      char s[] = "abc", t[3] = "abc";
+
+ defines 'plain' char array objects 's' and 't' whose elements are initialized
+ with character string literals. This declaration is identical t...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void getcharptr(char* ptc);
+void getchararr(char arr[]);
+
+char* foo() {
+  char* c1 = "Hello";    // Violation
+  char* c2;
+  int* p1;
+  c2 = "Hello";          // Violation
+  p1 = (int*)"Hello";    // Violation
+  getcharptr("Hello");   // Violation
+  getchararr("Hello");   // Violation
+
+  return "Hell
+... (truncated)
+
+--- OFFICIAL REPAIR ---
+void getcharptr(const char* ptc);
+void getchararr(const char arr[]);
+
+const char* foo() {
+  const char* c1 = "Hello"; // OK
+  char arr1[] = "Hello";    // OK
+  char arr2[6] = "Hello";   // OK
+  const char* c2;
+  c2 = "Hello";             // OK
+  getcharptr("Hello");      // OK
+  getchararr("Hello");      // OK
+
+  return "Hello";           // OK
+}
+
+
+Files Affected:
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  - Mka_Internal.c:5070
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  ... and 28 more files
+
+================================================================================
+
+FIX #109
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-MSC41-a-1
+Severity: LOW
+Category: CERT
+
+Description:
+The string literal is embedded directly in the code: IEEE8021 KEK
+
+Fix Type: parasoft_official
+Priority: HIGH
+
+Fix Description:
+Description: "Hard coding sensitive information, such as passwords or encryption keys can
+expose the information to attackers. Anyone who has access to the executable
+or dynamic library files can examine them for ...
+
+Example:
+
+--- VIOLATION EXAMPLE ---
+void f() {
+    const char login[] = "admin";    /* Violation */
+    const char passwd[] = "admin1";  /* Violation */
+}
+
+--- OFFICIAL REPAIR ---
+#include <stdio.h>
+
+void f() {
+    char login[10];                          /* OK */
+    char passwd[10];                         /* OK */
+    printf("Please enter your login:\n");    /* OK - Exception */
+    fgets(login, sizeof(login), stdin);
+    printf("Please enter your password:\n"); /* OK - Exception */
+    fgets(passwd, sizeof(passwd), stdin);
+}
+
+
+Files Affected:
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  - Mka_Internal.c:5070
+  - Mka_Internal.c:3297
+  - Mka_Internal.c:3378
+  ... and 28 more files
+
+================================================================================
+
+FIX #110
+--------------------------------------------------------------------------------
+Violation ID: CERT-C: EXP33-C⚠️ NEW
+Severity: LOW
+Category: CERT
+
+Description:
+Potential use of uninitialized variable 'Luscount' (declared at line 264). [Expressions]
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Potential use of uninitialized variable 'Luscount' (declared at line 264). [Expressions]
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka.c:283
+  - Mka_Cbk.c:299
+  - Mka_Cbk.c:398
+  - Mka_Cbk.c:405
+  - Mka_Internal.c:386
+  ... and 151 more files
+
+================================================================================
+
+FIX #111
+--------------------------------------------------------------------------------
+Violation ID: CERT-C: ARR30-C⚠️ NEW
+Severity: LOW
+Category: CERT
+
+Description:
+Array 'Mka_AcMi' accessed at index 3, but size is 3 (out-of-bounds). [Arrays]
+
+Fix Type: cert_compliance
+Priority: MEDIUM
+
+Fix Description:
+Review CERT rule and apply appropriate fix: Array 'Mka_AcMi' accessed at index 3, but size is 3 (out-of-bounds). [Arrays]
+
+Example:
+Refer to CERT Secure Coding Standards
+
+Files Affected:
+  - Mka_Internal.c:605
+  - Mka_Internal.c:608
+  - Mka_Internal.c:715
+  - Mka_Internal.c:717
+  - Mka_Internal.c:718
+  ... and 99 more files
+
+================================================================================
+
