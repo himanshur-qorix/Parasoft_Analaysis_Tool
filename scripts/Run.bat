@@ -198,7 +198,7 @@ echo   - reports\%MODULE_NAME%_violations_report_UPDATED.xlsx (Excel with Justif
 echo   - reports\%MODULE_NAME%_analysis_summary.json
 echo   - knowledge_base\%MODULE_NAME%_KnowledgeDatabase.json
 echo   - justifications\%MODULE_NAME%_suppress_comments_*.txt (Parasoft suppress comments)
-echo   - fixes\%MODULE_NAME%\
+echo   - fixes\%MODULE_NAME%\ (Text + HTML fix suggestions)
 echo.
 echo Excel Report includes:
 echo   - Status: Justified / Needs Code Update / Analysis Required
@@ -207,10 +207,45 @@ echo   - Filtered by Qorix_CP_Common_Deviations.xlsx
 echo.
 echo.
 echo ==================================================
-echo Next Step: Apply Suppress Comments to Code
+echo View Code Fix Suggestions?
 echo ==================================================
 echo.
-echo To automatically insert suppress comments into your source code:
+echo   [Y] Yes - Open interactive viewer
+echo   [H] HTML - Open HTML report in browser
+echo   [N] No - Skip for now
+echo.
+set /p VIEW_FIXES="View fixes now? (Y/H/N) [default: Y]: "
+
+if "%VIEW_FIXES%"=="" set VIEW_FIXES=Y
+
+if /I "%VIEW_FIXES%"=="Y" (
+    echo.
+    echo [INFO] Starting Interactive Fix Viewer...
+    echo.
+    for /f "delims=" %%i in ('dir /b /o-d "fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.txt" 2^>nul') do (
+        python scripts\view_fixes_interactive.py "fixes\%MODULE_NAME%\%%i"
+        goto :after_view
+    )
+) else if /I "%VIEW_FIXES%"=="H" (
+    echo.
+    echo [INFO] Opening HTML report in browser...
+    for /f "delims=" %%i in ('dir /b /o-d "fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.html" 2^>nul') do (
+        start "" "fixes\%MODULE_NAME%\%%i"
+        goto :after_view
+    )
+)
+
+:after_view
+echo.
+echo ==================================================
+echo Next Steps
+echo ==================================================
+echo.
+echo To view fixes again:
+echo   - Interactive: python scripts\view_fixes_interactive.py fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.txt
+echo   - HTML: Open fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.html in browser
+echo.
+echo To apply suppress comments:
 echo   1. Run: scripts\Apply_Suppressions.bat
 echo   2. Select the suppress comments file
 echo   3. Provide path to your source code repository

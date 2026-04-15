@@ -128,17 +128,24 @@ class CodeFixGenerator:
                 logger.error(f"Error generating fix for {violation['violation_id']}: {str(e)}")
                 fixes_failed += 1
         
-        # Save all fixes to a single file
+        # Save all fixes to text and HTML files
         if all_fixes:
-            fixes_file = self.module_fixes_dir / f"{self.module_name}_fixes_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            fixes_file = self.module_fixes_dir / f"{self.module_name}_fixes_{timestamp}.txt"
+            html_file = self.module_fixes_dir / f"{self.module_name}_fixes_{timestamp}.html"
+            
             self._save_fixes_file(all_fixes, fixes_file)
+            self.save_fixes_html(all_fixes, html_file)
+            
             logger.info(f"Fixes saved to: {fixes_file}")
+            logger.info(f"HTML report saved to: {html_file}")
         
         return {
             'fixes_generated': fixes_generated,
             'fixes_failed': fixes_failed,
             'total_violations': len(violations_to_fix),
-            'fixes_file': str(fixes_file) if all_fixes else None
+            'fixes_file': str(fixes_file) if all_fixes else None,
+            'html_file': str(html_file) if all_fixes else None
         }
     
     def _generate_fix_for_violation(self, violation: Dict) -> Optional[Dict]:
@@ -310,6 +317,7 @@ class CodeFixGenerator:
             return {
                 'type': 'parasoft_official',
                 'standard': rule.standard,
+                'priority': 'HIGH',  # Official Parasoft fixes are high priority
                 'description': fix_description,
                 'example': example_text,
                 'cwe_mappings': rule.cwe_mappings,
@@ -468,6 +476,526 @@ if (ptr != NULL) {
             'example': 'Review the violation and apply appropriate fix based on context',
             'priority': 'MEDIUM'
         }
+    
+    def save_fixes_html(self, fixes: List[Dict], output_file: Path):
+        """
+        Save fixes to an HTML file with Qorix branding and syntax highlighting
+        
+        Args:
+            fixes: List of fix dictionaries
+            output_file: Path to output HTML file
+        """
+        from datetime import datetime
+        
+        html_content = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Fix Suggestions - {self.module_name} - Qorix</title>
+    <style>
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+        
+        body {{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+        }}
+        
+        .container {{
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }}
+        
+        .header {{
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }}
+        
+        .header-logo {{
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }}
+        
+        .company {{
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-top: 10px;
+        }}
+        
+        h1 {{
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }}
+        
+        .stats {{
+            display: flex;
+            justify-content: space-around;
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 0;
+            border-bottom: 3px solid #667eea;
+        }}
+        
+        .stat {{
+            text-align: center;
+        }}
+        
+        .stat-value {{
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }}
+        
+        .stat-label {{
+            color: #666;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }}
+        
+        .filters {{
+            padding: 20px 40px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }}
+        
+        .filter-group {{
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }}
+        
+        .filter-group label {{
+            font-weight: 600;
+            color: #495057;
+        }}
+        
+        .filter-group input,
+        .filter-group select {{
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 14px;
+        }}
+        
+        .fixes-container {{
+            padding: 40px;
+        }}
+        
+        .fix-card {{
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }}
+        
+        .fix-card:hover {{
+            border-color: #667eea;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+        }}
+        
+        .fix-header {{
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }}
+        
+        .fix-title {{
+            font-size: 1.3em;
+            font-weight: 600;
+        }}
+        
+        .fix-badges {{
+            display: flex;
+            gap: 10px;
+        }}
+        
+        .badge {{
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            background: rgba(255,255,255,0.2);
+        }}
+        
+        .badge-critical {{ background: #dc3545; }}
+        .badge-high {{ background: #fd7e14; }}
+        .badge-medium {{ background: #ffc107; color: #333; }}
+        .badge-low {{ background: #28a745; }}
+        
+        .badge-parasoft {{ background: #17a2b8; }}
+        .badge-ai {{ background: #6f42c1; }}
+        .badge-rule {{ background: #6c757d; }}
+        
+        .fix-content {{
+            padding: 25px;
+        }}
+        
+        .section {{
+            margin-bottom: 25px;
+        }}
+        
+        .section-title {{
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #e9ecef;
+        }}
+        
+        .description {{
+            line-height: 1.6;
+            color: #495057;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }}
+        
+        .code-block {{
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }}
+        
+        .code-header {{
+            background: #21252b;
+            color: #61afef;
+            padding: 10px 15px;
+            border-radius: 8px 8px 0 0;
+            font-weight: 600;
+            border-left: 4px solid #61afef;
+        }}
+        
+        .violation-code {{
+            border-left: 4px solid #e06c75;
+        }}
+        
+        .repair-code {{
+            border-left: 4px solid #98c379;
+        }}
+        
+        .files-list {{
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+        }}
+        
+        .file-item {{
+            padding: 8px 12px;
+            margin: 5px 0;
+            background: white;
+            border-left: 3px solid #667eea;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }}
+        
+        .cwe-tags {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }}
+        
+        .cwe-tag {{
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            border: 1px solid #99ccff;
+        }}
+        
+        .footer {{
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 3px solid #667eea;
+            color: #666;
+        }}
+        
+        .footer-logo {{
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+        }}
+        
+        @media print {{
+            body {{
+                background: white;
+                padding: 0;
+            }}
+            .fix-card {{
+                page-break-inside: avoid;
+            }}
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-logo">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="90" fill="white" opacity="0.2"/>
+                    <text x="100" y="120" font-size="80" font-weight="bold" text-anchor="middle" fill="white">Q</text>
+                </svg>
+            </div>
+            <h1>Code Fix Suggestions</h1>
+            <div class="company">Qorix India Pvt Ltd</div>
+            <p style="margin-top: 15px; opacity: 0.9;">Module: {self.module_name}</p>
+            <p style="opacity: 0.8; font-size: 0.9em;">Generated: {datetime.now().strftime("%B %d, %Y at %I:%M %p")}</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">{len(fixes)}</div>
+                <div class="stat-label">Total Fixes</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">{sum(1 for f in fixes if f['fix_suggestion']['type'] == 'parasoft_official')}</div>
+                <div class="stat-label">Parasoft Official</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">{sum(1 for f in fixes if f['fix_suggestion'].get('priority') in ['CRITICAL', 'HIGH'])}</div>
+                <div class="stat-label">High Priority</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">{len(set(f['category'] for f in fixes))}</div>
+                <div class="stat-label">Categories</div>
+            </div>
+        </div>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label>Search:</label>
+                <input type="text" id="searchInput" placeholder="Filter by violation ID or description..." style="width: 300px;" onkeyup="filterFixes()">
+            </div>
+            <div class="filter-group">
+                <label>Priority:</label>
+                <select id="priorityFilter" onchange="filterFixes()">
+                    <option value="">All</option>
+                    <option value="CRITICAL">Critical</option>
+                    <option value="HIGH">High</option>
+                    <option value="MEDIUM">Medium</option>
+                    <option value="LOW">Low</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Type:</label>
+                <select id="typeFilter" onchange="filterFixes()">
+                    <option value="">All</option>
+                    <option value="parasoft_official">Parasoft Official</option>
+                    <option value="ai_generated">AI Generated</option>
+                    <option value="rule_based">Rule Based</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="fixes-container" id="fixesContainer">
+'''
+        
+        # Generate fix cards
+        for i, fix in enumerate(fixes, 1):
+            fix_suggestion = fix['fix_suggestion']
+            priority = fix_suggestion.get('priority', 'MEDIUM')
+            fix_type = fix_suggestion['type']
+            
+            # Determine badge colors
+            priority_class = f"badge-{priority.lower()}"
+            type_display = {
+                'parasoft_official': ('Parasoft Official', 'badge-parasoft'),
+                'ai_generated': ('AI Generated', 'badge-ai'),
+                'rule_based': ('Rule Based', 'badge-rule')
+            }.get(fix_type, (fix_type.title(), 'badge-rule'))
+            
+            html_content += f'''
+            <div class="fix-card" data-priority="{priority}" data-type="{fix_type}" data-violation="{fix['violation_id']}" data-description="{fix['violation_text']}">
+                <div class="fix-header">
+                    <div class="fix-title">FIX #{i} - {fix['violation_id']}</div>
+                    <div class="fix-badges">
+                        <span class="badge {priority_class}">{priority}</span>
+                        <span class="badge {type_display[1]}">{type_display[0]}</span>
+                        <span class="badge">{fix['severity']}</span>
+                    </div>
+                </div>
+                <div class="fix-content">
+                    <div class="section">
+                        <div class="section-title">📋 Violation Description</div>
+                        <div class="description">{fix['violation_text']}</div>
+                    </div>
+                    
+                    <div class="section">
+                        <div class="section-title">💡 Fix Suggestion</div>
+                        <div class="description">{fix_suggestion.get('description', 'No description available')}</div>
+                    </div>
+'''
+            
+            # Add code examples if available
+            if 'example' in fix_suggestion and fix_suggestion['example']:
+                example = fix_suggestion['example']
+                if 'VIOLATION EXAMPLE' in example:
+                    violation_part = example.split('--- OFFICIAL REPAIR ---')[0].replace('--- VIOLATION EXAMPLE ---', '').strip()
+                    if violation_part:
+                        html_content += f'''
+                    <div class="section">
+                        <div class="code-header violation-code">❌ Violation Example</div>
+                        <div class="code-block"><pre>{violation_part}</pre></div>
+                    </div>
+'''
+                
+                if 'OFFICIAL REPAIR' in example:
+                    repair_part = example.split('--- OFFICIAL REPAIR ---')[1].strip() if '--- OFFICIAL REPAIR ---' in example else ''
+                    if repair_part:
+                        html_content += f'''
+                    <div class="section">
+                        <div class="code-header repair-code">✅ Official Repair</div>
+                        <div class="code-block"><pre>{repair_part}</pre></div>
+                    </div>
+'''
+            
+            # Add CWE mappings if available
+            if 'cwe_mappings' in fix_suggestion and fix_suggestion['cwe_mappings']:
+                html_content += f'''
+                    <div class="section">
+                        <div class="section-title">🔒 Security Mappings</div>
+                        <div class="cwe-tags">
+'''
+                for cwe in fix_suggestion['cwe_mappings'][:8]:  # Limit to 8
+                    html_content += f'                            <span class="cwe-tag">{cwe}</span>\n'
+                html_content += '''                        </div>
+                    </div>
+'''
+            
+            # Add affected files
+            files_to_show = fix['files_affected'][:10]  # Show first 10
+            html_content += f'''
+                    <div class="section">
+                        <div class="section-title">📁 Affected Files ({len(fix['files_affected'])} total)</div>
+                        <div class="files-list">
+'''
+            for file_entry in files_to_show:
+                html_content += f'                            <div class="file-item">{file_entry["file"]}:{file_entry["line"]}</div>\n'
+            
+            if len(fix['files_affected']) > 10:
+                html_content += f'                            <div class="file-item" style="color: #666; font-style: italic;">... and {len(fix["files_affected"]) - 10} more files</div>\n'
+            
+            html_content += '''                        </div>
+                    </div>
+'''
+            
+            # Add source info if Parasoft official
+            if 'source' in fix_suggestion:
+                html_content += f'''
+                    <div class="section">
+                        <div class="section-title">📚 Source</div>
+                        <div class="description" style="font-style: italic;">{fix_suggestion['source']}</div>
+                    </div>
+'''
+            
+            html_content += '''                </div>
+            </div>
+'''
+        
+        # Footer and scripts
+        html_content += f'''        </div>
+        
+        <div class="footer">
+            <div class="footer-logo">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="100" cy="100" r="90" fill="#667eea" opacity="0.2"/>
+                    <text x="100" y="120" font-size="80" font-weight="bold" text-anchor="middle" fill="#667eea">Q</text>
+                </svg>
+            </div>
+            <p style="font-weight: 600; margin-bottom: 10px;">Qorix India Pvt Ltd</p>
+            <p>Parasoft Analysis Tool v2.3.0 - Powered by Official Parasoft Rules Database</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">© 2025 Qorix India Pvt Ltd. All Rights Reserved.</p>
+        </div>
+    </div>
+    
+    <script>
+        function filterFixes() {{
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const priorityFilter = document.getElementById('priorityFilter').value;
+            const typeFilter = document.getElementById('typeFilter').value;
+            
+            const fixCards = document.querySelectorAll('.fix-card');
+            let visibleCount = 0;
+            
+            fixCards.forEach(card => {{
+                const violationId = card.getAttribute('data-violation').toLowerCase();
+                const description = card.getAttribute('data-description').toLowerCase();
+                const priority = card.getAttribute('data-priority');
+                const type = card.getAttribute('data-type');
+                
+                const matchesSearch = !searchTerm || violationId.includes(searchTerm) || description.includes(searchTerm);
+                const matchesPriority = !priorityFilter || priority === priorityFilter;
+                const matchesType = !typeFilter || type === typeFilter;
+                
+                if (matchesSearch && matchesPriority && matchesType) {{
+                    card.style.display = 'block';
+                    visibleCount++;
+                }} else {{
+                    card.style.display = 'none';
+                }}
+            }});
+            
+            // Update stats if needed
+            console.log(`Showing ${{visibleCount}} of ${{fixCards.length}} fixes`);
+        }}
+        
+        // Make fix headers collapsible
+        document.querySelectorAll('.fix-header').forEach(header => {{
+            header.addEventListener('click', function() {{
+                const content = this.nextElementSibling;
+                if (content.style.display === 'none') {{
+                    content.style.display = 'block';
+                }} else {{
+                    content.style.display = 'none';
+                }}
+            }});
+        }});
+    </script>
+</body>
+</html>
+'''
+        
+        with open(output_file, 'w', encoding='utf-8') as f:
+            f.write(html_content)
+        
+        logger.info(f"HTML report saved to: {output_file}")
     
     def _save_fixes_file(self, fixes: List[Dict], output_file: Path):
         """

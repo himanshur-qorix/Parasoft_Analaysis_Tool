@@ -1,0 +1,16 @@
+================================================================================
+PARASOFT FIXES - Module: Mka
+Generated: 2026-04-15 13:26:53
+Total Fixes: 111
+================================================================================
+
+FIX #1
+--------------------------------------------------------------------------------
+Violation ID: CERT_C-INT31-i-2
+Severity: LOW
+Category: CERT
+
+Description:
+The expression of the 'essentially Enum' type is assigned to an object with the 'essentially unsigned' type
+
+Fix Type: parasoft_official

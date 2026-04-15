@@ -11,6 +11,7 @@
 
 For comprehensive documentation, see the [`docs/`](docs/) folder:
 
+- **[Fix Viewing Options](docs/FIX_VIEWING_OPTIONS.md)** - Interactive viewer, HTML reports, text files (NEW! v2.3)
 - **[Parasoft Rules Database](docs/PARASOFT_RULES_DATABASE.md)** - Official Parasoft-approved fix suggestions (NEW! v2.3)
 - **[Knowledge Base Integration](docs/KNOWLEDGE_BASE_INTEGRATION.md)** - Smart analysis with KB insights (NEW!)
 - **[Cross-Module Knowledge Base](docs/CROSS_MODULE_KNOWLEDGE.md)** - Consolidate learnings across modules
@@ -46,22 +47,24 @@ For comprehensive documentation, see the [`docs/`](docs/) folder:
 ## 🚀 Features
 
 ### Core Capabilities
-1. **Parasoft Rules Database (NEW! v2.3)** - Leverages 1200+ official Parasoft rule documentation files for authoritative fix suggestions and justifications
-2. **Smart Knowledge Base Integration** - Analyzers cross-check violations against KB for known vs new detection and proven fix suggestions
-3. **Cross-Module Knowledge Base** - Consolidate learnings across all modules for intelligent insights and proven fix recommendations
-4. **Auto-Generate Workflow** - Automatically generate MISRA/CERT report when Parasoft report unavailable
-5. **MISRA/CERT Pre-Analysis** - Integrated MISRA-C:2012 and CERT-C static analyzer for comprehensive code checking
-6. **Git Integration** - Seamlessly integrated with Visual Studio Code and Git repositories
-7. **AI-Powered Analysis** - Local LLM integration via Ollama for intelligent fix suggestions
-8. **Qorix Deviations Integration** - Automatically checks violations against Qorix_CP_Common_Deviations.xlsx
-9. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
-10. **Excel Report Generation** - Automatically generates comprehensive Excel reports with violation status
-11. **Parasoft Suppress Comments** - Generates properly formatted suppress comments for justified violations
-12. **Interactive Code Application** - Apply suppress comments to source code with user approval for each change
-13. **Unique Violation Tracking** - Identifies and tracks unique violations across analyses
-14. **Hybrid Fix Generation** - AI for complex cases, rule-based for standard violations (optimal performance)
-15. **Parasoft Justifications** - Generates Parasoft-formatted justification comments
-16. **Query Tool** - Comprehensive tool to analyze and export knowledge database
+1. **Interactive Fix Viewer (NEW! v2.3)** - Keyboard-driven terminal interface for browsing fixes with navigation, search, and color coding
+2. **HTML Fix Reports (NEW! v2.3)** - Professional web reports with Qorix branding, filtering, and syntax highlighting
+3. **Parasoft Rules Database (v2.3)** - Leverages 1200+ official Parasoft rule documentation files for authoritative fix suggestions and justifications
+4. **Smart Knowledge Base Integration** - Analyzers cross-check violations against KB for known vs new detection and proven fix suggestions
+5. **Cross-Module Knowledge Base** - Consolidate learnings across all modules for intelligent insights and proven fix recommendations
+6. **Auto-Generate Workflow** - Automatically generate MISRA/CERT report when Parasoft report unavailable
+7. **MISRA/CERT Pre-Analysis** - Integrated MISRA-C:2012 and CERT-C static analyzer for comprehensive code checking
+8. **Git Integration** - Seamlessly integrated with Visual Studio Code and Git repositories
+9. **AI-Powered Analysis** - Local LLM integration via Ollama for intelligent fix suggestions
+10. **Qorix Deviations Integration** - Automatically checks violations against Qorix_CP_Common_Deviations.xlsx
+11. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
+12. **Excel Report Generation** - Automatically generates comprehensive Excel reports with violation status
+13. **Parasoft Suppress Comments** - Generates properly formatted suppress comments for justified violations
+14. **Interactive Code Application** - Apply suppress comments to source code with user approval for each change
+15. **Unique Violation Tracking** - Identifies and tracks unique violations across analyses
+16. **Hybrid Fix Generation** - AI for complex cases, rule-based for standard violations (optimal performance)
+17. **Parasoft Justifications** - Generates Parasoft-formatted justification comments
+18. **Query Tool** - Comprehensive tool to analyze and export knowledge database
 
 ### MISRA/CERT Integration (New!)
 - **Pattern-Based Detection**: 20+ MISRA-C:2012 and 15+ CERT-C rules
@@ -288,9 +291,31 @@ python src\run_agent.py report_dev1.html Mka
 - Excel report with violation status (Justified/Needs Code Update/Analysis Required)
 - Suppress comments file for justified violations
 - Knowledge database
-- Fix suggestions
+- Fix suggestions (Parasoft DB + AI + Rules)
 
-### Step 2: Apply Suppress Comments (Interactive)
+### Step 2: (Optional) Regenerate Code Fix Suggestions
+```bash
+# NEW! Regenerate fixes without re-running full analysis
+scripts\Generate_Code_Fixes.bat
+
+# Try different AI modes for comparison
+# - Hybrid (default): Parasoft DB → AI → Rules
+# - AI Only: Pure AI suggestions
+# - Rules Only: Parasoft DB + Patterns (no AI)
+```
+
+**When to use:**
+- Want to try different AI modes
+- After building/updating Parasoft Rules Database
+- Need fresh fix suggestions without re-analysis
+- Faster than full Run.bat (10-30 seconds vs 2-5 minutes)
+
+**Outputs:**
+- Updated fix suggestions with official Parasoft examples
+- Before/after code snippets
+- Security relevance and CWE mappings
+
+### Step 3: Apply Suppress Comments (Interactive)
 ```bash
 # Option A: Using batch file (easiest)
 scripts\Apply_Suppressions.bat
@@ -324,7 +349,7 @@ Apply this suppression? (y=yes, n=no, a=yes to all, q=quit): y
 [INFO] Backup created: src/Mka_Internal.c
 ```
 
-### Step 3: Review and Commit
+### Step 4: Review and Commit
 1. Review modified files in your source code
 2. Check backup folder (`parasoft_backups_YYYYMMDD_HHMMSS/`) if you need to revert
 3. Test your code
@@ -358,8 +383,12 @@ Parasoft_Analaysis_Tool/
 │   └── config.json
 │
 ├── scripts/                      # Automation scripts
-│   ├── Run.bat
-│   └── Apply_Suppressions.bat   # Interactive suppress comment applicator
+│   ├── Run.bat                   # Main analysis workflow
+│   ├── Generate_Code_Fixes.bat   # Regenerate fix suggestions (NEW!)
+│   ├── Apply_Suppressions.bat    # Interactive suppress comment applicator
+│   ├── Build_Parasoft_Rules_Database.bat  # Build official rules DB
+│   ├── Consolidate_Knowledge.bat  # Merge module knowledge bases
+│   └── Query_Master_Knowledge.bat # Query consolidated insights
 │
 ├── assets/                       # Images and diagrams
 │   └── FlowDiagram_V1.0.0.png
