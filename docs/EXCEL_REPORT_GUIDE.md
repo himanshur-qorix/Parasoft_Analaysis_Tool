@@ -246,7 +246,7 @@ python capture_violations.py src/ --module Mka --format excel --kb
 
 **Step 3:** Process with AI Agent
 ```bash
-python scripts\run_agent.py
+python src\run_agent.py
 # Uses Mka_ViolationCapture.json knowledge base
 ```
 
@@ -307,3 +307,4 @@ pip install openpyxl pandas
 
 **Last Updated:** April 9, 2026  
 **Version:** 1.0.0
+

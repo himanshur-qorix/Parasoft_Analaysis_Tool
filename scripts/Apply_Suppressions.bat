@@ -136,7 +136,7 @@ echo.
 pause
 
 REM Run the applicator
-python scripts\apply_suppress_comments.py "!SUPPRESS_FILE!" "!TARGET_REPO!"
+python src\apply_suppress_comments.py "!SUPPRESS_FILE!" "!TARGET_REPO!"
 
 if errorlevel 1 (
     echo.

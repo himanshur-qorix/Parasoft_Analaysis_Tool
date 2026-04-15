@@ -376,6 +376,77 @@ class ParasoftAIAgent:
         
         logger.info(f"Excel report created with {len(violations)} violations across {df['File'].nunique()} files")
     
+    def _export_updated_excel_with_justifications(self, module_name):
+        """
+        Export updated Excel report with justifications column
+        
+        Args:
+            module_name: Name of the module
+        
+        Returns:
+            Path to updated Excel file or None if not created
+        """
+        import pandas as pd
+        from KnowledgeDatabaseManager import KnowledgeDatabaseManager
+        
+        # Original Excel report path
+        original_excel = self.reports_dir / f"{module_name}_violations_report.xlsx"
+        
+        if not original_excel.exists():
+            logger.warning(f"Original Excel report not found: {original_excel}")
+            return None
+        
+        # Load knowledge base to get justification status
+        kb_manager = KnowledgeDatabaseManager(self.knowledge_base_dir)
+        kb_manager.load_knowledge_base(module_name)
+        
+        try:
+            # Read the original Excel report (Detailed Violations sheet)
+            df = pd.read_excel(original_excel, sheet_name='Detailed Violations')
+            
+            # Add Justification column based on knowledge base
+            justifications = []
+            for _, row in df.iterrows():
+                violation_id = row['Violation ID']
+                violation_data = kb_manager.get_violation(violation_id)
+                
+                if violation_data:
+                    if violation_data.get('justification_added'):
+                        justification_text = violation_data.get('justification_text', 'Justification added')
+                        justifications.append('Yes - ' + justification_text[:100])  # Truncate for Excel
+                    else:
+                        justifications.append('No')
+                else:
+                    justifications.append('No')
+            
+            df['Justification'] = justifications
+            
+            # Create updated Excel file
+            updated_excel = self.reports_dir / f"{module_name}_violations_report_UPDATED.xlsx"
+            
+            # Read all sheets from original file
+            all_sheets = pd.read_excel(original_excel, sheet_name=None)
+            
+            # Write to new Excel file with all sheets
+            with pd.ExcelWriter(updated_excel, engine='openpyxl') as writer:
+                # Write Summary sheet
+                if 'Summary' in all_sheets:
+                    all_sheets['Summary'].to_excel(writer, sheet_name='Summary', index=False)
+                
+                # Write Unique Violations sheet
+                if 'Unique Violations' in all_sheets:
+                    all_sheets['Unique Violations'].to_excel(writer, sheet_name='Unique Violations', index=False)
+                
+                # Write updated Detailed Violations sheet with Justification column
+                df.to_excel(writer, sheet_name='Detailed Violations', index=False)
+            
+            logger.info(f"[OK] Updated Excel report created: {updated_excel}")
+            return str(updated_excel)
+            
+        except Exception as e:
+            logger.error(f"[ERROR] Failed to create updated Excel report: {str(e)}")
+            return None
+    
     def generate_fixes(self, module_name, violation_ids=None):
         """
         Generate fixes for violations in a module
@@ -424,9 +495,133 @@ class ParasoftAIAgent:
         
         logger.info(f"Generated {results['justifications_generated']} justifications")
         
+        # Export updated Excel report with justifications
+        updated_excel_path = self._export_updated_excel_with_justifications(module_name)
+        if updated_excel_path:
+            results['updated_excel_report'] = updated_excel_path
+        
         return results
     
-    def run_full_analysis(self, report_path, module_name, generate_fixes=True, add_justifications=True, qorix_file=None):
+    def run_misra_cert_checker(self, source_code_path, module_name, report_format='html'):
+        """
+        Run MISRA-C and CERT-C static analyzer on source code
+        
+        Args:
+            source_code_path: Path to C/C++ source code directory or file
+            module_name: Name of the module being analyzed
+            report_format: Output format ('html', 'json', or 'text')
+        
+        Returns:
+            Dictionary with report path and analysis status
+        """
+        logger.info("="*60)
+        logger.info("RUNNING MISRA/CERT STATIC ANALYZER")
+        logger.info(f"Source Code Path: {source_code_path}")
+        logger.info(f"Module: {module_name}")
+        logger.info("="*60)
+        
+        source_path = Path(source_code_path)
+        
+        # Validate source path exists
+        if not source_path.exists():
+            error_msg = f"Source code path does not exist: {source_code_path}"
+            logger.error(error_msg)
+            return {
+                'status': 'error',
+                'message': error_msg,
+                'report_path': None
+            }
+        
+        # Determine report output path
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        report_filename = f"{module_name}_misra_cert_report_{timestamp}.{report_format}"
+        report_path = self.reports_dir / report_filename
+        
+        # Path to misra_cert_checker.py script
+        src_dir = self.workspace_path / "src"
+        checker_script = src_dir / "misra_cert_checker.py"
+        
+        if not checker_script.exists():
+            error_msg = f"MISRA/CERT checker script not found: {checker_script}"
+            logger.error(error_msg)
+            return {
+                'status': 'error',
+                'message': error_msg,
+                'report_path': None
+            }
+        
+        try:
+            # Run the MISRA/CERT checker
+            logger.info(f"Running MISRA/CERT checker on: {source_path}")
+            
+            cmd = [
+                sys.executable,
+                str(checker_script),
+                str(source_path),
+                '--report', report_format,
+                '--output', str(report_path)
+            ]
+            
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=300  # 5 minute timeout
+            )
+            
+            if result.returncode == 0:
+                logger.info(f"[OK] MISRA/CERT analysis completed successfully")
+                logger.info(f"[OK] Report saved: {report_path}")
+                
+                # Extract violation count from stderr output
+                violation_count = 0
+                for line in result.stderr.split('\n'):
+                    if 'found' in line and 'violation(s)' in line:
+                        try:
+                            parts = line.split('found')
+                            if len(parts) > 1:
+                                violation_count = int(parts[1].split('violation(s)')[0].strip())
+                        except:
+                            pass
+                
+                return {
+                    'status': 'success',
+                    'message': 'MISRA/CERT analysis completed',
+                    'report_path': str(report_path),
+                    'violations_found': violation_count,
+                    'timestamp': datetime.now().isoformat()
+                }
+            else:
+                error_msg = f"MISRA/CERT checker failed with return code {result.returncode}"
+                logger.error(error_msg)
+                if result.stderr:
+                    logger.error(f"Error output: {result.stderr}")
+                
+                return {
+                    'status': 'error',
+                    'message': error_msg,
+                    'error_output': result.stderr,
+                    'report_path': None
+                }
+                
+        except subprocess.TimeoutExpired:
+            error_msg = "MISRA/CERT checker timed out after 5 minutes"
+            logger.error(error_msg)
+            return {
+                'status': 'error',
+                'message': error_msg,
+                'report_path': None
+            }
+        except Exception as e:
+            error_msg = f"Error running MISRA/CERT checker: {str(e)}"
+            logger.error(error_msg, exc_info=True)
+            return {
+                'status': 'error',
+                'message': error_msg,
+                'report_path': None
+            }
+    
+    def run_full_analysis(self, report_path, module_name, generate_fixes=True, add_justifications=True, qorix_file=None, source_code_path=None):
         """
         Run full analysis pipeline for a module
         
@@ -436,6 +631,7 @@ class ParasoftAIAgent:
             generate_fixes: Whether to generate code fixes
             add_justifications: Whether to add justifications
             qorix_file: Optional path to Qorix deviations file
+            source_code_path: Optional path to source code for MISRA/CERT pre-analysis
         
         Returns:
             Complete analysis results
@@ -448,6 +644,22 @@ class ParasoftAIAgent:
         # Check Git integration
         git_integrated = self.check_git_integration()
         git_info = self.get_git_info() if git_integrated else {}
+        
+        # Run MISRA/CERT checker if source code path is provided
+        misra_cert_results = None
+        if source_code_path:
+            run_checker = self.config.get('analysis', {}).get('run_misra_cert_checker', True)
+            if run_checker:
+                report_format = self.config.get('analysis', {}).get('misra_cert_report_format', 'html')
+                misra_cert_results = self.run_misra_cert_checker(source_code_path, module_name, report_format)
+                
+                if misra_cert_results['status'] == 'error':
+                    logger.warning(f"MISRA/CERT checker failed: {misra_cert_results.get('message', 'Unknown error')}")
+                    logger.warning("Continuing with Parasoft analysis...")
+                else:
+                    logger.info(f"[OK] MISRA/CERT pre-analysis completed: {misra_cert_results.get('violations_found', 0)} violations found")
+        else:
+            logger.info("No source code path provided - skipping MISRA/CERT pre-analysis")
         
         # Analyze report
         analysis_results = self.analyze_report(report_path, module_name, qorix_file)
@@ -467,6 +679,7 @@ class ParasoftAIAgent:
         # Combine results
         full_results = {
             'git_info': git_info,
+            'misra_cert_analysis': misra_cert_results,
             'analysis': analysis_results,
             'fixes': fix_results,
             'justifications': just_results,
@@ -500,6 +713,7 @@ def main():
         print("  --no-justifications Skip justification generation")
         print("  --workspace <path>  Specify workspace path")
         print("  --qorix <path>      Specify Qorix deviations file path")
+        print("  --source-code <path> Specify source code path for MISRA/CERT pre-analysis")
         print("  --ai-mode <mode>    AI mode: ai_only | hybrid | rules_only (default: hybrid)")
         print("\nAI Modes:")
         print("  ai_only     - Use Ollama AI for all violations (requires Ollama running)")
@@ -509,6 +723,7 @@ def main():
         print("  python ParasoftAIAgent.py report_dev1.html Mka")
         print("  python ParasoftAIAgent.py report_dev1.html Mka --workspace D:/MyProject")
         print("  python ParasoftAIAgent.py report_dev1.html Mka --qorix data/Qorix.xlsx")
+        print("  python ParasoftAIAgent.py report_dev1.html Mka --source-code D:/MyProject/src")
         print("  python ParasoftAIAgent.py report_dev1.html Mka --ai-mode hybrid")
         sys.exit(1)
     
@@ -530,6 +745,13 @@ def main():
         idx = sys.argv.index('--qorix')
         if idx + 1 < len(sys.argv):
             qorix_file = sys.argv[idx + 1]
+    
+    source_code_path = None
+    if '--source-code' in sys.argv:
+        idx = sys.argv.index('--source-code')
+        if idx + 1 < len(sys.argv):
+            source_code_path = sys.argv[idx + 1]
+            print(f"[INFO] Source Code Path: {source_code_path}")
     
     ai_mode = 'hybrid'  # Default mode
     if '--ai-mode' in sys.argv:
@@ -566,10 +788,21 @@ def main():
             module_name,
             generate_fixes=generate_fixes,
             add_justifications=add_justifications,
-            qorix_file=qorix_file
+            qorix_file=qorix_file,
+            source_code_path=source_code_path
         )
         
         print(f"\n[SUCCESS] Analysis completed successfully!")
+        
+        # Display MISRA/CERT pre-analysis results if available
+        if results.get('misra_cert_analysis'):
+            misra_cert = results['misra_cert_analysis']
+            if misra_cert.get('status') == 'success':
+                print(f"\n  MISRA/CERT Pre-Analysis:")
+                print(f"    Violations found: {misra_cert.get('violations_found', 0)}")
+                print(f"    Report: {misra_cert.get('report_path', 'N/A')}")
+        
+        print(f"\n  Parasoft Analysis:")
         print(f"  Total violations: {results['analysis'].get('total_violations', 0)}")
         print(f"  New unique violations: {results['analysis'].get('new_unique_violations', 0)}")
         print(f"  Knowledge base: {results['analysis'].get('knowledge_base_path', 'N/A')}")

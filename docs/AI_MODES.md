@@ -116,13 +116,13 @@ Enter choice (1-3) [default: 2]:
 
 ```bash
 # AI Only
-python scripts\run_agent.py report_dev1.html Mka --ai-mode ai_only
+python src\run_agent.py report_dev1.html Mka --ai-mode ai_only
 
 # Hybrid (default)
-python scripts\run_agent.py report_dev1.html Mka --ai-mode hybrid
+python src\run_agent.py report_dev1.html Mka --ai-mode hybrid
 
 # Rules Only
-python scripts\run_agent.py report_dev1.html Mka --ai-mode rules_only
+python src\run_agent.py report_dev1.html Mka --ai-mode rules_only
 ```
 
 ### Method 3: Configuration File

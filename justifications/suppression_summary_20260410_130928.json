@@ -1,0 +1,13 @@
+{
+  "module": "Mka",
+  "suppress_file": "Mka_suppress_comments_20260410_123954.txt",
+  "timestamp": "2026-04-10 13:09:28",
+  "applied": 0,
+  "skipped_user": 0,
+  "already_justified": 459,
+  "skipped_in_comment": 145,
+  "failed": 0,
+  "total": 604,
+  "backup_folder": null,
+  "applied_violations": []
+}

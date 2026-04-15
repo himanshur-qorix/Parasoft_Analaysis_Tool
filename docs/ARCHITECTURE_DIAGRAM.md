@@ -19,7 +19,7 @@
                     │                      │                      │             │
                     ▼                      ▼                      ▼             ▼
             ┌──────────────┐      ┌──────────────┐      ┌──────────────┐  ┌────────────┐
-            │  Run.bat     │      │ scripts/     │      │ scripts/     │  │ Apply_     │
+            │  Run.bat     │      │ src/     │      │ src/     │  │ Apply_     │
             │  (Windows)   │      │ run_agent.py │      │ run_query.py │  │ Suppress.  │
             └──────┬───────┘      └──────┬───────┘      └──────┬───────┘  │ bat        │
                    │                      │                      │          └─────┬──────┘
@@ -92,7 +92,7 @@
 │  QUERY & REPORTING LAYER    │       │  SUPPRESS APPLICATOR (INTERACTIVE)   │ │
 ├─────────────────────────────┤       ├──────────────────────────────────────┤ │
 │                             │       │                                      │◄┘
-│ KnowledgeDatabaseQueryTool  │       │  scripts/apply_suppress_comments.py  │
+│ KnowledgeDatabaseQueryTool  │       │  src/apply_suppress_comments.py  │
 │ • Load all databases        │       │  ┌────────────────────────────────┐  │
 │ • Interactive queries       │       │  │ 1. Parse suppress file         │  │
 │ • Filter & search           │       │  │ 2. Find source files           │  │
@@ -480,7 +480,7 @@
 └─────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────┐
-│ 7. INTERACTIVE APPLICATOR (scripts/apply_suppress_comments.py)     │
+│ 7. INTERACTIVE APPLICATOR (src/apply_suppress_comments.py)     │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
 │  ┌──────────────────────────────────────────────────────────────┐  │
@@ -1019,7 +1019,7 @@ Parasoft_Analaysis_Tool/
 │   └── ParasoftAnalysisTool.py   [HTML parser - legacy]
 │
 ├── 📂 SCRIPTS & LAUNCHERS
-│   └── scripts/
+│   └── src/
 │       ├── run_agent.py              [Main launcher script]
 │       ├── run_query.py              [Query launcher script]
 │       ├── apply_suppress_comments.py [Suppress applicator]
@@ -1061,7 +1061,7 @@ Parasoft_Analaysis_Tool/
 │                    DEPENDENCY GRAPH                             │
 └─────────────────────────────────────────────────────────────────┘
 
-run_agent.py / run_query.py (scripts/)
+run_agent.py / run_query.py (src/)
       │
       ├─► sys, pathlib
       └─► Adds src/ to Python path
@@ -1195,3 +1195,4 @@ EXTERNAL DEPENDENCIES (from requirements.txt):
 For implementation details, see source code in `src/` folder.
 For usage examples, see `docs/EXAMPLE_WORKFLOW.md`.
 For project structure, see [STRUCTURE.md](STRUCTURE.md).
+

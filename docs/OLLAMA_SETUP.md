@@ -163,7 +163,7 @@ For each violation:
 ### Example Session:
 
 ```
-$ python scripts\run_agent.py report_dev1.html Mka
+$ python src\run_agent.py report_dev1.html Mka
 
 [INFO] Parasoft AI Agent initialized
 [OK] Configuration loaded
@@ -364,7 +364,7 @@ To completely disable AI and use only rule-based fixes:
 ollama serve
 
 # 2. Run analysis
-python scripts\run_agent.py report_dev1.html Mka
+python src\run_agent.py report_dev1.html Mka
 
 # 3. Review generated fixes
 # Check: fixes/Mka/Mka_fixes_TIMESTAMP.txt
@@ -388,7 +388,7 @@ After setup, verify everything works:
 - [ ] Python library installed: `pip show ollama`
 - [ ] Config enabled: Check `config.json` → `"enabled": true`
 - [ ] Model matches: Config model name matches `ollama list` output
-- [ ] Test run: `python scripts\run_agent.py report_dev1.html TestModule`
+- [ ] Test run: `python src\run_agent.py report_dev1.html TestModule`
 - [ ] AI status logged: Look for "[OK] AI enabled" in output
 
 ---
@@ -396,3 +396,4 @@ After setup, verify everything works:
 **Ready to use AI-powered Parasoft analysis! 🚀**
 
 For questions or issues, check the troubleshooting section above or open a GitHub issue.
+
