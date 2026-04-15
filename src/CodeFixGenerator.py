@@ -41,8 +41,12 @@ class CodeFixGenerator:
         self.fixes_dir.mkdir(exist_ok=True)
         
         # Create module-specific fixes directory
-        self.module_fixes_dir = self.fixes_dir / module_name
-        self.module_fixes_dir.mkdir(exist_ok=True)
+        # If fixes_dir already contains module name, use it directly
+        if module_name in str(fixes_dir):
+            self.module_fixes_dir = self.fixes_dir
+        else:
+            self.module_fixes_dir = self.fixes_dir / module_name
+            self.module_fixes_dir.mkdir(exist_ok=True)
         
         # Initialize Ollama integration
         if config is None:

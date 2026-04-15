@@ -111,8 +111,8 @@ echo [SUCCESS] Code Fixes Generated!
 echo ==================================================
 echo.
 echo Your code fix suggestions have been saved to:
-echo   Text: fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.txt
-echo   HTML: fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.html
+echo   Text: %MODULE_NAME%_code_suggestion\%MODULE_NAME%_fixes_*.txt
+echo   HTML: %MODULE_NAME%_code_suggestion\%MODULE_NAME%_fixes_*.html
 echo.
 echo The fixes include:
 echo   ✅ Official Parasoft repair examples (when available)
@@ -140,8 +140,8 @@ set /p VIEW_CHOICE="Enter choice (1-4) [default: 1]: "
 if "%VIEW_CHOICE%"=="" set VIEW_CHOICE=1
 
 REM Find the latest fixes file
-for /f "delims=" %%i in ('dir /b /o-d "fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.txt" 2^>nul') do (
-    set LATEST_FIXES_FILE=fixes\%MODULE_NAME%\%%i
+for /f "delims=" %%i in ('dir /b /o-d "%MODULE_NAME%_code_suggestion\%MODULE_NAME%_fixes_*.txt" 2^>nul') do (
+    set LATEST_FIXES_FILE=%MODULE_NAME%_code_suggestion\%%i
     goto :found_file
 )
 
@@ -157,8 +157,8 @@ if "%VIEW_CHOICE%"=="1" (
     echo [INFO] Opening HTML report in browser...
     echo.
     REM Find HTML file
-    for /f "delims=" %%i in ('dir /b /o-d "fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.html" 2^>nul') do (
-        set LATEST_HTML_FILE=fixes\%MODULE_NAME%\%%i
+    for /f "delims=" %%i in ('dir /b /o-d "%MODULE_NAME%_code_suggestion\%MODULE_NAME%_fixes_*.html" 2^>nul') do (
+        set LATEST_HTML_FILE=%MODULE_NAME%_code_suggestion\%%i
         goto :open_html
     )
     :open_html
@@ -180,8 +180,8 @@ echo ==================================================
 echo.
 echo To view the fixes again:
 echo   - Interactive: python src\view_fixes_interactive.py "%LATEST_FIXES_FILE%"
-echo   - HTML: Open fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.html in browser
-echo   - Text: Open fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.txt
+echo   - HTML: Open %MODULE_NAME%_code_suggestion\%MODULE_NAME%_fixes_*.html in browser
+echo   - Text: Open %MODULE_NAME%_code_suggestion\%MODULE_NAME%_fixes_*.txt
 echo.
 echo To apply fixes to your source code:
 echo   1. Review each fix suggestion
