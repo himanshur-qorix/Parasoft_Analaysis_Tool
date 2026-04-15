@@ -89,6 +89,15 @@ class CodeFixGenerator:
             else:
                 logger.info(f"[INFO] AI disabled - Using rule-based fixes")
         
+        # Store source code path if provided
+        self.source_code_path = config.get('source_code_path')
+        if self.source_code_path:
+            self.source_code_path = Path(self.source_code_path)
+            logger.info(f"[INFO] Source code path configured: {self.source_code_path}")
+        
+        # Store config for later use
+        self.config = config
+        
         logger.info(f"Code Fix Generator initialized for module: {module_name}")
     
     def generate_all_fixes(self, violation_ids: Optional[List[str]] = None) -> Dict:
@@ -167,8 +176,13 @@ class CodeFixGenerator:
         severity = violation['severity']
         category = violation['category']
         
+        # Extract code context if source code path is provided
+        code_context = None
+        if self.source_code_path:
+            code_context = self._extract_code_context(violation)
+        
         # Generate fix based on violation type
-        fix_suggestion = self._get_fix_suggestion(violation_id, violation_text, category)
+        fix_suggestion = self._get_fix_suggestion(violation_id, violation_text, category, code_context)
         
         if not fix_suggestion:
             logger.warning(f"No fix suggestion available for {violation_id}")
@@ -181,6 +195,7 @@ class CodeFixGenerator:
             'category': category,
             'files_affected': violation['files_affected'],
             'fix_suggestion': fix_suggestion,
+            'code_context': code_context,
             'timestamp': datetime.now().isoformat()
         }
         
@@ -193,12 +208,91 @@ class CodeFixGenerator:
         
         return fix_data
     
-    def _get_fix_suggestion(self, violation_id: str, violation_text: str, category: str) -> Optional[Dict]:
+    def _extract_code_context(self, violation: Dict) -> Optional[Dict]:
+        """
+        Extract code context from source file for better fix suggestions
+        
+        Args:
+            violation: Violation dictionary with file and line info
+        
+        Returns:
+            Dictionary with code context or None if not available
+        """
+        if not self.source_code_path:
+            return None
+        
+        try:
+            files_affected = violation.get('files_affected', [])
+            if not files_affected:
+                return None
+            
+            # Parse first file entry (format: "file.c:line")
+            file_entry = files_affected[0]
+            if ':' in file_entry:
+                file_name, line_str = file_entry.rsplit(':', 1)
+                try:
+                    line_number = int(line_str)
+                except ValueError:
+                    return None
+            else:
+                return None
+            
+            # Search for the file in source code path
+            source_file = self._find_source_file(file_name)
+            if not source_file:
+                return None
+            
+            # Read code context (5 lines before, target line, 5 lines after)
+            context_lines = 5
+            with open(source_file, 'r', encoding='utf-8', errors='ignore') as f:
+                all_lines = f.readlines()
+            
+            total_lines = len(all_lines)
+            start_line = max(0, line_number - context_lines - 1)
+            end_line = min(total_lines, line_number + context_lines)
+            
+            context_code = ''.join(all_lines[start_line:end_line])
+            target_line_code = all_lines[line_number - 1] if 0 < line_number <= total_lines else ''
+            
+            return {
+                'file': file_name,
+                'line': line_number,
+                'target_code': target_line_code.strip(),
+                'context': context_code,
+                'start_line': start_line + 1,
+                'end_line': end_line
+            }
+        
+        except Exception as e:
+            logger.debug(f"Error extracting code context: {e}")
+            return None
+    
+    def _find_source_file(self, filename: str) -> Optional[Path]:
+        """
+        Find source file in the source code directory
+        
+        Args:
+            filename: File name to search for
+        
+        Returns:
+            Path to file or None if not found
+        """
+        if not self.source_code_path or not self.source_code_path.exists():
+            return None
+        
+        # Search recursively for the file
+        for path in self.source_code_path.rglob(filename):
+            if path.is_file():
+                return path
+        
+        return None
+    
+    def _get_fix_suggestion(self, violation_id: str, violation_text: str, category: str, code_context: Optional[Dict] = None) -> Optional[Dict]:
         """
         Get fix suggestion based on AI mode configuration
         
         Strategy depends on AI mode:
-        - AI Only: AI generation -> Rule-based fallback (skip Parasoft DB)
+        - AI Only: AIgeneration -> Rule-based fallback (skip Parasoft DB)
         - Hybrid: Parasoft DB -> AI -> Rule-based fallback (balanced approach)
         - Rules Only: Parasoft DB -> Rule-based patterns (skip AI)
         
@@ -206,6 +300,7 @@ class CodeFixGenerator:
             violation_id: Violation ID
             violation_text: Violation description
             category: Violation category
+            code_context: Optional code context from source file
         
         Returns:
             Fix suggestion dictionary
@@ -213,17 +308,26 @@ class CodeFixGenerator:
         # Get AI mode to determine strategy
         ai_mode = self.ollama.ai_mode
         
-        # AI ONLY MODE: Skip Parasoft DB, prioritize AI
+        # AI ONLY MODE: Use AI with Parasoft DB as reference context
         if ai_mode == 'ai_only':
             logger.debug(f"[AI-ONLY] Attempting AI generation for {violation_id}")
             
-            # Try AI generation first
+            # Get Parasoft DB information as reference (not as direct answer)
+            parasoft_reference = None
+            if self.use_rules_db and self.rules_parser:
+                parasoft_reference = self._get_parasoft_reference(violation_id, violation_text, category)
+                if parasoft_reference:
+                    logger.debug(f"[AI-ONLY] Found Parasoft reference for context")
+            
+            # Try AI generation with enhanced context
             if self.ollama.enabled:
                 violation_dict = {
                     'violation_id': violation_id,
                     'violation_text': violation_text,
                     'category': category,
-                    'severity': 'MEDIUM'
+                    'severity': 'MEDIUM',
+                    'code_context': code_context,
+                    'parasoft_reference': parasoft_reference
                 }
                 
                 ai_fix = self.ollama.generate_fix_suggestion(violation_dict)
@@ -267,7 +371,8 @@ class CodeFixGenerator:
                     'violation_id': violation_id,
                     'violation_text': violation_text,
                     'category': category,
-                    'severity': 'MEDIUM'
+                    'severity': 'MEDIUM',
+                    'code_context': code_context
                 }
                 
                 ai_fix = self.ollama.generate_fix_suggestion(violation_dict)
@@ -390,6 +495,49 @@ class CodeFixGenerator:
             
         except Exception as e:
             logger.debug(f"Could not extract Parasoft fix for {violation_id}: {e}")
+            return None
+    
+    def _get_parasoft_reference(self, violation_id: str, violation_text: str, category: str) -> Optional[Dict]:
+        """
+        Get Parasoft DB information as reference context (not as direct fix)
+        This is used to provide AI with official documentation for better suggestions
+        
+        Args:
+            violation_id: Violation ID
+            violation_text: Violation description
+            category: Violation category
+        
+        Returns:
+            Dictionary with Parasoft reference info or None
+        """
+        try:
+            # Try exact match first
+            rule = self.rules_parser.get_rule(violation_id)
+            
+            # If not found, try extracting base rule
+            if not rule:
+                import re
+                base_id = re.sub(r'-\d+$', '', violation_id)
+                rule = self.rules_parser.get_rule(base_id)
+            
+            if not rule:
+                return None
+            
+            # Extract key information as reference context
+            reference_info = {
+                'rule_title': rule.title,
+                'description': rule.description[:500] if rule.description else None,
+                'security_relevance': rule.security_relevance[:300] if rule.security_relevance else None,
+                'repair_strategy': rule.repair[:400] if rule.repair else None,
+                'example_violation': rule.example_violation[:300] if rule.example_violation else None,
+                'example_repair': rule.example_repair[:300] if rule.example_repair else None,
+                'cwe_mappings': rule.cwe_mappings[:3] if rule.cwe_mappings else []
+            }
+            
+            return reference_info
+            
+        except Exception as e:
+            logger.debug(f"Could not extract Parasoft reference for {violation_id}: {e}")
             return None
     
     def _get_misra_fix(self, violation_id: str, text_upper: str, violation_text: str) -> Dict:
@@ -927,23 +1075,35 @@ if (ptr != NULL) {
             # Add code examples if available
             if 'example' in fix_suggestion and fix_suggestion['example']:
                 example = fix_suggestion['example']
-                if 'VIOLATION EXAMPLE' in example:
-                    violation_part = example.split('--- OFFICIAL REPAIR ---')[0].replace('--- VIOLATION EXAMPLE ---', '').strip()
-                    if violation_part:
-                        html_content += f'''
+                
+                # Check if it's Parasoft format with special markers
+                if 'VIOLATION EXAMPLE' in example or 'OFFICIAL REPAIR' in example:
+                    if 'VIOLATION EXAMPLE' in example:
+                        violation_part = example.split('--- OFFICIAL REPAIR ---')[0].replace('--- VIOLATION EXAMPLE ---', '').strip()
+                        if violation_part:
+                            html_content += f'''
                     <div class="section">
                         <div class="code-header violation-code">❌ Violation Example</div>
                         <div class="code-block"><pre>{violation_part}</pre></div>
                     </div>
 '''
-                
-                if 'OFFICIAL REPAIR' in example:
-                    repair_part = example.split('--- OFFICIAL REPAIR ---')[1].strip() if '--- OFFICIAL REPAIR ---' in example else ''
-                    if repair_part:
-                        html_content += f'''
+                    
+                    if 'OFFICIAL REPAIR' in example:
+                        repair_part = example.split('--- OFFICIAL REPAIR ---')[1].strip() if '--- OFFICIAL REPAIR ---' in example else ''
+                        if repair_part:
+                            html_content += f'''
                     <div class="section">
                         <div class="code-header repair-code">✅ Official Repair</div>
                         <div class="code-block"><pre>{repair_part}</pre></div>
+                    </div>
+'''
+                else:
+                    # Regular AI-generated or pattern-based example
+                    # Display as single code block with before/after
+                    html_content += f'''
+                    <div class="section">
+                        <div class="code-header">📝 Code Example</div>
+                        <div class="code-block"><pre>{example}</pre></div>
                     </div>
 '''
             
@@ -1091,11 +1251,19 @@ if (ptr != NULL) {
                     f.write(f"Example:\n{fix['fix_suggestion']['example']}\n\n")
                 
                 f.write(f"Files Affected:\n")
-                for file_entry in fix['files_affected'][:5]:
-                    f.write(f"  - {file_entry['file']}:{file_entry['line']}\n")
-                
-                if len(fix['files_affected']) > 5:
-                    f.write(f"  ... and {len(fix['files_affected']) - 5} more files\n")
+                files = fix.get('files_affected', [])
+                if files:
+                    for file_entry in files[:5]:
+                        # Handle both string and dict formats
+                        if isinstance(file_entry, dict):
+                            f.write(f"  - {file_entry.get('file', 'unknown')}:{file_entry.get('line', '?')}\n")
+                        else:
+                            f.write(f"  - {file_entry}\n")
+                    
+                    if len(files) > 5:
+                        f.write(f"  ... and {len(files) - 5} more files\n")
+                else:
+                    f.write(f"  - No file information available\n")
                 
                 f.write("\n" + "="*80 + "\n\n")
     
