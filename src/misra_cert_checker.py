@@ -724,8 +724,11 @@ def report_html(results: List[AnalysisResult]) -> str:
 <title>MISRA / CERT Static Analysis Report</title>
 <style>
   body {{ font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f8; margin: 0; padding: 20px; color: #2c3e50; }}
-  h1 {{ color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }}
-  .meta {{ color: #7f8c8d; font-size: 0.9em; margin-bottom: 20px; }}
+  .header-logo {{ text-align: center; margin-bottom: 20px; }}
+  .header-logo svg {{ width: 150px; height: auto; }}
+  .company {{ text-align: center; color: #7f8c8d; font-size: 0.9em; margin-bottom: 10px; }}
+  h1 {{ color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; text-align: center; }}
+  .meta {{ color: #7f8c8d; font-size: 0.9em; margin-bottom: 20px; text-align: center; }}
   .summary {{ display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }}
   .card {{ background: #fff; border-radius: 8px; padding: 20px 30px; box-shadow: 0 2px 8px rgba(0,0,0,.08);
             text-align: center; min-width: 130px; }}
@@ -740,9 +743,20 @@ def report_html(results: List[AnalysisResult]) -> str:
   pre.snippet {{ background: #2c3e50; color: #ecf0f1; padding: 6px 10px; border-radius: 4px;
                   margin: 0; font-size: 0.82em; white-space: pre-wrap; word-break: break-all; max-width: 300px; }}
   code {{ background: #ecf0f1; padding: 2px 6px; border-radius: 3px; font-size: 0.85em; }}
+  .footer {{ text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid #ecf0f1; color: #7f8c8d; font-size: 0.9em; }}
 </style>
 </head>
 <body>
+<div class="header-logo">
+  <svg width="150" height="38" viewBox="0 0 150 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M136.846 10.9347L127.134 0.970459L123.693 4.45571L133.449 14.4646L123.693 24.4289L127.134 27.9588L136.846 17.9499L146.559 27.9588L150 24.4289L140.243 14.4646L150 4.45571L146.559 0.970459L136.846 10.9347Z" fill="#3C00FF"/>
+    <path d="M113.893 1.41748H109.102V27.1547H113.893V1.41748Z" fill="#3C00FF"/>
+    <path d="M81.0102 5.75153H89.7645C91.2454 5.75153 92.3778 6.91328 92.3778 8.43249V10.7113C92.3778 12.837 90.913 13.4339 89.7645 13.3923H81.9248V15.8945C81.9248 22.1501 86.89 27.2886 92.9875 27.2886H96.7767V22.2841H92.9875C90.4178 22.2841 88.1966 20.6309 87.2384 18.352H89.7645C91.7244 18.352 93.6408 17.5924 95.0345 16.1626C96.4718 14.6881 97.2558 12.722 97.2558 10.7113V8.43249C97.2558 4.23232 93.8586 0.791748 89.7645 0.791748H81.0102C76.8726 0.791748 73.5189 4.23232 73.5189 8.43249V27.378H78.3098V8.43249C78.3098 6.91328 79.5294 5.75153 81.0102 5.75153Z" fill="#3C00FF"/>
+    <path d="M50.2612 0.74707C42.5086 0.74707 36.1933 7.1367 36.1933 15.1349C36.1933 23.0884 42.5086 29.6121 50.2612 29.6121C58.0574 29.6121 64.3727 23.0884 64.3727 15.1349C64.3727 7.1367 58.0574 0.74707 50.2612 0.74707ZM50.2612 24.6523C45.209 24.6523 41.0713 20.3628 41.0713 15.1349C41.0713 9.90702 45.209 5.66217 50.2612 5.66217C55.357 5.66217 59.4946 9.90702 59.4946 15.1349C59.4946 20.3628 55.357 24.6523 50.2612 24.6523Z" fill="#3C00FF"/>
+    <path d="M28.0487 15.2689C28.0487 7.31541 21.7334 0.881104 14.0244 0.881104C6.27176 0.881104 0 7.31541 0 15.2689C0 22.5969 5.31357 28.6291 12.2386 29.6121C13.763 33.991 17.9007 37.2528 22.6916 37.2528H26.4372V32.293H22.6916C20.5139 32.293 18.4669 31.0866 17.378 29.2993C23.5627 27.7354 28.0487 22.0607 28.0487 15.2689ZM14.0244 24.7417C8.9721 24.7417 4.83448 20.4968 4.83448 15.2689C4.83448 10.0411 8.9721 5.7962 14.0244 5.7962C19.1202 5.7962 23.2578 10.0411 23.2578 15.2689C23.2578 20.4968 19.1202 24.7417 14.0244 24.7417Z" fill="#3C00FF"/>
+  </svg>
+</div>
+<p class="company">Qorix India Pvt Ltd</p>
 <h1>🔍 MISRA-C / CERT-C Static Analysis Report</h1>
 <p class="meta">Generated: {now} &nbsp;|&nbsp; Files analyzed: {files_count}</p>
 
@@ -764,6 +778,11 @@ def report_html(results: List[AnalysisResult]) -> str:
     {rows if rows else '<tr><td colspan="8" style="text-align:center;padding:30px;color:#27ae60">✅ No violations found!</td></tr>'}
   </tbody>
 </table>
+
+<div class="footer">
+  <p>© 2025 Qorix India Pvt Ltd. All rights reserved.</p>
+  <p>MISRA/CERT Static Analyzer - Parasoft AI Agent</p>
+</div>
 </body>
 </html>"""
 
@@ -829,8 +848,11 @@ def report_html_with_kb(results: List[AnalysisResult], known_violations: List[Vi
 <title>MISRA / CERT Static Analysis Report with Knowledge Base Insights</title>
 <style>
   body {{ font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f8; margin: 0; padding: 20px; color: #2c3e50; }}
-  h1 {{ color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }}
-  .meta {{ color: #7f8c8d; font-size: 0.9em; margin-bottom: 20px; }}
+  .header-logo {{ text-align: center; margin-bottom: 20px; }}
+  .header-logo svg {{ width: 150px; height: auto; }}
+  .company {{ text-align: center; color: #7f8c8d; font-size: 0.9em; margin-bottom: 10px; }}
+  h1 {{ color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; text-align: center; }}
+  .meta {{ color: #7f8c8d; font-size: 0.9em; margin-bottom: 20px; text-align: center; }}
   .summary {{ display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }}
   .card {{ background: #fff; border-radius: 8px; padding: 20px 30px; box-shadow: 0 2px 8px rgba(0,0,0,.08);
             text-align: center; min-width: 130px; }}
@@ -847,10 +869,21 @@ def report_html_with_kb(results: List[AnalysisResult], known_violations: List[Vi
   pre.snippet {{ background: #2c3e50; color: #ecf0f1; padding: 6px 10px; border-radius: 4px;
                   margin: 0; font-size: 0.82em; white-space: pre-wrap; word-break: break-all; max-width: 300px; }}
   code {{ background: #ecf0f1; padding: 2px 6px; border-radius: 3px; font-size: 0.85em; }}
+  .footer {{ text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid #ecf0f1; color: #7f8c8d; font-size: 0.9em; }}
 </style>
 </head>
 <body>
-<h1>🔍 MISRA-C / CERT-C Static Analysis Report</h1>
+<div class="header-logo">
+  <svg width="150" height="38" viewBox="0 0 150 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M136.846 10.9347L127.134 0.970459L123.693 4.45571L133.449 14.4646L123.693 24.4289L127.134 27.9588L136.846 17.9499L146.559 27.9588L150 24.4289L140.243 14.4646L150 4.45571L146.559 0.970459L136.846 10.9347Z" fill="#3C00FF"/>
+    <path d="M113.893 1.41748H109.102V27.1547H113.893V1.41748Z" fill="#3C00FF"/>
+    <path d="M81.0102 5.75153H89.7645C91.2454 5.75153 92.3778 6.91328 92.3778 8.43249V10.7113C92.3778 12.837 90.913 13.4339 89.7645 13.3923H81.9248V15.8945C81.9248 22.1501 86.89 27.2886 92.9875 27.2886H96.7767V22.2841H92.9875C90.4178 22.2841 88.1966 20.6309 87.2384 18.352H89.7645C91.7244 18.352 93.6408 17.5924 95.0345 16.1626C96.4718 14.6881 97.2558 12.722 97.2558 10.7113V8.43249C97.2558 4.23232 93.8586 0.791748 89.7645 0.791748H81.0102C76.8726 0.791748 73.5189 4.23232 73.5189 8.43249V27.378H78.3098V8.43249C78.3098 6.91328 79.5294 5.75153 81.0102 5.75153Z" fill="#3C00FF"/>
+    <path d="M50.2612 0.74707C42.5086 0.74707 36.1933 7.1367 36.1933 15.1349C36.1933 23.0884 42.5086 29.6121 50.2612 29.6121C58.0574 29.6121 64.3727 23.0884 64.3727 15.1349C64.3727 7.1367 58.0574 0.74707 50.2612 0.74707ZM50.2612 24.6523C45.209 24.6523 41.0713 20.3628 41.0713 15.1349C41.0713 9.90702 45.209 5.66217 50.2612 5.66217C55.357 5.66217 59.4946 9.90702 59.4946 15.1349C59.4946 20.3628 55.357 24.6523 50.2612 24.6523Z" fill="#3C00FF"/>
+    <path d="M28.0487 15.2689C28.0487 7.31541 21.7334 0.881104 14.0244 0.881104C6.27176 0.881104 0 7.31541 0 15.2689C0 22.5969 5.31357 28.6291 12.2386 29.6121C13.763 33.991 17.9007 37.2528 22.6916 37.2528H26.4372V32.293H22.6916C20.5139 32.293 18.4669 31.0866 17.378 29.2993C23.5627 27.7354 28.0487 22.0607 28.0487 15.2689ZM14.0244 24.7417C8.9721 24.7417 4.83448 20.4968 4.83448 15.2689C4.83448 10.0411 8.9721 5.7962 14.0244 5.7962C19.1202 5.7962 23.2578 10.0411 23.2578 15.2689C23.2578 20.4968 19.1202 24.7417 14.0244 24.7417Z" fill="#3C00FF"/>
+  </svg>
+</div>
+<p class="company">Qorix India Pvt Ltd</p>
+<h1>🔍 MISRA-C / CERT-C Static Analysis Report with KB Insights</h1>
 <p class="meta">Generated: {now} &nbsp;|&nbsp; Files analyzed: {files_count}</p>
 
 <div class="summary">
@@ -883,6 +916,11 @@ def report_html_with_kb(results: List[AnalysisResult], known_violations: List[Vi
   <p><span class="badge" style="background:#3498db">📊 KNOWN (Nx)</span> - Violation seen N times before</p>
   <p><span class="badge" style="background:#e74c3c">⚠️ NEW</span> - First time seeing this violation</p>
   <p>💡 <span style="color:#27ae60">Fix suggestions</span> are provided for known violations based on successful fixes from previous analyses</p>
+</div>
+
+<div class="footer">
+  <p>© 2025 Qorix India Pvt Ltd. All rights reserved.</p>
+  <p>MISRA/CERT Static Analyzer with Knowledge Base - Parasoft AI Agent</p>
 </div>
 </body>
 </html>"""

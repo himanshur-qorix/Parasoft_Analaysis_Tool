@@ -1,11 +1,17 @@
-# Parasoft AI Analysis Tool
+<div align="center">
+  <img src="Images/logo.svg" alt="Qorix Logo" width="200"/>
+  <h1>Parasoft AI Analysis Tool</h1>
+  <p><strong>AI-powered agent for Parasoft analysis with intelligent knowledge database management</strong></p>
+  <p>Developed by <strong>Qorix India Pvt Ltd</strong></p>
+</div>
 
-**AI-powered agent for Parasoft analysis with intelligent knowledge database management**
+---
 
 ## 📖 Documentation
 
 For comprehensive documentation, see the [`docs/`](docs/) folder:
 
+- **[Parasoft Rules Database](docs/PARASOFT_RULES_DATABASE.md)** - Official Parasoft-approved fix suggestions (NEW! v2.3)
 - **[Knowledge Base Integration](docs/KNOWLEDGE_BASE_INTEGRATION.md)** - Smart analysis with KB insights (NEW!)
 - **[Cross-Module Knowledge Base](docs/CROSS_MODULE_KNOWLEDGE.md)** - Consolidate learnings across modules
 - **[Auto-Generate Workflow](docs/AUTO_GENERATE_WORKFLOW.md)** - Use without Parasoft report
@@ -18,40 +24,44 @@ For comprehensive documentation, see the [`docs/`](docs/) folder:
 
 ---
 
-## Version
-- **2.2.1** - Knowledge Base Integration for Analyzers (NEW!)
-- 2.2.0 - Cross-Module Knowledge Base
-- 2.1.1 - Auto-Generate Workflow
-- 2.1.0 - MISRA/CERT Integration
-- 2.0.0 - AI Agent with Knowledge Database
-- Version 1.0.0 - Basic Report Analysis
-- Developer: Himanshu R
-- Platform: Windows
-- CodeSet: Python
+## 📌 Version Information
+
+| Version | Release | Features |
+|---------|---------|----------|
+| **2.3.0** | Jan 2025 | Parasoft Rules Database - Official fix suggestions from 1200+ rules |
+| 2.2.1 | Apr 2026 | Knowledge Base Integration for Analyzers |
+| 2.2.0 | Apr 2026 | Cross-Module Knowledge Base & HTML Reports |
+| 2.1.1 | Apr 2026 | Auto-Generate Workflow |
+| 2.1.0 | Apr 2026 | MISRA/CERT Static Analyzer Integration |
+| 2.0.0 | Apr 2026 | AI Agent with Knowledge Database |
+| 1.0.0 | Mar 2026 | Basic Report Analysis |
+
+**Developer:** Himanshu R  
+**Organization:** Qorix India Pvt Ltd  
+**Platform:** Windows  
+**Language:** Python 3.8+
 
 ---
 
 ## 🚀 Features
 
 ### Core Capabilities
-1. **Smart Knowledge Base Integration (NEW!)** - Analyzers cross-check violations against KB for known vs new detection and proven fix suggestions
-2. **Cross-Module Knowledge Base** - Consolidate learnings across all modules for intelligent insights and proven fix recommendations
-3. **Auto-Generate Workflow** - Automatically generate MISRA/CERT report when Parasoft report unavailable
-4. **MISRA/CERT Pre-Analysis** - Integrated MISRA-C:2012 and CERT-C static analyzer for comprehensive code checking
-5. **Git Integration** - Seamlessly integrated with Visual Studio Code and Git repositories
-6. **AI-Powered Analysis** - Local LLM integration via Ollama for intelligent fix suggestions
-7. **Qorix Deviations Integration** - Automatically checks violations against Qorix_CP_Common_Deviations.xlsx
-8. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
-3. **AI-Powered Analysis** - Local LLM integration via Ollama for intelligent fix suggestions
-4. **Qorix Deviations Integration** - Automatically checks violations against Qorix_CP_Common_Deviations.xlsx
-5. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
-6. **Excel Report Generation** - Automatically generates comprehensive Excel reports with violation status
-7. **Parasoft Suppress Comments** - Generates properly formatted suppress comments for justified violations
-8. **Interactive Code Application** - Apply suppress comments to source code with user approval for each change
-9. **Unique Violation Tracking** - Identifies and tracks unique violations across analyses
-10. **Hybrid Fix Generation** - AI for complex cases, rule-based for standard violations (optimal performance)
-11. **Parasoft Justifications** - Generates Parasoft-formatted justification comments
-12. **Query Tool** - Comprehensive tool to analyze and export knowledge database
+1. **Parasoft Rules Database (NEW! v2.3)** - Leverages 1200+ official Parasoft rule documentation files for authoritative fix suggestions and justifications
+2. **Smart Knowledge Base Integration** - Analyzers cross-check violations against KB for known vs new detection and proven fix suggestions
+3. **Cross-Module Knowledge Base** - Consolidate learnings across all modules for intelligent insights and proven fix recommendations
+4. **Auto-Generate Workflow** - Automatically generate MISRA/CERT report when Parasoft report unavailable
+5. **MISRA/CERT Pre-Analysis** - Integrated MISRA-C:2012 and CERT-C static analyzer for comprehensive code checking
+6. **Git Integration** - Seamlessly integrated with Visual Studio Code and Git repositories
+7. **AI-Powered Analysis** - Local LLM integration via Ollama for intelligent fix suggestions
+8. **Qorix Deviations Integration** - Automatically checks violations against Qorix_CP_Common_Deviations.xlsx
+9. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
+10. **Excel Report Generation** - Automatically generates comprehensive Excel reports with violation status
+11. **Parasoft Suppress Comments** - Generates properly formatted suppress comments for justified violations
+12. **Interactive Code Application** - Apply suppress comments to source code with user approval for each change
+13. **Unique Violation Tracking** - Identifies and tracks unique violations across analyses
+14. **Hybrid Fix Generation** - AI for complex cases, rule-based for standard violations (optimal performance)
+15. **Parasoft Justifications** - Generates Parasoft-formatted justification comments
+16. **Query Tool** - Comprehensive tool to analyze and export knowledge database
 
 ### MISRA/CERT Integration (New!)
 - **Pattern-Based Detection**: 20+ MISRA-C:2012 and 15+ CERT-C rules
@@ -825,17 +835,23 @@ Edit `config.json` to customize:
 
 ## 📄 License
 
-Copyright © 2026 Himanshu R
+**Copyright © 2025 Qorix India Pvt Ltd**  
 All rights reserved.
+
+This software is proprietary and confidential.  
+Developed by Qorix India Pvt Ltd for internal use and authorized clients.
 
 ---
 
 ## 🤝 Support
 
+**Qorix India Pvt Ltd**
+
 For issues, questions, or contributions:
-1. Check existing documentation
+1. Check existing documentation in [`docs/`](docs/) folder
 2. Review log files (`parasoft_agent.log`)
-3. Contact: [Your Contact Information]
+3. Contact: Qorix Support Team
+4. Visit: [Qorix India Pvt Ltd](https://qorix.com)
 
 ---
 

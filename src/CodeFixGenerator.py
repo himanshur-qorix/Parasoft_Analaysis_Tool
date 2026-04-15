@@ -1,6 +1,11 @@
 """
 Code Fix Generator
 Generates code fixes and justifications for Parasoft violations
+Enhanced with Parasoft Rules Database integration
+
+Developer: Himanshu R
+Organization: Qorix India Pvt Ltd
+Version: 2.0.0
 """
 
 import logging
@@ -10,6 +15,7 @@ from typing import Dict, List, Optional
 from datetime import datetime
 from KnowledgeDatabaseManager import KnowledgeDatabaseManager
 from OllamaIntegration import OllamaIntegration
+from ParasoftRulesParser import ParasoftRulesParser
 
 logger = logging.getLogger(__name__)
 
@@ -47,6 +53,23 @@ class CodeFixGenerator:
                     config = json.load(f)
             else:
                 config = {}
+        
+        # Initialize Parasoft Rules Database (PRIMARY SOURCE)
+        rules_dir = Path(__file__).parent.parent / 'data' / 'Parasoft_Enabled_Rules_List' / 'gendoc'
+        if rules_dir.exists():
+            try:
+                self.rules_parser = ParasoftRulesParser(rules_dir)
+                rules_count = self.rules_parser.load_all_rules()
+                logger.info(f"[OK] Parasoft Rules Database loaded: {rules_count} rules available")
+                self.use_rules_db = True
+            except Exception as e:
+                logger.warning(f"Failed to load Parasoft Rules Database: {e}")
+                self.rules_parser = None
+                self.use_rules_db = False
+        else:
+            logger.warning(f"Parasoft Rules directory not found: {rules_dir}")
+            self.rules_parser = None
+            self.use_rules_db = False
         
         ai_config = config.get('ai_integration', {})
         self.ollama = OllamaIntegration(ai_config)
@@ -161,8 +184,12 @@ class CodeFixGenerator:
     
     def _get_fix_suggestion(self, violation_id: str, violation_text: str, category: str) -> Optional[Dict]:
         """
-        Get fix suggestion based on violation type
-        Try AI first (if enabled), then fall back to rule-based
+        Get fix suggestion using Parasoft Rules Database (PRIORITY) -> AI -> Rule-based fallback
+        
+        Strategy:
+        1. Try Parasoft Official Rules Database (official examples and repairs)
+        2. Fall back to AI generation (if enabled)
+        3. Fall back to generic rule-based patterns
         
         Args:
             violation_id: Violation ID
@@ -172,7 +199,14 @@ class CodeFixGenerator:
         Returns:
             Fix suggestion dictionary
         """
-        # Try AI generation first (if enabled and appropriate)
+        # PRIORITY: Try Parasoft Rules Database for official fix
+        if self.use_rules_db and self.rules_parser:
+            parasoft_fix = self._get_parasoft_official_fix(violation_id, violation_text, category)
+            if parasoft_fix:
+                logger.info(f"[PARASOFT-DB] Using official Parasoft fix for {violation_id}")
+                return parasoft_fix
+        
+        # FALLBACK 1: Try AI generation (if enabled and appropriate)
         if self.ollama.should_use_ai(category, violation_text):
             violation_dict = {
                 'violation_id': violation_id,
@@ -188,7 +222,7 @@ class CodeFixGenerator:
             else:
                 logger.info(f"[FALLBACK] Using rule-based fix for {violation_id}")
         
-        # Fallback to rule-based fixes
+        # FALLBACK 2: Generic rule-based fixes
         text_upper = violation_text.upper()
         
         # Common MISRA fixes
@@ -202,6 +236,92 @@ class CodeFixGenerator:
         # Generic fixes
         else:
             return self._get_generic_fix(text_upper, violation_text)
+    
+    def _get_parasoft_official_fix(self, violation_id: str, violation_text: str, category: str) -> Optional[Dict]:
+        """
+        Extract official fix from Parasoft Rules Database
+        
+        Args:
+            violation_id: Violation ID (e.g., "CERT_C-STR31-a")
+            violation_text: Violation description
+            category: Violation category
+        
+        Returns:
+            Fix suggestion dictionary with official Parasoft repair example, or None
+        """
+        try:
+            # Extract base rule ID from violation ID
+            # Example: "CERT_C-STR31-a-2" -> "CERT_C-STR31-a"
+            # Example: "MISRAC2012-RULE_8_7-a" -> "MISRAC2012-RULE_8_7-a"
+            
+            # Try exact match first
+            rule = self.rules_parser.get_rule(violation_id)
+            
+            # If not found, try extracting base rule (remove trailing numbers/variant)
+            if not rule:
+                import re
+                # Try removing trailing -\d+ suffix
+                base_id = re.sub(r'-\d+$', '', violation_id)
+                rule = self.rules_parser.get_rule(base_id)
+            
+            if not rule:
+                return None
+            
+            # Build fix suggestion from official Parasoft documentation
+            fix_parts = []
+            
+            # Add description
+            if rule.description:
+                fix_parts.append(f"Description: {rule.description[:200]}...")
+            
+            # Add security relevance if available
+            if rule.security_relevance and rule.security_relevance != "N/A":
+                fix_parts.append(f"\nSecurity Impact: {rule.security_relevance[:150]}...")
+            
+            # Add repair example (MOST IMPORTANT)
+            repair_code = ""
+            if rule.example_repair:
+                repair_code = rule.example_repair
+                # Limit repair code length for display
+                if len(repair_code) > 500:
+                    repair_code = repair_code[:500] + "\n... (truncated)"
+            
+            # Add violation example for context
+            violation_code = ""
+            if rule.example_violation:
+                violation_code = rule.example_violation
+                if len(violation_code) > 300:
+                    violation_code = violation_code[:300] + "\n... (truncated)"
+            
+            # Build formatted fix suggestion
+            fix_description = "\n".join(fix_parts)
+            
+            example_text = ""
+            if violation_code:
+                example_text += f"\n--- VIOLATION EXAMPLE ---\n{violation_code}\n"
+            if repair_code:
+                example_text += f"\n--- OFFICIAL REPAIR ---\n{repair_code}\n"
+            
+            # Add CWE mappings if available
+            cwe_info = ""
+            if rule.cwe_mappings:
+                cwe_info = f"CWE Mappings: {', '.join(rule.cwe_mappings[:5])}"
+            
+            return {
+                'type': 'parasoft_official',
+                'standard': rule.standard,
+                'description': fix_description,
+                'example': example_text,
+                'cwe_mappings': rule.cwe_mappings,
+                'repair_code': repair_code,
+                'violation_code': violation_code,
+                'references': rule.references[:3] if rule.references else [],  # Limit to 3
+                'source': f'Parasoft Official Documentation: {rule.title}'
+            }
+            
+        except Exception as e:
+            logger.debug(f"Could not extract Parasoft fix for {violation_id}: {e}")
+            return None
     
     def _get_misra_fix(self, violation_id: str, text_upper: str, violation_text: str) -> Dict:
         """Get MISRA-specific fix suggestions"""
@@ -496,11 +616,26 @@ if (ptr != NULL) {
         return justification
     
     def _generate_justification_reason(self, violation: Dict) -> str:
-        """Generate justification reason"""
+        """
+        Generate justification reason using Parasoft Rules Database (PRIORITY) -> Fallback to generic
         
+        Args:
+            violation: Violation dictionary
+        
+        Returns:
+            Justification reason text
+        """
+        violation_id = violation['violation_id']
         violation_text = violation['violation_text'].upper()
         
-        # Common justification reasons
+        # PRIORITY: Try to get official rationale from Parasoft Rules Database
+        if self.use_rules_db and self.rules_parser:
+            official_reason = self._get_parasoft_justification_rationale(violation_id)
+            if official_reason:
+                # Use official security relevance + benefits as justification reason
+                return f"Parasoft Official: {official_reason[:200]}"
+        
+        # FALLBACK: Common generic justification reasons
         if 'DESIGN' in violation_text or 'ARCHITECTURE' in violation_text:
             return "Design decision - alternative approach not feasible in current architecture"
         
@@ -515,6 +650,31 @@ if (ptr != NULL) {
         
         else:
             return "Technical constraint - fix would require significant architectural changes"
+    
+    def _get_parasoft_justification_rationale(self, violation_id: str) -> Optional[str]:
+        """
+        Get official justification rationale from Parasoft Rules Database
+        
+        Args:
+            violation_id: Violation ID
+        
+        Returns:
+            Justification rationale text combining security relevance and benefits, or None
+        """
+        try:
+            # Get rule from database
+            rationale = self.rules_parser.get_justification_rationale(violation_id)
+            if rationale:
+                # Clean up and format
+                rationale = rationale.replace('\n', ' ').strip()
+                # Limit length
+                if len(rationale) > 250:
+                    rationale = rationale[:247] + "..."
+                return rationale
+            return None
+        except Exception as e:
+            logger.debug(f"Could not extract justification rationale for {violation_id}: {e}")
+            return None
     
     def _save_justifications_file(self, justifications: List[Dict], output_file: Path):
         """
