@@ -223,7 +223,7 @@ if /I "%VIEW_FIXES%"=="Y" (
     echo [INFO] Starting Interactive Fix Viewer...
     echo.
     for /f "delims=" %%i in ('dir /b /o-d "fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.txt" 2^>nul') do (
-        python scripts\view_fixes_interactive.py "fixes\%MODULE_NAME%\%%i"
+        python src\view_fixes_interactive.py "fixes\%MODULE_NAME%\%%i"
         goto :after_view
     )
 ) else if /I "%VIEW_FIXES%"=="H" (
@@ -242,7 +242,7 @@ echo Next Steps
 echo ==================================================
 echo.
 echo To view fixes again:
-echo   - Interactive: python scripts\view_fixes_interactive.py fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.txt
+echo   - Interactive: python src\view_fixes_interactive.py fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.txt
 echo   - HTML: Open fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.html in browser
 echo.
 echo To apply suppress comments:

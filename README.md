@@ -368,11 +368,16 @@ Parasoft_Analaysis_Tool/
 │   ├── KnowledgeDatabaseManager.py
 │   ├── ViolationAnalyzer.py
 │   ├── CodeFixGenerator.py
-│   ├── KnowledgeDatabaseQueryTool.py
-│   └── ParasoftAnalysisTool.py
+│   ├── ParasoftRulesParser.py
+│   ├── generate_code_fixes.py    # Code fix generation utility
+│   ├── view_fixes_interactive.py # Interactive fix viewer
+│   ├── run_agent.py
+│   └── ...
 │
 ├── docs/                         # Documentation
 │   ├── QUICKSTART.md
+│   ├── FIX_VIEWING_OPTIONS.md
+│   ├── PARASOFT_RULES_DATABASE.md
 │   ├── EXAMPLE_WORKFLOW.md
 │   ├── ARCHITECTURE.md
 │   ├── CHANGELOG.md
@@ -382,7 +387,7 @@ Parasoft_Analaysis_Tool/
 ├── config/                       # Configuration files
 │   └── config.json
 │
-├── scripts/                      # Automation scripts
+├── scripts/                      # Batch automation scripts
 │   ├── Run.bat                   # Main analysis workflow
 │   ├── Generate_Code_Fixes.bat   # Regenerate fix suggestions (NEW!)
 │   ├── Apply_Suppressions.bat    # Interactive suppress comment applicator

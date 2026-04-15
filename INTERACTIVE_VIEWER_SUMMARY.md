@@ -162,7 +162,7 @@ return {
 
 ### **6. Enhanced Python Script** 📝
 
-**Updated:** `scripts/generate_code_fixes.py`
+**Updated:** `src/generate_code_fixes.py`
 
 **Now displays:**
 ```
@@ -242,7 +242,7 @@ scripts\Generate_Code_Fixes.bat
 → Choose viewing option [1] Interactive
 
 # Or view existing fixes
-python scripts\view_fixes_interactive.py fixes\Mka\Mka_fixes_20260415_132653.txt
+python src\view_fixes_interactive.py fixes\Mka\Mka_fixes_20260415_132653.txt
 ```
 
 ### **From Main Workflow:**
@@ -262,7 +262,7 @@ scripts\Run.bat
 
 ### **Created:**
 ```
-✅ scripts/view_fixes_interactive.py       (450+ lines)
+✅ src/view_fixes_interactive.py           (450+ lines)
    - Interactive terminal viewer with navigation
    
 ✅ docs/FIX_VIEWING_OPTIONS.md             (Comprehensive guide)
@@ -283,7 +283,7 @@ scripts\Run.bat
 ✅ scripts/Run.bat
    - Added viewing prompt after completion
    
-✅ scripts/generate_code_fixes.py
+✅ src/generate_code_fixes.py
    - Enhanced output messages
    - Shows both file paths
    

@@ -24,7 +24,7 @@ A keyboard-driven terminal interface for browsing fixes one at a time with full-
 ```batch
 # Automatically after Run.bat or Generate_Code_Fixes.bat
 # Or manually:
-python scripts\view_fixes_interactive.py fixes\Mka\Mka_fixes_20260415_132653.txt
+python src\view_fixes_interactive.py fixes\Mka\Mka_fixes_20260415_132653.txt
 ```
 
 ### **Features**

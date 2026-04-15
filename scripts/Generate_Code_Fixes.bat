@@ -93,7 +93,7 @@ echo AI Mode: %AI_MODE%
 echo.
 
 REM Run the code fix generator
-python scripts\generate_code_fixes.py %MODULE_NAME% --ai-mode %AI_MODE%
+python src\generate_code_fixes.py %MODULE_NAME% --ai-mode %AI_MODE%
 
 if errorlevel 1 (
     echo.
@@ -151,7 +151,7 @@ if "%VIEW_CHOICE%"=="1" (
     echo.
     echo [INFO] Starting Interactive Viewer...
     echo.
-    python scripts\view_fixes_interactive.py "%LATEST_FIXES_FILE%"
+    python src\view_fixes_interactive.py "%LATEST_FIXES_FILE%"
 ) else if "%VIEW_CHOICE%"=="2" (
     echo.
     echo [INFO] Opening HTML report in browser...
@@ -179,7 +179,7 @@ echo Next Steps
 echo ==================================================
 echo.
 echo To view the fixes again:
-echo   - Interactive: python scripts\view_fixes_interactive.py "%LATEST_FIXES_FILE%"
+echo   - Interactive: python src\view_fixes_interactive.py "%LATEST_FIXES_FILE%"
 echo   - HTML: Open fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.html in browser
 echo   - Text: Open fixes\%MODULE_NAME%\%MODULE_NAME%_fixes_*.txt
 echo.
