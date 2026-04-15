@@ -1,7 +1,7 @@
 {
   "database_type": "master",
-  "created_date": "2026-04-15T14:24:21.840515",
-  "last_updated": "2026-04-15T14:24:22.028661",
+  "created_date": "2026-04-15T14:47:31.110964",
+  "last_updated": "2026-04-15T14:47:31.364119",
   "version": "1.0",
   "modules_included": [
     "Mka",
@@ -11,7 +11,7 @@
   ],
   "total_modules": 4,
   "total_unique_violations": 137,
-  "total_violations_across_modules": 32514,
+  "total_violations_across_modules": 32579,
   "violations": {
     "CERT_C-INT31-i-2": {
       "violation_id": "CERT_C-INT31-i-2",
@@ -130839,17 +130839,173 @@
       "modules_affected": [
         {
           "module": "Mka",
-          "occurrences": 195,
+          "occurrences": 234,
           "fix_applied": false,
           "justification_added": false
         }
       ],
-      "total_occurrences": 195,
+      "total_occurrences": 234,
       "first_seen": "2026-04-15T12:19:25.059861",
-      "last_seen": "2026-04-15T14:21:36.360710",
+      "last_seen": "2026-04-15T14:38:42.133742",
       "severity": "LOW",
       "category": "CERT",
       "files_affected": [
+        {
+          "module": "Mka",
+          "file": "Mka.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Cbk.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Cbk.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Cbk.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
         {
           "module": "Mka",
           "file": "Mka.c"
@@ -131636,7 +131792,7 @@
       "justification_examples": [],
       "common_patterns": [],
       "common_file_types": {
-        ".c": 195
+        ".c": 234
       }
     },
     "CERT-C: ARR30-C⚠️ NEW": {
@@ -131645,17 +131801,121 @@
       "modules_affected": [
         {
           "module": "Mka",
-          "occurrences": 130,
+          "occurrences": 156,
           "fix_applied": false,
           "justification_added": false
         }
       ],
-      "total_occurrences": 130,
+      "total_occurrences": 156,
       "first_seen": "2026-04-15T12:19:25.066055",
-      "last_seen": "2026-04-15T14:21:36.360794",
+      "last_seen": "2026-04-15T14:38:42.133910",
       "severity": "LOW",
       "category": "CERT",
       "files_affected": [
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Internal.c"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Cfg.h"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_InternalTypes.h"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_InternalTypes.h"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_InternalTypes.h"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_InternalTypes.h"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_InternalTypes.h"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_InternalTypes.h"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_InternalTypes.h"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_InternalTypes.h"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_InternalTypes.h"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_InternalTypes.h"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Types.h"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Types.h"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Types.h"
+        },
+        {
+          "module": "Mka",
+          "file": "Mka_Types.h"
+        },
         {
           "module": "Mka",
           "file": "Mka_Internal.c"
@@ -132182,8 +132442,8 @@
       "justification_examples": [],
       "common_patterns": [],
       "common_file_types": {
-        ".c": 55,
-        ".h": 75
+        ".c": 66,
+        ".h": 90
       }
     },
     "MISRAC2012-RULE_1_1-c-2": {
@@ -134839,6 +135099,13 @@
         "category": "CERT"
       },
       {
+        "violation_id": "CERT-C: EXP33-C⚠️ NEW",
+        "total_occurrences": 234,
+        "modules_affected": 1,
+        "severity": "LOW",
+        "category": "CERT"
+      },
+      {
         "violation_id": "MISRAC2012-RULE_8_4-a-2",
         "total_occurrences": 230,
         "modules_affected": 2,
@@ -134874,18 +135141,18 @@
         "category": "CERT"
       },
       {
-        "violation_id": "CERT-C: EXP33-C⚠️ NEW",
-        "total_occurrences": 195,
-        "modules_affected": 1,
-        "severity": "LOW",
-        "category": "CERT"
-      },
-      {
         "violation_id": "MISRAC2012-RULE_2_8-a-4",
         "total_occurrences": 181,
         "modules_affected": 4,
         "severity": "MEDIUM",
         "category": "MISRA"
+      },
+      {
+        "violation_id": "CERT-C: ARR30-C⚠️ NEW",
+        "total_occurrences": 156,
+        "modules_affected": 1,
+        "severity": "LOW",
+        "category": "CERT"
       },
       {
         "violation_id": "CERT_C-EXP08-a-2",
@@ -134921,22 +135188,15 @@
         "modules_affected": 1,
         "severity": "MEDIUM",
         "category": "MISRA"
-      },
-      {
-        "violation_id": "MISRAC2012-RULE_18_4-a-4",
-        "total_occurrences": 131,
-        "modules_affected": 3,
-        "severity": "MEDIUM",
-        "category": "MISRA"
       }
     ],
     "violations_by_category": {
-      "CERT": 16022,
+      "CERT": 16087,
       "MISRA": 16418,
       "OTHER": 74
     },
     "violations_by_severity": {
-      "LOW": 15290,
+      "LOW": 15355,
       "MEDIUM": 16738,
       "HIGH": 486
     },

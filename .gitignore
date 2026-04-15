@@ -26,6 +26,7 @@ parasoft_agent.log
 # Reports (optional - uncomment if you don't want to track reports)
 # reports/
 # fixes/
+# *_code_suggestion/
 
 # Knowledge Base (optional - uncomment if you don't want to track knowledge base)
 # knowledge_base/

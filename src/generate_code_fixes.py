@@ -65,8 +65,8 @@ def generate_code_fixes(module_name: str, specific_violations: list = None, ai_m
         config['ai_integration'] = {}
     config['ai_integration']['ai_mode'] = ai_mode
     
-    # Initialize directories
-    fixes_dir = workspace_path / 'fixes'
+    # Initialize directories - create module-specific code suggestion folder
+    fixes_dir = workspace_path / f'{module_name}_code_suggestion'
     fixes_dir.mkdir(exist_ok=True)
     
     # Initialize Knowledge Database Manager
