@@ -61,6 +61,21 @@ if "%MODULE_NAME%"=="" (
     exit /b 1
 )
 
+REM Prompt for source code path (optional)
+echo.
+set /p SOURCE_CODE_PATH="Enter source code path for MISRA/CERT analysis (optional, press Enter to skip): "
+
+if not "%SOURCE_CODE_PATH%"=="" (
+    if not exist "%SOURCE_CODE_PATH%" (
+        echo Warning: Source code path does not exist: %SOURCE_CODE_PATH%
+        echo Skipping MISRA/CERT pre-analysis...
+        set SOURCE_CODE_PATH=
+    ) else (
+        echo [INFO] Source code path: %SOURCE_CODE_PATH%
+        echo [INFO] MISRA/CERT pre-analysis will be performed
+    )
+)
+
 REM Prompt for AI mode
 echo.
 echo ==================================================
@@ -94,7 +109,12 @@ REM Run the AI Agent
 echo.
 echo Running analysis with Qorix integration...
 echo.
-python scripts\run_agent.py report_dev1.html %MODULE_NAME% --ai-mode %AI_MODE%
+
+if not "%SOURCE_CODE_PATH%"=="" (
+    python scripts\run_agent.py report_dev1.html %MODULE_NAME% --source-code "%SOURCE_CODE_PATH%" --ai-mode %AI_MODE%
+) else (
+    python scripts\run_agent.py report_dev1.html %MODULE_NAME% --ai-mode %AI_MODE%
+)
 
 if errorlevel 1 (
     echo.

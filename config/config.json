@@ -7,13 +7,16 @@
   "workspace": {
     "default_knowledge_base_dir": "knowledge_base",
     "default_reports_dir": "reports",
-    "default_fixes_dir": "fixes"
+    "default_fixes_dir": "fixes",
+    "source_code_path": ""
   },
   "analysis": {
     "auto_generate_fixes": true,
     "auto_generate_justifications": false,
     "severity_threshold": "MEDIUM",
-    "max_files_per_violation": 100
+    "max_files_per_violation": 100,
+    "run_misra_cert_checker": true,
+    "misra_cert_report_format": "html"
   },
   "git_integration": {
     "enabled": true,

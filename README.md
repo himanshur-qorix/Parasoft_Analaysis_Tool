@@ -26,17 +26,26 @@ For comprehensive documentation, see the [`docs/`](docs/) folder:
 ## 🚀 Features
 
 ### Core Capabilities
-1. **Git Integration** - Seamlessly integrated with Visual Studio Code and Git repositories
-2. **AI-Powered Analysis** - Local LLM integration via Ollama for intelligent fix suggestions
-3. **Qorix Deviations Integration** - Automatically checks violations against Qorix_CP_Common_Deviations.xlsx
-4. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
-5. **Excel Report Generation** - Automatically generates comprehensive Excel reports with violation status
-6. **Parasoft Suppress Comments** - Generates properly formatted suppress comments for justified violations
-7. **Interactive Code Application** - Apply suppress comments to source code with user approval for each change
-8. **Unique Violation Tracking** - Identifies and tracks unique violations across analyses
-9. **Hybrid Fix Generation** - AI for complex cases, rule-based for standard violations (optimal performance)
-10. **Parasoft Justifications** - Generates Parasoft-formatted justification comments
-11. **Query Tool** - Comprehensive tool to analyze and export knowledge database
+1. **MISRA/CERT Pre-Analysis** - Integrated MISRA-C:2012 and CERT-C static analyzer for comprehensive code checking
+2. **Git Integration** - Seamlessly integrated with Visual Studio Code and Git repositories
+3. **AI-Powered Analysis** - Local LLM integration via Ollama for intelligent fix suggestions
+4. **Qorix Deviations Integration** - Automatically checks violations against Qorix_CP_Common_Deviations.xlsx
+5. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
+6. **Excel Report Generation** - Automatically generates comprehensive Excel reports with violation status
+7. **Parasoft Suppress Comments** - Generates properly formatted suppress comments for justified violations
+8. **Interactive Code Application** - Apply suppress comments to source code with user approval for each change
+9. **Unique Violation Tracking** - Identifies and tracks unique violations across analyses
+10. **Hybrid Fix Generation** - AI for complex cases, rule-based for standard violations (optimal performance)
+11. **Parasoft Justifications** - Generates Parasoft-formatted justification comments
+12. **Query Tool** - Comprehensive tool to analyze and export knowledge database
+
+### MISRA/CERT Integration (New!)
+- **Pattern-Based Detection**: 20+ MISRA-C:2012 and 15+ CERT-C rules
+- **Pre-Analysis Step**: Runs before Parasoft analysis for early violation detection
+- **Multiple Report Formats**: HTML, JSON, or text outputs
+- **Optional Integration**: Can be enabled/disabled via config or command line
+- **Comprehensive Coverage**: Control flow, memory safety, type safety, and more
+- **Detailed Reports**: Rule descriptions, rationale, severity, and code snippets
 
 ### AI Integration (Ollama)
 - **Lightweight & Local**: Runs small models (2-4GB) with minimal resource usage

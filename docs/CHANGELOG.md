@@ -4,6 +4,56 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.1.0] - 2026-04-15
+
+### ✨ Added - MISRA/CERT Static Analyzer Integration
+
+#### Pre-Analysis Workflow
+- **Integrated MISRA-C:2012 and CERT-C static analyzer** as pre-analysis step
+- Runs pattern-based violation detection on source code before Parasoft analysis
+- Generates detailed MISRA/CERT violation reports (HTML, JSON, or text format)
+- Seamless integration with existing Parasoft analysis workflow
+
+#### Configuration Updates
+- Added `source_code_path` to workspace configuration
+- Added `run_misra_cert_checker` flag to analysis configuration
+- Added `misra_cert_report_format` option (html/json/text)
+- Configuration support in `config/config.json`
+
+#### Command Line Support
+- New `--source-code <path>` option to specify C/C++ source directory
+- Automatic MISRA/CERT pre-analysis when source code path provided
+- Optional integration - can be skipped if source path not provided
+- Results included in analysis summary JSON
+
+#### Features
+- Pattern-based detection for 20+ MISRA-C:2012 rules
+- Pattern-based detection for 15+ CERT-C rules
+- Detailed violation reporting with:
+  - Rule ID and description
+  - Severity and category
+  - File, line, and column location
+  - Code snippets
+  - Rule rationale
+- Timestamped report generation
+- Error handling with workflow continuation on failure
+
+#### Documentation
+- Added `MISRA_CERT_INTEGRATION.md` with comprehensive guide
+- Updated `Run.bat` to prompt for source code path
+- Updated command line help and examples
+- Standalone checker usage examples
+
+#### Enhanced Workflow
+1. MISRA/CERT pre-analysis (optional)
+2. Parasoft violation analysis
+3. Qorix deviation mapping
+4. Code fix generation
+5. Justification creation
+6. Knowledge database update
+
+---
+
 ## [2.0.0] - 2026-04-09
 
 ### 🎉 Major Release - AI Agent with Knowledge Database
