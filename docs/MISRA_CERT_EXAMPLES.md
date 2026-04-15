@@ -74,13 +74,13 @@ python src/ParasoftAIAgent.py report_dev1.html Mka
 
 ```powershell
 # Run MISRA/CERT checker independently
-python scripts/misra_cert_checker.py D:/MyProject/src --report html --output my_report.html
+python src\misra_cert_checker.py D:/MyProject/src --report html --output my_report.html
 
 # Analyze single file
-python scripts/misra_cert_checker.py D:/MyProject/src/main.c --report text
+python src\misra_cert_checker.py D:/MyProject/src/main.c --report text
 
 # JSON output
-python scripts/misra_cert_checker.py D:/MyProject/src --report json --output violations.json
+python src\misra_cert_checker.py D:/MyProject/src --report json --output violations.json
 ```
 
 ## Batch File Usage
@@ -274,7 +274,7 @@ Skipping MISRA/CERT pre-analysis...
 ### Checker Script Not Found
 
 ```
-[ERROR] MISRA/CERT checker script not found: scripts/misra_cert_checker.py
+[ERROR] MISRA/CERT checker script not found: src/misra_cert_checker.py
 ```
 
 **Solution:** Ensure `misra_cert_checker.py` exists in the `scripts/` directory.
@@ -292,3 +292,4 @@ Skipping MISRA/CERT pre-analysis...
 - [MISRA_CERT_INTEGRATION.md](MISRA_CERT_INTEGRATION.md) - Complete integration guide
 - [AI_QUICKSTART.md](AI_QUICKSTART.md) - Getting started with AI features
 - [EXAMPLE_WORKFLOW.md](EXAMPLE_WORKFLOW.md) - Complete workflow examples
+

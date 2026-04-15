@@ -195,7 +195,7 @@
 ┌─────────────┐
 │   User      │
 └──────┬──────┘
-       │ Runs: python scripts\run_agent.py report.html Mka
+       │ Runs: python src\run_agent.py report.html Mka
        ▼
 ┌─────────────────────────┐
 │  ParasoftAIAgent        │
@@ -413,3 +413,4 @@ def test_violation_categorization():
 ---
 
 **For implementation details, refer to source code docstrings and inline comments.**
+

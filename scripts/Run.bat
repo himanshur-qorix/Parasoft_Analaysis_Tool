@@ -111,9 +111,9 @@ echo Running analysis with Qorix integration...
 echo.
 
 if not "%SOURCE_CODE_PATH%"=="" (
-    python scripts\run_agent.py report_dev1.html %MODULE_NAME% --source-code "%SOURCE_CODE_PATH%" --ai-mode %AI_MODE%
+    python src\run_agent.py report_dev1.html %MODULE_NAME% --source-code "%SOURCE_CODE_PATH%" --ai-mode %AI_MODE%
 ) else (
-    python scripts\run_agent.py report_dev1.html %MODULE_NAME% --ai-mode %AI_MODE%
+    python src\run_agent.py report_dev1.html %MODULE_NAME% --ai-mode %AI_MODE%
 )
 
 if errorlevel 1 (

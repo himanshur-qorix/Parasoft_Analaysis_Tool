@@ -206,30 +206,30 @@ This **hybrid approach** keeps resource usage low while providing AI benefits wh
 
 #### Basic Analysis
 ```bash
-python scripts\run_agent.py <report_path> <module_name>
+python src\run_agent.py <report_path> <module_name>
 ```
 
 **Example:**
 ```bash
-python scripts\run_agent.py report_dev1.html Mka
+python src\run_agent.py report_dev1.html Mka
 ```
 
 #### Advanced Options
 ```bash
 # Skip code fix generation
-python scripts\run_agent.py report_dev1.html Mka --no-fixes
+python src\run_agent.py report_dev1.html Mka --no-fixes
 
 # Skip justification generation
-python scripts\run_agent.py report_dev1.html Mka --no-justifications
+python src\run_agent.py report_dev1.html Mka --no-justifications
 
 # Specify custom workspace
-python scripts\run_agent.py report_dev1.html Mka --workspace D:/MyProject
+python src\run_agent.py report_dev1.html Mka --workspace D:/MyProject
 
 # Specify custom Qorix deviations file
-python scripts\run_agent.py report_dev1.html Mka --qorix custom_deviations.xlsx
+python src\run_agent.py report_dev1.html Mka --qorix custom_deviations.xlsx
 
 # Combine options
-python scripts\run_agent.py report_dev1.html Mka --no-justifications --workspace D:/MyProject --qorix data/Qorix.xlsx
+python src\run_agent.py report_dev1.html Mka --no-justifications --workspace D:/MyProject --qorix data/Qorix.xlsx
 ```
 
 ---
@@ -242,7 +242,7 @@ python scripts\run_agent.py report_dev1.html Mka --no-justifications --workspace
 scripts\Run.bat
 
 # Option B: Using command line
-python scripts\run_agent.py report_dev1.html Mka
+python src\run_agent.py report_dev1.html Mka
 ```
 
 **Outputs:**
@@ -257,7 +257,7 @@ python scripts\run_agent.py report_dev1.html Mka
 scripts\Apply_Suppressions.bat
 
 # Option B: Using command line
-python scripts\apply_suppress_comments.py justifications\Mka_suppress_comments_20260410_143022.txt D:\Path\To\SourceCode
+python src\apply_suppress_comments.py justifications\Mka_suppress_comments_20260410_143022.txt D:\Path\To\SourceCode
 ```
 
 **Process:**
@@ -410,7 +410,7 @@ The tool includes an interactive applicator to insert suppress comments directly
 scripts\Apply_Suppressions.bat
 
 # Or use Python directly
-python scripts\apply_suppress_comments.py justifications\Module_suppress_comments_timestamp.txt D:\Path\To\SourceCode
+python src\apply_suppress_comments.py justifications\Module_suppress_comments_timestamp.txt D:\Path\To\SourceCode
 ```
 
 **Features:**
@@ -445,7 +445,7 @@ Use the Knowledge Database Query Tool to analyze violations:
 
 ### Interactive Mode
 ```bash
-python scripts\run_query.py knowledge_base --interactive
+python src\run_query.py knowledge_base --interactive
 ```
 
 **Available Commands:**
@@ -462,16 +462,16 @@ python scripts\run_query.py knowledge_base --interactive
 
 ### Generate Summary Report
 ```bash
-python scripts\run_query.py knowledge_base --summary report.json
+python src\run_query.py knowledge_base --summary report.json
 ```
 
 ### Export to Excel
 ```bash
 # Export all modules
-python scripts\run_query.py knowledge_base --excel violations.xlsx
+python src\run_query.py knowledge_base --excel violations.xlsx
 
 # Export specific module
-python scripts\run_query.py knowledge_base --excel violations.xlsx --module Mka
+python src\run_query.py knowledge_base --excel violations.xlsx --module Mka
 ```
 
 ---
@@ -557,12 +557,12 @@ Generated justifications follow Parasoft standards:
 
 1. **Initial Analysis**
    ```bash
-   python scripts\run_agent.py report_dev1.html Mka
+   python src\run_agent.py report_dev1.html Mka
    ```
 
 2. **Query High Priority Issues**
    ```bash
-   python scripts\run_query.py knowledge_base --interactive
+   python src\run_query.py knowledge_base --interactive
    # Then select option 3 and choose "HIGH" severity
    ```
 
@@ -580,7 +580,7 @@ Generated justifications follow Parasoft standards:
 
 6. **Export Reports**
    ```bash
-   python scripts\\run_query.py knowledge_base --excel status_report.xlsx
+   python src\run_query.py knowledge_base --excel status_report.xlsx
    ```
 
 ---

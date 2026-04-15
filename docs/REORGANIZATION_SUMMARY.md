@@ -7,16 +7,16 @@
 
 ## 📋 Changes Made
 
-All Python scripts have been moved to the `scripts/` folder for better organization.
+All Python scripts have been moved to the `src/` folder for better organization.
 
 ### Files Moved
 
 | File | Old Location | New Location | Status |
 |------|-------------|--------------|--------|
-| run_agent.py | Root | `scripts/run_agent.py` | ✅ Updated |
-| run_query.py | Root | `scripts/run_query.py` | ✅ Updated |
-| apply_suppress_comments.py | Root | `scripts/apply_suppress_comments.py` | ✅ Working |
-| capture_violations.py | Root | `scripts/capture_violations.py` | ✅ Working |
+| run_agent.py | Root | `src/run_agent.py` | ✅ Updated |
+| run_query.py | Root | `src/run_query.py` | ✅ Updated |
+| apply_suppress_comments.py | Root | `src/apply_suppress_comments.py` | ✅ Working |
+| capture_violations.py | Root | `src/capture_violations.py` | ✅ Working |
 
 **Technical Update:** Path resolution updated in launcher scripts to correctly locate the `src/` folder from the new location.
 
@@ -50,7 +50,7 @@ Parasoft_Analaysis_Tool/
 │   ├── requirements.txt
 │   └── .gitignore
 │
-├── 📂 scripts/                    ← All scripts moved here!
+├── 📂 src/                    ← All scripts moved here!
 │   ├── run_agent.py              [Main launcher]
 │   ├── run_query.py              [Query tool launcher]
 │   ├── apply_suppress_comments.py [Interactive applicator]
@@ -92,7 +92,7 @@ Parasoft_Analaysis_Tool/
 
 ## 🔄 Updated Commands
 
-All commands now reference scripts from the `scripts/` folder.
+All commands now reference scripts from the `src/` folder.
 
 ### Basic Commands (Updated)
 
@@ -105,9 +105,9 @@ python apply_suppress_comments.py suppress_file.txt D:\SourceCode
 
 **After:**
 ```bash
-python scripts\run_agent.py report_dev1.html Mka
-python scripts\run_query.py knowledge_base --interactive
-python scripts\apply_suppress_comments.py suppress_file.txt D:\SourceCode
+python src\run_agent.py report_dev1.html Mka
+python src\run_query.py knowledge_base --interactive
+python src\apply_suppress_comments.py suppress_file.txt D:\SourceCode
 ```
 
 ### Batch Files (No Change - Already Updated)
@@ -160,12 +160,12 @@ All functionality remains the same:
 scripts\Run.bat
 
 # Option 2: Direct Python
-python scripts\run_agent.py report_dev1.html YourModule
+python src\run_agent.py report_dev1.html YourModule
 ```
 
 ### Query Knowledge Base
 ```bash
-python scripts\run_query.py knowledge_base --interactive
+python src\run_query.py knowledge_base --interactive
 ```
 
 ### Apply Suppress Comments
@@ -174,7 +174,7 @@ python scripts\run_query.py knowledge_base --interactive
 scripts\Apply_Suppressions.bat
 
 # Option 2: Direct Python
-python scripts\apply_suppress_comments.py justifications\file.txt D:\SourceCode
+python src\apply_suppress_comments.py justifications\file.txt D:\SourceCode
 ```
 
 ---
@@ -195,13 +195,13 @@ Everything is ready to use! No migration needed - just use the updated commands:
 
 ```bash
 # Test the reorganization
-python scripts\run_agent.py report_dev1.html TestModule
+python src\run_agent.py report_dev1.html TestModule
 
 # Verify AI integration still works
 ollama list  # Should show qwen2.5-coder:1.5b-base
 
 # Run analysis with AI
-python scripts\run_agent.py report_dev1.html YourModule
+python src\run_agent.py report_dev1.html YourModule
 ```
 
 ---
@@ -218,3 +218,5 @@ python scripts\run_agent.py report_dev1.html YourModule
 **Reorganization Complete!** ✨
 
 Your project structure is now cleaner and more maintainable for team collaboration.
+
+

@@ -462,8 +462,8 @@ class ParasoftAIAgent:
         report_path = self.reports_dir / report_filename
         
         # Path to misra_cert_checker.py script
-        scripts_dir = self.workspace_path / "scripts"
-        checker_script = scripts_dir / "misra_cert_checker.py"
+        src_dir = self.workspace_path / "src"
+        checker_script = src_dir / "misra_cert_checker.py"
         
         if not checker_script.exists():
             error_msg = f"MISRA/CERT checker script not found: {checker_script}"

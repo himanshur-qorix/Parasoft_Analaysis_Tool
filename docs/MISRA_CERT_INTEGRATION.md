@@ -162,13 +162,13 @@ You can also run the MISRA/CERT checker independently:
 
 ```bash
 # Analyze a single file
-python scripts/misra_cert_checker.py src/main.c --report html --output report.html
+python src\misra_cert_checker.py src/main.c --report html --output report.html
 
 # Analyze a directory
-python scripts/misra_cert_checker.py src/ --report json --output violations.json
+python src\misra_cert_checker.py src/ --report json --output violations.json
 
 # Text output to console
-python scripts/misra_cert_checker.py src/
+python src\misra_cert_checker.py src/
 ```
 
 ## Benefits
