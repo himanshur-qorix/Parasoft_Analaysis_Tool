@@ -28,7 +28,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def generate_code_fixes(module_name: str, specific_violations: list = None, ai_mode: str = 'hybrid'):
+def generate_code_fixes(module_name: str, specific_violations: list = None, ai_mode: str = 'hybrid', 
+                       source_code_path: str = None, interactive: bool = False):
     """
     Generate code fix suggestions for violations
     
@@ -36,6 +37,8 @@ def generate_code_fixes(module_name: str, specific_violations: list = None, ai_m
         module_name: Module name (e.g., "Mka")
         specific_violations: Optional list of specific violation IDs to fix
         ai_mode: AI mode ('ai_only', 'hybrid', 'rules_only')
+        source_code_path: Path to source code directory for context-aware fixes
+        interactive: If True, prompt for each violation individually
     """
     print("\n" + "="*80)
     print("  CODE FIX GENERATOR - Version 2.3.0")
@@ -85,11 +88,19 @@ def generate_code_fixes(module_name: str, specific_violations: list = None, ai_m
     
     # Initialize Code Fix Generator
     logger.info(f"\nInitializing Code Fix Generator (AI Mode: {ai_mode})")
+    if source_code_path:
+        logger.info(f"Source code path: {source_code_path}")
+        config['source_code_path'] = source_code_path
     fix_generator = CodeFixGenerator(module_name, kb_manager, fixes_dir, config)
     
     # Generate fixes
     print()
-    if specific_violations:
+    
+    # Interactive mode
+    if interactive:
+        logger.info("Interactive mode enabled - you'll be prompted for each violation")
+        results = generate_fixes_interactive(fix_generator, unfixed_violations, kb_manager)
+    elif specific_violations:
         logger.info(f"Generating fixes for {len(specific_violations)} specific violations...")
         results = fix_generator.generate_all_fixes(specific_violations)
     else:
@@ -127,6 +138,159 @@ def generate_code_fixes(module_name: str, specific_violations: list = None, ai_m
     print("="*80 + "\n")
     
     return True
+
+
+def generate_fixes_interactive(fix_generator, violations, kb_manager):
+    """
+    Generate fixes interactively, prompting user for each violation
+    
+    Args:
+        fix_generator: CodeFixGenerator instance
+        violations: List of violations to process
+        kb_manager: KnowledgeDatabaseManager instance
+    
+    Returns:
+        Results dictionary
+    """
+    print("\n" + "="*80)
+    print("  INTERACTIVE FIX GENERATION")
+    print("="*80)
+    print("\nYou will be prompted for each violation.")
+    print("Options: [y] Generate fix  [n] Skip  [a] Generate all remaining  [q] Quit\n")
+    
+    fixes_generated = 0
+    fixes_skipped = 0
+    all_fixes = []
+    auto_mode = False
+    
+    for idx, violation in enumerate(violations, 1):
+        violation_id = violation['violation_id']
+        category = violation.get('category', 'UNKNOWN')
+        severity = violation.get('severity', 'MEDIUM')
+        files_list = violation.get('files_affected', [])
+        file_info = files_list[0] if files_list else "Unknown file"
+        
+        print(f"\n[{idx}/{len(violations)}] Violation: {violation_id}")
+        print(f"  Category: {category} | Severity: {severity}")
+        print(f"  File: {file_info}")
+        print(f"  Description: {violation.get('violation_text', 'N/A')[:100]}...")
+        
+        # Check if other modules have handled this violation
+        cross_module_info = check_cross_module_handling(kb_manager, violation_id)
+        if cross_module_info:
+            print(f"\n  ℹ️  Cross-Module Info:")
+            for info in cross_module_info:
+                print(f"     {info}")
+        
+        if not auto_mode:
+            choice = input(f"\n  Generate fix? [y/n/a/q]: ").lower().strip()
+            
+            if choice == 'q':
+                print("\n[INFO] Quitting interactive mode...")
+                break
+            elif choice == 'a':
+                print("\n[INFO] Switching to automatic mode for remaining violations...")
+                auto_mode = True
+            elif choice == 'n':
+                print("[SKIPPED]")
+                fixes_skipped += 1
+                continue
+        
+        # Generate fix
+        try:
+            fix_data = fix_generator._generate_fix_for_violation(violation)
+            if fix_data:
+                all_fixes.append(fix_data)
+                fixes_generated += 1
+                print("[✓] Fix generated successfully")
+            else:
+                fixes_skipped += 1
+                print("[✗] Could not generate fix")
+        except Exception as e:
+            logger.error(f"Error generating fix: {e}")
+            fixes_skipped += 1
+    
+    # Save fixes if any were generated
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    module_name = fix_generator.module_name
+    fixes_dir = fix_generator.module_fixes_dir
+    
+    results = {
+        'fixes_generated': fixes_generated,
+        'fixes_failed': fixes_skipped,
+        'total_violations': len(violations),
+        'fixes_file': None,
+        'html_file': None
+    }
+    
+    if all_fixes:
+        fixes_file = fixes_dir / f"{module_name}_fixes_{timestamp}.txt"
+        html_file = fixes_dir / f"{module_name}_fixes_{timestamp}.html"
+        
+        fix_generator._save_fixes_file(all_fixes, fixes_file)
+        fix_generator.save_fixes_html(all_fixes, html_file)
+        
+        results['fixes_file'] = str(fixes_file)
+        results['html_file'] = str(html_file)
+    
+    return results
+
+
+def check_cross_module_handling(kb_manager, violation_id):
+    """
+    Check if other modules have handled the same violation
+    
+    Args:
+        kb_manager: KnowledgeDatabaseManager instance
+        violation_id: Violation ID to check
+    
+    Returns:
+        List of informational strings about cross-module handling
+    """
+    info = []
+    
+    try:
+        # Get all knowledge bases
+        kb_dir = kb_manager.kb_dir
+        kb_files = list(kb_dir.glob('*_KnowledgeDatabase.json'))
+        
+        for kb_file in kb_files:
+            # Skip current module
+            if kb_file.stem == f"{kb_manager.module_name}_KnowledgeDatabase":
+                continue
+            
+            try:
+                with open(kb_file, 'r', encoding='utf-8') as f:
+                    kb_data = json.load(f)
+                
+                module_name = kb_file.stem.replace('_KnowledgeDatabase', '')
+                violations = kb_data.get('violations', {})
+                
+                # Extract base violation ID (remove trailing numbers)
+                import re
+                base_violation_id = re.sub(r'-\d+$', '', violation_id)
+                
+                # Check for exact or base match
+                for vid, vdata in violations.items():
+                    if vid == violation_id or vid.startswith(base_violation_id):
+                        # Check if it was suppressed
+                        if vdata.get('justification_added') or vdata.get('suppressed'):
+                            info.append(f"Module '{module_name}': Suppressed/Justified")
+                        # Check if it was fixed
+                        elif vdata.get('fix_applied'):
+                            fix_type = vdata.get('fix_type', 'unknown')
+                            info.append(f"Module '{module_name}': Fixed ({fix_type})")
+                        else:
+                            info.append(f"Module '{module_name}': Also present")
+                        
+                        break  # Found match, no need to check other violations
+            except Exception as e:
+                # Silently skip if KB file is invalid
+                continue
+    except Exception as e:
+        logger.debug(f"Could not check cross-module info: {e}")
+    
+    return info
 
 
 def main():
@@ -169,6 +333,16 @@ AI Modes:
         default='hybrid',
         help='AI mode for fix generation (default: hybrid)'
     )
+    parser.add_argument(
+        '--source-code',
+        type=str,
+        help='Path to source code directory for context-aware fixes'
+    )
+    parser.add_argument(
+        '--interactive',
+        action='store_true',
+        help='Interactive mode - prompt for each violation'
+    )
     
     args = parser.parse_args()
     
@@ -176,7 +350,9 @@ AI Modes:
     success = generate_code_fixes(
         module_name=args.module,
         specific_violations=args.violations,
-        ai_mode=args.ai_mode
+        ai_mode=args.ai_mode,
+        source_code_path=args.source_code,
+        interactive=args.interactive
     )
     
     if success:

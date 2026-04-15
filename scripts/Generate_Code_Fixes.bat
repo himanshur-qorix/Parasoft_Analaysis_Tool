@@ -57,13 +57,58 @@ if not exist "knowledge_base\%MODULE_NAME%_KnowledgeDatabase.json" (
 
 echo.
 echo ==================================================
+echo Source Code Configuration
+echo ==================================================
+echo.
+echo Would you like to provide source code path for context-aware fixes?
+echo This enables AI to see actual code and generate better suggestions.
+echo.
+set /p USE_SOURCE_CODE="Use source code? [Y/N] [default: N]: "
+
+if /I "%USE_SOURCE_CODE%"=="Y" (
+    set /p SOURCE_CODE_PATH="Enter path to source code directory: "
+    echo [INFO] Source code path: !SOURCE_CODE_PATH!
+    set SOURCE_CODE_ARG=--source-code "!SOURCE_CODE_PATH!"
+) else (
+    echo [INFO] Using violation descriptions only (no source code)
+    set SOURCE_CODE_ARG=
+)
+
+echo.
+echo ==================================================
+echo Generation Mode
+echo ==================================================
+echo.
+echo Choose how to process violations:
+echo   [1] All at once    - Generate fixes for all violations automatically
+echo   [2] Interactive    - Choose which violations to fix one by one
+echo.
+set /p GEN_MODE_CHOICE="Enter choice (1-2) [default: 1]: "
+
+if "%GEN_MODE_CHOICE%"=="" set GEN_MODE_CHOICE=1
+
+if "%GEN_MODE_CHOICE%"=="2" (
+    set INTERACTIVE_ARG=--interactive
+    echo [INFO] Selected: Interactive mode
+) else (
+    set INTERACTIVE_ARG=
+    echo [INFO] Selected: Automatic mode - all violations
+)
+
+echo.
+echo ==================================================
 echo AI Mode Selection
 echo ==================================================
 echo.
 echo Choose fix generation mode:
-echo   [1] AI Only      - Use Ollama AI for all violations (requires Ollama)
-echo   [2] Hybrid       - Smart: AI for complex, Parasoft DB + rules for standard (RECOMMENDED)
-echo   [3] Rules Only   - Use Parasoft DB + rule-based fixes only (no AI required)
+echo   [1] AI Only      - AI generates unique fixes using Parasoft DB as reference
+echo   [2] Hybrid       - Parasoft DB first, then AI for unmatched (RECOMMENDED)
+echo   [3] Rules Only   - Parasoft DB + pattern-based fixes (no AI/Ollama needed)
+echo.
+echo Mode Details:
+echo   - AI Only:   AI gets Parasoft guidance but generates unique suggestions
+echo   - Hybrid:    Uses official Parasoft examples when available, AI for rest
+echo   - Rules:     Official Parasoft examples + hardcoded patterns only
 echo.
 set /p AI_MODE_CHOICE="Enter choice (1-3) [default: 2]: "
 
@@ -71,13 +116,13 @@ if "%AI_MODE_CHOICE%"=="" set AI_MODE_CHOICE=2
 
 if "%AI_MODE_CHOICE%"=="1" (
     set AI_MODE=ai_only
-    echo [INFO] Selected: AI Only mode
+    echo [INFO] Selected: AI Only mode - AI-generated fixes
 ) else if "%AI_MODE_CHOICE%"=="2" (
     set AI_MODE=hybrid
-    echo [INFO] Selected: Hybrid mode - Parasoft DB + AI + Rules ^(RECOMMENDED^)
+    echo [INFO] Selected: Hybrid mode - Parasoft DB ^+ AI ^+ Patterns ^(RECOMMENDED^)
 ) else if "%AI_MODE_CHOICE%"=="3" (
     set AI_MODE=rules_only
-    echo [INFO] Selected: Rules Only mode - Parasoft DB + Patterns
+    echo [INFO] Selected: Rules Only mode - Parasoft DB ^+ Patterns ^(No AI^)
 ) else (
     echo Invalid choice. Using default: Hybrid mode
     set AI_MODE=hybrid
@@ -92,8 +137,8 @@ echo Module: %MODULE_NAME%
 echo AI Mode: %AI_MODE%
 echo.
 
-REM Run the code fix generator
-python src\generate_code_fixes.py %MODULE_NAME% --ai-mode %AI_MODE%
+REM Run the code fix generator with all options
+python src\generate_code_fixes.py %MODULE_NAME% --ai-mode %AI_MODE% %SOURCE_CODE_ARG% %INTERACTIVE_ARG%
 
 if errorlevel 1 (
     echo.
@@ -114,17 +159,30 @@ echo Your code fix suggestions have been saved to:
 echo   Text: %MODULE_NAME%_code_suggestion\%MODULE_NAME%_fixes_*.txt
 echo   HTML: %MODULE_NAME%_code_suggestion\%MODULE_NAME%_fixes_*.html
 echo.
-echo The fixes include:
-echo   ✅ Official Parasoft repair examples (when available)
-echo   ✅ Before/after code snippets
-echo   ✅ Security relevance and CWE mappings
-echo   ✅ AI-generated suggestions (if hybrid/AI mode)
-echo   ✅ Rule-based patterns
+
+if "%AI_MODE%"=="ai_only" (
+    echo Fix Generation Strategy: AI ONLY
+    echo   ✅ AI-generated suggestions ^(with Parasoft reference context^)
+    echo   ✅ Unique fixes based on official guidance
+    echo   ✅ Pattern-based fallback ^(if AI fails^)
+    echo   ℹ️  Uses Parasoft DB as reference, not direct answer
+) else if "%AI_MODE%"=="rules_only" (
+    echo Fix Generation Strategy: RULES ONLY
+    echo   ✅ Official Parasoft repair examples ^(1200+ rules^)
+    echo   ✅ Pattern-based rules ^(hardcoded fixes^)
+    echo   ℹ️  AI was disabled ^(rules-only mode^)
+) else (
+    echo Fix Generation Strategy: HYBRID ^(Balanced^)
+    echo   ✅ Official Parasoft examples ^(priority 1^)
+    echo   ✅ AI-generated suggestions ^(priority 2^)
+    echo   ✅ Pattern-based rules ^(priority 3^)
+)
+
 echo.
-echo Priority order used:
-echo   1. Parasoft Rules Database (1200+ official rules) ⭐
-echo   2. AI generation (hybrid mode)
-echo   3. Pattern-based rules (fallback)
+echo All fixes include:
+echo   • Before/after code snippets
+echo   • Security relevance and CWE mappings
+echo   • Detailed explanations
 echo.
 echo ==================================================
 echo How Would You Like to View the Fixes?
