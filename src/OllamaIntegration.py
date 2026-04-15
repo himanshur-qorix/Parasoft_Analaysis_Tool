@@ -914,6 +914,183 @@ static int unusedVar = 0;
 /* Refactored code addressing the violation */
 /* Review specific requirements in rule documentation */"""
     
+    def suggest_justification(self, violation: Dict, cross_module_info: list) -> Optional[Dict]:
+        """
+        Use AI to analyze whether a violation should be justified instead of fixed
+        
+        Args:
+            violation: Violation dictionary
+            cross_module_info: List of strings describing how other modules handled this violation
+        
+        Returns:
+            Justification suggestion dict with 'should_justify', 'confidence', 'reason', 'suggested_rationale'
+        """
+        if not self.enabled:
+            return None
+        
+        try:
+            violation_id = violation.get('violation_id', 'UNKNOWN')
+            violation_text = violation.get('violation_text', '')
+            category = violation.get('category', 'OTHER')
+            severity = violation.get('severity', 'MEDIUM')
+            
+            logger.info(f"[AI] Analyzing justification recommendation for {violation_id}...")
+            
+            # Build prompt for justification analysis
+            prompt = self._build_justification_prompt(
+                violation_id, violation_text, category, severity, cross_module_info
+            )
+            
+            # Call Ollama
+            response = ollama.generate(
+                model=self.model,
+                prompt=prompt,
+                options={
+                    'temperature': 0.2,  # Lower temperature for more consistent analysis
+                    'num_predict': 500,  # Shorter response needed
+                }
+            )
+            
+            # Extract response text
+            if hasattr(response, 'response'):
+                response_text = response.response
+            elif isinstance(response, dict):
+                response_text = response.get('response', '')
+            else:
+                logger.error(f"[ERROR] Unexpected response type: {type(response)}")
+                return None
+            
+            logger.debug(f"   AI justification analysis: {response_text[:200]}...")
+            
+            # Parse the response
+            result = self._parse_justification_analysis(response_text, violation)
+            
+            if result:
+                logger.info(f"[OK] Justification analysis: {'JUSTIFY' if result['should_justify'] else 'FIX'} (confidence: {result['confidence']})")
+                return result
+            else:
+                logger.warning(f"[WARNING] Failed to parse justification analysis")
+                return None
+            
+        except Exception as e:
+            logger.error(f"[ERROR] Justification analysis failed: {str(e)}")
+            return None
+    
+    def _build_justification_prompt(self, violation_id: str, violation_text: str,
+                                   category: str, severity: str, cross_module_info: list) -> str:
+        """
+        Build prompt for AI justification analysis
+        
+        Args:
+            violation_id: Violation ID
+            violation_text: Violation description
+            category: Violation category
+            severity: Severity level
+            cross_module_info: How other modules handled this violation
+        
+        Returns:
+            Prompt string
+        """
+        cross_module_context = ""
+        if cross_module_info:
+            cross_module_context = "\n\nCROSS-MODULE ANALYSIS:\n"
+            for info in cross_module_info:
+                cross_module_context += f"  - {info}\n"
+        
+        prompt = f"""You are a code quality analyst helping decide whether a coding standard violation should be JUSTIFIED (suppressed) or FIXED.
+
+VIOLATION DETAILS:
+ID: {violation_id}
+Category: {category}
+Severity: {severity}
+Description: {violation_text}
+{cross_module_context}
+
+ANALYSIS CRITERIA:
+1. If OTHER MODULES have already justified/suppressed this same violation → likely a common deviation → SUGGEST JUSTIFICATION
+2. If violation is due to legacy code, third-party libraries, or platform constraints → SUGGEST JUSTIFICATION
+3. If violation is design decision (e.g., performance, architecture) → SUGGEST JUSTIFICATION
+4. If violation is legitimate code quality issue that should be fixed → SUGGEST FIX
+
+REQUIRED OUTPUT FORMAT (JSON):
+{{
+  "should_justify": true/false,
+  "confidence": "HIGH/MEDIUM/LOW",
+  "reason": "Brief explanation (max 100 chars)",
+  "suggested_rationale": "Suggested justification text if should_justify=true, max 150 chars"
+}}
+
+IMPORTANT:
+- If multiple modules justified this → should_justify = true
+- If it's a genuine bug or security issue → should_justify = false
+- Keep reason and suggested_rationale concise and specific
+- Focus on whether this is a COMMON DEVIATION that belongs in deviation Excel
+
+Analyze and respond ONLY with the JSON object:"""
+        
+        return prompt
+    
+    def _parse_justification_analysis(self, response: str, violation: Dict) -> Optional[Dict]:
+        """
+        Parse AI justification analysis response
+        
+        Args:
+            response: AI response text
+            violation: Original violation dict
+        
+        Returns:
+            Parsed analysis dict or None
+        """
+        try:
+            # Remove markdown code blocks
+            response = response.replace('```json', '').replace('```', '').strip()
+            
+            # Extract JSON
+            start = response.find('{')
+            end = response.rfind('}') + 1
+            
+            if start >= 0 and end > start:
+                json_str = response[start:end]
+                analysis = json.loads(json_str)
+                
+                # Validate required fields
+                required = ['should_justify', 'confidence', 'reason']
+                if all(k in analysis for k in required):
+                    # Ensure boolean
+                    analysis['should_justify'] = bool(analysis['should_justify'])
+                    
+                    # Add violation context
+                    analysis['violation_id'] = violation.get('violation_id')
+                    analysis['category'] = violation.get('category')
+                    
+                    # If suggested_rationale missing, generate default
+                    if not analysis.get('suggested_rationale') and analysis['should_justify']:
+                        analysis['suggested_rationale'] = "Common deviation - consistent with other modules"
+                    
+                    return analysis
+                else:
+                    logger.debug(f"Missing required fields in justification analysis. Found: {list(analysis.keys())}")
+            
+            # Fallback: parse from text
+            response_lower = response.lower()
+            should_justify = any(word in response_lower for word in ['justify', 'suppress', 'deviation', 'common'])
+            
+            return {
+                'should_justify': should_justify,
+                'confidence': 'LOW',
+                'reason': 'Inferred from text analysis',
+                'suggested_rationale': 'Review cross-module handling - may be common deviation',
+                'violation_id': violation.get('violation_id'),
+                'category': violation.get('category')
+            }
+            
+        except json.JSONDecodeError as e:
+            logger.debug(f"JSON parse failed for justification analysis: {str(e)}")
+            return None
+        except Exception as e:
+            logger.error(f"Failed to parse justification analysis: {str(e)}")
+            return None
+    
     def get_status(self) -> Dict:
         """Get current status of Ollama integration"""
         return {

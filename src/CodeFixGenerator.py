@@ -19,6 +19,14 @@ from ParasoftRulesParser import ParasoftRulesParser
 
 logger = logging.getLogger(__name__)
 
+try:
+    from openpyxl import load_workbook
+    from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+    OPENPYXL_AVAILABLE = True
+except ImportError:
+    OPENPYXL_AVAILABLE = False
+    logger.warning("openpyxl not installed - Excel update features disabled")
+
 
 class CodeFixGenerator:
     """Generates fixes and justifications for Parasoft violations"""
@@ -128,6 +136,7 @@ class CodeFixGenerator:
         fixes_failed = 0
         
         all_fixes = []
+        justification_recommendations = []  # Track AI justification suggestions
         
         for violation in violations_to_fix:
             try:
@@ -135,6 +144,10 @@ class CodeFixGenerator:
                 if fix_data:
                     all_fixes.append(fix_data)
                     fixes_generated += 1
+                    
+                    # Collect justification recommendations
+                    if fix_data.get('recommended_action') == 'justify':
+                        justification_recommendations.append(fix_data)
                 else:
                     fixes_failed += 1
             except Exception as e:
@@ -153,11 +166,21 @@ class CodeFixGenerator:
             logger.info(f"Fixes saved to: {fixes_file}")
             logger.info(f"HTML report saved to: {html_file}")
         
+        # Add justification recommendations to Excel report
+        if justification_recommendations:
+            logger.info(f"Found {len(justification_recommendations)} AI justification recommendations")
+            excel_updated = self._add_justification_sheet_to_excel(justification_recommendations)
+            if excel_updated:
+                logger.info(f"✅ Added 'AI Justification Suggestions' sheet to violations report")
+            else:
+                logger.warning(f"⚠️  Could not update Excel report - file may not exist yet")
+        
         return {
             'fixes_generated': fixes_generated,
             'fixes_failed': fixes_failed,
             'total_violations': len(violations_to_fix),
             'fixes_file': str(fixes_file) if all_fixes else None,
+            'justification_recommendations': len(justification_recommendations),
             'html_file': str(html_file) if all_fixes else None
         }
     
@@ -176,6 +199,43 @@ class CodeFixGenerator:
         severity = violation['severity']
         category = violation['category']
         
+        # STEP 1: Check cross-module handling to see if this should be justified instead
+        cross_module_info = self._check_cross_module_justifications(violation_id)
+        
+        # STEP 2: If other modules justified this, ask AI if it should be justified here too
+        justification_suggestion = None
+        if cross_module_info and self.ollama.enabled:
+            justification_suggestion = self.ollama.suggest_justification(violation, cross_module_info)
+            
+            if justification_suggestion and justification_suggestion.get('should_justify'):
+                confidence = justification_suggestion.get('confidence', 'MEDIUM')
+                reason = justification_suggestion.get('reason', 'Common deviation')
+                
+                logger.info(f"⚖️  AI suggests JUSTIFICATION for {violation_id} ({confidence} confidence)")
+                logger.info(f"   Reason: {reason}")
+                logger.info(f"   Cross-module context: {len(cross_module_info)} modules have justified this")
+                
+                # Return special fix data suggesting justification
+                return {
+                    'violation_id': violation_id,
+                    'violation_text': violation_text,
+                    'severity': severity,
+                    'category': category,
+                    'files_affected': violation['files_affected'],
+                    'fix_suggestion': {
+                        'type': 'justification_recommended',
+                        'description': f"AI Analysis: This violation appears to be a common deviation. {len(cross_module_info)} other module(s) have justified this same violation. Consider adding to common deviations Excel instead of generating code fix.",
+                        'example': f"Suggestion: Add {violation_id} to common deviations list\n\nReason: {justification_suggestion.get('suggested_rationale', reason)}\n\nModules with justifications:\n" + "\n".join([f"  - {info}" for info in cross_module_info[:5]]),
+                        'priority': 'HIGH' if confidence == 'HIGH' else 'MEDIUM',
+                        'ai_generated': True,
+                        'justification_analysis': justification_suggestion
+                    },
+                    'code_context': None,
+                    'timestamp': datetime.now().isoformat(),
+                    'recommended_action': 'justify'
+                }
+        
+        # STEP 3: If no justification recommended, proceed with normal fix generation
         # Extract code context if source code path is provided
         code_context = None
         if self.source_code_path:
@@ -207,6 +267,60 @@ class CodeFixGenerator:
         })
         
         return fix_data
+    
+    def _check_cross_module_justifications(self, violation_id: str) -> list:
+        """
+        Check if other modules have justified the same violation
+        
+        Args:
+            violation_id: Violation ID to check
+        
+        Returns:
+            List of informational strings about modules that justified this violation
+        """
+        justified_in_modules = []
+        
+        try:
+            # Get all knowledge bases
+            kb_dir = self.kb_manager.kb_dir
+            kb_files = list(kb_dir.glob('*_KnowledgeDatabase.json'))
+            
+            # Extract base violation ID (remove trailing instance numbers)
+            import re
+            base_violation_id = re.sub(r'-\d+$', '', violation_id)
+            
+            for kb_file in kb_files:
+                # Skip current module
+                if kb_file.stem == f"{self.module_name}_KnowledgeDatabase":
+                    continue
+                
+                try:
+                    import json
+                    with open(kb_file, 'r', encoding='utf-8') as f:
+                        kb_data = json.load(f)
+                    
+                    module_name = kb_file.stem.replace('_KnowledgeDatabase', '')
+                    violations = kb_data.get('violations', {})
+                    
+                    # Check for exact or base match
+                    for vid, vdata in violations.items():
+                        if vid == violation_id or vid.startswith(base_violation_id):
+                            # Check if it was justified/suppressed
+                            if vdata.get('justification_added') or vdata.get('suppressed'):
+                                justified_count = len(vdata.get('files_affected', []))
+                                justified_in_modules.append(
+                                    f"Module '{module_name}': {justified_count} instance(s) justified/suppressed"
+                                )
+                                break  # Found in this module, move to next KB
+                
+                except Exception as e:
+                    logger.debug(f"Error reading KB file {kb_file}: {e}")
+                    continue
+        
+        except Exception as e:
+            logger.error(f"Error checking cross-module justifications: {e}")
+        
+        return justified_in_modules
     
     def _extract_code_context(self, violation: Dict) -> Optional[Dict]:
         """
@@ -857,6 +971,17 @@ if (ptr != NULL) {
         .badge-parasoft {{ background: #17a2b8; }}
         .badge-ai {{ background: #6f42c1; }}
         .badge-rule {{ background: #6c757d; }}
+        .badge-info {{ background: #20c997; }}
+        
+        /* Justification recommendation card styling */
+        .justification-rec-card {{
+            border-left: 5px solid #20c997 !important;
+            background: linear-gradient(135deg, #e8f9f5 0%, #ffffff 100%) !important;
+        }}
+        
+        .justification-rec-card .fix-header {{
+            background: linear-gradient(135deg, #20c997 0%, #17a589 100%) !important;
+        }}
         
         .fix-content {{
             padding: 25px;
@@ -1042,18 +1167,22 @@ if (ptr != NULL) {
             priority = fix_suggestion.get('priority', 'MEDIUM')
             fix_type = fix_suggestion['type']
             
+            # Check if this is a justification recommendation
+            is_justification_rec = (fix_type == 'justification_recommended')
+            
             # Determine badge colors
             priority_class = f"badge-{priority.lower()}"
             type_display = {
                 'parasoft_official': ('Parasoft Official', 'badge-parasoft'),
                 'ai_generated': ('AI Generated', 'badge-ai'),
-                'rule_based': ('Rule Based', 'badge-rule')
+                'rule_based': ('Rule Based', 'badge-rule'),
+                'justification_recommended': ('⚖️ Justify Instead', 'badge-info')
             }.get(fix_type, (fix_type.title(), 'badge-rule'))
             
             html_content += f'''
-            <div class="fix-card" data-priority="{priority}" data-type="{fix_type}" data-violation="{fix['violation_id']}" data-description="{fix['violation_text']}">
+            <div class="fix-card {'justification-rec-card' if is_justification_rec else ''}" data-priority="{priority}" data-type="{fix_type}" data-violation="{fix['violation_id']}" data-description="{fix['violation_text']}">
                 <div class="fix-header">
-                    <div class="fix-title">FIX #{i} - {fix['violation_id']}</div>
+                    <div class="fix-title">{'⚖️  JUSTIFICATION SUGGESTION' if is_justification_rec else 'FIX'} #{i} - {fix['violation_id']}</div>
                     <div class="fix-badges">
                         <span class="badge {priority_class}">{priority}</span>
                         <span class="badge {type_display[1]}">{type_display[0]}</span>
@@ -1067,7 +1196,7 @@ if (ptr != NULL) {
                     </div>
                     
                     <div class="section">
-                        <div class="section-title">💡 Fix Suggestion</div>
+                        <div class="section-title">{'⚖️  AI Recommendation' if is_justification_rec else '💡 Fix Suggestion'}</div>
                         <div class="description">{fix_suggestion.get('description', 'No description available')}</div>
                     </div>
 '''
@@ -1234,21 +1363,30 @@ if (ptr != NULL) {
             f.write("="*80 + "\n\n")
             
             for i, fix in enumerate(fixes, 1):
-                f.write(f"FIX #{i}\n")
+                fix_type = fix['fix_suggestion']['type']
+                is_justification_rec = (fix_type == 'justification_recommended')
+                
+                f.write(f"{'⚖️  JUSTIFICATION SUGGESTION' if is_justification_rec else 'FIX'} #{i}\n")
                 f.write("-"*80 + "\n")
                 f.write(f"Violation ID: {fix['violation_id']}\n")
                 f.write(f"Severity: {fix['severity']}\n")
-                f.write(f"Category: {fix['category']}\n\n")
+                f.write(f"Category: {fix['category']}\n")
+                if is_justification_rec:
+                    f.write(f"🔍 Recommended Action: JUSTIFY (Add to common deviations Excel)\n")
+                f.write("\n")
                 
                 f.write(f"Description:\n{fix['violation_text']}\n\n")
                 
-                f.write(f"Fix Type: {fix['fix_suggestion']['type']}\n")
+                f.write(f"{'Recommendation' if is_justification_rec else 'Fix'} Type: {fix_type}\n")
                 f.write(f"Priority: {fix['fix_suggestion']['priority']}\n\n")
                 
-                f.write(f"Fix Description:\n{fix['fix_suggestion']['description']}\n\n")
+                f.write(f"{'AI Analysis' if is_justification_rec else 'Fix Description'}:\n{fix['fix_suggestion']['description']}\n\n")
                 
                 if 'example' in fix['fix_suggestion']:
-                    f.write(f"Example:\n{fix['fix_suggestion']['example']}\n\n")
+                    if is_justification_rec:
+                        f.write(f"Cross-Module Context & Suggested Rationale:\n{fix['fix_suggestion']['example']}\n\n")
+                    else:
+                        f.write(f"Example:\n{fix['fix_suggestion']['example']}\n\n")
                 
                 f.write(f"Files Affected:\n")
                 files = fix.get('files_affected', [])
@@ -1266,6 +1404,185 @@ if (ptr != NULL) {
                     f.write(f"  - No file information available\n")
                 
                 f.write("\n" + "="*80 + "\n\n")
+    
+    def _add_justification_sheet_to_excel(self, justification_recommendations: List[Dict]) -> bool:
+        """
+        Add a new sheet to violations Excel report with AI justification recommendations
+        
+        Args:
+            justification_recommendations: List of violation dicts with justification recommendations
+        
+        Returns:
+            True if successfully added, False otherwise
+        """
+        if not OPENPYXL_AVAILABLE:
+            logger.warning("openpyxl not available - cannot update Excel report")
+            return False
+        
+        try:
+            # Find the violations report Excel file
+            report_file = self._find_violations_report_excel()
+            if not report_file:
+                logger.warning("Violations report Excel file not found")
+                return False
+            
+            # Load the workbook
+            workbook = load_workbook(report_file)
+            
+            # Remove sheet if it already exists (update scenario)
+            sheet_name = "AI Justification Suggestions"
+            if sheet_name in workbook.sheetnames:
+                logger.info(f"Removing existing '{sheet_name}' sheet")
+                del workbook[sheet_name]
+            
+            # Create new sheet
+            ws = workbook.create_sheet(sheet_name)
+            
+            # Define styles
+            header_font = Font(bold=True, color="FFFFFF", size=12)
+            header_fill = PatternFill(start_color="4472C4", end_color="4472C4", fill_type="solid")
+            header_alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+            
+            cell_alignment = Alignment(horizontal="left", vertical="top", wrap_text=True)
+            border = Border(
+                left=Side(style='thin', color='CCCCCC'),
+                right=Side(style='thin', color='CCCCCC'),
+                top=Side(style='thin', color='CCCCCC'),
+                bottom=Side(style='thin', color='CCCCCC')
+            )
+            
+            # Headers
+            headers = [
+                "Violation ID",
+                "Category",
+                "Severity", 
+                "Description",
+                "AI Confidence",
+                "Suggested Rationale",
+                "Cross-Module Count",
+                "Modules with Justifications",
+                "Files Affected Count",
+                "Recommendation"
+            ]
+            
+            # Write headers
+            for col, header in enumerate(headers, 1):
+                cell = ws.cell(row=1, column=col, value=header)
+                cell.font = header_font
+                cell.fill = header_fill
+                cell.alignment = header_alignment
+                cell.border = border
+            
+            # Write data rows
+            for row_idx, rec in enumerate(justification_recommendations, 2):
+                justification_analysis = rec.get('fix_suggestion', {}).get('justification_analysis', {})
+                
+                # Extract cross-module info from example field
+                example_text = rec.get('fix_suggestion', {}).get('example', '')
+                cross_module_count = 0
+                modules_list = []
+                
+                # Parse cross-module info from example text
+                if 'Modules with justifications:' in example_text:
+                    lines = example_text.split('\n')
+                    for line in lines:
+                        if line.strip().startswith('- Module'):
+                            modules_list.append(line.strip().replace('- ', ''))
+                    cross_module_count = len(modules_list)
+                
+                # Extract suggested rationale
+                suggested_rationale = justification_analysis.get('suggested_rationale', '')
+                if not suggested_rationale and 'Reason:' in example_text:
+                    for line in example_text.split('\n'):
+                        if line.startswith('Reason:'):
+                            suggested_rationale = line.replace('Reason:', '').strip()
+                            break
+                
+                # Row data
+                row_data = [
+                    rec.get('violation_id', ''),
+                    rec.get('category', ''),
+                    rec.get('severity', ''),
+                    rec.get('violation_text', ''),
+                    justification_analysis.get('confidence', 'MEDIUM'),
+                    suggested_rationale,
+                    cross_module_count,
+                    '\n'.join(modules_list),
+                    len(rec.get('files_affected', [])),
+                    "Add to Common Deviations Excel"
+                ]
+                
+                for col, value in enumerate(row_data, 1):
+                    cell = ws.cell(row=row_idx, column=col, value=value)
+                    cell.alignment = cell_alignment
+                    cell.border = border
+                    
+                    # Highlight high confidence recommendations
+                    if col == 5 and value == 'HIGH':
+                        cell.fill = PatternFill(start_color="D4EDDA", end_color="D4EDDA", fill_type="solid")
+                        cell.font = Font(bold=True, color="155724")
+            
+            # Adjust column widths
+            column_widths = [20, 12, 10, 50, 12, 40, 12, 40, 12, 30]
+            for col, width in enumerate(column_widths, 1):
+                ws.column_dimensions[ws.cell(row=1, column=col).column_letter].width = width
+            
+            # Freeze header row
+            ws.freeze_panes = 'A2'
+            
+            # Add summary at top (insert rows)
+            ws.insert_rows(1, 3)
+            ws.merge_cells('A1:J1')
+            ws['A1'] = f"AI Justification Recommendations - {self.module_name}"
+            ws['A1'].font = Font(bold=True, size=14, color="4472C4")
+            ws['A1'].alignment = Alignment(horizontal="center", vertical="center")
+            
+            ws.merge_cells('A2:J2')
+            ws['A2'] = f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} | Total Recommendations: {len(justification_recommendations)}"
+            ws['A2'].font = Font(italic=True, size=10)
+            ws['A2'].alignment = Alignment(horizontal="center")
+            
+            ws.merge_cells('A3:J3')
+            ws['A3'] = "⚠️ These violations appear in multiple modules as justified. Consider adding to common deviations Excel instead of fixing."
+            ws['A3'].font = Font(bold=True, size=10, color="856404")
+            ws['A3'].fill = PatternFill(start_color="FFF3CD", end_color="FFF3CD", fill_type="solid")
+            ws['A3'].alignment = Alignment(horizontal="center", wrap_text=True)
+            
+            # Save workbook
+            workbook.save(report_file)
+            logger.info(f"Updated Excel report: {report_file}")
+            
+            return True
+            
+        except Exception as e:
+            logger.error(f"Failed to add justification sheet to Excel: {str(e)}")
+            return False
+    
+    def _find_violations_report_excel(self) -> Optional[Path]:
+        """
+        Find the violations report Excel file
+        
+        Returns:
+            Path to violations report or None
+        """
+        # Expected filename pattern
+        report_filename = f"{self.module_name}_violations_report.xlsx"
+        
+        # Search in common locations
+        search_paths = [
+            self.reports_dir / report_filename,  # reports/ folder
+            Path.cwd() / "reports" / report_filename,
+            Path.cwd() / report_filename,
+            self.reports_dir.parent / report_filename,  # Parent of reports
+        ]
+        
+        for path in search_paths:
+            if path.exists():
+                logger.debug(f"Found violations report: {path}")
+                return path
+        
+        logger.debug(f"Violations report not found. Searched: {[str(p) for p in search_paths]}")
+        return None
     
     def generate_justifications(self, violation_ids: Optional[List[str]] = None) -> Dict:
         """
