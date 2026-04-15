@@ -67,8 +67,39 @@ class OllamaIntegration:
             response = ollama.list()
             logger.info(f"[OK] Connected to Ollama at {self.base_url}")
             
+            # Validate response structure
+            if not isinstance(response, dict):
+                logger.error(f"[ERROR] Unexpected response type from Ollama: {type(response)}")
+                self.enabled = False
+                return False
+            
             # Check if model is available
-            available_models = [model['name'] for model in response.get('models', [])]
+            models_list = response.get('models', [])
+            if not models_list:
+                logger.warning(f"[WARNING] No models found in Ollama.")
+                logger.warning(f"Run: ollama pull {self.model}")
+                self.enabled = False
+                return False
+            
+            # Extract model names with error handling
+            available_models = []
+            for model in models_list:
+                if isinstance(model, dict):
+                    # Try different possible keys for model name
+                    model_name = model.get('name') or model.get('model') or model.get('id')
+                    if model_name:
+                        available_models.append(model_name)
+                    else:
+                        logger.debug(f"Model entry missing name field: {model}")
+                elif isinstance(model, str):
+                    available_models.append(model)
+            
+            if not available_models:
+                logger.warning(f"[WARNING] Could not extract model names from Ollama response.")
+                logger.warning(f"Response structure: {response}")
+                self.enabled = False
+                return False
+            
             if self.model not in available_models:
                 logger.warning(f"[WARNING] Model '{self.model}' not found in Ollama.")
                 logger.warning(f"Available models: {', '.join(available_models)}")
@@ -108,21 +139,22 @@ class OllamaIntegration:
         if self.ai_mode == 'rules_only':
             return False
         
-        # Hybrid mode - intelligent selection
+        # Hybrid mode - intelligent selection (more permissive to show AI capability)
         if self.ai_mode == 'hybrid':
+            # Use AI for violations when Parasoft DB doesn't have a match
+            # This method is called AFTER Parasoft DB check fails
+            # So in hybrid mode, we should try AI as a fallback
+            
             # Check category-based rules
-            if 'CERT' in category and self.use_ai_for.get('cert_violations', False):
+            if 'CERT' in category and self.use_ai_for.get('cert_violations', True):
                 return True
             
-            if 'MISRA' in category and self.use_ai_for.get('misra_violations', False):
+            if 'MISRA' in category and self.use_ai_for.get('misra_violations', True):
                 return True
             
-            # Use AI for unknown/complex patterns
+            # Use AI for unknown/complex patterns (default: true in hybrid)
             if self.use_ai_for.get('unknown_patterns', True):
-                # Simple heuristic: if violation text is long or contains "complex" keywords
-                if len(violation_text) > 100 or any(kw in violation_text.lower() for kw in 
-                    ['complex', 'undefined', 'unknown', 'ambiguous', 'context']):
-                    return True
+                return True
         
         return False
     

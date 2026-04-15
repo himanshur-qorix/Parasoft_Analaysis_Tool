@@ -195,12 +195,12 @@ class CodeFixGenerator:
     
     def _get_fix_suggestion(self, violation_id: str, violation_text: str, category: str) -> Optional[Dict]:
         """
-        Get fix suggestion using Parasoft Rules Database (PRIORITY) -> AI -> Rule-based fallback
+        Get fix suggestion based on AI mode configuration
         
-        Strategy:
-        1. Try Parasoft Official Rules Database (official examples and repairs)
-        2. Fall back to AI generation (if enabled)
-        3. Fall back to generic rule-based patterns
+        Strategy depends on AI mode:
+        - AI Only: AI generation -> Rule-based fallback (skip Parasoft DB)
+        - Hybrid: Parasoft DB -> AI -> Rule-based fallback (balanced approach)
+        - Rules Only: Parasoft DB -> Rule-based patterns (skip AI)
         
         Args:
             violation_id: Violation ID
@@ -210,30 +210,87 @@ class CodeFixGenerator:
         Returns:
             Fix suggestion dictionary
         """
-        # PRIORITY: Try Parasoft Rules Database for official fix
-        if self.use_rules_db and self.rules_parser:
-            parasoft_fix = self._get_parasoft_official_fix(violation_id, violation_text, category)
-            if parasoft_fix:
-                logger.info(f"[PARASOFT-DB] Using official Parasoft fix for {violation_id}")
-                return parasoft_fix
+        # Get AI mode to determine strategy
+        ai_mode = self.ollama.ai_mode
         
-        # FALLBACK 1: Try AI generation (if enabled and appropriate)
-        if self.ollama.should_use_ai(category, violation_text):
-            violation_dict = {
-                'violation_id': violation_id,
-                'violation_text': violation_text,
-                'category': category,
-                'severity': 'MEDIUM'  # Default severity
-            }
+        # AI ONLY MODE: Skip Parasoft DB, prioritize AI
+        if ai_mode == 'ai_only':
+            logger.debug(f"[AI-ONLY] Attempting AI generation for {violation_id}")
             
-            ai_fix = self.ollama.generate_fix_suggestion(violation_dict)
-            if ai_fix:
-                logger.info(f"[AI] Using AI-generated fix for {violation_id}")
-                return ai_fix
-            else:
-                logger.info(f"[FALLBACK] Using rule-based fix for {violation_id}")
+            # Try AI generation first
+            if self.ollama.enabled:
+                violation_dict = {
+                    'violation_id': violation_id,
+                    'violation_text': violation_text,
+                    'category': category,
+                    'severity': 'MEDIUM'
+                }
+                
+                ai_fix = self.ollama.generate_fix_suggestion(violation_dict)
+                if ai_fix:
+                    logger.info(f"[AI-ONLY] Using AI-generated fix for {violation_id}")
+                    return ai_fix
+            
+            # Fallback to rule-based only if AI fails
+            logger.info(f"[AI-ONLY] AI unavailable, falling back to rules for {violation_id}")
+            return self._get_rule_based_fix(violation_id, violation_text, category)
         
-        # FALLBACK 2: Generic rule-based fixes
+        # RULES ONLY MODE: Use Parasoft DB and patterns, skip AI
+        elif ai_mode == 'rules_only':
+            logger.debug(f"[RULES-ONLY] Using Parasoft DB + patterns for {violation_id}")
+            
+            # Try Parasoft Rules Database first
+            if self.use_rules_db and self.rules_parser:
+                parasoft_fix = self._get_parasoft_official_fix(violation_id, violation_text, category)
+                if parasoft_fix:
+                    logger.info(f"[PARASOFT-DB] Using official Parasoft fix for {violation_id}")
+                    return parasoft_fix
+            
+            # Fallback to rule-based patterns
+            logger.info(f"[RULES-ONLY] Using pattern-based fix for {violation_id}")
+            return self._get_rule_based_fix(violation_id, violation_text, category)
+        
+        # HYBRID MODE (default): Try all sources in priority order
+        else:
+            logger.debug(f"[HYBRID] Trying all sources for {violation_id}")
+            
+            # PRIORITY 1: Try Parasoft Rules Database for official fix
+            if self.use_rules_db and self.rules_parser:
+                parasoft_fix = self._get_parasoft_official_fix(violation_id, violation_text, category)
+                if parasoft_fix:
+                    logger.info(f"[PARASOFT-DB] Using official Parasoft fix for {violation_id}")
+                    return parasoft_fix
+            
+            # PRIORITY 2: Try AI generation (if appropriate)
+            if self.ollama.should_use_ai(category, violation_text):
+                violation_dict = {
+                    'violation_id': violation_id,
+                    'violation_text': violation_text,
+                    'category': category,
+                    'severity': 'MEDIUM'
+                }
+                
+                ai_fix = self.ollama.generate_fix_suggestion(violation_dict)
+                if ai_fix:
+                    logger.info(f"[AI] Using AI-generated fix for {violation_id}")
+                    return ai_fix
+            
+            # PRIORITY 3: Fallback to rule-based patterns
+            logger.info(f"[HYBRID] Using pattern-based fix for {violation_id}")
+            return self._get_rule_based_fix(violation_id, violation_text, category)
+    
+    def _get_rule_based_fix(self, violation_id: str, violation_text: str, category: str) -> Optional[Dict]:
+        """
+        Get rule-based fix using pattern matching
+        
+        Args:
+            violation_id: Violation ID
+            violation_text: Violation description
+            category: Violation category
+        
+        Returns:
+            Fix suggestion dictionary
+        """
         text_upper = violation_text.upper()
         
         # Common MISRA fixes
