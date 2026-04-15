@@ -36,6 +36,10 @@ class Violation:
     column: int
     snippet: str          # Source line content
     rationale: str        # Why this rule exists
+    is_known: bool = False           # Found in knowledge base
+    occurrence_count: int = 0        # Times seen before
+    has_proven_fix: bool = False     # Has fix in knowledge base
+    proven_fix: Optional[str] = None # Proven fix suggestion
 
 
 @dataclass
@@ -764,6 +768,283 @@ def report_html(results: List[AnalysisResult]) -> str:
 </html>"""
 
 
+def report_html_with_kb(results: List[AnalysisResult], known_violations: List[Violation], new_violations: List[Violation]) -> str:
+    """Generate enhanced HTML report with knowledge base insights"""
+    total = sum(len(r.violations) for r in results)
+    misra_count = sum(1 for r in results for v in r.violations if v.standard == "MISRA")
+    cert_count = sum(1 for r in results for v in r.violations if v.standard == "CERT")
+    files_count = len(results)
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    
+    known_count = len(known_violations)
+    new_count = len(new_violations)
+    with_fixes = sum(1 for v in known_violations if v.has_proven_fix)
+
+    severity_color = {
+        "Mandatory": "#c0392b", "Required": "#e67e22", "Advisory": "#2980b9",
+        "High": "#c0392b", "Medium": "#e67e22", "Low": "#27ae60"
+    }
+    standard_color = {"MISRA": "#8e44ad", "CERT": "#16a085"}
+
+    # Generate rows for all violations
+    all_violations = known_violations + new_violations
+    rows = ""
+    for result in results:
+        for v in result.violations:
+            sc = severity_color.get(v.severity, "#555")
+            stc = standard_color.get(v.standard, "#555")
+            
+            # Add status badge
+            status_badge = ""
+            if v.is_known:
+                if v.has_proven_fix:
+                    status_badge = '<span class="badge" style="background:#27ae60;margin-left:5px" title="Has proven fix">✅ KNOWN (Fix Available)</span>'
+                else:
+                    status_badge = f'<span class="badge" style="background:#3498db;margin-left:5px" title="Seen {v.occurrence_count} times">📊 KNOWN ({v.occurrence_count}x)</span>'
+            else:
+                status_badge = '<span class="badge" style="background:#e74c3c;margin-left:5px">⚠️ NEW</span>'
+            
+            # Add proven fix tooltip
+            fix_tooltip = ""
+            if v.proven_fix:
+                fix_info = html.escape(v.proven_fix[:200])
+                fix_tooltip = f'<div style="font-size:0.85em;color:#27ae60;margin-top:3px">💡 Fix: {fix_info}...</div>'
+            
+            rows += f"""
+        <tr>
+          <td><span class="badge" style="background:{stc}">{html.escape(v.standard)}</span></td>
+          <td><code>{html.escape(v.rule_id)}</code>{status_badge}</td>
+          <td><span class="badge" style="background:{sc}">{html.escape(v.severity)}</span></td>
+          <td>{html.escape(v.category)}</td>
+          <td>{html.escape(os.path.basename(result.file))}</td>
+          <td style="text-align:center">{v.line}</td>
+          <td>{html.escape(v.message)}{fix_tooltip}</td>
+          <td><pre class="snippet">{html.escape(v.snippet.strip())}</pre></td>
+        </tr>"""
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>MISRA / CERT Static Analysis Report with Knowledge Base Insights</title>
+<style>
+  body {{ font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f8; margin: 0; padding: 20px; color: #2c3e50; }}
+  h1 {{ color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }}
+  .meta {{ color: #7f8c8d; font-size: 0.9em; margin-bottom: 20px; }}
+  .summary {{ display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }}
+  .card {{ background: #fff; border-radius: 8px; padding: 20px 30px; box-shadow: 0 2px 8px rgba(0,0,0,.08);
+            text-align: center; min-width: 130px; }}
+  .card .num {{ font-size: 2.4em; font-weight: bold; }}
+  .card .lbl {{ font-size: 0.85em; color: #7f8c8d; text-transform: uppercase; }}
+  .kb-alert {{ background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 20px 0; border-radius: 4px; }}
+  .kb-success {{ background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 20px 0; border-radius: 4px; }}
+  table {{ width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px;
+           box-shadow: 0 2px 8px rgba(0,0,0,.08); overflow: hidden; }}
+  th {{ background: #2c3e50; color: #fff; padding: 12px 10px; text-align: left; font-size: 0.85em; }}
+  td {{ padding: 10px; border-bottom: 1px solid #ecf0f1; font-size: 0.88em; vertical-align: top; }}
+  tr:hover td {{ background: #f8f9fa; }}
+  .badge {{ color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.78em; font-weight: bold; }}
+  pre.snippet {{ background: #2c3e50; color: #ecf0f1; padding: 6px 10px; border-radius: 4px;
+                  margin: 0; font-size: 0.82em; white-space: pre-wrap; word-break: break-all; max-width: 300px; }}
+  code {{ background: #ecf0f1; padding: 2px 6px; border-radius: 3px; font-size: 0.85em; }}
+</style>
+</head>
+<body>
+<h1>🔍 MISRA-C / CERT-C Static Analysis Report</h1>
+<p class="meta">Generated: {now} &nbsp;|&nbsp; Files analyzed: {files_count}</p>
+
+<div class="summary">
+  <div class="card"><div class="num" style="color:#c0392b">{total}</div><div class="lbl">Total Violations</div></div>
+  <div class="card"><div class="num" style="color:#27ae60">{known_count}</div><div class="lbl">Known Violations</div></div>
+  <div class="card"><div class="num" style="color:#e74c3c">{new_count}</div><div class="lbl">New Violations</div></div>
+  <div class="card"><div class="num" style="color:#3498db">{with_fixes}</div><div class="lbl">With Proven Fixes</div></div>
+  <div class="card"><div class="num" style="color:#8e44ad">{misra_count}</div><div class="lbl">MISRA Violations</div></div>
+  <div class="card"><div class="num" style="color:#16a085">{cert_count}</div><div class="lbl">CERT Violations</div></div>
+</div>
+
+{f'<div class="kb-alert">⚠️ <strong>{new_count} NEW violations detected!</strong> These haven\'t been seen before - review carefully.</div>' if new_count > 0 else ''}
+{f'<div class="kb-success">✅ <strong>{with_fixes} violations have proven fixes available</strong> from previous analyses. Apply these to resolve issues faster!</div>' if with_fixes > 0 else ''}
+
+<table>
+  <thead>
+    <tr>
+      <th>Standard</th><th>Rule ID / Status</th><th>Severity</th><th>Category</th>
+      <th>File</th><th>Line</th><th>Message / Fix Suggestion</th><th>Code Snippet</th>
+    </tr>
+  </thead>
+  <tbody>
+    {rows if rows else '<tr><td colspan="8" style="text-align:center;padding:30px;color:#27ae60">✅ No violations found!</td></tr>'}
+  </tbody>
+</table>
+
+<div style="margin-top:30px;padding:15px;background:#fff;border-radius:8px;box-shadow: 0 2px 8px rgba(0,0,0,.08)">
+  <h3>Legend</h3>
+  <p><span class="badge" style="background:#27ae60">✅ KNOWN (Fix Available)</span> - Violation seen before with proven fix</p>
+  <p><span class="badge" style="background:#3498db">📊 KNOWN (Nx)</span> - Violation seen N times before</p>
+  <p><span class="badge" style="background:#e74c3c">⚠️ NEW</span> - First time seeing this violation</p>
+  <p>💡 <span style="color:#27ae60">Fix suggestions</span> are provided for known violations based on successful fixes from previous analyses</p>
+</div>
+</body>
+</html>"""
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Knowledge Base Integration
+# ─────────────────────────────────────────────────────────────────────────────
+
+def load_knowledge_bases(kb_dir: Path, module_name: Optional[str] = None):
+    """
+    Load module-specific and master knowledge bases
+    
+    Args:
+        kb_dir: Knowledge base directory
+        module_name: Optional module name for module-specific KB
+    
+    Returns:
+        Tuple of (module_kb, master_kb)
+    """
+    module_kb = {}
+    master_kb = {}
+    
+    # Load module-specific knowledge base
+    if module_name:
+        module_kb_path = kb_dir / f"{module_name}_KnowledgeDatabase.json"
+        if module_kb_path.exists():
+            try:
+                with open(module_kb_path, 'r', encoding='utf-8') as f:
+                    module_kb = json.load(f)
+                print(f"[INFO] Loaded knowledge base for module: {module_name}", file=sys.stderr)
+            except Exception as e:
+                print(f"[WARNING] Could not load module KB: {e}", file=sys.stderr)
+    
+    # Load master knowledge base
+    master_kb_path = kb_dir / "Master_KnowledgeDatabase.json"
+    if master_kb_path.exists():
+        try:
+            with open(master_kb_path, 'r', encoding='utf-8') as f:
+                master_kb = json.load(f)
+            print(f"[INFO] Loaded master knowledge base", file=sys.stderr)
+        except Exception as e:
+            print(f"[WARNING] Could not load master KB: {e}", file=sys.stderr)
+    
+    return module_kb, master_kb
+
+
+def check_violation_against_kb(violation: Violation, module_kb: dict, master_kb: dict):
+    """
+    Check if violation is known and get insights
+    
+    Args:
+        violation: The violation to check
+        module_kb: Module-specific knowledge base
+        master_kb: Master knowledge base
+    
+    Returns:
+        Updated violation with KB insights
+    """
+    rule_id = violation.rule_id
+    
+    # Check module-specific KB first
+    if module_kb and 'violations' in module_kb:
+        if rule_id in module_kb['violations']:
+            vdata = module_kb['violations'][rule_id]
+            violation.is_known = True
+            violation.occurrence_count = vdata.get('occurrence_count', 0)
+            violation.has_proven_fix = vdata.get('fix_applied', False)
+            
+            if vdata.get('fix_details'):
+                fix_details = vdata['fix_details']
+                if isinstance(fix_details, dict):
+                    violation.proven_fix = fix_details.get('description', str(fix_details))
+                else:
+                    violation.proven_fix = str(fix_details)
+            
+            return violation
+    
+    # Check master KB for cross-module insights
+    if master_kb and 'violations' in master_kb:
+        if rule_id in master_kb['violations']:
+            vdata = master_kb['violations'][rule_id]
+            violation.is_known = True
+            violation.occurrence_count = vdata.get('total_occurrences', 0)
+            
+            # Check for proven fixes from other modules
+            fix_examples = vdata.get('fix_examples', [])
+            if fix_examples:
+                violation.has_proven_fix = True
+                first_fix = fix_examples[0]
+                fix_details = first_fix.get('fix_details', {})
+                
+                if isinstance(fix_details, dict):
+                    fix_desc = fix_details.get('description', str(fix_details))
+                    source_module = first_fix.get('module', 'another module')
+                    violation.proven_fix = f"[From {source_module}] {fix_desc}"
+                else:
+                    violation.proven_fix = str(fix_details)
+    
+    return violation
+
+
+def classify_violations(results: List[AnalysisResult], module_kb: dict, master_kb: dict):
+    """
+    Classify violations as known vs new based on knowledge bases
+    
+    Args:
+        results: Analysis results
+        module_kb: Module-specific knowledge base
+        master_kb: Master knowledge base
+    
+    Returns:
+        Tuple of (known_violations, new_violations, total_count)
+    """
+    known_violations = []
+    new_violations = []
+    
+    for result in results:
+        for violation in result.violations:
+            check_violation_against_kb(violation, module_kb, master_kb)
+            
+            if violation.is_known:
+                known_violations.append(violation)
+            else:
+                new_violations.append(violation)
+    
+    total_count = len(known_violations) + len(new_violations)
+    
+    return known_violations, new_violations, total_count
+
+
+def print_knowledge_summary(known_violations: List[Violation], new_violations: List[Violation]):
+    """
+    Print summary of known vs new violations
+    
+    Args:
+        known_violations: List of known violations
+        new_violations: List of new violations
+    """
+    print("\n" + "="*60, file=sys.stderr)
+    print("KNOWLEDGE BASE SUMMARY", file=sys.stderr)
+    print("="*60, file=sys.stderr)
+    print(f"  Known Violations (seen before): {len(known_violations)}", file=sys.stderr)
+    print(f"  New Violations (first time): {len(new_violations)}", file=sys.stderr)
+    print(f"  Total Violations: {len(known_violations) + len(new_violations)}", file=sys.stderr)
+    
+    # Count violations with proven fixes
+    with_fixes = sum(1 for v in known_violations if v.has_proven_fix)
+    if with_fixes > 0:
+        print(f"  Known with Proven Fixes: {with_fixes}", file=sys.stderr)
+    
+    if new_violations:
+        print(f"\n  ⚠️  {len(new_violations)} NEW violations detected!", file=sys.stderr)
+        print(f"      Review these carefully as they haven't been seen before", file=sys.stderr)
+    
+    if with_fixes > 0:
+        print(f"\n  ✅ {with_fixes} violations have proven fixes available", file=sys.stderr)
+        print(f"      Apply these fixes to resolve issues faster", file=sys.stderr)
+    
+    print("="*60 + "\n", file=sys.stderr)
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # CLI Entry Point
 # ─────────────────────────────────────────────────────────────────────────────
@@ -777,6 +1058,12 @@ def main():
                         help="Output report format (default: text)")
     parser.add_argument("--output", default=None,
                         help="Save report to file (e.g. report.html). If omitted, prints to stdout.")
+    parser.add_argument("--module", default=None,
+                        help="Module name to check against knowledge base")
+    parser.add_argument("--kb-dir", default=None,
+                        help="Knowledge base directory (default: ../knowledge_base)")
+    parser.add_argument("--show-known", action="store_true",
+                        help="Show detailed breakdown of known vs new violations")
     args = parser.parse_args()
 
     print(f"[INFO] Analyzing: {args.path}", file=sys.stderr)
@@ -788,15 +1075,67 @@ def main():
 
     total = sum(len(r.violations) for r in results)
     print(f"[INFO] Analyzed {len(results)} file(s), found {total} violation(s).", file=sys.stderr)
+    
+    # Knowledge base integration
+    module_kb = {}
+    master_kb = {}
+    known_violations = []
+    new_violations = []
+    
+    if args.module or args.kb_dir:
+        # Determine knowledge base directory
+        if args.kb_dir:
+            kb_dir = Path(args.kb_dir)
+        else:
+            # Default: ../knowledge_base relative to script
+            kb_dir = Path(__file__).parent.parent / "knowledge_base"
+        
+        if kb_dir.exists():
+            module_kb, master_kb = load_knowledge_bases(kb_dir, args.module)
+            
+            # Classify violations
+            if module_kb or master_kb:
+                known_violations, new_violations, total_classified = classify_violations(
+                    results, module_kb, master_kb
+                )
+                print_knowledge_summary(known_violations, new_violations)
+                
+                # Show detailed breakdown if requested
+                if args.show_known:
+                    print("\n" + "="*60, file=sys.stderr)
+                    print("KNOWN VIOLATIONS DETAILS", file=sys.stderr)
+                    print("="*60, file=sys.stderr)
+                    for v in known_violations[:10]:  # Show first 10
+                        print(f"\n  {v.rule_id}", file=sys.stderr)
+                        print(f"    Previously seen: {v.occurrence_count} times", file=sys.stderr)
+                        if v.has_proven_fix:
+                            print(f"    ✅ Proven fix: {v.proven_fix[:80]}...", file=sys.stderr)
+                    
+                    if new_violations:
+                        print("\n" + "="*60, file=sys.stderr)
+                        print("NEW VIOLATIONS DETAILS", file=sys.stderr)
+                        print("="*60, file=sys.stderr)
+                        for v in new_violations[:10]:  # Show first 10
+                            print(f"\n  {v.rule_id}", file=sys.stderr)
+                            print(f"    Severity: {v.severity} | Category: {v.category}", file=sys.stderr)
+                            print(f"    ⚠️  First time detected - review carefully", file=sys.stderr)
+                    print("="*60 + "\n", file=sys.stderr)
+        else:
+            print(f"[INFO] Knowledge base directory not found: {kb_dir}", file=sys.stderr)
+            print(f"[INFO] Proceeding without knowledge base integration", file=sys.stderr)
 
     if args.report == "json":
         output = report_json(results)
     elif args.report == "html":
-        output = report_html(results)
+        output = report_html_with_kb(results, known_violations, new_violations) if (known_violations or new_violations) else report_html(results)
     else:
         output = report_text(results)
 
     if args.output:
+        # Create output directory if it doesn't exist
+        output_path = Path(args.output)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        
         with open(args.output, 'w', encoding='utf-8') as f:
             f.write(output)
         print(f"[INFO] Report saved to: {args.output}", file=sys.stderr)

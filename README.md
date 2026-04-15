@@ -6,7 +6,11 @@
 
 For comprehensive documentation, see the [`docs/`](docs/) folder:
 
+- **[Knowledge Base Integration](docs/KNOWLEDGE_BASE_INTEGRATION.md)** - Smart analysis with KB insights (NEW!)
+- **[Cross-Module Knowledge Base](docs/CROSS_MODULE_KNOWLEDGE.md)** - Consolidate learnings across modules
+- **[Auto-Generate Workflow](docs/AUTO_GENERATE_WORKFLOW.md)** - Use without Parasoft report
 - **[Quick Start Guide](docs/AI_QUICKSTART.md)** - Get started in 5 minutes
+- **[MISRA/CERT Integration](docs/MISRA_CERT_INTEGRATION.md)** - Static analyzer integration
 - **[Architecture Diagram](docs/ARCHITECTURE_DIAGRAM.md)** - System architecture and workflow
 - **[Project Structure](docs/STRUCTURE.md)** - Complete folder organization
 - **[Reorganization Summary](docs/REORGANIZATION_SUMMARY.md)** - Latest structural changes
@@ -15,7 +19,11 @@ For comprehensive documentation, see the [`docs/`](docs/) folder:
 ---
 
 ## Version
-- **2.0.0** - AI Agent with Knowledge Database
+- **2.2.1** - Knowledge Base Integration for Analyzers (NEW!)
+- 2.2.0 - Cross-Module Knowledge Base
+- 2.1.1 - Auto-Generate Workflow
+- 2.1.0 - MISRA/CERT Integration
+- 2.0.0 - AI Agent with Knowledge Database
 - Version 1.0.0 - Basic Report Analysis
 - Developer: Himanshu R
 - Platform: Windows
@@ -26,8 +34,14 @@ For comprehensive documentation, see the [`docs/`](docs/) folder:
 ## 🚀 Features
 
 ### Core Capabilities
-1. **MISRA/CERT Pre-Analysis** - Integrated MISRA-C:2012 and CERT-C static analyzer for comprehensive code checking
-2. **Git Integration** - Seamlessly integrated with Visual Studio Code and Git repositories
+1. **Smart Knowledge Base Integration (NEW!)** - Analyzers cross-check violations against KB for known vs new detection and proven fix suggestions
+2. **Cross-Module Knowledge Base** - Consolidate learnings across all modules for intelligent insights and proven fix recommendations
+3. **Auto-Generate Workflow** - Automatically generate MISRA/CERT report when Parasoft report unavailable
+4. **MISRA/CERT Pre-Analysis** - Integrated MISRA-C:2012 and CERT-C static analyzer for comprehensive code checking
+5. **Git Integration** - Seamlessly integrated with Visual Studio Code and Git repositories
+6. **AI-Powered Analysis** - Local LLM integration via Ollama for intelligent fix suggestions
+7. **Qorix Deviations Integration** - Automatically checks violations against Qorix_CP_Common_Deviations.xlsx
+8. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
 3. **AI-Powered Analysis** - Local LLM integration via Ollama for intelligent fix suggestions
 4. **Qorix Deviations Integration** - Automatically checks violations against Qorix_CP_Common_Deviations.xlsx
 5. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
@@ -197,7 +211,22 @@ This **hybrid approach** keeps resource usage low while providing AI benefits wh
 
 ### Method 1: Quick Start with Run.bat (Windows)
 
+**Option A: With Parasoft Report**
 1. **Place your report**: Copy `report_dev1.html` from Parasoft to the project root folder
+2. **Run**: Double-click `scripts\Run.bat`
+3. **Follow prompts**: Enter module name and options
+
+**Option B: Generate Report from Source Code (New!)**
+1. **No Parasoft report needed**: Skip placing report_dev1.html
+2. **Run**: Double-click `scripts\Run.bat`
+3. **Provide source path**: When prompted, enter path to your C/C++ source code
+4. **Automatic generation**: Tool generates MISRA/CERT report and uses it for analysis
+
+The tool automatically:
+- Detects if report_dev1.html exists
+- If not found but source code path provided → generates MISRA/CERT report
+- Uses the generated report for complete analysis workflow
+- Applies Qorix deviations and generates fixes
 2. **Run the batch file**: Double-click `scripts\Run.bat` (or run from project root)
 3. **Enter module name**: When prompted, enter the module name (e.g., "Mka")
 4. **Review results**: Check the generated directories for outputs
@@ -364,6 +393,7 @@ knowledge_base/                  # Module-specific databases
 reports/                         # Analysis summaries and Excel reports
 ├── Mka_analysis_summary.json
 ├── Mka_violations_report.xlsx  # Excel report with violations
+├── Mka_violations_report_UPDATED.xlsx  # Excel report with justifications added
 └── ...
 
 justifications/                  # Generated suppress comments
@@ -391,6 +421,12 @@ The generated Excel report (`{Module}_violations_report.xlsx`) contains:
   - File name
   - Line number
   - **Status** (Justified / Needs Code Update / Analysis Required)
+
+The **updated Excel report** (`{Module}_violations_report_UPDATED.xlsx`) is generated after adding justifications and includes:
+- All sheets from the original report
+- **Additional "Justification" column** in Detailed Violations sheet showing:
+  - "Yes - [justification text]" for violations with justifications
+  - "No" for violations without justifications
 
 ### Parasoft Suppress Comments
 For violations marked as "Justified" in the Qorix deviations file, the tool automatically generates suppress comments in the format:
@@ -473,6 +509,154 @@ python src\run_query.py knowledge_base --excel violations.xlsx
 # Export specific module
 python src\run_query.py knowledge_base --excel violations.xlsx --module Mka
 ```
+
+---
+
+## 🌐 Cross-Module Knowledge Base (NEW!)
+
+**Consolidate learnings from all analyzed modules** to create a master knowledge database with intelligent insights.
+
+### Why Use It?
+
+- **Learn from past analyses** - Apply proven fixes from other modules
+- **Identify patterns** - Find violations appearing across multiple modules
+- **Prioritize work** - Focus on widespread issues first
+- **Share knowledge** - Leverage team expertise across projects
+- **Track progress** - Measure improvement company-wide
+
+### Usage
+
+#### Step 1: Analyze Multiple Modules
+```powershell
+# Analyze each module separately
+scripts\Run.bat  # Enter: Mka
+scripts\Run.bat  # Enter: Mkb
+scripts\Run.bat  # Enter: Mkc
+```
+
+#### Step 2: Consolidate Knowledge
+```powershell
+# Consolidate all knowledge databases
+scripts\Consolidate_Knowledge.bat
+```
+
+**Output:**
+- `Master_KnowledgeDatabase.json` - Consolidated knowledge
+- `Master_Knowledge_Report.xlsx` - Excel report with insights
+- `Master_Knowledge_Report.html` - Interactive HTML report
+- Recommendations for priority actions
+- Cross-module violation patterns
+- Proven fix examples
+
+#### Step 3: Query Master Knowledge
+```powershell
+# Interactive query tool
+scripts\Query_Master_Knowledge.bat
+```
+
+**Features:**
+- View cross-module violations
+- Find proven fixes from other modules
+- Get violation insights with fix success rates
+- Filter by category, severity
+- Export consolidated reports
+- View recommendations
+
+### Benefits
+
+```powershell
+# Example: Find violations with proven fixes
+Query Master Knowledge > Select option 7
+
+==================================================
+VIOLATIONS WITH PROVEN FIXES (34 total)
+==================================================
+
+1. CERT-EXP34-C
+   Fix Success Rate: 100.0%
+   Modules with Fixes: 3
+   Total Occurrences: 15
+   → Apply the same fix pattern!
+
+2. MISRA-C:2012 Rule 21.3
+   Fix Success Rate: 66.7%
+   Modules with Fixes: 2
+   → Review and adapt existing fixes
+```
+
+**See [CROSS_MODULE_KNOWLEDGE.md](docs/CROSS_MODULE_KNOWLEDGE.md) for complete guide**
+
+---
+
+## 🧠 Smart Analysis with Knowledge Base (NEW!)
+
+**Every analysis now checks against your knowledge base** to provide intelligent insights.
+
+### What You Get
+
+When running analysis on a module (new or existing):
+
+```powershell
+scripts\Run.bat
+# Enter module: Mka
+# Enter source: D:\MyProject\src
+
+Output with Knowledge Base Integration:
+
+==================================================
+KNOWLEDGE BASE SUMMARY
+==================================================
+  Known Violations (seen before): 42
+  New Violations (first time): 23
+  Total Violations: 65
+  Known with Proven Fixes: 15
+
+  ⚠️  23 NEW violations detected!
+      Review these carefully
+
+  ✅ 15 violations have proven fixes available
+      Apply these to resolve faster
+==================================================
+```
+
+### Features
+
+**✅ Automatic Classification**
+- **KNOWN** - Violations seen before (green badge)
+- **NEW** - First-time violations (red badge)
+- **2023 Proven Fixes** - Solutions from previous analyses
+
+**📊 Smart Insights**
+```
+CERT-EXP34-C
+  Previously seen: 5 times
+  ✅ Proven fix: Add NULL pointer check before dereference
+                 [From Module Mkb - 100% success rate]
+```
+
+**🎯 Prioritization**
+- Focus on NEW violations first (potential regressions)
+- Apply proven fixes to KNOWN violations
+- Track violation trends over time
+
+### How It Works
+
+1. **Run analysis** on any module
+2. **Tool automatically checks** module KB and master KB
+3. **Classifies each violation** as KNOWN or NEW
+4. **Suggests proven fixes** for known violations
+5. **Enhanced HTML report** shows everything visually
+
+### Enhanced Reports
+
+HTML reports now include:
+- Color-coded badges (KNOWN/NEW)
+- Inline fix suggestions with source module
+- Occurrence counts
+- Alert banners for new violations
+- Success rates for proven fixes
+
+**See [KNOWLEDGE_BASE_INTEGRATION.md](docs/KNOWLEDGE_BASE_INTEGRATION.md) for complete guide**
 
 ---
 

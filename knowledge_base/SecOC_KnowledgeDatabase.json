@@ -1,0 +1,2848 @@
+{
+  "module_name": "SecOC",
+  "created_date": "2026-04-14T17:16:16.275140",
+  "last_updated": "2026-04-14T17:16:16.949166",
+  "version": "1.0",
+  "total_unique_violations": 21,
+  "violations": {
+    "MISRAC2012-RULE_2_8-a-4": {
+      "violation_id": "MISRAC2012-RULE_2_8-a-4",
+      "violation_text": "The 'SecOC_GaaRxQueueIndexBuffer' variable is not used in the testing scope",
+      "first_seen": "2026-04-14T17:16:16.940447",
+      "last_seen": "2026-04-14T17:16:16.942471",
+      "occurrence_count": 2,
+      "files_affected": [
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 902,
+          "timestamp": "2026-04-14T17:16:16.940752"
+        },
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 1894,
+          "timestamp": "2026-04-14T17:16:16.942473"
+        }
+      ],
+      "line_numbers": [
+        902,
+        1894
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.940778",
+          "note": "Security-related violation - high priority"
+        },
+        {
+          "timestamp": "2026-04-14T17:16:16.940780",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "MEDIUM",
+      "category": "MISRA"
+    },
+    "CERT_C-API00-a-3": {
+      "violation_id": "CERT_C-API00-a-3",
+      "violation_text": "Parameter 'jobId' is not validated before use",
+      "first_seen": "2026-04-14T17:16:16.940789",
+      "last_seen": "2026-04-14T17:16:16.948962",
+      "occurrence_count": 94,
+      "files_affected": [
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 1575,
+          "timestamp": "2026-04-14T17:16:16.941141"
+        },
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 1631,
+          "timestamp": "2026-04-14T17:16:16.942039"
+        },
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 1687,
+          "timestamp": "2026-04-14T17:16:16.942054"
+        },
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 1744,
+          "timestamp": "2026-04-14T17:16:16.942062"
+        },
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 1802,
+          "timestamp": "2026-04-14T17:16:16.942074"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 651,
+          "timestamp": "2026-04-14T17:16:16.942488"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 652,
+          "timestamp": "2026-04-14T17:16:16.942495"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 793,
+          "timestamp": "2026-04-14T17:16:16.942503"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 794,
+          "timestamp": "2026-04-14T17:16:16.942510"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 1327,
+          "timestamp": "2026-04-14T17:16:16.942528"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 295,
+          "timestamp": "2026-04-14T17:16:16.944175"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 755,
+          "timestamp": "2026-04-14T17:16:16.944192"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2062,
+          "timestamp": "2026-04-14T17:16:16.944250"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2065,
+          "timestamp": "2026-04-14T17:16:16.944256"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2763,
+          "timestamp": "2026-04-14T17:16:16.945133"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 3845,
+          "timestamp": "2026-04-14T17:16:16.945175"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 4185,
+          "timestamp": "2026-04-14T17:16:16.945180"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 4188,
+          "timestamp": "2026-04-14T17:16:16.945186"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 4191,
+          "timestamp": "2026-04-14T17:16:16.945192"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 4194,
+          "timestamp": "2026-04-14T17:16:16.945198"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1499,
+          "timestamp": "2026-04-14T17:16:16.946185"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 2156,
+          "timestamp": "2026-04-14T17:16:16.946187"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 2442,
+          "timestamp": "2026-04-14T17:16:16.946206"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 2750,
+          "timestamp": "2026-04-14T17:16:16.946216"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 2968,
+          "timestamp": "2026-04-14T17:16:16.946218"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 3296,
+          "timestamp": "2026-04-14T17:16:16.946221"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 3641,
+          "timestamp": "2026-04-14T17:16:16.946559"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4062,
+          "timestamp": "2026-04-14T17:16:16.946580"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4149,
+          "timestamp": "2026-04-14T17:16:16.946583"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4152,
+          "timestamp": "2026-04-14T17:16:16.946586"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4320,
+          "timestamp": "2026-04-14T17:16:16.946592"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4321,
+          "timestamp": "2026-04-14T17:16:16.946595"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4609,
+          "timestamp": "2026-04-14T17:16:16.946609"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4814,
+          "timestamp": "2026-04-14T17:16:16.946624"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4817,
+          "timestamp": "2026-04-14T17:16:16.946629"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4820,
+          "timestamp": "2026-04-14T17:16:16.946632"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5091,
+          "timestamp": "2026-04-14T17:16:16.947085"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5223,
+          "timestamp": "2026-04-14T17:16:16.947096"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5440,
+          "timestamp": "2026-04-14T17:16:16.947110"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5751,
+          "timestamp": "2026-04-14T17:16:16.947126"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5899,
+          "timestamp": "2026-04-14T17:16:16.947128"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6857,
+          "timestamp": "2026-04-14T17:16:16.947188"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7203,
+          "timestamp": "2026-04-14T17:16:16.947444"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7321,
+          "timestamp": "2026-04-14T17:16:16.947447"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7714,
+          "timestamp": "2026-04-14T17:16:16.947457"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7992,
+          "timestamp": "2026-04-14T17:16:16.947469"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 8450,
+          "timestamp": "2026-04-14T17:16:16.947473"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 8590,
+          "timestamp": "2026-04-14T17:16:16.947476"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9102,
+          "timestamp": "2026-04-14T17:16:16.947833"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9403,
+          "timestamp": "2026-04-14T17:16:16.947852"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9496,
+          "timestamp": "2026-04-14T17:16:16.947859"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9499,
+          "timestamp": "2026-04-14T17:16:16.947867"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9596,
+          "timestamp": "2026-04-14T17:16:16.947870"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9599,
+          "timestamp": "2026-04-14T17:16:16.947874"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9602,
+          "timestamp": "2026-04-14T17:16:16.947877"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9903,
+          "timestamp": "2026-04-14T17:16:16.947894"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9912,
+          "timestamp": "2026-04-14T17:16:16.947901"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10167,
+          "timestamp": "2026-04-14T17:16:16.947912"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10170,
+          "timestamp": "2026-04-14T17:16:16.947915"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10341,
+          "timestamp": "2026-04-14T17:16:16.947926"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10490,
+          "timestamp": "2026-04-14T17:16:16.948124"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10493,
+          "timestamp": "2026-04-14T17:16:16.948131"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10621,
+          "timestamp": "2026-04-14T17:16:16.948148"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10627,
+          "timestamp": "2026-04-14T17:16:16.948155"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10825,
+          "timestamp": "2026-04-14T17:16:16.948170"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 11037,
+          "timestamp": "2026-04-14T17:16:16.948179"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 11040,
+          "timestamp": "2026-04-14T17:16:16.948182"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 11151,
+          "timestamp": "2026-04-14T17:16:16.948187"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 11416,
+          "timestamp": "2026-04-14T17:16:16.948198"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 11558,
+          "timestamp": "2026-04-14T17:16:16.948202"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 11792,
+          "timestamp": "2026-04-14T17:16:16.948229"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 12051,
+          "timestamp": "2026-04-14T17:16:16.948233"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 12514,
+          "timestamp": "2026-04-14T17:16:16.948237"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 12515,
+          "timestamp": "2026-04-14T17:16:16.948241"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 12517,
+          "timestamp": "2026-04-14T17:16:16.948244"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 12518,
+          "timestamp": "2026-04-14T17:16:16.948248"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 12795,
+          "timestamp": "2026-04-14T17:16:16.948260"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 12796,
+          "timestamp": "2026-04-14T17:16:16.948264"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 12955,
+          "timestamp": "2026-04-14T17:16:16.948268"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 12961,
+          "timestamp": "2026-04-14T17:16:16.948273"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13124,
+          "timestamp": "2026-04-14T17:16:16.948276"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13130,
+          "timestamp": "2026-04-14T17:16:16.948280"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13136,
+          "timestamp": "2026-04-14T17:16:16.948285"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13265,
+          "timestamp": "2026-04-14T17:16:16.948689"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13266,
+          "timestamp": "2026-04-14T17:16:16.948693"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13621,
+          "timestamp": "2026-04-14T17:16:16.948711"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13721,
+          "timestamp": "2026-04-14T17:16:16.948717"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 14117,
+          "timestamp": "2026-04-14T17:16:16.948727"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 14122,
+          "timestamp": "2026-04-14T17:16:16.948738"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 14260,
+          "timestamp": "2026-04-14T17:16:16.948931"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 14418,
+          "timestamp": "2026-04-14T17:16:16.948937"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 14684,
+          "timestamp": "2026-04-14T17:16:16.948942"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 14908,
+          "timestamp": "2026-04-14T17:16:16.948958"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 15418,
+          "timestamp": "2026-04-14T17:16:16.948963"
+        }
+      ],
+      "line_numbers": [
+        1575,
+        1631,
+        1687,
+        1744,
+        1802,
+        651,
+        652,
+        793,
+        794,
+        1327,
+        295,
+        755,
+        2062,
+        2065,
+        2763,
+        3845,
+        4185,
+        4188,
+        4191,
+        4194,
+        1499,
+        2156,
+        2442,
+        2750,
+        2968,
+        3296,
+        3641,
+        4062,
+        4149,
+        4152,
+        4320,
+        4321,
+        4609,
+        4814,
+        4817,
+        4820,
+        5091,
+        5223,
+        5440,
+        5751,
+        5899,
+        6857,
+        7203,
+        7321,
+        7714,
+        7992,
+        8450,
+        8590,
+        9102,
+        9403,
+        9496,
+        9499,
+        9596,
+        9599,
+        9602,
+        9903,
+        9912,
+        10167,
+        10170,
+        10341,
+        10490,
+        10493,
+        10621,
+        10627,
+        10825,
+        11037,
+        11040,
+        11151,
+        11416,
+        11558,
+        11792,
+        12051,
+        12514,
+        12515,
+        12517,
+        12518,
+        12795,
+        12796,
+        12955,
+        12961,
+        13124,
+        13130,
+        13136,
+        13265,
+        13266,
+        13621,
+        13721,
+        14117,
+        14122,
+        14260,
+        14418,
+        14684,
+        14908,
+        15418
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.941156",
+          "note": "Security-related violation - high priority"
+        },
+        {
+          "timestamp": "2026-04-14T17:16:16.941158",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "LOW",
+      "category": "CERT"
+    },
+    "CERT_C-DCL00-b-3": {
+      "violation_id": "CERT_C-DCL00-b-3",
+      "violation_text": "Declare parameter 'Result' as const",
+      "first_seen": "2026-04-14T17:16:16.941160",
+      "last_seen": "2026-04-14T17:16:16.948733",
+      "occurrence_count": 51,
+      "files_affected": [
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 1578,
+          "timestamp": "2026-04-14T17:16:16.941480"
+        },
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 1634,
+          "timestamp": "2026-04-14T17:16:16.942049"
+        },
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 1690,
+          "timestamp": "2026-04-14T17:16:16.942058"
+        },
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 1747,
+          "timestamp": "2026-04-14T17:16:16.942066"
+        },
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 1805,
+          "timestamp": "2026-04-14T17:16:16.942079"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 305,
+          "timestamp": "2026-04-14T17:16:16.942478"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 443,
+          "timestamp": "2026-04-14T17:16:16.942482"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 651,
+          "timestamp": "2026-04-14T17:16:16.942485"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 652,
+          "timestamp": "2026-04-14T17:16:16.942491"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 793,
+          "timestamp": "2026-04-14T17:16:16.942501"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 794,
+          "timestamp": "2026-04-14T17:16:16.942506"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 943,
+          "timestamp": "2026-04-14T17:16:16.942513"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 1092,
+          "timestamp": "2026-04-14T17:16:16.942516"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 1323,
+          "timestamp": "2026-04-14T17:16:16.942519"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 1324,
+          "timestamp": "2026-04-14T17:16:16.942522"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 1327,
+          "timestamp": "2026-04-14T17:16:16.942525"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 1572,
+          "timestamp": "2026-04-14T17:16:16.942530"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 291,
+          "timestamp": "2026-04-14T17:16:16.944167"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 295,
+          "timestamp": "2026-04-14T17:16:16.944172"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 752,
+          "timestamp": "2026-04-14T17:16:16.944187"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 755,
+          "timestamp": "2026-04-14T17:16:16.944189"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1215,
+          "timestamp": "2026-04-14T17:16:16.944199"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1218,
+          "timestamp": "2026-04-14T17:16:16.944202"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1669,
+          "timestamp": "2026-04-14T17:16:16.944213"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1672,
+          "timestamp": "2026-04-14T17:16:16.944216"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1678,
+          "timestamp": "2026-04-14T17:16:16.944218"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1679,
+          "timestamp": "2026-04-14T17:16:16.944221"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2062,
+          "timestamp": "2026-04-14T17:16:16.944247"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2065,
+          "timestamp": "2026-04-14T17:16:16.944253"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2763,
+          "timestamp": "2026-04-14T17:16:16.945121"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2763,
+          "timestamp": "2026-04-14T17:16:16.945127"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 3369,
+          "timestamp": "2026-04-14T17:16:16.945139"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 3372,
+          "timestamp": "2026-04-14T17:16:16.945147"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 3375,
+          "timestamp": "2026-04-14T17:16:16.945152"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 3841,
+          "timestamp": "2026-04-14T17:16:16.945169"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 3845,
+          "timestamp": "2026-04-14T17:16:16.945172"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 4185,
+          "timestamp": "2026-04-14T17:16:16.945177"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 4188,
+          "timestamp": "2026-04-14T17:16:16.945183"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 4191,
+          "timestamp": "2026-04-14T17:16:16.945188"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 4194,
+          "timestamp": "2026-04-14T17:16:16.945195"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 3961,
+          "timestamp": "2026-04-14T17:16:16.946577"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4320,
+          "timestamp": "2026-04-14T17:16:16.946589"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9496,
+          "timestamp": "2026-04-14T17:16:16.947855"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9499,
+          "timestamp": "2026-04-14T17:16:16.947863"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9903,
+          "timestamp": "2026-04-14T17:16:16.947891"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9912,
+          "timestamp": "2026-04-14T17:16:16.947897"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10493,
+          "timestamp": "2026-04-14T17:16:16.948128"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10621,
+          "timestamp": "2026-04-14T17:16:16.948145"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10627,
+          "timestamp": "2026-04-14T17:16:16.948152"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 14121,
+          "timestamp": "2026-04-14T17:16:16.948731"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 14122,
+          "timestamp": "2026-04-14T17:16:16.948734"
+        }
+      ],
+      "line_numbers": [
+        1578,
+        1634,
+        1690,
+        1747,
+        1805,
+        305,
+        443,
+        651,
+        652,
+        793,
+        794,
+        943,
+        1092,
+        1323,
+        1324,
+        1327,
+        1572,
+        291,
+        295,
+        752,
+        755,
+        1215,
+        1218,
+        1669,
+        1672,
+        1678,
+        1679,
+        2062,
+        2065,
+        2763,
+        3369,
+        3372,
+        3375,
+        3841,
+        3845,
+        4185,
+        4188,
+        4191,
+        4194,
+        3961,
+        4320,
+        9496,
+        9499,
+        9903,
+        9912,
+        10493,
+        10621,
+        10627,
+        14121,
+        14122
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.941531",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "LOW",
+      "category": "CERT"
+    },
+    "CDD-DUPC-3": {
+      "violation_id": "CDD-DUPC-3",
+      "violation_text": "Duplicated code: 'const PduIdType PduId = (PduIdType)0; // parasoft-suppress C...'",
+      "first_seen": "2026-04-14T17:16:16.941542",
+      "last_seen": "2026-04-14T17:16:16.948954",
+      "occurrence_count": 9,
+      "files_affected": [
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 1580,
+          "timestamp": "2026-04-14T17:16:16.941993"
+        },
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 1749,
+          "timestamp": "2026-04-14T17:16:16.942070"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 696,
+          "timestamp": "2026-04-14T17:16:16.942498"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2168,
+          "timestamp": "2026-04-14T17:16:16.944259"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2231,
+          "timestamp": "2026-04-14T17:16:16.944261"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 3667,
+          "timestamp": "2026-04-14T17:16:16.946563"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6002,
+          "timestamp": "2026-04-14T17:16:16.947132"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13353,
+          "timestamp": "2026-04-14T17:16:16.948698"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 14812,
+          "timestamp": "2026-04-14T17:16:16.948955"
+        }
+      ],
+      "line_numbers": [
+        1580,
+        1749,
+        696,
+        2168,
+        2231,
+        3667,
+        6002,
+        13353,
+        14812
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.942022",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "MEDIUM",
+      "category": "OTHER"
+    },
+    "CERT_C-DCL06-a-3": {
+      "violation_id": "CERT_C-DCL06-a-3",
+      "violation_text": "Do not use the literal constant '3'",
+      "first_seen": "2026-04-14T17:16:16.942081",
+      "last_seen": "2026-04-14T17:16:16.942082",
+      "occurrence_count": 1,
+      "files_affected": [
+        {
+          "file": "SecOC_Lcfg.c",
+          "line": 1807,
+          "timestamp": "2026-04-14T17:16:16.942448"
+        }
+      ],
+      "line_numbers": [
+        1807
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.942466",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "LOW",
+      "category": "CERT"
+    },
+    "CERT_C-INT02-a-2": {
+      "violation_id": "CERT_C-INT02-a-2",
+      "violation_text": "Implicit conversion from 'unsigned long' type to 'unsigned int' type in function's argument",
+      "first_seen": "2026-04-14T17:16:16.942532",
+      "last_seen": "2026-04-14T17:16:16.948950",
+      "occurrence_count": 55,
+      "files_affected": [
+        {
+          "file": "SecOC.c",
+          "line": 2005,
+          "timestamp": "2026-04-14T17:16:16.942857"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 2166,
+          "timestamp": "2026-04-14T17:16:16.943293"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 589,
+          "timestamp": "2026-04-14T17:16:16.944178"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 615,
+          "timestamp": "2026-04-14T17:16:16.944182"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1057,
+          "timestamp": "2026-04-14T17:16:16.944194"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1469,
+          "timestamp": "2026-04-14T17:16:16.944204"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1494,
+          "timestamp": "2026-04-14T17:16:16.944209"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1847,
+          "timestamp": "2026-04-14T17:16:16.944224"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1886,
+          "timestamp": "2026-04-14T17:16:16.944231"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1906,
+          "timestamp": "2026-04-14T17:16:16.944233"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1943,
+          "timestamp": "2026-04-14T17:16:16.944237"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1953,
+          "timestamp": "2026-04-14T17:16:16.944242"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2318,
+          "timestamp": "2026-04-14T17:16:16.944264"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2384,
+          "timestamp": "2026-04-14T17:16:16.944269"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2449,
+          "timestamp": "2026-04-14T17:16:16.944274"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2474,
+          "timestamp": "2026-04-14T17:16:16.944279"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 3740,
+          "timestamp": "2026-04-14T17:16:16.945166"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 4525,
+          "timestamp": "2026-04-14T17:16:16.945201"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 2240,
+          "timestamp": "2026-04-14T17:16:16.946190"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 2303,
+          "timestamp": "2026-04-14T17:16:16.946195"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 2324,
+          "timestamp": "2026-04-14T17:16:16.946200"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 2676,
+          "timestamp": "2026-04-14T17:16:16.946213"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 3783,
+          "timestamp": "2026-04-14T17:16:16.946569"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4460,
+          "timestamp": "2026-04-14T17:16:16.946601"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4499,
+          "timestamp": "2026-04-14T17:16:16.946603"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4676,
+          "timestamp": "2026-04-14T17:16:16.946615"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4746,
+          "timestamp": "2026-04-14T17:16:16.946621"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4927,
+          "timestamp": "2026-04-14T17:16:16.946634"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4983,
+          "timestamp": "2026-04-14T17:16:16.946640"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5203,
+          "timestamp": "2026-04-14T17:16:16.947089"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5382,
+          "timestamp": "2026-04-14T17:16:16.947100"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5382,
+          "timestamp": "2026-04-14T17:16:16.947103"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5521,
+          "timestamp": "2026-04-14T17:16:16.947113"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5548,
+          "timestamp": "2026-04-14T17:16:16.947119"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6268,
+          "timestamp": "2026-04-14T17:16:16.947136"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6280,
+          "timestamp": "2026-04-14T17:16:16.947144"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7117,
+          "timestamp": "2026-04-14T17:16:16.947194"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7131,
+          "timestamp": "2026-04-14T17:16:16.947201"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7657,
+          "timestamp": "2026-04-14T17:16:16.947451"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7837,
+          "timestamp": "2026-04-14T17:16:16.947460"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 8671,
+          "timestamp": "2026-04-14T17:16:16.947479"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 8762,
+          "timestamp": "2026-04-14T17:16:16.947491"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9188,
+          "timestamp": "2026-04-14T17:16:16.947841"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9198,
+          "timestamp": "2026-04-14T17:16:16.947848"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9707,
+          "timestamp": "2026-04-14T17:16:16.947881"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10045,
+          "timestamp": "2026-04-14T17:16:16.947905"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10251,
+          "timestamp": "2026-04-14T17:16:16.947919"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10564,
+          "timestamp": "2026-04-14T17:16:16.948137"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10740,
+          "timestamp": "2026-04-14T17:16:16.948163"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 11291,
+          "timestamp": "2026-04-14T17:16:16.948191"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 11678,
+          "timestamp": "2026-04-14T17:16:16.948210"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 11691,
+          "timestamp": "2026-04-14T17:16:16.948218"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 11705,
+          "timestamp": "2026-04-14T17:16:16.948226"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 12643,
+          "timestamp": "2026-04-14T17:16:16.948252"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 14807,
+          "timestamp": "2026-04-14T17:16:16.948951"
+        }
+      ],
+      "line_numbers": [
+        2005,
+        2166,
+        589,
+        615,
+        1057,
+        1469,
+        1494,
+        1847,
+        1886,
+        1906,
+        1943,
+        1953,
+        2318,
+        2384,
+        2449,
+        2474,
+        3740,
+        4525,
+        2240,
+        2303,
+        2324,
+        2676,
+        3783,
+        4460,
+        4499,
+        4676,
+        4746,
+        4927,
+        4983,
+        5203,
+        5382,
+        5521,
+        5548,
+        6268,
+        6280,
+        7117,
+        7131,
+        7657,
+        7837,
+        8671,
+        8762,
+        9188,
+        9198,
+        9707,
+        10045,
+        10251,
+        10564,
+        10740,
+        11291,
+        11678,
+        11691,
+        11705,
+        12643,
+        14807
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.942876",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "LOW",
+      "category": "CERT"
+    },
+    "CERT_C-POS54-a-1": {
+      "violation_id": "CERT_C-POS54-a-1",
+      "violation_text": "The value returned by the POSIX library function 'memset' should be used",
+      "first_seen": "2026-04-14T17:16:16.942879",
+      "last_seen": "2026-04-14T17:16:16.948945",
+      "occurrence_count": 78,
+      "files_affected": [
+        {
+          "file": "SecOC.c",
+          "line": 2005,
+          "timestamp": "2026-04-14T17:16:16.943275"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 2166,
+          "timestamp": "2026-04-14T17:16:16.943296"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 589,
+          "timestamp": "2026-04-14T17:16:16.944180"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 615,
+          "timestamp": "2026-04-14T17:16:16.944184"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1057,
+          "timestamp": "2026-04-14T17:16:16.944197"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1469,
+          "timestamp": "2026-04-14T17:16:16.944206"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1494,
+          "timestamp": "2026-04-14T17:16:16.944211"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1847,
+          "timestamp": "2026-04-14T17:16:16.944226"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1877,
+          "timestamp": "2026-04-14T17:16:16.944228"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1906,
+          "timestamp": "2026-04-14T17:16:16.944235"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1943,
+          "timestamp": "2026-04-14T17:16:16.944240"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 1953,
+          "timestamp": "2026-04-14T17:16:16.944244"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2318,
+          "timestamp": "2026-04-14T17:16:16.944266"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2384,
+          "timestamp": "2026-04-14T17:16:16.944271"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2449,
+          "timestamp": "2026-04-14T17:16:16.944277"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2474,
+          "timestamp": "2026-04-14T17:16:16.944282"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 3739,
+          "timestamp": "2026-04-14T17:16:16.945159"
+        },
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 4525,
+          "timestamp": "2026-04-14T17:16:16.945203"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1130,
+          "timestamp": "2026-04-14T17:16:16.946103"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1135,
+          "timestamp": "2026-04-14T17:16:16.946105"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1140,
+          "timestamp": "2026-04-14T17:16:16.946108"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1145,
+          "timestamp": "2026-04-14T17:16:16.946110"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1150,
+          "timestamp": "2026-04-14T17:16:16.946115"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1155,
+          "timestamp": "2026-04-14T17:16:16.946120"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1160,
+          "timestamp": "2026-04-14T17:16:16.946125"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1165,
+          "timestamp": "2026-04-14T17:16:16.946130"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1169,
+          "timestamp": "2026-04-14T17:16:16.946135"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1174,
+          "timestamp": "2026-04-14T17:16:16.946142"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1272,
+          "timestamp": "2026-04-14T17:16:16.946145"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1277,
+          "timestamp": "2026-04-14T17:16:16.946148"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1282,
+          "timestamp": "2026-04-14T17:16:16.946150"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1290,
+          "timestamp": "2026-04-14T17:16:16.946153"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1296,
+          "timestamp": "2026-04-14T17:16:16.946156"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1303,
+          "timestamp": "2026-04-14T17:16:16.946159"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1309,
+          "timestamp": "2026-04-14T17:16:16.946161"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1314,
+          "timestamp": "2026-04-14T17:16:16.946164"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1319,
+          "timestamp": "2026-04-14T17:16:16.946167"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1324,
+          "timestamp": "2026-04-14T17:16:16.946170"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1374,
+          "timestamp": "2026-04-14T17:16:16.946173"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1379,
+          "timestamp": "2026-04-14T17:16:16.946176"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1392,
+          "timestamp": "2026-04-14T17:16:16.946178"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 1407,
+          "timestamp": "2026-04-14T17:16:16.946182"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 2240,
+          "timestamp": "2026-04-14T17:16:16.946192"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 2303,
+          "timestamp": "2026-04-14T17:16:16.946197"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 2324,
+          "timestamp": "2026-04-14T17:16:16.946203"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 2675,
+          "timestamp": "2026-04-14T17:16:16.946210"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 3783,
+          "timestamp": "2026-04-14T17:16:16.946571"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4459,
+          "timestamp": "2026-04-14T17:16:16.946597"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4499,
+          "timestamp": "2026-04-14T17:16:16.946606"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4672,
+          "timestamp": "2026-04-14T17:16:16.946612"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4742,
+          "timestamp": "2026-04-14T17:16:16.946618"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4927,
+          "timestamp": "2026-04-14T17:16:16.946637"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 4983,
+          "timestamp": "2026-04-14T17:16:16.946643"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5203,
+          "timestamp": "2026-04-14T17:16:16.947092"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5382,
+          "timestamp": "2026-04-14T17:16:16.947106"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5521,
+          "timestamp": "2026-04-14T17:16:16.947116"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5548,
+          "timestamp": "2026-04-14T17:16:16.947122"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6268,
+          "timestamp": "2026-04-14T17:16:16.947140"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6280,
+          "timestamp": "2026-04-14T17:16:16.947146"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7117,
+          "timestamp": "2026-04-14T17:16:16.947197"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7131,
+          "timestamp": "2026-04-14T17:16:16.947439"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7657,
+          "timestamp": "2026-04-14T17:16:16.947454"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7837,
+          "timestamp": "2026-04-14T17:16:16.947463"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 8671,
+          "timestamp": "2026-04-14T17:16:16.947482"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 8758,
+          "timestamp": "2026-04-14T17:16:16.947486"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9187,
+          "timestamp": "2026-04-14T17:16:16.947837"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9197,
+          "timestamp": "2026-04-14T17:16:16.947844"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9707,
+          "timestamp": "2026-04-14T17:16:16.947884"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10045,
+          "timestamp": "2026-04-14T17:16:16.947908"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10251,
+          "timestamp": "2026-04-14T17:16:16.947922"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10564,
+          "timestamp": "2026-04-14T17:16:16.948140"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10740,
+          "timestamp": "2026-04-14T17:16:16.948166"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 11291,
+          "timestamp": "2026-04-14T17:16:16.948194"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 11677,
+          "timestamp": "2026-04-14T17:16:16.948206"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 11690,
+          "timestamp": "2026-04-14T17:16:16.948214"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 11704,
+          "timestamp": "2026-04-14T17:16:16.948221"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 12643,
+          "timestamp": "2026-04-14T17:16:16.948256"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 14803,
+          "timestamp": "2026-04-14T17:16:16.948946"
+        }
+      ],
+      "line_numbers": [
+        2005,
+        2166,
+        589,
+        615,
+        1057,
+        1469,
+        1494,
+        1847,
+        1877,
+        1906,
+        1943,
+        1953,
+        2318,
+        2384,
+        2449,
+        2474,
+        3739,
+        4525,
+        1130,
+        1135,
+        1140,
+        1145,
+        1150,
+        1155,
+        1160,
+        1165,
+        1169,
+        1174,
+        1272,
+        1277,
+        1282,
+        1290,
+        1296,
+        1303,
+        1309,
+        1314,
+        1319,
+        1324,
+        1374,
+        1379,
+        1392,
+        1407,
+        2240,
+        2303,
+        2324,
+        2675,
+        3783,
+        4459,
+        4499,
+        4672,
+        4742,
+        4927,
+        4983,
+        5203,
+        5382,
+        5521,
+        5548,
+        6268,
+        6280,
+        7117,
+        7131,
+        7657,
+        7837,
+        8671,
+        8758,
+        9187,
+        9197,
+        9707,
+        10045,
+        10251,
+        10564,
+        10740,
+        11291,
+        11677,
+        11690,
+        11704,
+        12643,
+        14803
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.943290",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "LOW",
+      "category": "CERT"
+    },
+    "CERT_C-MSC12-j-3": {
+      "violation_id": "CERT_C-MSC12-j-3",
+      "violation_text": "Condition \"(!(sendDefaultAuthenticationInformation)) && (sendDefaultAut...ticationInformation)\" always evaluates to false",
+      "first_seen": "2026-04-14T17:16:16.943298",
+      "last_seen": "2026-04-14T17:16:16.944162",
+      "occurrence_count": 2,
+      "files_affected": [
+        {
+          "file": "SecOC.c",
+          "line": 2334,
+          "timestamp": "2026-04-14T17:16:16.943756"
+        },
+        {
+          "file": "SecOC.c",
+          "line": 2340,
+          "timestamp": "2026-04-14T17:16:16.944163"
+        }
+      ],
+      "line_numbers": [
+        2334,
+        2340
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.943778",
+          "note": "Security-related violation - high priority"
+        },
+        {
+          "timestamp": "2026-04-14T17:16:16.943780",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "LOW",
+      "category": "CERT"
+    },
+    "MISRAC2012-RULE_14_3-ac-2": {
+      "violation_id": "MISRAC2012-RULE_14_3-ac-2",
+      "violation_text": "Condition \"(!(sendDefaultAuthenticationInformation)) && (sendDefaultAut...ticationInformation)\" always evaluates to false",
+      "first_seen": "2026-04-14T17:16:16.943784",
+      "last_seen": "2026-04-14T17:16:16.943786",
+      "occurrence_count": 1,
+      "files_affected": [
+        {
+          "file": "SecOC.c",
+          "line": 2334,
+          "timestamp": "2026-04-14T17:16:16.944144"
+        }
+      ],
+      "line_numbers": [
+        2334
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.944159",
+          "note": "Security-related violation - high priority"
+        },
+        {
+          "timestamp": "2026-04-14T17:16:16.944160",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "MEDIUM",
+      "category": "MISRA"
+    },
+    "MISRAC2012-RULE_15_7-a-2": {
+      "violation_id": "MISRAC2012-RULE_15_7-a-2",
+      "violation_text": "Provide 'else' after the last 'else-if' construct",
+      "first_seen": "2026-04-14T17:16:16.944285",
+      "last_seen": "2026-04-14T17:16:16.948705",
+      "occurrence_count": 2,
+      "files_affected": [
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2661,
+          "timestamp": "2026-04-14T17:16:16.944672"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13519,
+          "timestamp": "2026-04-14T17:16:16.948706"
+        }
+      ],
+      "line_numbers": [
+        2661,
+        13519
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.944690",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "MEDIUM",
+      "category": "MISRA"
+    },
+    "CERT_C-MSC01-a-2": {
+      "violation_id": "CERT_C-MSC01-a-2",
+      "violation_text": "Provide 'else' after the last 'else-if' construct",
+      "first_seen": "2026-04-14T17:16:16.944694",
+      "last_seen": "2026-04-14T17:16:16.948708",
+      "occurrence_count": 2,
+      "files_affected": [
+        {
+          "file": "SecOC_Cbk.c",
+          "line": 2661,
+          "timestamp": "2026-04-14T17:16:16.945098"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13519,
+          "timestamp": "2026-04-14T17:16:16.948709"
+        }
+      ],
+      "line_numbers": [
+        2661,
+        13519
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.945115",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "LOW",
+      "category": "CERT"
+    },
+    "MISRAC2012-RULE_11_1-b-2": {
+      "violation_id": "MISRAC2012-RULE_11_1-b-2",
+      "violation_text": "Pointer to function 'Std_ReturnType (const PduIdType)' is implicitly converted to pointer to incompatible function 'Std_ReturnType\n(PduIdType)'",
+      "first_seen": "2026-04-14T17:16:16.945205",
+      "last_seen": "2026-04-14T17:16:16.947181",
+      "occurrence_count": 28,
+      "files_affected": [
+        {
+          "file": "SecOC_Internal.c",
+          "line": 920,
+          "timestamp": "2026-04-14T17:16:16.945577"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 920,
+          "timestamp": "2026-04-14T17:16:16.945891"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 921,
+          "timestamp": "2026-04-14T17:16:16.945900"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 921,
+          "timestamp": "2026-04-14T17:16:16.945907"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 922,
+          "timestamp": "2026-04-14T17:16:16.945916"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 922,
+          "timestamp": "2026-04-14T17:16:16.945925"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 923,
+          "timestamp": "2026-04-14T17:16:16.945935"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 923,
+          "timestamp": "2026-04-14T17:16:16.945944"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 924,
+          "timestamp": "2026-04-14T17:16:16.945954"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 925,
+          "timestamp": "2026-04-14T17:16:16.945965"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 925,
+          "timestamp": "2026-04-14T17:16:16.945975"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 926,
+          "timestamp": "2026-04-14T17:16:16.945985"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 927,
+          "timestamp": "2026-04-14T17:16:16.945994"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 928,
+          "timestamp": "2026-04-14T17:16:16.946005"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 930,
+          "timestamp": "2026-04-14T17:16:16.946016"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 954,
+          "timestamp": "2026-04-14T17:16:16.946027"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 954,
+          "timestamp": "2026-04-14T17:16:16.946038"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 954,
+          "timestamp": "2026-04-14T17:16:16.946050"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 955,
+          "timestamp": "2026-04-14T17:16:16.946061"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 955,
+          "timestamp": "2026-04-14T17:16:16.946072"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 955,
+          "timestamp": "2026-04-14T17:16:16.946084"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 955,
+          "timestamp": "2026-04-14T17:16:16.946096"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6433,
+          "timestamp": "2026-04-14T17:16:16.947150"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6434,
+          "timestamp": "2026-04-14T17:16:16.947156"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6435,
+          "timestamp": "2026-04-14T17:16:16.947162"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6436,
+          "timestamp": "2026-04-14T17:16:16.947170"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6437,
+          "timestamp": "2026-04-14T17:16:16.947176"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6439,
+          "timestamp": "2026-04-14T17:16:16.947182"
+        }
+      ],
+      "line_numbers": [
+        920,
+        921,
+        922,
+        923,
+        924,
+        925,
+        926,
+        927,
+        928,
+        930,
+        954,
+        955,
+        6433,
+        6434,
+        6435,
+        6436,
+        6437,
+        6439
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.945597",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "MEDIUM",
+      "category": "MISRA"
+    },
+    "CERT_C-EXP37-a-3": {
+      "violation_id": "CERT_C-EXP37-a-3",
+      "violation_text": "Pointer to function 'Std_ReturnType (const PduIdType)' is implicitly converted to pointer to incompatible function 'Std_ReturnType\n(PduIdType)'",
+      "first_seen": "2026-04-14T17:16:16.945600",
+      "last_seen": "2026-04-14T17:16:16.947184",
+      "occurrence_count": 28,
+      "files_affected": [
+        {
+          "file": "SecOC_Internal.c",
+          "line": 920,
+          "timestamp": "2026-04-14T17:16:16.945865"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 920,
+          "timestamp": "2026-04-14T17:16:16.945896"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 921,
+          "timestamp": "2026-04-14T17:16:16.945903"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 921,
+          "timestamp": "2026-04-14T17:16:16.945912"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 922,
+          "timestamp": "2026-04-14T17:16:16.945921"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 922,
+          "timestamp": "2026-04-14T17:16:16.945931"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 923,
+          "timestamp": "2026-04-14T17:16:16.945940"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 923,
+          "timestamp": "2026-04-14T17:16:16.945949"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 924,
+          "timestamp": "2026-04-14T17:16:16.945960"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 925,
+          "timestamp": "2026-04-14T17:16:16.945970"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 925,
+          "timestamp": "2026-04-14T17:16:16.945980"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 926,
+          "timestamp": "2026-04-14T17:16:16.945990"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 927,
+          "timestamp": "2026-04-14T17:16:16.945999"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 928,
+          "timestamp": "2026-04-14T17:16:16.946010"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 930,
+          "timestamp": "2026-04-14T17:16:16.946021"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 954,
+          "timestamp": "2026-04-14T17:16:16.946032"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 954,
+          "timestamp": "2026-04-14T17:16:16.946045"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 954,
+          "timestamp": "2026-04-14T17:16:16.946056"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 955,
+          "timestamp": "2026-04-14T17:16:16.946066"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 955,
+          "timestamp": "2026-04-14T17:16:16.946078"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 955,
+          "timestamp": "2026-04-14T17:16:16.946090"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 955,
+          "timestamp": "2026-04-14T17:16:16.946100"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6433,
+          "timestamp": "2026-04-14T17:16:16.947153"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6434,
+          "timestamp": "2026-04-14T17:16:16.947159"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6435,
+          "timestamp": "2026-04-14T17:16:16.947167"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6436,
+          "timestamp": "2026-04-14T17:16:16.947173"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6437,
+          "timestamp": "2026-04-14T17:16:16.947179"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6439,
+          "timestamp": "2026-04-14T17:16:16.947185"
+        }
+      ],
+      "line_numbers": [
+        920,
+        921,
+        922,
+        923,
+        924,
+        925,
+        926,
+        927,
+        928,
+        930,
+        954,
+        955,
+        6433,
+        6434,
+        6435,
+        6436,
+        6437,
+        6439
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.945885",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "LOW",
+      "category": "CERT"
+    },
+    "CERT_C-INT13-b-2": {
+      "violation_id": "CERT_C-INT13-b-2",
+      "violation_text": "The right-hand-side operand of shift operator '<<' should be unsigned",
+      "first_seen": "2026-04-14T17:16:16.946223",
+      "last_seen": "2026-04-14T17:16:16.948723",
+      "occurrence_count": 13,
+      "files_affected": [
+        {
+          "file": "SecOC_Internal.c",
+          "line": 3514,
+          "timestamp": "2026-04-14T17:16:16.946544"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 3722,
+          "timestamp": "2026-04-14T17:16:16.946566"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 3856,
+          "timestamp": "2026-04-14T17:16:16.946574"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5030,
+          "timestamp": "2026-04-14T17:16:16.947082"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 6061,
+          "timestamp": "2026-04-14T17:16:16.947134"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7026,
+          "timestamp": "2026-04-14T17:16:16.947192"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7887,
+          "timestamp": "2026-04-14T17:16:16.947467"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 9759,
+          "timestamp": "2026-04-14T17:16:16.947888"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13373,
+          "timestamp": "2026-04-14T17:16:16.948700"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13443,
+          "timestamp": "2026-04-14T17:16:16.948703"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13673,
+          "timestamp": "2026-04-14T17:16:16.948715"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13901,
+          "timestamp": "2026-04-14T17:16:16.948722"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 14009,
+          "timestamp": "2026-04-14T17:16:16.948724"
+        }
+      ],
+      "line_numbers": [
+        3514,
+        3722,
+        3856,
+        5030,
+        6061,
+        7026,
+        7887,
+        9759,
+        13373,
+        13443,
+        13673,
+        13901,
+        14009
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.946556",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "LOW",
+      "category": "CERT"
+    },
+    "CERT_C-INT13-a-2": {
+      "violation_id": "CERT_C-INT13-a-2",
+      "violation_text": "The right-hand-side operand of bitwise operator '&' should be unsigned",
+      "first_seen": "2026-04-14T17:16:16.946645",
+      "last_seen": "2026-04-14T17:16:16.946646",
+      "occurrence_count": 1,
+      "files_affected": [
+        {
+          "file": "SecOC_Internal.c",
+          "line": 5030,
+          "timestamp": "2026-04-14T17:16:16.947060"
+        }
+      ],
+      "line_numbers": [
+        5030
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.947077",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "LOW",
+      "category": "CERT"
+    },
+    "MISRAC2012-RULE_21_18-a-1": {
+      "violation_id": "MISRAC2012-RULE_21_18-a-1",
+      "violation_text": "The number of bytes to process by the \"memcpy\" function is not positive and equals 0",
+      "first_seen": "2026-04-14T17:16:16.947203",
+      "last_seen": "2026-04-14T17:16:16.947203",
+      "occurrence_count": 1,
+      "files_affected": [
+        {
+          "file": "SecOC_Internal.c",
+          "line": 7131,
+          "timestamp": "2026-04-14T17:16:16.947422"
+        }
+      ],
+      "line_numbers": [
+        7131
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.947436",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "MEDIUM",
+      "category": "MISRA"
+    },
+    "CERT_C-DCL15-a-3": {
+      "violation_id": "CERT_C-DCL15-a-3",
+      "violation_text": "Function 'SecOC_RxBuildVerificationFail' has external linkage and is not declared in the header",
+      "first_seen": "2026-04-14T17:16:16.947493",
+      "last_seen": "2026-04-14T17:16:16.947494",
+      "occurrence_count": 1,
+      "files_affected": [
+        {
+          "file": "SecOC_Internal.c",
+          "line": 8816,
+          "timestamp": "2026-04-14T17:16:16.947651"
+        }
+      ],
+      "line_numbers": [
+        8816
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.947664",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "HIGH",
+      "category": "CERT"
+    },
+    "MISRAC2012-RULE_8_7-a-4": {
+      "violation_id": "MISRAC2012-RULE_8_7-a-4",
+      "violation_text": "The function 'SecOC_RxBuildVerificationFail' is referenced only in the translation unit where it is defined",
+      "first_seen": "2026-04-14T17:16:16.947666",
+      "last_seen": "2026-04-14T17:16:16.947667",
+      "occurrence_count": 1,
+      "files_affected": [
+        {
+          "file": "SecOC_Internal.c",
+          "line": 8816,
+          "timestamp": "2026-04-14T17:16:16.947815"
+        }
+      ],
+      "line_numbers": [
+        8816
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.947830",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "MEDIUM",
+      "category": "MISRA"
+    },
+    "CERT_C-INT02-b-2": {
+      "violation_id": "CERT_C-INT02-b-2",
+      "violation_text": "Different types of operands: LHS type 'short', RHS type 'long'",
+      "first_seen": "2026-04-14T17:16:16.947928",
+      "last_seen": "2026-04-14T17:16:16.948175",
+      "occurrence_count": 8,
+      "files_affected": [
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10403,
+          "timestamp": "2026-04-14T17:16:16.948104"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10435,
+          "timestamp": "2026-04-14T17:16:16.948119"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10435,
+          "timestamp": "2026-04-14T17:16:16.948122"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10543,
+          "timestamp": "2026-04-14T17:16:16.948135"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10666,
+          "timestamp": "2026-04-14T17:16:16.948158"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10706,
+          "timestamp": "2026-04-14T17:16:16.948161"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10891,
+          "timestamp": "2026-04-14T17:16:16.948174"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 10982,
+          "timestamp": "2026-04-14T17:16:16.948176"
+        }
+      ],
+      "line_numbers": [
+        10403,
+        10435,
+        10543,
+        10666,
+        10706,
+        10891,
+        10982
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.948116",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "LOW",
+      "category": "CERT"
+    },
+    "MISRAC2012-RULE_15_5-a-4": {
+      "violation_id": "MISRAC2012-RULE_15_5-a-4",
+      "violation_text": "Provide only one exit point in 'SecOC_DetCheck' function",
+      "first_seen": "2026-04-14T17:16:16.948288",
+      "last_seen": "2026-04-14T17:16:16.948685",
+      "occurrence_count": 2,
+      "files_affected": [
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13240,
+          "timestamp": "2026-04-14T17:16:16.948670"
+        },
+        {
+          "file": "SecOC_Internal.c",
+          "line": 13248,
+          "timestamp": "2026-04-14T17:16:16.948686"
+        }
+      ],
+      "line_numbers": [
+        13240,
+        13248
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.948683",
+          "note": "Estimated fix complexity: LOW"
+        }
+      ],
+      "severity": "MEDIUM",
+      "category": "MISRA"
+    },
+    "CERT_C-DCL00-a-3": {
+      "violation_id": "CERT_C-DCL00-a-3",
+      "violation_text": "Declare local variable 'Lpid' as const",
+      "first_seen": "2026-04-14T17:16:16.948741",
+      "last_seen": "2026-04-14T17:16:16.948742",
+      "occurrence_count": 1,
+      "files_affected": [
+        {
+          "file": "SecOC_Internal.c",
+          "line": 14138,
+          "timestamp": "2026-04-14T17:16:16.948917"
+        }
+      ],
+      "line_numbers": [
+        14138
+      ],
+      "justifiable": "Analyse",
+      "fix_applied": false,
+      "fix_details": null,
+      "justification_added": false,
+      "justification_text": null,
+      "analysis_notes": [
+        {
+          "timestamp": "2026-04-14T17:16:16.948928",
+          "note": "Estimated fix complexity: MEDIUM"
+        }
+      ],
+      "severity": "LOW",
+      "category": "CERT"
+    }
+  },
+  "statistics": {
+    "total_analyses": 1,
+    "total_violations_processed": 381,
+    "most_common_violations": [
+      {
+        "violation_id": "CERT_C-API00-a-3",
+        "count": 94
+      },
+      {
+        "violation_id": "CERT_C-POS54-a-1",
+        "count": 78
+      },
+      {
+        "violation_id": "CERT_C-INT02-a-2",
+        "count": 55
+      },
+      {
+        "violation_id": "CERT_C-DCL00-b-3",
+        "count": 51
+      },
+      {
+        "violation_id": "MISRAC2012-RULE_11_1-b-2",
+        "count": 28
+      },
+      {
+        "violation_id": "CERT_C-EXP37-a-3",
+        "count": 28
+      },
+      {
+        "violation_id": "CERT_C-INT13-b-2",
+        "count": 13
+      },
+      {
+        "violation_id": "CDD-DUPC-3",
+        "count": 9
+      },
+      {
+        "violation_id": "CERT_C-INT02-b-2",
+        "count": 8
+      },
+      {
+        "violation_id": "MISRAC2012-RULE_2_8-a-4",
+        "count": 2
+      }
+    ]
+  },
+  "metadata": {
+    "git_commits": [],
+    "analysis_history": [
+      {
+        "timestamp": "2026-04-14T17:16:16.948983",
+        "violations_found": 381,
+        "new_violations": 21
+      }
+    ]
+  }
+}

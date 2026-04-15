@@ -1,0 +1,3635 @@
+Parasoft Suppress Comments for Mka
+Generated: 2026-04-15 12:45:57
+================================================================================
+
+Instructions:
+1. Add the 'parasoft-begin-suppress' comment BEFORE the line with the violation
+2. Add the 'parasoft-end-suppress' comment AFTER the line with the violation
+3. Update the reason reference as needed
+
+================================================================================
+
+File: Mka.c, Line: 209
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: Mka_Parasoft_REF_209" */
+... (your code at line 209) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: Mka.c, Line: 215
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: Mka_Parasoft_REF_215" */
+... (your code at line 215) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: Mka.c, Line: 221
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: Mka_Parasoft_REF_221" */
+... (your code at line 221) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: Mka.c, Line: 228
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: Mka_Parasoft_REF_228" */
+... (your code at line 228) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: Mka.c, Line: 316
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_Parasoft_REF_316" */
+... (your code at line 316) ...
+/* parasoft-end-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 */
+
+File: Mka.c, Line: 405
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_Parasoft_REF_405" */
+... (your code at line 405) ...
+/* parasoft-end-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 */
+
+File: Mka.c, Line: 470
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_Parasoft_REF_470" */
+... (your code at line 470) ...
+/* parasoft-end-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 */
+
+File: Mka.c, Line: 502
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_Parasoft_REF_502" */
+... (your code at line 502) ...
+/* parasoft-end-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 */
+
+File: Mka.c, Line: 596
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_Parasoft_REF_596" */
+... (your code at line 596) ...
+/* parasoft-end-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 */
+
+File: Mka.c, Line: 655
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-MSC12-j-3 "Reason: Mka_Parasoft_REF_655" */
+... (your code at line 655) ...
+/* parasoft-end-suppress CERT_C-MSC12-j-3 */
+
+File: Mka.c, Line: 672
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-EXP46-b-2 CERT_C-INT13-a-2 CERT_C-INT31-b-2 CERT_C-MSC12-j-3 MISRAC2012-RULE_10_1-b-2 "Reason: Mka_Parasoft_REF_672" */
+... (your code at line 672) ...
+/* parasoft-end-suppress CERT_C-EXP46-b-2 CERT_C-INT13-a-2 CERT_C-INT31-b-2 CERT_C-MSC12-j-3 MISRAC2012-RULE_10_1-b-2 */
+
+File: Mka.c, Line: 673
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_673" */
+... (your code at line 673) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Cbk.c, Line: 263
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_263" */
+... (your code at line 263) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Cbk.c, Line: 264
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_264" */
+... (your code at line 264) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Cbk.c, Line: 266
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_266" */
+... (your code at line 266) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Cbk.c, Line: 313
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: Mka_Parasoft_REF_313" */
+... (your code at line 313) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: Mka_Cbk.c, Line: 398
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_398" */
+... (your code at line 398) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Cbk.c, Line: 402
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT31-i-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_402" */
+... (your code at line 402) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT31-i-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Cbk.c, Line: 418
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_418" */
+... (your code at line 418) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cbk.c, Line: 424
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_424" */
+... (your code at line 424) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cbk.c, Line: 433
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_433" */
+... (your code at line 433) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cbk.c, Line: 438
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_438" */
+... (your code at line 438) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cbk.c, Line: 444
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_444" */
+... (your code at line 444) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cbk.c, Line: 449
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_449" */
+... (your code at line 449) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cbk.c, Line: 561
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 "Reason: Mka_Parasoft_REF_561" */
+... (your code at line 561) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 */
+
+File: Mka_Cbk.c, Line: 705
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 "Reason: Mka_Parasoft_REF_705" */
+... (your code at line 705) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 */
+
+File: Mka_Cbk.c, Line: 768
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 "Reason: Mka_Parasoft_REF_768" */
+... (your code at line 768) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 */
+
+File: Mka_Cbk.c, Line: 835
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 "Reason: Mka_Parasoft_REF_835" */
+... (your code at line 835) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 */
+
+File: Mka_Cbk.c, Line: 874
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 "Reason: Mka_Parasoft_REF_874" */
+... (your code at line 874) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 */
+
+File: Mka_Cbk.c, Line: 914
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 "Reason: Mka_Parasoft_REF_914" */
+... (your code at line 914) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 */
+
+File: Mka_Cbk.c, Line: 954
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 "Reason: Mka_Parasoft_REF_954" */
+... (your code at line 954) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 */
+
+File: Mka_Cbk.c, Line: 994
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 "Reason: Mka_Parasoft_REF_994" */
+... (your code at line 994) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 */
+
+File: Mka_Cbk.c, Line: 1055
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 "Reason: Mka_Parasoft_REF_1055" */
+... (your code at line 1055) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 */
+
+File: Mka_Cbk.c, Line: 1095
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 "Reason: Mka_Parasoft_REF_1095" */
+... (your code at line 1095) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 */
+
+File: Mka_Cfg.c, Line: 93
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_93" */
+... (your code at line 93) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 99
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_99" */
+... (your code at line 99) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 105
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_105" */
+... (your code at line 105) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 111
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_111" */
+... (your code at line 111) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 117
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_117" */
+... (your code at line 117) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 123
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_123" */
+... (your code at line 123) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 129
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_129" */
+... (your code at line 129) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 150
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_150" */
+... (your code at line 150) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 153
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_153" */
+... (your code at line 153) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 156
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_156" */
+... (your code at line 156) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 180
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_180" */
+... (your code at line 180) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 186
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_186" */
+... (your code at line 186) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 192
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_192" */
+... (your code at line 192) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 198
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_198" */
+... (your code at line 198) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 204
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_204" */
+... (your code at line 204) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 210
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_210" */
+... (your code at line 210) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 216
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_216" */
+... (your code at line 216) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 237
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_237" */
+... (your code at line 237) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 240
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_240" */
+... (your code at line 240) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 243
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_243" */
+... (your code at line 243) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 267
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_267" */
+... (your code at line 267) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 273
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_273" */
+... (your code at line 273) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 279
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_279" */
+... (your code at line 279) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 285
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_285" */
+... (your code at line 285) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 291
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_291" */
+... (your code at line 291) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 297
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_297" */
+... (your code at line 297) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 303
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_303" */
+... (your code at line 303) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 327
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_327" */
+... (your code at line 327) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 330
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_330" */
+... (your code at line 330) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 354
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_354" */
+... (your code at line 354) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 360
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_360" */
+... (your code at line 360) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 366
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_366" */
+... (your code at line 366) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 372
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_372" */
+... (your code at line 372) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 378
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_378" */
+... (your code at line 378) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 384
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_384" */
+... (your code at line 384) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 390
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_390" */
+... (your code at line 390) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 411
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_411" */
+... (your code at line 411) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 414
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_414" */
+... (your code at line 414) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 417
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_417" */
+... (your code at line 417) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 441
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_441" */
+... (your code at line 441) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 447
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_447" */
+... (your code at line 447) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 453
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_453" */
+... (your code at line 453) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 459
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_459" */
+... (your code at line 459) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 465
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_465" */
+... (your code at line 465) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 471
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_471" */
+... (your code at line 471) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 477
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_477" */
+... (your code at line 477) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 498
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_498" */
+... (your code at line 498) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 501
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_501" */
+... (your code at line 501) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 504
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_504" */
+... (your code at line 504) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 528
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_528" */
+... (your code at line 528) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 534
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_534" */
+... (your code at line 534) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 540
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_540" */
+... (your code at line 540) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 546
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_546" */
+... (your code at line 546) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 552
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_552" */
+... (your code at line 552) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 558
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_558" */
+... (your code at line 558) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 564
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_564" */
+... (your code at line 564) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 585
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_585" */
+... (your code at line 585) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 588
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_588" */
+... (your code at line 588) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 591
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_591" */
+... (your code at line 591) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 615
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_615" */
+... (your code at line 615) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 621
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_621" */
+... (your code at line 621) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 627
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_627" */
+... (your code at line 627) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 633
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_633" */
+... (your code at line 633) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 639
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_639" */
+... (your code at line 639) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 645
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_645" */
+... (your code at line 645) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 651
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_651" */
+... (your code at line 651) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 672
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_672" */
+... (your code at line 672) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 675
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_675" */
+... (your code at line 675) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 678
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_678" */
+... (your code at line 678) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 691
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_691" */
+... (your code at line 691) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Cfg.c, Line: 693
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_693" */
+... (your code at line 693) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 695
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: Mka_Parasoft_REF_695" */
+... (your code at line 695) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: Mka_Cfg.c, Line: 707
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_707" */
+... (your code at line 707) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 710
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_710" */
+... (your code at line 710) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 713
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_713" */
+... (your code at line 713) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 725
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_725" */
+... (your code at line 725) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 728
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_728" */
+... (your code at line 728) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 731
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_731" */
+... (your code at line 731) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 743
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_743" */
+... (your code at line 743) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 746
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_746" */
+... (your code at line 746) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 749
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_749" */
+... (your code at line 749) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 752
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_752" */
+... (your code at line 752) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 753
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_753" */
+... (your code at line 753) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Cfg.c, Line: 757
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_757" */
+... (your code at line 757) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Cfg.c, Line: 762
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_762" */
+... (your code at line 762) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Cfg.c, Line: 764
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_764" */
+... (your code at line 764) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 767
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_767" */
+... (your code at line 767) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Cfg.c, Line: 771
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_771" */
+... (your code at line 771) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 772
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_772" */
+... (your code at line 772) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Cfg.c, Line: 774
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_774" */
+... (your code at line 774) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 777
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_777" */
+... (your code at line 777) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Cfg.c, Line: 780
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_9_3-a-2 "Reason: Mka_Parasoft_REF_780" */
+... (your code at line 780) ...
+/* parasoft-end-suppress MISRAC2012-RULE_9_3-a-2 */
+
+File: Mka_Cfg.c, Line: 781
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_9_3-a-2 "Reason: Mka_Parasoft_REF_781" */
+... (your code at line 781) ...
+/* parasoft-end-suppress MISRAC2012-RULE_9_3-a-2 */
+
+File: Mka_Cfg.c, Line: 782
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_9_3-a-2 "Reason: Mka_Parasoft_REF_782" */
+... (your code at line 782) ...
+/* parasoft-end-suppress MISRAC2012-RULE_9_3-a-2 */
+
+File: Mka_Cfg.c, Line: 785
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_785" */
+... (your code at line 785) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 786
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_786" */
+... (your code at line 786) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Cfg.c, Line: 788
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_788" */
+... (your code at line 788) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 791
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_791" */
+... (your code at line 791) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Cfg.c, Line: 794
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_9_3-a-2 "Reason: Mka_Parasoft_REF_794" */
+... (your code at line 794) ...
+/* parasoft-end-suppress MISRAC2012-RULE_9_3-a-2 */
+
+File: Mka_Cfg.c, Line: 795
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_9_3-a-2 "Reason: Mka_Parasoft_REF_795" */
+... (your code at line 795) ...
+/* parasoft-end-suppress MISRAC2012-RULE_9_3-a-2 */
+
+File: Mka_Cfg.c, Line: 796
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_9_3-a-2 "Reason: Mka_Parasoft_REF_796" */
+... (your code at line 796) ...
+/* parasoft-end-suppress MISRAC2012-RULE_9_3-a-2 */
+
+File: Mka_Cfg.c, Line: 799
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_799" */
+... (your code at line 799) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 800
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_800" */
+... (your code at line 800) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Cfg.c, Line: 803
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_803" */
+... (your code at line 803) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 805
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: Mka_Parasoft_REF_805" */
+... (your code at line 805) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: Mka_Cfg.c, Line: 850
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_850" */
+... (your code at line 850) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 853
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_853" */
+... (your code at line 853) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 910
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_910" */
+... (your code at line 910) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 913
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_913" */
+... (your code at line 913) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 970
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_970" */
+... (your code at line 970) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 973
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_973" */
+... (your code at line 973) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Cfg.c, Line: 988
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_988" */
+... (your code at line 988) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 989
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_989" */
+... (your code at line 989) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Cfg.c, Line: 991
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_991" */
+... (your code at line 991) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 993
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_993" */
+... (your code at line 993) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Cfg.c, Line: 1032
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_1032" */
+... (your code at line 1032) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 1033
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_1033" */
+... (your code at line 1033) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Cfg.c, Line: 1035
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_1035" */
+... (your code at line 1035) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 1037
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_1037" */
+... (your code at line 1037) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Cfg.c, Line: 1058
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_1058" */
+... (your code at line 1058) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 1059
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_1059" */
+... (your code at line 1059) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Cfg.c, Line: 1061
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_1061" */
+... (your code at line 1061) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 1063
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_1063" */
+... (your code at line 1063) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_5_1-a-2 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Cfg.c, Line: 1075
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_1075" */
+... (your code at line 1075) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 1076
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_1076" */
+... (your code at line 1076) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Cfg.c, Line: 1078
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_1078" */
+... (your code at line 1078) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 1080
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: Mka_Parasoft_REF_1080" */
+... (your code at line 1080) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: Mka_Cfg.c, Line: 1155
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_1155" */
+... (your code at line 1155) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Cfg.c, Line: 1156
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_1156" */
+... (your code at line 1156) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 149
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_149" */
+... (your code at line 149) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 155
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_155" */
+... (your code at line 155) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 161
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_161" */
+... (your code at line 161) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 167
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_167" */
+... (your code at line 167) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 173
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_173" */
+... (your code at line 173) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 180
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_180" */
+... (your code at line 180) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 186
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_186" */
+... (your code at line 186) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 192
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_192" */
+... (your code at line 192) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 204
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_204" */
+... (your code at line 204) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 223
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_2_8-a-4 "Reason: Mka_Parasoft_REF_223" */
+... (your code at line 223) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_2_8-a-4 */
+
+File: Mka_Internal.c, Line: 235
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_235" */
+... (your code at line 235) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 242
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_242" */
+... (your code at line 242) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 248
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_248" */
+... (your code at line 248) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 269
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_269" */
+... (your code at line 269) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 305
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_305" */
+... (your code at line 305) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 349
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_349" */
+... (your code at line 349) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 350
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_350" */
+... (your code at line 350) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 377
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_377" */
+... (your code at line 377) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 379
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_379" */
+... (your code at line 379) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 389
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-EXP05-a-2 CERT_C-EXP32-a-2 CERT_C-EXP40-a-3 MISRAC2012-RULE_11_8-a-2 "Reason: Mka_Parasoft_REF_389" */
+... (your code at line 389) ...
+/* parasoft-end-suppress CERT_C-EXP05-a-2 CERT_C-EXP32-a-2 CERT_C-EXP40-a-3 MISRAC2012-RULE_11_8-a-2 */
+
+File: Mka_Internal.c, Line: 392
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: Mka_Parasoft_REF_392" */
+... (your code at line 392) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: Mka_Internal.c, Line: 413
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Parasoft_REF_413" */
+... (your code at line 413) ...
+/* parasoft-end-suppress MISRAC2012-RULE_18_4-a-4 */
+
+File: Mka_Internal.c, Line: 417
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: Mka_Parasoft_REF_417" */
+... (your code at line 417) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: Mka_Internal.c, Line: 420
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_420" */
+... (your code at line 420) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 430
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_430" */
+... (your code at line 430) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 432
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_432" */
+... (your code at line 432) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 435
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_435" */
+... (your code at line 435) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 438
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_438" */
+... (your code at line 438) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 443
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_443" */
+... (your code at line 443) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 444
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_444" */
+... (your code at line 444) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 445
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_445" */
+... (your code at line 445) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 446
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_446" */
+... (your code at line 446) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 447
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_447" */
+... (your code at line 447) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 448
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_448" */
+... (your code at line 448) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 456
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_456" */
+... (your code at line 456) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 458
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_458" */
+... (your code at line 458) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 463
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_463" */
+... (your code at line 463) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 464
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_464" */
+... (your code at line 464) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 478
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: Mka_Parasoft_REF_478" */
+... (your code at line 478) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: Mka_Internal.c, Line: 479
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_479" */
+... (your code at line 479) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 530
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_530" */
+... (your code at line 530) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 531
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_531" */
+... (your code at line 531) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 559
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_559" */
+... (your code at line 559) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 582
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_582" */
+... (your code at line 582) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Internal.c, Line: 583
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_583" */
+... (your code at line 583) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 584
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_584" */
+... (your code at line 584) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Internal.c, Line: 585
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_585" */
+... (your code at line 585) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 586
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_586" */
+... (your code at line 586) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Internal.c, Line: 587
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_587" */
+... (your code at line 587) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 588
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_588" */
+... (your code at line 588) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Internal.c, Line: 589
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_589" */
+... (your code at line 589) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 615
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_615" */
+... (your code at line 615) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 655
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_655" */
+... (your code at line 655) ...
+/* parasoft-end-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 708
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_708" */
+... (your code at line 708) ...
+/* parasoft-end-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 710
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_710" */
+... (your code at line 710) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 711
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_Parasoft_REF_711" */
+... (your code at line 711) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 */
+
+File: Mka_Internal.c, Line: 715
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_715" */
+... (your code at line 715) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 717
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_717" */
+... (your code at line 717) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 718
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_718" */
+... (your code at line 718) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 729
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_729" */
+... (your code at line 729) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 736
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: Mka_Parasoft_REF_736" */
+... (your code at line 736) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: Mka_Internal.c, Line: 737
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_737" */
+... (your code at line 737) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 739
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-ARR30-a-2 CERT_C-ARR39-a-2 CERT_C-EXP08-b-2 CERT_C-FIO37-a-1 CERT_C-MSC19-a-3 CERT_C-STR31-a-1 MISRAC2012-DIR_4_1-a-2 MISRAC2012-RULE_18_1-a-2 MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Parasoft_REF_739" */
+... (your code at line 739) ...
+/* parasoft-end-suppress CERT_C-ARR30-a-2 CERT_C-ARR39-a-2 CERT_C-EXP08-b-2 CERT_C-FIO37-a-1 CERT_C-MSC19-a-3 CERT_C-STR31-a-1 MISRAC2012-DIR_4_1-a-2 MISRAC2012-RULE_18_1-a-2 MISRAC2012-RULE_18_4-a-4 */
+
+File: Mka_Internal.c, Line: 742
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Parasoft_REF_742" */
+... (your code at line 742) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 MISRAC2012-RULE_18_4-a-4 */
+
+File: Mka_Internal.c, Line: 743
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Parasoft_REF_743" */
+... (your code at line 743) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 MISRAC2012-RULE_18_4-a-4 */
+
+File: Mka_Internal.c, Line: 745
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Parasoft_REF_745" */
+... (your code at line 745) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 MISRAC2012-RULE_18_4-a-4 */
+
+File: Mka_Internal.c, Line: 774
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_774" */
+... (your code at line 774) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 834
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_834" */
+... (your code at line 834) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 945
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_945" */
+... (your code at line 945) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 946
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_946" */
+... (your code at line 946) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 1044
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_1044" */
+... (your code at line 1044) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 1045
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_1045" */
+... (your code at line 1045) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 1046
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_1046" */
+... (your code at line 1046) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 1055
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1055" */
+... (your code at line 1055) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1059
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1059" */
+... (your code at line 1059) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1061
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1061" */
+... (your code at line 1061) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1065
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_1065" */
+... (your code at line 1065) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 1066
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_1066" */
+... (your code at line 1066) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 1067
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1067" */
+... (your code at line 1067) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1068
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_1068" */
+... (your code at line 1068) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 1069
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1069" */
+... (your code at line 1069) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1070
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_1070" */
+... (your code at line 1070) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 1071
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1071" */
+... (your code at line 1071) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1108
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_1108" */
+... (your code at line 1108) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 1109
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_1109" */
+... (your code at line 1109) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 1110
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_1110" */
+... (your code at line 1110) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 1130
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1130" */
+... (your code at line 1130) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1132
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1132" */
+... (your code at line 1132) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1141
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1141" */
+... (your code at line 1141) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1151
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_1151" */
+... (your code at line 1151) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 1192
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_1192" */
+... (your code at line 1192) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 1195
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1195" */
+... (your code at line 1195) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1196
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1196" */
+... (your code at line 1196) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1197
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1197" */
+... (your code at line 1197) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1198
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1198" */
+... (your code at line 1198) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1200
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1200" */
+... (your code at line 1200) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1203
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1203" */
+... (your code at line 1203) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1235
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_1235" */
+... (your code at line 1235) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 1238
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1238" */
+... (your code at line 1238) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1239
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1239" */
+... (your code at line 1239) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1240
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1240" */
+... (your code at line 1240) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1241
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1241" */
+... (your code at line 1241) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1242
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1242" */
+... (your code at line 1242) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1243
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1243" */
+... (your code at line 1243) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1244
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1244" */
+... (your code at line 1244) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1245
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1245" */
+... (your code at line 1245) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1247
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1247" */
+... (your code at line 1247) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1250
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1250" */
+... (your code at line 1250) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1282
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_1282" */
+... (your code at line 1282) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 1285
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1285" */
+... (your code at line 1285) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1286
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1286" */
+... (your code at line 1286) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1288
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1288" */
+... (your code at line 1288) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1291
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1291" */
+... (your code at line 1291) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1323
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_1323" */
+... (your code at line 1323) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 1324
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_1324" */
+... (your code at line 1324) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 1327
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Parasoft_REF_1327" */
+... (your code at line 1327) ...
+/* parasoft-end-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 */
+
+File: Mka_Internal.c, Line: 1329
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1329" */
+... (your code at line 1329) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1364
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_1364" */
+... (your code at line 1364) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 1365
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_1365" */
+... (your code at line 1365) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 1371
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-a-3 "Reason: Mka_Parasoft_REF_1371" */
+... (your code at line 1371) ...
+/* parasoft-end-suppress CERT_C-DCL00-a-3 */
+
+File: Mka_Internal.c, Line: 1466
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_1466" */
+... (your code at line 1466) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 1467
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_1467" */
+... (your code at line 1467) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 1503
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_1503" */
+... (your code at line 1503) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Internal.c, Line: 1534
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_1534" */
+... (your code at line 1534) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 1550
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_1550" */
+... (your code at line 1550) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Internal.c, Line: 1588
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_1588" */
+... (your code at line 1588) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 1609
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_1609" */
+... (your code at line 1609) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Internal.c, Line: 1622
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1622" */
+... (your code at line 1622) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1638
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-EXP33-a-1 CERT_C-EXP46-b-2 CERT_C-INT13-a-2 CERT_C-INT31-b-2 MISRAC2012-RULE_10_1-b-2 "Reason: Mka_Parasoft_REF_1638" */
+... (your code at line 1638) ...
+/* parasoft-end-suppress CERT_C-EXP33-a-1 CERT_C-EXP46-b-2 CERT_C-INT13-a-2 CERT_C-INT31-b-2 MISRAC2012-RULE_10_1-b-2 */
+
+File: Mka_Internal.c, Line: 1652
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_1652" */
+... (your code at line 1652) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Internal.c, Line: 1695
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_1695" */
+... (your code at line 1695) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 1696
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_Parasoft_REF_1696" */
+... (your code at line 1696) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 */
+
+File: Mka_Internal.c, Line: 1700
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1700" */
+... (your code at line 1700) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1719
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_1719" */
+... (your code at line 1719) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 1727
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_17_8-a-4 "Reason: Mka_Parasoft_REF_1727" */
+... (your code at line 1727) ...
+/* parasoft-end-suppress MISRAC2012-RULE_17_8-a-4 */
+
+File: Mka_Internal.c, Line: 1740
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Parasoft_REF_1740" */
+... (your code at line 1740) ...
+/* parasoft-end-suppress MISRAC2012-RULE_18_4-a-4 */
+
+File: Mka_Internal.c, Line: 1744
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: Mka_Parasoft_REF_1744" */
+... (your code at line 1744) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: Mka_Internal.c, Line: 1747
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1747" */
+... (your code at line 1747) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1756
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_1756" */
+... (your code at line 1756) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 1757
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1757" */
+... (your code at line 1757) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1758
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_1758" */
+... (your code at line 1758) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 1759
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1759" */
+... (your code at line 1759) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1760
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_1760" */
+... (your code at line 1760) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 1761
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1761" */
+... (your code at line 1761) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1766
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_1766" */
+... (your code at line 1766) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-i-2 */
+
+File: Mka_Internal.c, Line: 1767
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_1767" */
+... (your code at line 1767) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-i-2 */
+
+File: Mka_Internal.c, Line: 1768
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_1768" */
+... (your code at line 1768) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-i-2 */
+
+File: Mka_Internal.c, Line: 1777
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1777" */
+... (your code at line 1777) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1778
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1778" */
+... (your code at line 1778) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1779
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1779" */
+... (your code at line 1779) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1782
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_1782" */
+... (your code at line 1782) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 1783
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1783" */
+... (your code at line 1783) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1784
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1784" */
+... (your code at line 1784) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1785
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1785" */
+... (your code at line 1785) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1828
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_1828" */
+... (your code at line 1828) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 1829
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_1829" */
+... (your code at line 1829) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 1830
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_1830" */
+... (your code at line 1830) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 1837
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-EXP05-a-2 CERT_C-EXP32-a-2 CERT_C-EXP40-a-3 MISRAC2012-RULE_11_8-a-2 "Reason: Mka_Parasoft_REF_1837" */
+... (your code at line 1837) ...
+/* parasoft-end-suppress CERT_C-EXP05-a-2 CERT_C-EXP32-a-2 CERT_C-EXP40-a-3 MISRAC2012-RULE_11_8-a-2 */
+
+File: Mka_Internal.c, Line: 1843
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-MSC12-j-3 "Reason: Mka_Parasoft_REF_1843" */
+... (your code at line 1843) ...
+/* parasoft-end-suppress CERT_C-MSC12-j-3 */
+
+File: Mka_Internal.c, Line: 1877
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_1877" */
+... (your code at line 1877) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 1878
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_1878" */
+... (your code at line 1878) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 1879
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_1879" */
+... (your code at line 1879) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 1902
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1902" */
+... (your code at line 1902) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1903
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1903" */
+... (your code at line 1903) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1915
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1915" */
+... (your code at line 1915) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1930
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1930" */
+... (your code at line 1930) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1932
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1932" */
+... (your code at line 1932) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1935
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1935" */
+... (your code at line 1935) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1936
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1936" */
+... (your code at line 1936) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1943
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1943" */
+... (your code at line 1943) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1946
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1946" */
+... (your code at line 1946) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1947
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1947" */
+... (your code at line 1947) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1954
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1954" */
+... (your code at line 1954) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 1957
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1957" */
+... (your code at line 1957) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1958
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_1958" */
+... (your code at line 1958) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 1969
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_1969" */
+... (your code at line 1969) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 2033
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_2033" */
+... (your code at line 2033) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 2034
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_2034" */
+... (your code at line 2034) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 2051
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-ARR30-a-2 CERT_C-ARR39-a-2 CERT_C-EXP08-b-2 CERT_C-FIO37-a-1 CERT_C-MSC19-a-3 CERT_C-STR31-a-1 MISRAC2012-DIR_4_1-a-2 MISRAC2012-RULE_18_1-a-2 "Reason: Mka_Parasoft_REF_2051" */
+... (your code at line 2051) ...
+/* parasoft-end-suppress CERT_C-ARR30-a-2 CERT_C-ARR39-a-2 CERT_C-EXP08-b-2 CERT_C-FIO37-a-1 CERT_C-MSC19-a-3 CERT_C-STR31-a-1 MISRAC2012-DIR_4_1-a-2 MISRAC2012-RULE_18_1-a-2 */
+
+File: Mka_Internal.c, Line: 2064
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_2064" */
+... (your code at line 2064) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 2065
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_2065" */
+... (your code at line 2065) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 2088
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_2088" */
+... (your code at line 2088) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 2089
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_2089" */
+... (your code at line 2089) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 2097
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_2097" */
+... (your code at line 2097) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 2098
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_2098" */
+... (your code at line 2098) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 2135
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_2135" */
+... (your code at line 2135) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 2136
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_2136" */
+... (your code at line 2136) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 2139
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_2139" */
+... (your code at line 2139) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 2159
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_2159" */
+... (your code at line 2159) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 2192
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-EXP33-a-1 "Reason: Mka_Parasoft_REF_2192" */
+... (your code at line 2192) ...
+/* parasoft-end-suppress CERT_C-EXP33-a-1 */
+
+File: Mka_Internal.c, Line: 2193
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-EXP33-a-1 CERT_C-POS54-a-1 "Reason: Mka_Parasoft_REF_2193" */
+... (your code at line 2193) ...
+/* parasoft-end-suppress CERT_C-EXP33-a-1 CERT_C-POS54-a-1 */
+
+File: Mka_Internal.c, Line: 2194
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_2194" */
+... (your code at line 2194) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 2234
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_2234" */
+... (your code at line 2234) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 2235
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_2235" */
+... (your code at line 2235) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 2242
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-a-3 "Reason: Mka_Parasoft_REF_2242" */
+... (your code at line 2242) ...
+/* parasoft-end-suppress CERT_C-DCL00-a-3 */
+
+File: Mka_Internal.c, Line: 2335
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_2335" */
+... (your code at line 2335) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 2417
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_2417" */
+... (your code at line 2417) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 2418
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_2418" */
+... (your code at line 2418) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 2461
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_2461" */
+... (your code at line 2461) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 2495
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_2495" */
+... (your code at line 2495) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 2496
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_2496" */
+... (your code at line 2496) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 2516
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_2516" */
+... (your code at line 2516) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Internal.c, Line: 2517
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-EXP46-b-2 CERT_C-INT13-a-2 CERT_C-INT31-b-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_1-b-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_2517" */
+... (your code at line 2517) ...
+/* parasoft-end-suppress CERT_C-EXP46-b-2 CERT_C-INT13-a-2 CERT_C-INT31-b-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_1-b-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 2518
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_2518" */
+... (your code at line 2518) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 2519
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-EXP46-b-2 CERT_C-INT13-a-2 CERT_C-INT31-b-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_1-b-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_2519" */
+... (your code at line 2519) ...
+/* parasoft-end-suppress CERT_C-EXP46-b-2 CERT_C-INT13-a-2 CERT_C-INT31-b-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_1-b-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 2553
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_2553" */
+... (your code at line 2553) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 2554
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: Mka_Parasoft_REF_2554" */
+... (your code at line 2554) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: Mka_Internal.c, Line: 2596
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_2596" */
+... (your code at line 2596) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 2597
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_2597" */
+... (your code at line 2597) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 2598
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_2598" */
+... (your code at line 2598) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 2599
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_2599" */
+... (your code at line 2599) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 2600
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_2600" */
+... (your code at line 2600) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 2601
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_2601" */
+... (your code at line 2601) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 2602
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_2602" */
+... (your code at line 2602) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 2603
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_2603" */
+... (your code at line 2603) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 2604
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_2604" */
+... (your code at line 2604) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 2605
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_2605" */
+... (your code at line 2605) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 2607
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_2607" */
+... (your code at line 2607) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 2644
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_2644" */
+... (your code at line 2644) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 2646
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: Mka_Parasoft_REF_2646" */
+... (your code at line 2646) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: Mka_Internal.c, Line: 2699
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_2699" */
+... (your code at line 2699) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 2700
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_2700" */
+... (your code at line 2700) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 2724
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_2724" */
+... (your code at line 2724) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 2726
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_2726" */
+... (your code at line 2726) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 2762
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_2762" */
+... (your code at line 2762) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 2763
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_2763" */
+... (your code at line 2763) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 2787
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_2787" */
+... (your code at line 2787) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 2789
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_5_1-a-2 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_2789" */
+... (your code at line 2789) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_5_1-a-2 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 2792
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-a-3 "Reason: Mka_Parasoft_REF_2792" */
+... (your code at line 2792) ...
+/* parasoft-end-suppress CERT_C-DCL00-a-3 */
+
+File: Mka_Internal.c, Line: 2802
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-EXP33-a-1 "Reason: Mka_Parasoft_REF_2802" */
+... (your code at line 2802) ...
+/* parasoft-end-suppress CERT_C-EXP33-a-1 */
+
+File: Mka_Internal.c, Line: 2833
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_2833" */
+... (your code at line 2833) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 2835
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: Mka_Parasoft_REF_2835" */
+... (your code at line 2835) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: Mka_Internal.c, Line: 2937
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_2937" */
+... (your code at line 2937) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 2938
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_2938" */
+... (your code at line 2938) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 2963
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_2963" */
+... (your code at line 2963) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 2965
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_2965" */
+... (your code at line 2965) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 3094
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3094" */
+... (your code at line 3094) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3095
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3095" */
+... (your code at line 3095) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3120
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3120" */
+... (your code at line 3120) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3122
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_3122" */
+... (your code at line 3122) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 3136
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3136" */
+... (your code at line 3136) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3137
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3137" */
+... (your code at line 3137) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3161
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3161" */
+... (your code at line 3161) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3163
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_3163" */
+... (your code at line 3163) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 3187
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3187" */
+... (your code at line 3187) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3188
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3188" */
+... (your code at line 3188) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3212
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3212" */
+... (your code at line 3212) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3214
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_3214" */
+... (your code at line 3214) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 3219
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: Mka_Parasoft_REF_3219" */
+... (your code at line 3219) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: Mka_Internal.c, Line: 3258
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3258" */
+... (your code at line 3258) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3259
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3259" */
+... (your code at line 3259) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3283
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3283" */
+... (your code at line 3283) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3285
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_3285" */
+... (your code at line 3285) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 3299
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_3299" */
+... (your code at line 3299) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 3301
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_3301" */
+... (your code at line 3301) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 3323
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_3323" */
+... (your code at line 3323) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 3338
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3338" */
+... (your code at line 3338) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3339
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3339" */
+... (your code at line 3339) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3363
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3363" */
+... (your code at line 3363) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3365
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_3365" */
+... (your code at line 3365) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 3381
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_3381" */
+... (your code at line 3381) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 3383
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_3383" */
+... (your code at line 3383) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 3404
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_3404" */
+... (your code at line 3404) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 3419
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3419" */
+... (your code at line 3419) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3420
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3420" */
+... (your code at line 3420) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3445
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3445" */
+... (your code at line 3445) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3447
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_3447" */
+... (your code at line 3447) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 3458
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3458" */
+... (your code at line 3458) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3459
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3459" */
+... (your code at line 3459) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3483
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3483" */
+... (your code at line 3483) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3485
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: Mka_Parasoft_REF_3485" */
+... (your code at line 3485) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: Mka_Internal.c, Line: 3505
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3505" */
+... (your code at line 3505) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3506
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3506" */
+... (your code at line 3506) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3531
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3531" */
+... (your code at line 3531) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3533
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_3533" */
+... (your code at line 3533) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 3556
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-EXP46-b-2 CERT_C-INT13-a-2 CERT_C-INT31-b-2 MISRAC2012-RULE_10_1-b-2 "Reason: Mka_Parasoft_REF_3556" */
+... (your code at line 3556) ...
+/* parasoft-end-suppress CERT_C-EXP46-b-2 CERT_C-INT13-a-2 CERT_C-INT31-b-2 MISRAC2012-RULE_10_1-b-2 */
+
+File: Mka_Internal.c, Line: 3559
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_3559" */
+... (your code at line 3559) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 3568
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_3568" */
+... (your code at line 3568) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Internal.c, Line: 3590
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3590" */
+... (your code at line 3590) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3591
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3591" */
+... (your code at line 3591) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3615
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3615" */
+... (your code at line 3615) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3617
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_3617" */
+... (your code at line 3617) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 3618
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: Mka_Parasoft_REF_3618" */
+... (your code at line 3618) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: Mka_Internal.c, Line: 3619
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_Parasoft_REF_3619" */
+... (your code at line 3619) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 */
+
+File: Mka_Internal.c, Line: 3622
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: Mka_Parasoft_REF_3622" */
+... (your code at line 3622) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: Mka_Internal.c, Line: 3624
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: Mka_Parasoft_REF_3624" */
+... (your code at line 3624) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: Mka_Internal.c, Line: 3625
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: Mka_Parasoft_REF_3625" */
+... (your code at line 3625) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: Mka_Internal.c, Line: 3687
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_3687" */
+... (your code at line 3687) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 3688
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_3688" */
+... (your code at line 3688) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 3702
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_3702" */
+... (your code at line 3702) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 3703
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_3703" */
+... (your code at line 3703) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 3717
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_3717" */
+... (your code at line 3717) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 3718
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_3718" */
+... (your code at line 3718) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 3732
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_3732" */
+... (your code at line 3732) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 3733
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_3733" */
+... (your code at line 3733) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 3753
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3753" */
+... (your code at line 3753) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3754
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3754" */
+... (your code at line 3754) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3778
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3778" */
+... (your code at line 3778) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3780
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: Mka_Parasoft_REF_3780" */
+... (your code at line 3780) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: Mka_Internal.c, Line: 3788
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3788" */
+... (your code at line 3788) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3789
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3789" */
+... (your code at line 3789) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3814
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3814" */
+... (your code at line 3814) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3816
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: Mka_Parasoft_REF_3816" */
+... (your code at line 3816) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: Mka_Internal.c, Line: 3823
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3823" */
+... (your code at line 3823) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3824
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3824" */
+... (your code at line 3824) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3849
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3849" */
+... (your code at line 3849) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3851
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: Mka_Parasoft_REF_3851" */
+... (your code at line 3851) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: Mka_Internal.c, Line: 3858
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3858" */
+... (your code at line 3858) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3859
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3859" */
+... (your code at line 3859) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3884
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3884" */
+... (your code at line 3884) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3886
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: Mka_Parasoft_REF_3886" */
+... (your code at line 3886) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: Mka_Internal.c, Line: 3893
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3893" */
+... (your code at line 3893) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3894
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3894" */
+... (your code at line 3894) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3919
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3919" */
+... (your code at line 3919) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3921
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: Mka_Parasoft_REF_3921" */
+... (your code at line 3921) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: Mka_Internal.c, Line: 3928
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3928" */
+... (your code at line 3928) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3929
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3929" */
+... (your code at line 3929) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3954
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3954" */
+... (your code at line 3954) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3956
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: Mka_Parasoft_REF_3956" */
+... (your code at line 3956) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: Mka_Internal.c, Line: 3963
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3963" */
+... (your code at line 3963) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3964
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_3964" */
+... (your code at line 3964) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 3989
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_3989" */
+... (your code at line 3989) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 3991
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_3991" */
+... (your code at line 3991) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 4003
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4003" */
+... (your code at line 4003) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4005
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4005" */
+... (your code at line 4005) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4008
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4008" */
+... (your code at line 4008) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4025
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4025" */
+... (your code at line 4025) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4038
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4038" */
+... (your code at line 4038) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4039
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_4039" */
+... (your code at line 4039) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 4065
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4065" */
+... (your code at line 4065) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4067
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_4067" */
+... (your code at line 4067) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 4102
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Parasoft_REF_4102" */
+... (your code at line 4102) ...
+/* parasoft-end-suppress MISRAC2012-RULE_18_4-a-4 */
+
+File: Mka_Internal.c, Line: 4106
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: Mka_Parasoft_REF_4106" */
+... (your code at line 4106) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: Mka_Internal.c, Line: 4109
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4109" */
+... (your code at line 4109) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4119
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4119" */
+... (your code at line 4119) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4121
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4121" */
+... (your code at line 4121) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4124
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4124" */
+... (your code at line 4124) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4127
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4127" */
+... (your code at line 4127) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4132
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4132" */
+... (your code at line 4132) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4133
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4133" */
+... (your code at line 4133) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4134
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4134" */
+... (your code at line 4134) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4135
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4135" */
+... (your code at line 4135) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4136
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4136" */
+... (your code at line 4136) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4137
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4137" */
+... (your code at line 4137) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4145
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4145" */
+... (your code at line 4145) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4147
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4147" */
+... (your code at line 4147) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4152
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4152" */
+... (your code at line 4152) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4153
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_4153" */
+... (your code at line 4153) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 4167
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4167" */
+... (your code at line 4167) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4174
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4174" */
+... (your code at line 4174) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4191
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: Mka_Parasoft_REF_4191" */
+... (your code at line 4191) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: Mka_Internal.c, Line: 4209
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4209" */
+... (your code at line 4209) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4210
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_4210" */
+... (your code at line 4210) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 4234
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4234" */
+... (your code at line 4234) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4236
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_4236" */
+... (your code at line 4236) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 4243
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: Mka_Parasoft_REF_4243" */
+... (your code at line 4243) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: Mka_Internal.c, Line: 4308
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4308" */
+... (your code at line 4308) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4309
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_4309" */
+... (your code at line 4309) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 4334
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4334" */
+... (your code at line 4334) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4337
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_4337" */
+... (your code at line 4337) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 4341
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: Mka_Parasoft_REF_4341" */
+... (your code at line 4341) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: Mka_Internal.c, Line: 4355
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: Mka_Parasoft_REF_4355" */
+... (your code at line 4355) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: Mka_Internal.c, Line: 4376
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4376" */
+... (your code at line 4376) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4377
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_4377" */
+... (your code at line 4377) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 4402
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4402" */
+... (your code at line 4402) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4404
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_4404" */
+... (your code at line 4404) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 4430
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4430" */
+... (your code at line 4430) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4431
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_4431" */
+... (your code at line 4431) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 4456
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4456" */
+... (your code at line 4456) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4458
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_4458" */
+... (your code at line 4458) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 4485
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4485" */
+... (your code at line 4485) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4486
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_4486" */
+... (your code at line 4486) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 4511
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4511" */
+... (your code at line 4511) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4513
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_4513" */
+... (your code at line 4513) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 4524
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4524" */
+... (your code at line 4524) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4525
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_4525" */
+... (your code at line 4525) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 4550
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4550" */
+... (your code at line 4550) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4552
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_4552" */
+... (your code at line 4552) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 4561
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4561" */
+... (your code at line 4561) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4562
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_4562" */
+... (your code at line 4562) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 4587
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4587" */
+... (your code at line 4587) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4590
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_4590" */
+... (your code at line 4590) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 4608
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4608" */
+... (your code at line 4608) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4609
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_4609" */
+... (your code at line 4609) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 4634
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4634" */
+... (your code at line 4634) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4636
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_4636" */
+... (your code at line 4636) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 4672
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Parasoft_REF_4672" */
+... (your code at line 4672) ...
+/* parasoft-end-suppress MISRAC2012-RULE_18_4-a-4 */
+
+File: Mka_Internal.c, Line: 4676
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: Mka_Parasoft_REF_4676" */
+... (your code at line 4676) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: Mka_Internal.c, Line: 4679
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4679" */
+... (your code at line 4679) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4689
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4689" */
+... (your code at line 4689) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4691
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4691" */
+... (your code at line 4691) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4694
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4694" */
+... (your code at line 4694) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4697
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4697" */
+... (your code at line 4697) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4702
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4702" */
+... (your code at line 4702) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4703
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4703" */
+... (your code at line 4703) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4704
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4704" */
+... (your code at line 4704) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4705
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4705" */
+... (your code at line 4705) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4706
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4706" */
+... (your code at line 4706) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4707
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4707" */
+... (your code at line 4707) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4774
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4774" */
+... (your code at line 4774) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4776
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4776" */
+... (your code at line 4776) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4781
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4781" */
+... (your code at line 4781) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4782
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_4782" */
+... (your code at line 4782) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 4796
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4796" */
+... (your code at line 4796) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4803
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4803" */
+... (your code at line 4803) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4820
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: Mka_Parasoft_REF_4820" */
+... (your code at line 4820) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: Mka_Internal.c, Line: 4838
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4838" */
+... (your code at line 4838) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4839
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_4839" */
+... (your code at line 4839) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 4864
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_4864" */
+... (your code at line 4864) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 4866
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_4866" */
+... (your code at line 4866) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 4902
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Parasoft_REF_4902" */
+... (your code at line 4902) ...
+/* parasoft-end-suppress MISRAC2012-RULE_18_4-a-4 */
+
+File: Mka_Internal.c, Line: 4906
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: Mka_Parasoft_REF_4906" */
+... (your code at line 4906) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: Mka_Internal.c, Line: 4909
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4909" */
+... (your code at line 4909) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4919
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4919" */
+... (your code at line 4919) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4921
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4921" */
+... (your code at line 4921) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4924
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4924" */
+... (your code at line 4924) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4927
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4927" */
+... (your code at line 4927) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4932
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4932" */
+... (your code at line 4932) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4933
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4933" */
+... (your code at line 4933) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4934
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4934" */
+... (your code at line 4934) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4935
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4935" */
+... (your code at line 4935) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4936
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4936" */
+... (your code at line 4936) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4937
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4937" */
+... (your code at line 4937) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4956
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4956" */
+... (your code at line 4956) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4957
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4957" */
+... (your code at line 4957) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4959
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4959" */
+... (your code at line 4959) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4961
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4961" */
+... (your code at line 4961) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 4967
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4967" */
+... (your code at line 4967) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4969
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4969" */
+... (your code at line 4969) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4974
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4974" */
+... (your code at line 4974) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4975
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 "Reason: Mka_Parasoft_REF_4975" */
+... (your code at line 4975) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 */
+
+File: Mka_Internal.c, Line: 4989
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Parasoft_REF_4989" */
+... (your code at line 4989) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: Mka_Internal.c, Line: 4996
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Mka_Parasoft_REF_4996" */
+... (your code at line 4996) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Mka_Internal.c, Line: 5013
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: Mka_Parasoft_REF_5013" */
+... (your code at line 5013) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: Mka_Internal.c, Line: 5032
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_5032" */
+... (your code at line 5032) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 5033
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_5033" */
+... (your code at line 5033) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: Mka_Internal.c, Line: 5058
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_5058" */
+... (your code at line 5058) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 5061
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Parasoft_REF_5061" */
+... (your code at line 5061) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: Mka_Internal.c, Line: 5071
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: Mka_Parasoft_REF_5071" */
+... (your code at line 5071) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: Mka_Internal.c, Line: 5080
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: Mka_Parasoft_REF_5080" */
+... (your code at line 5080) ...
+/* parasoft-end-suppress MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: Mka_Internal.c, Line: 5081
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: Mka_Parasoft_REF_5081" */
+... (your code at line 5081) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+

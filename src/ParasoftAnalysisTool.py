@@ -9,9 +9,25 @@ from collections import Counter
 # 1. Parse Parasoft HTML
 # -------------------------------------------------
 def parse_parasoft_report(report_path):
+    """
+    Parse Parasoft HTML report
+    Detects report type and calls appropriate parser
+    """
     with open(report_path, "r", encoding="utf-8", errors="ignore") as f:
-        soup = BeautifulSoup(f, "lxml")
+        content = f.read()
+        soup = BeautifulSoup(content, "lxml")
+    
+    # Detect report type
+    if "MISRA-C / CERT-C Static Analysis Report" in content or "MISRA / CERT Static Analysis Report" in content:
+        print("[INFO] Detected MISRA/CERT report format")
+        return parse_misra_cert_report(report_path, soup)
+    else:
+        print("[INFO] Detected Parasoft report format")
+        return parse_parasoft_html(soup)
 
+
+def parse_parasoft_html(soup):
+    """Parse standard Parasoft HTML report"""
     records = []
     current_file = None
 
@@ -47,6 +63,74 @@ def parse_parasoft_report(report_path):
                 "Line number": int(line)
             })
 
+    return records
+
+
+def parse_misra_cert_report(report_path, soup=None):
+    """
+    Parse MISRA/CERT HTML report
+    Format: Standard | Rule ID | Severity | Category | File | Line | Message | Snippet
+    """
+    if soup is None:
+        with open(report_path, "r", encoding="utf-8", errors="ignore") as f:
+            soup = BeautifulSoup(f, "lxml")
+    
+    records = []
+    table = soup.find("table")
+    
+    if not table:
+        print("[WARNING] No table found in MISRA/CERT report")
+        return records
+    
+    tbody = table.find("tbody")
+    if not tbody:
+        tbody = table
+    
+    rows = tbody.find_all("tr")
+    
+    for row in rows:
+        tds = row.find_all("td")
+        
+        # Skip if not enough columns or "No violations" message
+        if len(tds) < 7:
+            continue
+        
+        try:
+            # Extract data from columns
+            # Standard | Rule ID | Severity | Category | File | Line | Message | Snippet
+            standard = tds[0].get_text(strip=True)
+            rule_id = tds[1].get_text(strip=True)
+            severity = tds[2].get_text(strip=True)
+            category = tds[3].get_text(strip=True)
+            file_name = tds[4].get_text(strip=True)
+            line_str = tds[5].get_text(strip=True)
+            message = tds[6].get_text(strip=True)
+            
+            # Skip empty rows
+            if not rule_id or not file_name or not line_str:
+                continue
+            
+            # Parse line number
+            try:
+                line_num = int(line_str)
+            except ValueError:
+                continue
+            
+            # Create violation message in Parasoft-like format
+            violation_msg = f"{message} [{category}]"
+            
+            records.append({
+                "Violation": violation_msg,
+                "Violation ID": rule_id,
+                "File": file_name,
+                "Line number": line_num
+            })
+            
+        except Exception as e:
+            # Skip rows that can't be parsed
+            continue
+    
+    print(f"[INFO] Parsed {len(records)} violations from MISRA/CERT report")
     return records
 
 

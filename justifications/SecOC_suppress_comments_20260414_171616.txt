@@ -1,0 +1,1319 @@
+Parasoft Suppress Comments for SecOC
+Generated: 2026-04-14 17:16:16
+================================================================================
+
+Instructions:
+1. Add the 'parasoft-begin-suppress' comment BEFORE the line with the violation
+2. Add the 'parasoft-end-suppress' comment AFTER the line with the violation
+3. Update the reason reference as needed
+
+================================================================================
+
+File: SecOC.c, Line: 305
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_305" */
+... (your code at line 305) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC.c, Line: 443
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_443" */
+... (your code at line 443) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC.c, Line: 651
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_651" */
+... (your code at line 651) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC.c, Line: 652
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_652" */
+... (your code at line 652) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC.c, Line: 793
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_793" */
+... (your code at line 793) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC.c, Line: 794
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_794" */
+... (your code at line 794) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC.c, Line: 943
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_943" */
+... (your code at line 943) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC.c, Line: 1092
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1092" */
+... (your code at line 1092) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC.c, Line: 1323
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1323" */
+... (your code at line 1323) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC.c, Line: 1324
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1324" */
+... (your code at line 1324) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC.c, Line: 1327
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1327" */
+... (your code at line 1327) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC.c, Line: 1572
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1572" */
+... (your code at line 1572) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC.c, Line: 2005
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_2005" */
+... (your code at line 2005) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC.c, Line: 2166
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_2166" */
+... (your code at line 2166) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC.c, Line: 2334
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-MSC12-j-3 "Reason: SecOC_Parasoft_REF_2334" */
+... (your code at line 2334) ...
+/* parasoft-end-suppress CERT_C-MSC12-j-3 */
+
+File: SecOC.c, Line: 2340
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-MSC12-j-3 "Reason: SecOC_Parasoft_REF_2340" */
+... (your code at line 2340) ...
+/* parasoft-end-suppress CERT_C-MSC12-j-3 */
+
+File: SecOC_Cbk.c, Line: 291
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_291" */
+... (your code at line 291) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 295
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_295" */
+... (your code at line 295) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 589
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_589" */
+... (your code at line 589) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 615
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_615" */
+... (your code at line 615) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 752
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_752" */
+... (your code at line 752) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 755
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_755" */
+... (your code at line 755) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 1057
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1057" */
+... (your code at line 1057) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 1215
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1215" */
+... (your code at line 1215) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 1218
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1218" */
+... (your code at line 1218) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 1469
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1469" */
+... (your code at line 1469) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 1494
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1494" */
+... (your code at line 1494) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 1669
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1669" */
+... (your code at line 1669) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 1672
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1672" */
+... (your code at line 1672) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 1678
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1678" */
+... (your code at line 1678) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 1679
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1679" */
+... (your code at line 1679) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 1847
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1847" */
+... (your code at line 1847) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 1877
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1877" */
+... (your code at line 1877) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 1906
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1906" */
+... (your code at line 1906) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 1943
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1943" */
+... (your code at line 1943) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 1953
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1953" */
+... (your code at line 1953) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 2062
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_2062" */
+... (your code at line 2062) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 2065
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_2065" */
+... (your code at line 2065) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 2318
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_2318" */
+... (your code at line 2318) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 2384
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_2384" */
+... (your code at line 2384) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 2449
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_2449" */
+... (your code at line 2449) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 2474
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_2474" */
+... (your code at line 2474) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 2763
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_2763" */
+... (your code at line 2763) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 3369
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_3369" */
+... (your code at line 3369) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 3372
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_3372" */
+... (your code at line 3372) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 3375
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_3375" */
+... (your code at line 3375) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 3739
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_3739" */
+... (your code at line 3739) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Cbk.c, Line: 3841
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_3841" */
+... (your code at line 3841) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 3845
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_3845" */
+... (your code at line 3845) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 4185
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_4185" */
+... (your code at line 4185) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 4188
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_4188" */
+... (your code at line 4188) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 4191
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_4191" */
+... (your code at line 4191) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 4194
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_4194" */
+... (your code at line 4194) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Cbk.c, Line: 4525
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_4525" */
+... (your code at line 4525) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1130
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1130" */
+... (your code at line 1130) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1135
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1135" */
+... (your code at line 1135) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1140
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1140" */
+... (your code at line 1140) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1145
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1145" */
+... (your code at line 1145) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1150
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1150" */
+... (your code at line 1150) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1155
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1155" */
+... (your code at line 1155) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1160
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1160" */
+... (your code at line 1160) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1165
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1165" */
+... (your code at line 1165) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1169
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1169" */
+... (your code at line 1169) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1174
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1174" */
+... (your code at line 1174) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1272
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1272" */
+... (your code at line 1272) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1277
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1277" */
+... (your code at line 1277) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1282
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1282" */
+... (your code at line 1282) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1290
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1290" */
+... (your code at line 1290) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1296
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1296" */
+... (your code at line 1296) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1303
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1303" */
+... (your code at line 1303) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1309
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1309" */
+... (your code at line 1309) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1314
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1314" */
+... (your code at line 1314) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1319
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1319" */
+... (your code at line 1319) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1324
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1324" */
+... (your code at line 1324) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1374
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1374" */
+... (your code at line 1374) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1379
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1379" */
+... (your code at line 1379) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1392
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1392" */
+... (your code at line 1392) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1407
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_1407" */
+... (your code at line 1407) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 1499
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_1499" */
+... (your code at line 1499) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 2156
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_2156" */
+... (your code at line 2156) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 2240
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_2240" */
+... (your code at line 2240) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 2303
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_2303" */
+... (your code at line 2303) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 2324
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_2324" */
+... (your code at line 2324) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 2442
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_2442" */
+... (your code at line 2442) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 2675
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_2675" */
+... (your code at line 2675) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 2750
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_2750" */
+... (your code at line 2750) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 2968
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_2968" */
+... (your code at line 2968) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 3296
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_3296" */
+... (your code at line 3296) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 3514
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: SecOC_Parasoft_REF_3514" */
+... (your code at line 3514) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: SecOC_Internal.c, Line: 3641
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_3641" */
+... (your code at line 3641) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 3722
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: SecOC_Parasoft_REF_3722" */
+... (your code at line 3722) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: SecOC_Internal.c, Line: 3783
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_3783" */
+... (your code at line 3783) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 3856
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: SecOC_Parasoft_REF_3856" */
+... (your code at line 3856) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: SecOC_Internal.c, Line: 3961
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_3961" */
+... (your code at line 3961) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Internal.c, Line: 4062
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_4062" */
+... (your code at line 4062) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 4149
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_4149" */
+... (your code at line 4149) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 4152
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_4152" */
+... (your code at line 4152) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 4320
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_4320" */
+... (your code at line 4320) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Internal.c, Line: 4321
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_4321" */
+... (your code at line 4321) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 4459
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_4459" */
+... (your code at line 4459) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 4499
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_4499" */
+... (your code at line 4499) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 4609
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_4609" */
+... (your code at line 4609) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 4672
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_4672" */
+... (your code at line 4672) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 4742
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_4742" */
+... (your code at line 4742) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 4814
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_4814" */
+... (your code at line 4814) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 4817
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_4817" */
+... (your code at line 4817) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 4820
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_4820" */
+... (your code at line 4820) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 4927
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_4927" */
+... (your code at line 4927) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 4983
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_4983" */
+... (your code at line 4983) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 5030
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-a-2 CERT_C-INT13-b-2 "Reason: SecOC_Parasoft_REF_5030" */
+... (your code at line 5030) ...
+/* parasoft-end-suppress CERT_C-INT13-a-2 CERT_C-INT13-b-2 */
+
+File: SecOC_Internal.c, Line: 5091
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_5091" */
+... (your code at line 5091) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 5203
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_5203" */
+... (your code at line 5203) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 5223
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_5223" */
+... (your code at line 5223) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 5382
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_5382" */
+... (your code at line 5382) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 5440
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_5440" */
+... (your code at line 5440) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 5521
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_5521" */
+... (your code at line 5521) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 5548
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_5548" */
+... (your code at line 5548) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 5751
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_5751" */
+... (your code at line 5751) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 5899
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_5899" */
+... (your code at line 5899) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 6061
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: SecOC_Parasoft_REF_6061" */
+... (your code at line 6061) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: SecOC_Internal.c, Line: 6268
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_6268" */
+... (your code at line 6268) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 6280
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_6280" */
+... (your code at line 6280) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 6857
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_6857" */
+... (your code at line 6857) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 7026
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: SecOC_Parasoft_REF_7026" */
+... (your code at line 7026) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: SecOC_Internal.c, Line: 7117
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_7117" */
+... (your code at line 7117) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 7131
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_7131" */
+... (your code at line 7131) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 7203
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_7203" */
+... (your code at line 7203) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 7321
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_7321" */
+... (your code at line 7321) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 7657
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_7657" */
+... (your code at line 7657) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 7714
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_7714" */
+... (your code at line 7714) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 7837
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_7837" */
+... (your code at line 7837) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 7887
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: SecOC_Parasoft_REF_7887" */
+... (your code at line 7887) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: SecOC_Internal.c, Line: 7992
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_7992" */
+... (your code at line 7992) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 8450
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_8450" */
+... (your code at line 8450) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 8590
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_8590" */
+... (your code at line 8590) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 8671
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_8671" */
+... (your code at line 8671) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 8758
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_8758" */
+... (your code at line 8758) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 8816
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: SecOC_Parasoft_REF_8816" */
+... (your code at line 8816) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: SecOC_Internal.c, Line: 9102
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_9102" */
+... (your code at line 9102) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 9187
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_9187" */
+... (your code at line 9187) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 9197
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_9197" */
+... (your code at line 9197) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 9403
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_9403" */
+... (your code at line 9403) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 9496
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_9496" */
+... (your code at line 9496) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Internal.c, Line: 9499
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_9499" */
+... (your code at line 9499) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Internal.c, Line: 9596
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_9596" */
+... (your code at line 9596) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 9599
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_9599" */
+... (your code at line 9599) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 9602
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_9602" */
+... (your code at line 9602) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 9707
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_9707" */
+... (your code at line 9707) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 9759
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: SecOC_Parasoft_REF_9759" */
+... (your code at line 9759) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: SecOC_Internal.c, Line: 9903
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_9903" */
+... (your code at line 9903) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Internal.c, Line: 9912
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_9912" */
+... (your code at line 9912) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Internal.c, Line: 10045
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_10045" */
+... (your code at line 10045) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 10167
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_10167" */
+... (your code at line 10167) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 10170
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_10170" */
+... (your code at line 10170) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 10251
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_10251" */
+... (your code at line 10251) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 10341
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_10341" */
+... (your code at line 10341) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 10490
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_10490" */
+... (your code at line 10490) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 10493
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_10493" */
+... (your code at line 10493) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Internal.c, Line: 10564
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_10564" */
+... (your code at line 10564) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 10621
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_10621" */
+... (your code at line 10621) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Internal.c, Line: 10627
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_10627" */
+... (your code at line 10627) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Internal.c, Line: 10740
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_10740" */
+... (your code at line 10740) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 10825
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_10825" */
+... (your code at line 10825) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 11037
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_11037" */
+... (your code at line 11037) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 11040
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_11040" */
+... (your code at line 11040) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 11151
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_11151" */
+... (your code at line 11151) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 11291
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_11291" */
+... (your code at line 11291) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 11416
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_11416" */
+... (your code at line 11416) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 11558
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_11558" */
+... (your code at line 11558) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 11677
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_11677" */
+... (your code at line 11677) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 11690
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_11690" */
+... (your code at line 11690) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 11704
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_11704" */
+... (your code at line 11704) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 11792
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_11792" */
+... (your code at line 11792) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 12051
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_12051" */
+... (your code at line 12051) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 12514
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_12514" */
+... (your code at line 12514) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 12515
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_12515" */
+... (your code at line 12515) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 12517
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_12517" */
+... (your code at line 12517) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 12518
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_12518" */
+... (your code at line 12518) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 12643
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_12643" */
+... (your code at line 12643) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 12795
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_12795" */
+... (your code at line 12795) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 12796
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_12796" */
+... (your code at line 12796) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 12955
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_12955" */
+... (your code at line 12955) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 12961
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_12961" */
+... (your code at line 12961) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 13124
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_13124" */
+... (your code at line 13124) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 13130
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_13130" */
+... (your code at line 13130) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 13136
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_13136" */
+... (your code at line 13136) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 13265
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_13265" */
+... (your code at line 13265) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 13266
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_13266" */
+... (your code at line 13266) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 13373
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: SecOC_Parasoft_REF_13373" */
+... (your code at line 13373) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: SecOC_Internal.c, Line: 13443
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: SecOC_Parasoft_REF_13443" */
+... (your code at line 13443) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: SecOC_Internal.c, Line: 13621
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_13621" */
+... (your code at line 13621) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 13673
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: SecOC_Parasoft_REF_13673" */
+... (your code at line 13673) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: SecOC_Internal.c, Line: 13721
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_13721" */
+... (your code at line 13721) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 13901
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: SecOC_Parasoft_REF_13901" */
+... (your code at line 13901) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: SecOC_Internal.c, Line: 14009
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: SecOC_Parasoft_REF_14009" */
+... (your code at line 14009) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: SecOC_Internal.c, Line: 14117
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_14117" */
+... (your code at line 14117) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 14121
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_14121" */
+... (your code at line 14121) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Internal.c, Line: 14122
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_14122" */
+... (your code at line 14122) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: SecOC_Internal.c, Line: 14138
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-a-3 "Reason: SecOC_Parasoft_REF_14138" */
+... (your code at line 14138) ...
+/* parasoft-end-suppress CERT_C-DCL00-a-3 */
+
+File: SecOC_Internal.c, Line: 14260
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_14260" */
+... (your code at line 14260) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 14418
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_14418" */
+... (your code at line 14418) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 14684
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_14684" */
+... (your code at line 14684) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 14803
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-POS54-a-1 "Reason: SecOC_Parasoft_REF_14803" */
+... (your code at line 14803) ...
+/* parasoft-end-suppress CERT_C-POS54-a-1 */
+
+File: SecOC_Internal.c, Line: 14908
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_14908" */
+... (your code at line 14908) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Internal.c, Line: 15418
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_15418" */
+... (your code at line 15418) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Lcfg.c, Line: 902
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: SecOC_Parasoft_REF_902" */
+... (your code at line 902) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: SecOC_Lcfg.c, Line: 1575
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_1575" */
+... (your code at line 1575) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Lcfg.c, Line: 1578
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1578" */
+... (your code at line 1578) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Lcfg.c, Line: 1631
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_1631" */
+... (your code at line 1631) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Lcfg.c, Line: 1634
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1634" */
+... (your code at line 1634) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Lcfg.c, Line: 1687
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_1687" */
+... (your code at line 1687) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Lcfg.c, Line: 1690
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1690" */
+... (your code at line 1690) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Lcfg.c, Line: 1744
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_1744" */
+... (your code at line 1744) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Lcfg.c, Line: 1747
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1747" */
+... (your code at line 1747) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Lcfg.c, Line: 1802
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 "Reason: SecOC_Parasoft_REF_1802" */
+... (your code at line 1802) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 */
+
+File: SecOC_Lcfg.c, Line: 1805
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: SecOC_Parasoft_REF_1805" */
+... (your code at line 1805) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: SecOC_Lcfg.c, Line: 1807
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 "Reason: SecOC_Parasoft_REF_1807" */
+... (your code at line 1807) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 */
+
+File: SecOC_Lcfg.c, Line: 1894
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: SecOC_Parasoft_REF_1894" */
+... (your code at line 1894) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+

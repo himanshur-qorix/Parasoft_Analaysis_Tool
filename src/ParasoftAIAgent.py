@@ -376,6 +376,77 @@ class ParasoftAIAgent:
         
         logger.info(f"Excel report created with {len(violations)} violations across {df['File'].nunique()} files")
     
+    def _export_updated_excel_with_justifications(self, module_name):
+        """
+        Export updated Excel report with justifications column
+        
+        Args:
+            module_name: Name of the module
+        
+        Returns:
+            Path to updated Excel file or None if not created
+        """
+        import pandas as pd
+        from KnowledgeDatabaseManager import KnowledgeDatabaseManager
+        
+        # Original Excel report path
+        original_excel = self.reports_dir / f"{module_name}_violations_report.xlsx"
+        
+        if not original_excel.exists():
+            logger.warning(f"Original Excel report not found: {original_excel}")
+            return None
+        
+        # Load knowledge base to get justification status
+        kb_manager = KnowledgeDatabaseManager(self.knowledge_base_dir)
+        kb_manager.load_knowledge_base(module_name)
+        
+        try:
+            # Read the original Excel report (Detailed Violations sheet)
+            df = pd.read_excel(original_excel, sheet_name='Detailed Violations')
+            
+            # Add Justification column based on knowledge base
+            justifications = []
+            for _, row in df.iterrows():
+                violation_id = row['Violation ID']
+                violation_data = kb_manager.get_violation(violation_id)
+                
+                if violation_data:
+                    if violation_data.get('justification_added'):
+                        justification_text = violation_data.get('justification_text', 'Justification added')
+                        justifications.append('Yes - ' + justification_text[:100])  # Truncate for Excel
+                    else:
+                        justifications.append('No')
+                else:
+                    justifications.append('No')
+            
+            df['Justification'] = justifications
+            
+            # Create updated Excel file
+            updated_excel = self.reports_dir / f"{module_name}_violations_report_UPDATED.xlsx"
+            
+            # Read all sheets from original file
+            all_sheets = pd.read_excel(original_excel, sheet_name=None)
+            
+            # Write to new Excel file with all sheets
+            with pd.ExcelWriter(updated_excel, engine='openpyxl') as writer:
+                # Write Summary sheet
+                if 'Summary' in all_sheets:
+                    all_sheets['Summary'].to_excel(writer, sheet_name='Summary', index=False)
+                
+                # Write Unique Violations sheet
+                if 'Unique Violations' in all_sheets:
+                    all_sheets['Unique Violations'].to_excel(writer, sheet_name='Unique Violations', index=False)
+                
+                # Write updated Detailed Violations sheet with Justification column
+                df.to_excel(writer, sheet_name='Detailed Violations', index=False)
+            
+            logger.info(f"[OK] Updated Excel report created: {updated_excel}")
+            return str(updated_excel)
+            
+        except Exception as e:
+            logger.error(f"[ERROR] Failed to create updated Excel report: {str(e)}")
+            return None
+    
     def generate_fixes(self, module_name, violation_ids=None):
         """
         Generate fixes for violations in a module
@@ -423,6 +494,11 @@ class ParasoftAIAgent:
         results = fix_generator.generate_justifications(violation_ids)
         
         logger.info(f"Generated {results['justifications_generated']} justifications")
+        
+        # Export updated Excel report with justifications
+        updated_excel_path = self._export_updated_excel_with_justifications(module_name)
+        if updated_excel_path:
+            results['updated_excel_report'] = updated_excel_path
         
         return results
     

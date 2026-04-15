@@ -4,6 +4,134 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.2.1] - 2026-04-15
+
+### ✨ Added - Knowledge Base Integration for Analysis Tools
+
+#### MISRA/CERT Checker Enhancement
+- **Cross-checks against knowledge base** during analysis
+- Classifies violations as **KNOWN vs NEW**
+- Shows **proven fix suggestions** from previous analyses
+- Displays **occurrence counts** for known violations
+- Enhanced HTML reports with KB insights
+
+#### New Command Line Options
+- `--module <name>` - Enable knowledge base integration
+- `--kb-dir <path>` - Specify custom knowledge base directory
+- `--show-known` - Show detailed breakdown of known vs new violations
+
+#### Enhanced Reporting
+- **Visual indicators** in HTML reports:
+  - ✅ KNOWN (Fix Available) - Green badge
+  - 📊 KNOWN (Nx) - Blue badge with occurrence count
+  - ⚠️ NEW - Red badge for first-time violations
+- **Inline fix suggestions** with proven solutions
+- **Alert banners** for new violations and available fixes
+- **Statistics cards** showing known/new breakdown
+
+#### Integration Features
+- Checks module-specific knowledge base first
+- Falls back to master KB for cross-module insights
+- Suggests fixes from other modules automatically
+- Tracks violation trends over time
+- Helps prioritize new issues
+
+#### Benefits
+- **Focus on new issues** - Quickly identify what's different
+- **Apply proven fixes** - Leverage solutions that worked before
+- **Track progress** - See violation trends across analyses
+- **Cross-team learning** - Use fixes from other modules
+
+#### Documentation
+- Complete guide: [KNOWLEDGE_BASE_INTEGRATION.md](KNOWLEDGE_BASE_INTEGRATION.md)
+- Updated README with usage examples
+- Enhanced Run.bat with automatic KB integration
+
+---
+
+## [2.2.0] - 2026-04-15
+
+### ✨ Added - Cross-Module Knowledge Base
+
+#### Master Knowledge Base Manager
+- **Consolidates knowledge** from all module-specific databases
+- Aggregates violations, fixes, and justifications across modules
+- Identifies cross-module patterns and common issues
+- Calculates fix success rates per violation
+- Generates intelligent recommendations
+
+#### Cross-Module Insights
+- **Cross-module violation detection** - Identifies issues appearing in 2+ modules
+- **Proven fix recommendations** - Suggests fixes that worked in other modules
+- **Fix success rate tracking** - Shows % success for each violation type
+- **Justification templates** - Reusable justifications from other modules
+- **Pattern recognition** - Identifies company-wide vs module-specific issues
+
+#### New Tools & Scripts
+- **MasterKnowledgeBaseManager.py** - Core consolidation logic
+- **consolidate_knowledge.py** - Consolidation script
+- **query_master_knowledge.py** - Interactive query tool
+- **Consolidate_Knowledge.bat** - Windows batch script
+- **Query_Master_Knowledge.bat** - Windows query script
+
+#### Features
+- Automatic aggregation of all module knowledge databases
+- Export consolidated reports to Excel
+- Interactive query interface with 9 query options
+- Recommendations engine for prioritized actions
+- Category and severity-based filtering
+- Violation insight lookup with cross-module data
+
+#### Excel Reporting
+- Multi-sheet consolidated reports
+- All violations with cross-module stats
+- Cross-module violations summary
+- Statistics and metrics dashboard
+- Fix success rate tracking
+
+#### Documentation
+- Complete guide: [CROSS_MODULE_KNOWLEDGE.md](CROSS_MODULE_KNOWLEDGE.md)
+- Updated README with usage examples
+- Integration with existing workflow
+
+### 🎯 Benefits
+- **Faster violation resolution** - Apply proven fixes from other modules
+- **Knowledge sharing** - Leverage team expertise across projects
+- **Pattern recognition** - Identify systemic coding issues
+- **Prioritized remediation** - Focus on cross-module violations first
+- **Metrics & reporting** - Track progress company-wide
+
+---
+
+## [2.1.1] - 2026-04-15
+
+### ✨ Added - Auto-Generate Workflow
+
+#### Smart Report Detection
+- **Automatic MISRA/CERT report generation** when report_dev1.html not found
+- Tool now works with or without Parasoft report
+- Fallback workflow: Generate MISRA/CERT report from source code if no Parasoft report available
+
+#### Enhanced Batch Script (Run.bat)
+- Detects missing report_dev1.html automatically
+- Prompts for source code path if report missing
+- Generates MISRA/CERT HTML report on-the-fly
+- Uses generated report as input for analysis
+- Seamless integration with existing workflow
+
+#### Report Parser Enhancement
+- **Auto-detection** of report type (Parasoft vs MISRA/CERT)
+- Added `parse_misra_cert_report()` function
+- Unified parser handles both report formats
+- Consistent violation data structure regardless of source
+
+#### Workflow Options
+1. **Traditional**: Place report_dev1.html → Run analysis
+2. **New**: Provide source code path → Auto-generate report → Run analysis
+3. **Hybrid**: Both Parasoft report + source code for comprehensive analysis
+
+---
+
 ## [2.1.0] - 2026-04-15
 
 ### ✨ Added - MISRA/CERT Static Analyzer Integration

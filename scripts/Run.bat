@@ -6,7 +6,7 @@ REM Change to project root directory
 cd /d "%~dp0.."
 
 echo ==================================================
-echo        Parasoft AI Agent - Version 2.0.0
+echo        Parasoft AI Agent - Version 2.1.1
 echo        Developer: Himanshu R
 echo ==================================================
 echo.
@@ -30,29 +30,17 @@ if not exist "venv\" (
     call venv\Scripts\activate.bat
 )
 
+REM Ensure required directories exist
+if not exist "reports" mkdir reports
+if not exist "knowledge_base" mkdir knowledge_base
+if not exist "fixes" mkdir fixes
+if not exist "justifications" mkdir justifications
+
 echo.
 echo Starting AI Agent analysis...
 echo.
 
-REM Check if report_dev1.html exists
-if not exist "report_dev1.html" (
-    echo Error: report_dev1.html not found in current directory
-    echo Please place the Parasoft report in the tool folder
-    pause
-    exit /b 1
-)
-
-REM Check if Qorix deviations file exists
-if not exist "data\Qorix_CP_Common_Deviations.xlsx" (
-    echo Warning: Qorix_CP_Common_Deviations.xlsx not found in data\ folder
-    echo The analysis will continue but violations will not be checked against Qorix deviations
-    echo Status column will show "Analysis Required" for all violations
-    echo.
-    echo Press any key to continue or Ctrl+C to cancel...
-    pause >nul
-)
-
-REM Prompt for module name
+REM Prompt for module name first
 set /p MODULE_NAME="Enter module name (e.g., Mka): "
 
 if "%MODULE_NAME%"=="" (
@@ -61,19 +49,85 @@ if "%MODULE_NAME%"=="" (
     exit /b 1
 )
 
-REM Prompt for source code path (optional)
+REM Prompt for source code path
 echo.
 set /p SOURCE_CODE_PATH="Enter source code path for MISRA/CERT analysis (optional, press Enter to skip): "
 
+REM Initialize variables
+set REPORT_FILE=report_dev1.html
+set GENERATED_REPORT=
+
+REM Validate source code path if provided
 if not "%SOURCE_CODE_PATH%"=="" (
     if not exist "%SOURCE_CODE_PATH%" (
         echo Warning: Source code path does not exist: %SOURCE_CODE_PATH%
-        echo Skipping MISRA/CERT pre-analysis...
+        echo Skipping MISRA/CERT analysis...
         set SOURCE_CODE_PATH=
     ) else (
         echo [INFO] Source code path: %SOURCE_CODE_PATH%
-        echo [INFO] MISRA/CERT pre-analysis will be performed
     )
+)
+
+REM Check if report_dev1.html exists
+if not exist "%REPORT_FILE%" (
+    echo.
+    echo ==================================================
+    echo report_dev1.html not found
+    echo ==================================================
+    
+    if "%SOURCE_CODE_PATH%"=="" (
+        echo.
+        echo Error: No Parasoft report found and no source code path provided
+        echo.
+        echo Please do one of the following:
+        echo   1. Place report_dev1.html in the project folder, OR
+        echo   2. Provide source code path to generate MISRA/CERT report
+        echo.
+        pause
+        exit /b 1
+    )
+    
+    echo Generating MISRA/CERT report from source code...
+    echo.
+    
+    REM Create reports directory if it doesn't exist
+    if not exist "reports" mkdir reports
+    
+    REM Generate MISRA/CERT report as HTML with knowledge base integration
+    python src\misra_cert_checker.py "%SOURCE_CODE_PATH%" --report html --output "reports\%MODULE_NAME%_misra_cert_report.html" --module %MODULE_NAME% --show-known
+    
+    if errorlevel 1 (
+        echo.
+        echo ==================================================
+        echo Error: Failed to generate MISRA/CERT report
+        echo ==================================================
+        pause
+        exit /b 1
+    )
+    
+    REM Use the generated MISRA/CERT report as input
+    set REPORT_FILE=reports\%MODULE_NAME%_misra_cert_report.html
+    set GENERATED_REPORT=yes
+    
+    echo [OK] MISRA/CERT report generated: %REPORT_FILE%
+    echo [INFO] This report will be used for analysis
+    echo.
+) else (
+    echo [OK] Using existing Parasoft report: %REPORT_FILE%
+    if not "%SOURCE_CODE_PATH%"=="" (
+        echo [INFO] MISRA/CERT pre-analysis will also be performed
+    )
+)
+
+REM Check if Qorix deviations file exists
+if not exist "data\Qorix_CP_Common_Deviations.xlsx" (
+    echo.
+    echo Warning: Qorix_CP_Common_Deviations.xlsx not found in data\ folder
+    echo The analysis will continue but violations will not be checked against Qorix deviations
+    echo Status column will show "Analysis Required" for all violations
+    echo.
+    echo Press any key to continue or Ctrl+C to cancel...
+    pause >nul
 )
 
 REM Prompt for AI mode
@@ -111,9 +165,16 @@ echo Running analysis with Qorix integration...
 echo.
 
 if not "%SOURCE_CODE_PATH%"=="" (
-    python src\run_agent.py report_dev1.html %MODULE_NAME% --source-code "%SOURCE_CODE_PATH%" --ai-mode %AI_MODE%
+    if "%GENERATED_REPORT%"=="yes" (
+        REM Report was generated from MISRA/CERT, source code already analyzed
+        python src\run_agent.py "%REPORT_FILE%" %MODULE_NAME% --ai-mode %AI_MODE%
+    ) else (
+        REM Using Parasoft report with MISRA/CERT pre-analysis
+        python src\run_agent.py "%REPORT_FILE%" %MODULE_NAME% --source-code "%SOURCE_CODE_PATH%" --ai-mode %AI_MODE%
+    )
 ) else (
-    python src\run_agent.py report_dev1.html %MODULE_NAME% --ai-mode %AI_MODE%
+    REM No source code path, just analyze the report
+    python src\run_agent.py "%REPORT_FILE%" %MODULE_NAME% --ai-mode %AI_MODE%
 )
 
 if errorlevel 1 (
@@ -133,6 +194,7 @@ echo ==================================================
 echo.
 echo Check the following directories for results:
 echo   - reports\%MODULE_NAME%_violations_report.xlsx (Excel with Status column)
+echo   - reports\%MODULE_NAME%_violations_report_UPDATED.xlsx (Excel with Justifications)
 echo   - reports\%MODULE_NAME%_analysis_summary.json
 echo   - knowledge_base\%MODULE_NAME%_KnowledgeDatabase.json
 echo   - justifications\%MODULE_NAME%_suppress_comments_*.txt (Parasoft suppress comments)
@@ -140,6 +202,7 @@ echo   - fixes\%MODULE_NAME%\
 echo.
 echo Excel Report includes:
 echo   - Status: Justified / Needs Code Update / Analysis Required
+echo   - Justification: Shows which violations have justifications added
 echo   - Filtered by Qorix_CP_Common_Deviations.xlsx
 echo.
 echo.
