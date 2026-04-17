@@ -1,0 +1,77 @@
+Parasoft Suppress Comments for Tls
+Generated: 2026-04-16 12:27:05
+================================================================================
+
+Instructions:
+1. Add the 'parasoft-begin-suppress' comment BEFORE the line with the violation
+2. Add the 'parasoft-end-suppress' comment AFTER the line with the violation
+3. Update the reason reference as needed
+
+================================================================================
+
+File: Tls_Certificate.c, Line: 1472
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Tls_Parasoft_REF_1472" */
+... (your code at line 1472) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Tls_Certificate.c, Line: 1476
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Tls_Parasoft_REF_1476" */
+... (your code at line 1476) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Tls_Certificate.c, Line: 1480
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Tls_Parasoft_REF_1480" */
+... (your code at line 1480) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Tls_Certificate.c, Line: 1487
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Tls_Parasoft_REF_1487" */
+... (your code at line 1487) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Tls_Certificate.c, Line: 1491
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Tls_Parasoft_REF_1491" */
+... (your code at line 1491) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Tls_Certificate.c, Line: 1499
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Tls_Parasoft_REF_1499" */
+... (your code at line 1499) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Tls_Certificate.c, Line: 1505
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Tls_Parasoft_REF_1505" */
+... (your code at line 1505) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Tls_Certificate.c, Line: 1513
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Tls_Parasoft_REF_1513" */
+... (your code at line 1513) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Tls_Certificate.c, Line: 1519
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Tls_Parasoft_REF_1519" */
+... (your code at line 1519) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Tls_Certificate.c, Line: 1531
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: Tls_Parasoft_REF_1531" */
+... (your code at line 1531) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: Tls_Certificate.c, Line: 1750
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Tls_Parasoft_REF_1750" */
+... (your code at line 1750) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+

@@ -1,6 +1,6 @@
 """
 Parasoft AI Agent - Main Entry Point
-Version: 2.0.0
+Version: 3.0.0
 Developer: Himanshu R
 Description: AI-powered agent for Parasoft analysis with knowledge database management
 """

@@ -137,16 +137,36 @@ class KnowledgeDatabaseManager:
                 'fix_details': None,
                 'justification_added': False,
                 'justification_text': None,
+                'suppression_added': False,
+                'suppression_reason': None,
                 'analysis_notes': [],
                 'severity': self._determine_severity(violation_id),
-                'category': self._determine_category(violation_id)
+                'category': self._determine_category(violation_id),
+                'status': 'open',  # open, fixed, suppressed, justified, reopened
+                'status_history': [{
+                    'timestamp': datetime.now().isoformat(),
+                    'status': 'open',
+                    'note': 'First detected'
+                }]
             }
             self.database['total_unique_violations'] += 1
             logger.info(f"New unique violation added: {violation_id}")
         else:
             # Update existing violation
-            self.database['violations'][violation_id]['last_seen'] = datetime.now().isoformat()
-            self.database['violations'][violation_id]['occurrence_count'] += 1
+            existing = self.database['violations'][violation_id]
+            existing['last_seen'] = datetime.now().isoformat()
+            existing['occurrence_count'] += 1
+            
+            # If violation was marked as fixed but appeared again, mark as reopened
+            if existing.get('status') in ['fixed', 'suppressed']:
+                existing['status'] = 'reopened'
+                existing.setdefault('status_history', []).append({
+                    'timestamp': datetime.now().isoformat(),
+                    'status': 'reopened',
+                    'note': 'Violation reappeared after being marked as fixed/suppressed'
+                })
+                logger.warning(f"Violation {violation_id} reopened - was {existing.get('status')} but reappeared")
+            
             logger.debug(f"Updated existing violation: {violation_id}")
         
         # Add file and line number information
@@ -238,17 +258,25 @@ class KnowledgeDatabaseManager:
         
         return violations
     
-    def update_fix_status(self, violation_id: str, fix_details: Dict):
+    def update_fix_status(self, violation_id: str, fix_details: Dict, note: str = None):
         """
         Update fix status for a violation
         
         Args:
             violation_id: The violation ID
             fix_details: Dictionary containing fix information
+            note: Optional note about the fix
         """
         if violation_id in self.database['violations']:
-            self.database['violations'][violation_id]['fix_applied'] = True
-            self.database['violations'][violation_id]['fix_details'] = fix_details
+            violation = self.database['violations'][violation_id]
+            violation['fix_applied'] = True
+            violation['fix_details'] = fix_details
+            violation['status'] = 'fixed'
+            violation.setdefault('status_history', []).append({
+                'timestamp': datetime.now().isoformat(),
+                'status': 'fixed',
+                'note': note or 'Code fix applied'
+            })
             logger.info(f"Fix status updated for {violation_id}")
         else:
             logger.warning(f"Violation {violation_id} not found in database")
@@ -262,8 +290,15 @@ class KnowledgeDatabaseManager:
             justification_text: The justification text
         """
         if violation_id in self.database['violations']:
-            self.database['violations'][violation_id]['justification_added'] = True
-            self.database['violations'][violation_id]['justification_text'] = justification_text
+            violation = self.database['violations'][violation_id]
+            violation['justification_added'] = True
+            violation['justification_text'] = justification_text
+            violation['status'] = 'justified'
+            violation.setdefault('status_history', []).append({
+                'timestamp': datetime.now().isoformat(),
+                'status': 'justified',
+                'note': justification_text[:100] if justification_text else 'Violation justified'
+            })
             logger.info(f"Justification added for {violation_id}")
         else:
             logger.warning(f"Violation {violation_id} not found in database")
@@ -319,8 +354,88 @@ class KnowledgeDatabaseManager:
         
         self.database['metadata']['analysis_history'].append(history_entry)
     
+    def update_suppression_status(self, violation_id: str, suppression_reason: str):
+        """
+        Update suppression status for a violation
+        
+        Args:
+            violation_id: The violation ID
+            suppression_reason: The reason for suppression
+        """
+        if violation_id in self.database['violations']:
+            violation = self.database['violations'][violation_id]
+            violation['suppression_added'] = True
+            violation['suppression_reason'] = suppression_reason
+            violation['status'] = 'suppressed'
+            violation.setdefault('status_history', []).append({
+                'timestamp': datetime.now().isoformat(),
+                'status': 'suppressed',
+                'note': suppression_reason[:100] if suppression_reason else 'Violation suppressed'
+            })
+            logger.info(f"Suppression added for {violation_id}")
+        else:
+            logger.warning(f"Violation {violation_id} not found in database")
+    
+    def detect_status_changes(self, current_violations_ids: List[str]) -> Dict:
+        """
+        Detect changes in violation status by comparing current run with previous state
+        
+        Args:
+            current_violations_ids: List of violation IDs found in current analysis
+        
+        Returns:
+            Dictionary with status change statistics
+        """
+        current_set = set(current_violations_ids)
+        previous_violations = self.database.get('violations', {})
+        
+        # Find violations that existed but are no longer present
+        fixed_violations = []
+        for vid, vdata in previous_violations.items():
+            if vid not in current_set and vdata.get('status') == 'open':
+                # Mark as potentially fixed
+                vdata['status'] = 'fixed'
+                vdata.setdefault('status_history', []).append({
+                    'timestamp': datetime.now().isoformat(),
+                    'status': 'fixed',
+                    'note': 'No longer detected in latest analysis'
+                })
+                fixed_violations.append(vid)
+                logger.info(f"Violation {vid} marked as fixed (no longer detected)")
+        
+        # Identify new, existing, and reopened
+        new_violations = [vid for vid in current_set if vid not in previous_violations]
+        existing_violations = [vid for vid in current_set if vid in previous_violations and 
+                              previous_violations[vid].get('status') != 'reopened']
+        reopened_violations = [vid for vid in current_set if vid in previous_violations and 
+                               previous_violations[vid].get('status') in ['fixed', 'suppressed']]
+        
+        return {
+            'fixed': fixed_violations,
+            'new': new_violations,
+            'existing': existing_violations,
+            'reopened': reopened_violations,
+            'total_fixed': len(fixed_violations),
+            'total_new': len(new_violations),
+            'total_existing': len(existing_violations),
+            'total_reopened': len(reopened_violations)
+        }
+    
     def get_statistics(self) -> Dict:
         """Get database statistics"""
+        # Count violations by status
+        status_counts = {
+            'open': 0,
+            'fixed': 0,
+            'suppressed': 0,
+            'justified': 0,
+            'reopened': 0
+        }
+        
+        for v in self.database.get('violations', {}).values():
+            status = v.get('status', 'open')
+            status_counts[status] = status_counts.get(status, 0) + 1
+        
         return {
             'module_name': self.database.get('module_name'),
             'total_unique_violations': self.database.get('total_unique_violations', 0),
@@ -328,7 +443,8 @@ class KnowledgeDatabaseManager:
             'total_violations_processed': self.database['statistics'].get('total_violations_processed', 0),
             'created_date': self.database.get('created_date'),
             'last_updated': self.database.get('last_updated'),
-            'most_common_violations': self.database['statistics'].get('most_common_violations', [])
+            'most_common_violations': self.database['statistics'].get('most_common_violations', []),
+            'violations_by_status': status_counts
         }
     
     def export_to_excel(self, output_path: Path):

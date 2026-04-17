@@ -150,6 +150,11 @@ if errorlevel 1 (
     exit /b 1
 )
 
+REM Report generation completed successfully
+echo.
+echo ==================================================
+echo [SUCCESS] Reports Generated Successfully!
+echo ==================================================
 echo.
 echo ==================================================
 echo [SUCCESS] Code Fixes Generated!
@@ -188,14 +193,14 @@ echo ==================================================
 echo How Would You Like to View the Fixes?
 echo ==================================================
 echo.
-echo   [1] Interactive Viewer   - Navigate with keyboard (RECOMMENDED)
+echo   [1] Interactive Viewer   - Navigate with keyboard
 echo   [2] HTML Report         - Open in browser with filtering
 echo   [3] Text File           - Open in Notepad
-echo   [4] Skip                - View later
+echo   [4] Skip                - View later (DEFAULT)
 echo.
-set /p VIEW_CHOICE="Enter choice (1-4) [default: 1]: "
+set /p VIEW_CHOICE="Enter choice (1-4) [Press Enter to skip]: "
 
-if "%VIEW_CHOICE%"=="" set VIEW_CHOICE=1
+if "%VIEW_CHOICE%"=="" set VIEW_CHOICE=4
 
 REM Find the latest fixes file
 for /f "delims=" %%i in ('dir /b /o-d "%MODULE_NAME%_code_suggestion\%MODULE_NAME%_fixes_*.txt" 2^>nul') do (
@@ -249,6 +254,10 @@ echo.
 echo To apply suppress comments for justified violations:
 echo   Run: scripts\Apply_Suppressions.bat
 echo.
-
-pause
+echo ==================================================
+echo Generation Complete!
+echo ==================================================
+echo.
+echo Press any key to close this window...
+pause >nul
 exit /b 0

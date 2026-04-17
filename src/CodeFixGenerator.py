@@ -5,7 +5,7 @@ Enhanced with Parasoft Rules Database integration
 
 Developer: Himanshu R
 Organization: Qorix India Pvt Ltd
-Version: 2.0.0
+Version: 3.0.0
 """
 
 import logging

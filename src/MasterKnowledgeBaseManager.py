@@ -677,10 +677,10 @@ class MasterKnowledgeBaseManager:
         </div>
 """
         
-        # Top 20 Most Common Violations
+        # All Most Common Violations
         html_content += """
         <div class="section">
-            <h2>📊 Top 20 Most Common Violations</h2>
+            <h2>📊 Most Common Violations (All)</h2>
             <div class="top-violations">
                 <p><strong>Note:</strong> These violations appear most frequently across all analyzed modules.</p>
             </div>
@@ -699,7 +699,8 @@ class MasterKnowledgeBaseManager:
                 <tbody>
 """
         
-        for idx, (vid, vdata) in enumerate(sorted_violations[:20], 1):
+        # Show ALL violations instead of just top 20
+        for idx, (vid, vdata) in enumerate(sorted_violations, 1):
             severity_class = vdata['severity'].lower()
             fix_available = 'Yes' if vdata['fix_examples'] else 'No'
             fix_class = 'yes' if vdata['fix_examples'] else 'no'
