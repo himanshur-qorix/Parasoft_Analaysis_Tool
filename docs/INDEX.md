@@ -2,15 +2,16 @@
 
 Welcome to the Parasoft AI Agent documentation! This index helps you find the right document for your needs.
 
-## 📁 New Project Structure (v2.0.1)
+## 📁 New Project Structure (v3.0.0)
 
-The project has been reorganized with a clean folder structure:
-- **src/** - All Python source code
+The project has been enhanced with violation history tracking and RAG learning:
+- **src/** - All Python source code (including new ViolationHistoryManager & ComparisonReportGenerator)
 - **docs/** - All documentation (you are here!)
 - **config/** - Configuration files
-- **scripts/** - Automation scripts
+- **scripts/** - Automation scripts (including Run_Static_Analyzer.bat)
 - **assets/** - Images and diagrams
-- **data/** - Reference data files
+- **data/** - Reference data files and raw violation data
+- **history/** ⭐ NEW - Violation history tracking and RAG learning data
 
 See [STRUCTURE.md](STRUCTURE.md) for complete details.
 
@@ -21,11 +22,32 @@ See [STRUCTURE.md](STRUCTURE.md) for complete details.
 | Document | Purpose | When to Read |
 |----------|---------|--------------|
 | [README.md](../README.md) | Complete user documentation | First-time setup, comprehensive guide |
-| [QUICKSTART.md](QUICKSTART.md) | Quick start guide | Want to start in 30 seconds |
+| [QUICKSTART.md](QUICKSTART.md) | Quick start guide (v3.0 updated) | Want to start in 30 seconds |
 | [EXAMPLE_WORKFLOW.md](EXAMPLE_WORKFLOW.md) | Real-world usage example | Learning by example |
-| [STRUCTURE.md](STRUCTURE.md) | New folder organization | Understanding project layout |
+| [STRUCTURE.md](STRUCTURE.md) | Project organization (v3.0) | Understanding project layout |
+| [CHANGELOG.md](CHANGELOG.md) | Version history (v3.0.0 added) | See what's new in v3.0.0 |
+| [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) | Complete project summary (v3.0) | Full feature overview |
 
 **Recommendation:** Start with [QUICKSTART.md](QUICKSTART.md), then move to [README.md](../README.md) for details.
+
+---
+
+## 🆕 Version 3.0.0 Features (NEW!)
+
+| Feature | Description | Documentation |
+|---------|-------------|---------------|
+| **Violation History Tracking** | Complete timeline of all violations across modules | [CHANGELOG.md](CHANGELOG.md#300---2026-04-16) |
+| **RAG Learning System** | AI learns from resolution patterns with confidence scores | [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md#new-feature-2-rag-learning-system) |
+| **Comparison Reports** | Module timeline & cross-module matrix HTML reports | [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md#new-feature-3-comparison-report-generator) |
+| **Multi-line Comment Fix** | 99% false positive reduction (3000+ → 28) | [CHANGELOG.md](CHANGELOG.md#enhanced-static-analyzer) |
+| **6 Report Types** | HTML, Excel, KB, JSON, History, Cross-Module | [STRUCTURE.md](STRUCTURE.md#reports-reports) |
+
+**Key Benefits:**
+- 📊 Track violations over time (improving ↓, worsening ↑, stable →)
+- 🧠 Learn from how teams resolve violations
+- 🔍 Cross-module intelligence and pattern recognition
+- 📈 Confidence-based recommendations (e.g., "85% of teams suppress this")
+- 🎯 Timeline and matrix visualizations
 
 ---
 
@@ -41,6 +63,67 @@ See [STRUCTURE.md](STRUCTURE.md) for complete details.
 - **AI Only** - Use Ollama for all violations (requires Ollama)
 - **Hybrid** - Smart: AI for complex, rules for standard (recommended)
 - **Rules Only** - Only rule-based fixes (no AI needed)
+
+---
+
+## 📊 Static Code Analyzer (v3.0 - Built-in Analysis)
+
+| Document | Purpose | When to Read |
+|----------|---------|--------------|
+| [QUICKSTART.md](QUICKSTART.md#-static-code-analyzer-v30---built-in-cc-analysis) | Static analyzer quick start | Running built-in analyzer |
+| [STRUCTURE.md](STRUCTURE.md#source-code-src) | New source files | Understanding new components |
+| [CHANGELOG.md](CHANGELOG.md#300---2026-04-16) | v3.0.0 changes | Complete feature list |
+
+**What It Detects:**
+- Runtime errors (null pointer, buffer overflow, div by zero)
+- MISRA C violations (20+ rules)
+- CERT C issues (15+ rules)
+- Code quality problems
+- Context-aware with multi-line comment detection
+
+**Output Reports:**
+1. Color-coded HTML (RED/ORANGE/GREY)
+2. Excel with 11-line code context
+3. Knowledge base JSON
+4. Raw violations JSON
+5. **Module history HTML** (timeline with trends) ⭐ NEW
+6. **Cross-module comparison HTML** (matrix view) ⭐ NEW
+
+---
+
+## 📊 CERT & MISRA Focused Reports (v3.0 - NEW!)
+
+| Tool | Purpose | Usage |
+|------|---------|-------|
+| **Generate_CERT_MISRA_Report.bat** | Compliance-focused HTML reports | `scripts\Generate_CERT_MISRA_Report.bat` |
+| **generate_cert_misra_report.py** | Python script for CERT/MISRA reports | `python src\generate_cert_misra_report.py ModuleName` |
+
+**What's New:** Generate beautiful HTML reports focused exclusively on CERT and MISRA violations from your knowledge base. Perfect for compliance reviews and tracking standards adherence!
+
+**Features:**
+- Auto-filters CERT and MISRA violations from knowledge base
+- Top 10 violations by occurrence for each category
+- Severity breakdown statistics
+- Status summary (Open/Fixed/Justified)
+- Professional styled HTML with responsive design
+- Takes only module name as input (uses existing KB)
+
+**Quick Usage:**
+```bash
+# Using batch file (easiest)
+scripts\Generate_CERT_MISRA_Report.bat
+# Enter: Tls
+# Output: reports\Tls_CERT_MISRA_Report.html
+
+# Or direct Python
+python src\generate_cert_misra_report.py Tls
+```
+
+**When to use:**
+- Preparing compliance reports for code review
+- Tracking CERT/MISRA progress over time
+- Quick compliance status check
+- Presenting to stakeholders/management
 
 ---
 

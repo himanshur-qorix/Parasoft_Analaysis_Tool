@@ -11,9 +11,10 @@
 
 For comprehensive documentation, see the [`docs/`](docs/) folder:
 
-- **[Fix Viewing Options](docs/FIX_VIEWING_OPTIONS.md)** - Interactive viewer, HTML reports, text files (NEW! v2.3)
-- **[Parasoft Rules Database](docs/PARASOFT_RULES_DATABASE.md)** - Official Parasoft-approved fix suggestions (NEW! v2.3)
-- **[Knowledge Base Integration](docs/KNOWLEDGE_BASE_INTEGRATION.md)** - Smart analysis with KB insights (NEW!)
+- **[Static Code Analysis](docs/STATIC_ANALYSIS.md)** - Built-in C/C++ static analyzer for runtime errors, MISRA, CERT (NEW! v3.0)
+- **[Fix Viewing Options](docs/FIX_VIEWING_OPTIONS.md)** - Interactive viewer, HTML reports, text files (v2.3)
+- **[Parasoft Rules Database](docs/PARASOFT_RULES_DATABASE.md)** - Official Parasoft-approved fix suggestions (v2.3)
+- **[Knowledge Base Integration](docs/KNOWLEDGE_BASE_INTEGRATION.md)** - Smart analysis with KB insights
 - **[Cross-Module Knowledge Base](docs/CROSS_MODULE_KNOWLEDGE.md)** - Consolidate learnings across modules
 - **[Auto-Generate Workflow](docs/AUTO_GENERATE_WORKFLOW.md)** - Use without Parasoft report
 - **[Quick Start Guide](docs/AI_QUICKSTART.md)** - Get started in 5 minutes
@@ -29,7 +30,8 @@ For comprehensive documentation, see the [`docs/`](docs/) folder:
 
 | Version | Release | Features |
 |---------|---------|----------|
-| **2.3.0** | Jan 2025 | Parasoft Rules Database - Official fix suggestions from 1200+ rules |
+| **3.0.0** | Apr 2026 | Violation History Tracking, RAG Learning, Comparison Reports, Multi-line Comment Fix |
+| 2.3.0 | Jan 2025 | Parasoft Rules Database - Official fix suggestions from 1200+ rules |
 | 2.2.1 | Apr 2026 | Knowledge Base Integration for Analyzers |
 | 2.2.0 | Apr 2026 | Cross-Module Knowledge Base & HTML Reports |
 | 2.1.1 | Apr 2026 | Auto-Generate Workflow |
@@ -47,24 +49,66 @@ For comprehensive documentation, see the [`docs/`](docs/) folder:
 ## 🚀 Features
 
 ### Core Capabilities
-1. **Interactive Fix Viewer (NEW! v2.3)** - Keyboard-driven terminal interface for browsing fixes with navigation, search, and color coding
-2. **HTML Fix Reports (NEW! v2.3)** - Professional web reports with Qorix branding, filtering, and syntax highlighting
-3. **Parasoft Rules Database (v2.3)** - Leverages 1200+ official Parasoft rule documentation files for authoritative fix suggestions and justifications
-4. **Smart Knowledge Base Integration** - Analyzers cross-check violations against KB for known vs new detection and proven fix suggestions
-5. **Cross-Module Knowledge Base** - Consolidate learnings across all modules for intelligent insights and proven fix recommendations
-6. **Auto-Generate Workflow** - Automatically generate MISRA/CERT report when Parasoft report unavailable
-7. **MISRA/CERT Pre-Analysis** - Integrated MISRA-C:2012 and CERT-C static analyzer for comprehensive code checking
-8. **Git Integration** - Seamlessly integrated with Visual Studio Code and Git repositories
-9. **AI-Powered Analysis** - Local LLM integration via Ollama for intelligent fix suggestions
-10. **Qorix Deviations Integration** - Automatically checks violations against Qorix_CP_Common_Deviations.xlsx
-11. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
-12. **Excel Report Generation** - Automatically generates comprehensive Excel reports with violation status
-13. **Parasoft Suppress Comments** - Generates properly formatted suppress comments for justified violations
-14. **Interactive Code Application** - Apply suppress comments to source code with user approval for each change
-15. **Unique Violation Tracking** - Identifies and tracks unique violations across analyses
-16. **Hybrid Fix Generation** - AI for complex cases, rule-based for standard violations (optimal performance)
-17. **Parasoft Justifications** - Generates Parasoft-formatted justification comments
-18. **Query Tool** - Comprehensive tool to analyze and export knowledge database
+1. **Built-in Static Code Analyzer (v3.0)** - Direct C/C++ source analysis without external tools. Detects runtime errors (null deref, buffer overflow), MISRA C violations, CERT C issues, code quality problems. Context-aware validation with multi-line comment detection eliminates false positives (reduced from 3000+ to 28 violations).
+
+2. **Violation History Tracking (NEW! v3.0)** - Complete historical tracking across all modules and analysis runs
+   - Master history database tracks every run with timestamps
+   - Trend analysis shows if violations improving (↓), worsening (↑), or stable (→)
+   - Cross-module intelligence tracks how different teams handle same violations
+   - Automatic recording on every analysis run
+
+3. **RAG Learning System (NEW! v3.0)** - AI learns from how teams resolve violations
+   - Resolution pattern learning from suppressed/fixed/justified/open statuses
+   - Confidence-based recommendations (e.g., "Recommended: suppressed - 85% confidence")
+   - Cross-module learning shares resolution strategies
+   - Common resolution tracking identifies most effective approaches
+
+4. **Comparison Reports (NEW! v3.0)** - Professional HTML reports with timeline and matrix views
+   - **Module history reports** - Timeline showing trends over time, top violations per run
+   - **Cross-module comparison** - Matrix view comparing all modules side-by-side
+   - Responsive design with color-coded severity levels
+   - Interactive tables with hover effects and gradient headers
+
+5. **Color-Coded Reports (v3.0)** - Polyspace-style color coding (RED/ORANGE/GREY) in both HTML and Excel reports. HTML features interactive tabs, syntax highlighting, and multi-line code context. Excel includes color-coded rows and dedicated sheets per severity.
+
+6. **AI Justification Suggestions (v3.0)** - Cross-module analysis suggests which violations should be justified instead of fixed, auto-updates Excel reports
+
+7. **Interactive Fix Viewer (v2.3)** - Keyboard-driven terminal interface for browsing fixes with navigation, search, and color coding
+
+8. **HTML Fix Reports (v2.3)** - Professional web reports with Qorix branding, filtering, and syntax highlighting
+
+9. **Parasoft Rules Database (v2.3)** - Leverages 1200+ official Parasoft rule documentation files for authoritative fix suggestions and justifications
+
+10. **Smart Knowledge Base Integration** - Analyzers cross-check violations against KB for known vs new detection and proven fix suggestions
+
+11. **Cross-Module Knowledge Base** - Consolidate learnings across all modules for intelligent insights and proven fix recommendations
+
+12. **Auto-Generate Workflow** - Automatically generate MISRA/CERT report when Parasoft report unavailable
+
+13. **AI-Powered Analysis** - Local LLM integration via Ollama for intelligent fix suggestions
+
+14. **Qorix Deviations Integration** - Automatically checks violations against Qorix_CP_Common_Deviations.xlsx
+
+15. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
+
+16. **Parasoft Suppress Comments** - Generates properly formatted suppress comments for justified violations
+
+17. **Interactive Code Application** - Apply suppress comments to source code with user approval for each change
+
+18. **Unique Violation Tracking** - Identifies and tracks unique violations across analyses
+
+19. **Hybrid Fix Generation** - AI for complex cases, rule-based for standard violations (optimal performance)
+
+20. **Parasoft Justifications** - Generates Parasoft-formatted justification comments
+
+21. **Query Tool** - Comprehensive tool to analyze and export knowledge database
+
+22. **CERT & MISRA Report Generator (NEW! v3.0)** - Dedicated HTML report for CERT and MISRA violations from knowledge base
+   - Takes only module name as input
+   - Auto-filters CERT and MISRA violations
+   - Shows top 10 violations by occurrence
+   - Status breakdown (Open/Fixed/Justified)
+   - Severity statistics and comparison
 
 ### MISRA/CERT Integration (New!)
 - **Pattern-Based Detection**: 20+ MISRA-C:2012 and 15+ CERT-C rules
@@ -397,7 +441,52 @@ Apply this suppression? (y=yes, n=no, a=yes to all, q=quit): y
 4. Commit changes to Git
 
 ---
+## 📊 Additional Reports
 
+### CERT & MISRA Focused Report Generator (v3.0)
+
+Generate a dedicated HTML report showing only CERT and MISRA violations from your knowledge base:
+
+```bash
+# Option A: Using batch file (easiest)
+scripts\Generate_CERT_MISRA_Report.bat
+
+# Option B: Using command line
+python src\generate_cert_misra_report.py ModuleName
+```
+
+**Input:** Only requires module name (knowledge base must exist)
+
+**What it generates:**
+- Beautiful HTML report with CERT and MISRA sections
+- Top 10 violations by occurrence for each category
+- Severity breakdown statistics
+- Status summary (Open/Fixed/Justified)
+- Auto-filtered from knowledge base
+
+**Example:**
+```bash
+scripts\Generate_CERT_MISRA_Report.bat
+# Enter: Tls
+# Output: reports\Tls_CERT_MISRA_Report.html
+# Note: Uses src\generate_cert_misra_report.py
+```
+
+**When to use:**
+- Need focused view of compliance violations
+- Preparing reports for code review
+- Tracking CERT/MISRA progress over time
+- Quick compliance status check
+
+**Output:**
+- `reports/{Module}_CERT_MISRA_Report.html` - Professional styled HTML with:
+  - Summary cards showing total violations
+  - CERT section with statistics and top violations
+  - MISRA section with statistics and top violations
+  - Color-coded severity levels
+  - Responsive design for easy viewing
+
+---
 ## �📂 Project Structure
 
 The project is organized into the following folders:

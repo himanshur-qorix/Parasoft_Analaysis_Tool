@@ -1,0 +1,13 @@
+{
+  "module": "Tls",
+  "suppress_file": "Tls_suppress_comments_20260416_152730.txt",
+  "timestamp": "2026-04-16 15:28:58",
+  "applied": 0,
+  "skipped_user": 0,
+  "already_justified": 10,
+  "skipped_in_comment": 1,
+  "failed": 0,
+  "total": 11,
+  "backup_folder": null,
+  "applied_violations": []
+}

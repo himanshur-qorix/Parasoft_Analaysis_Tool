@@ -1,4 +1,4 @@
-# Project Structure - Parasoft AI Agent v2.2.0
+# Project Structure - Parasoft AI Agent v3.0.0
 
 ## 📁 Organized Folder Structure
 
@@ -12,7 +12,11 @@ Parasoft_Analaysis_Tool/
 │   ├── run_query.py                  # Query tool launcher
 │   ├── apply_suppress_comments.py    # Suppress comment applicator
 │   ├── capture_violations.py         # Violation capture utility
+│   ├── misra_cert_checker.py         # MISRA/CERT static analyzer
+│   ├── run_static_analyzer.py        # Static code analyzer (NEW v3.0)
 │   ├── Run.bat                       # Windows batch launcher
+│   ├── Run_Static_Analyzer.bat       # Static analyzer launcher (NEW v3.0)
+│   ├── Generate_CERT_MISRA_Report.bat # CERT/MISRA report launcher (NEW v3.0)
 │   └── Apply_Suppressions.bat        # Windows suppress applicator
 │
 ├── 📁 src/                           # Source Code
@@ -22,7 +26,12 @@ Parasoft_Analaysis_Tool/
 │   ├── CodeFixGenerator.py           # Fix generation with AI
 │   ├── OllamaIntegration.py          # AI integration (Ollama)
 │   ├── KnowledgeDatabaseQueryTool.py # Query tool
-│   └── ParasoftAnalysisTool.py       # HTML parser (legacy)
+│   ├── ParasoftAnalysisTool.py       # HTML parser (legacy)
+│   ├── StaticCodeAnalyzer.py         # Built-in C/C++ static analyzer (NEW v3.0)
+│   ├── StaticAnalysisReportGenerator.py  # HTML/Excel report generator (NEW v3.0)
+│   ├── ViolationHistoryManager.py    # History tracking & RAG learning (NEW v3.0)
+│   ├── ComparisonReportGenerator.py  # Comparison HTML reports (NEW v3.0)
+│   └── generate_cert_misra_report.py # CERT/MISRA report generator (NEW v3.0)
 │
 ├── 📁 docs/                          # Documentation
 │   ├── QUICKSTART.md                 # Quick start guide
@@ -40,6 +49,7 @@ Parasoft_Analaysis_Tool/
 │   └── FlowDiagram_V1.0.0.png        # Flow diagram
 │
 ├── 📁 data/                          # Data Files
+│   ├── {Module}_violations.json      # Raw violation data
 │   └── Qorix_CP_Common_Deviations.xlsx
 │
 ├── 📁 knowledge_base/                # Generated Databases
@@ -47,9 +57,16 @@ Parasoft_Analaysis_Tool/
 │   └── ...
 │
 ├── 📁 reports/                       # Analysis Reports
+│   ├── {Module}_static_analysis_report.html    # Color-coded HTML (NEW v3.0)
+│   ├── {Module}_violations_report.xlsx         # Excel with context (NEW v3.0)
+│   ├── {Module}_history_report.html            # Module timeline (NEW v3.0)
+│   ├── cross_module_comparison.html            # Cross-module matrix (NEW v3.0)
 │   ├── Mka_analysis_summary.json
-│   ├── Mka_violations_report.xlsx
 │   └── ...
+│
+├── 📁 history/                       # Violation History (NEW v3.0)
+│   ├── master_violation_history.json # All runs, all modules
+│   └── resolution_patterns.json      # RAG learning data
 │
 ├── 📁 justifications/                # Suppress Comments
 │   ├── Mka_suppress_comments_*.txt
@@ -74,18 +91,23 @@ Parasoft_Analaysis_Tool/
 
 ---
 
-## 🚀 Running the Agent
+## 🚀 Running the Tools
 
-### From Project Root (Recommended)
-
-#### Using Batch Script (Windows)
+### Static Code Analyzer (v3.0 - NEW!)
 ```bash
-scripts\Run.bat
+# Using batch script (Windows)
+scripts\Run_Static_Analyzer.bat
+
+# Direct Python
+python scripts\run_static_analyzer.py "path\to\source" ModuleName --no-fixes
 ```
 
-#### Using Python Launcher
+### Parasoft AI Agent
 ```bash
-# Main agent
+# Using batch script (Windows)
+scripts\Run.bat
+
+# Using Python launcher
 python run_agent.py report_dev1.html Mka
 
 # Query tool
@@ -111,13 +133,18 @@ Contains all Python source files organized in one location:
 - **CodeFixGenerator.py** - Generates fixes and justifications
 - **KnowledgeDatabaseQueryTool.py** - Interactive query interface
 - **ParasoftAnalysisTool.py** - HTML report parser (from v1.0.0)
+- **StaticCodeAnalyzer.py** ⭐ NEW - Built-in C/C++ static analyzer with 20+ rules
+- **StaticAnalysisReportGenerator.py** ⭐ NEW - Generates color-coded HTML/Excel reports
+- **ViolationHistoryManager.py** ⭐ NEW - Tracks history, RAG learning, trends
+- **ComparisonReportGenerator.py** ⭐ NEW - Module timeline & cross-module comparison HTML
+- **generate_cert_misra_report.py** ⭐ NEW - Generates HTML reports for CERT/MISRA violations only
 
 ### Documentation (docs/)
 All markdown documentation consolidated:
 - **QUICKSTART.md** - Get started in 30 seconds
 - **EXAMPLE_WORKFLOW.md** - Real-world usage examples
 - **ARCHITECTURE.md** - System design and architecture
-- **CHANGELOG.md** - Version history and changes
+- **CHANGELOG.md** - Version history and changes (including v3.0.0)
 - **PROJECT_SUMMARY.md** - Complete project overview
 - **INDEX.md** - Documentation navigation
 
@@ -128,20 +155,48 @@ Configuration files isolated for easy management:
 ### Scripts (scripts/)
 Automation and helper scripts:
 - **Run.bat** - Windows batch automation with user prompts
+- **Run_Static_Analyzer.bat** ⭐ NEW - Static code analyzer launcher
+- **Generate_CERT_MISRA_Report.bat** ⭐ NEW - CERT/MISRA focused report generator (calls src/generate_cert_misra_report.py)
+- **run_static_analyzer.py** ⭐ NEW - Static analyzer orchestrator
+- **misra_cert_checker.py** - MISRA/CERT compliance checker
 
 ### Assets (assets/)
 Images, diagrams, and visual resources:
 - **FlowDiagram_V1.0.0.png** - System flow diagram
 
 ### Data (data/)
-Reference data files:
+Reference data files and raw violation data:
 - **Qorix_CP_Common_Deviations.xlsx** - MISRA/CERT deviation mappings
+- **{Module}_violations.json** - Raw violation data per module
+
+### Reports (reports/)
+Generated analysis reports:
+- **{Module}_static_analysis_report.html** ⭐ NEW - Color-coded violations (RED/ORANGE/GREY)
+- **{Module}_violations_report.xlsx** ⭐ NEW - Excel with 11-line code context
+- **{Module}_history_report.html** ⭐ NEW - Timeline view with trends (↓↑→)
+- **cross_module_comparison.html** ⭐ NEW - Cross-module violation matrix
+- **{Module}_analysis_summary.json** - Analysis metadata
+
+### History (history/) ⭐ NEW - v3.0.0
+Violation history tracking and RAG learning data:
+- **master_violation_history.json** - Complete history of all analysis runs across all modules
+  - Timestamped runs with violation counts
+  - Severity breakdown per run
+  - Top violations tracking
+  - Trend calculations (improving/worsening/stable)
+  - Cross-module violation patterns
+- **resolution_patterns.json** - RAG learning database
+  - How violations are resolved (suppressed/fixed/justified/open)
+  - Confidence scores for recommendations
+  - Common resolution notes
+  - Status counts per violation type
 
 ### Generated Folders
 Created automatically during analysis:
 - **knowledge_base/** - Module-specific violation databases
-- **reports/** - Analysis summary reports
 - **fixes/** - Code fixes and justifications per module
+- **justifications/** - Suppress comment suggestions
+- **backups/** - Source code backups before applying suppressions
 
 ---
 
