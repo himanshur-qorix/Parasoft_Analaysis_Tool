@@ -16,6 +16,9 @@ For comprehensive documentation, see the [`docs/`](docs/) folder:
 - **[Parasoft Rules Database](docs/PARASOFT_RULES_DATABASE.md)** - Official Parasoft-approved fix suggestions (v2.3)
 - **[Knowledge Base Integration](docs/KNOWLEDGE_BASE_INTEGRATION.md)** - Smart analysis with KB insights
 - **[Cross-Module Knowledge Base](docs/CROSS_MODULE_KNOWLEDGE.md)** - Consolidate learnings across modules
+- **[Rule-Based Learning](docs/RULE_BASED_LEARNING.md)** - Pattern learning without AI (NEW! v3.0)
+- **[Learning Folder Guide](learning/README.md)** - AI training data contribution (NEW! v3.0)
+- **[Learning Quick Start](learning/QUICK_START.md)** - 5-minute contribution guide (NEW! v3.0)
 - **[Auto-Generate Workflow](docs/AUTO_GENERATE_WORKFLOW.md)** - Use without Parasoft report
 - **[Quick Start Guide](docs/AI_QUICKSTART.md)** - Get started in 5 minutes
 - **[MISRA/CERT Integration](docs/MISRA_CERT_INTEGRATION.md)** - Static analyzer integration
@@ -30,8 +33,8 @@ For comprehensive documentation, see the [`docs/`](docs/) folder:
 
 | Version | Release | Features |
 |---------|---------|----------|
-| **3.0.0** | Apr 2026 | Violation History Tracking, RAG Learning, Comparison Reports, Multi-line Comment Fix |
-| 2.3.0 | Jan 2025 | Parasoft Rules Database - Official fix suggestions from 1200+ rules |
+| **3.0.0** | Apr 2026 | Violation History Tracking, RAG Learning, Comparison Reports, Multi-line Comment Fix, Learning Database with Rule-Based Pattern Learning, AI Training Folder Structure |
+| 2.3.0 | Apr 2026 | Parasoft Rules Database - Official fix suggestions from 1200+ rules |
 | 2.2.1 | Apr 2026 | Knowledge Base Integration for Analyzers |
 | 2.2.0 | Apr 2026 | Cross-Module Knowledge Base & HTML Reports |
 | 2.1.1 | Apr 2026 | Auto-Generate Workflow |
@@ -83,27 +86,42 @@ For comprehensive documentation, see the [`docs/`](docs/) folder:
 
 11. **Cross-Module Knowledge Base** - Consolidate learnings across all modules for intelligent insights and proven fix recommendations
 
-12. **Auto-Generate Workflow** - Automatically generate MISRA/CERT report when Parasoft report unavailable
+12. **Rule-Based Pattern Learning (NEW! v3.0)** - Intelligent justification quality analysis WITHOUT AI
+    - Learns from human-written justifications automatically
+    - Calculates quality scores (0-10) for each justification
+    - Detects common mistakes: generic references, too short, vague explanations
+    - Works completely offline, no AI/LLM required
+    - Builds persistent pattern database in `knowledge_base/learned_patterns_db.json`
+    - See [Rule-Based Learning Guide](docs/RULE_BASED_LEARNING.md)
 
-13. **AI-Powered Analysis** - Local LLM integration via Ollama for intelligent fix suggestions
+13. **AI Learning Database (NEW! v3.0)** - Structured `learning/` folder for team contributions
+    - Each module contributes source code + Parasoft reports
+    - AI learns module-specific patterns and coding styles
+    - Improves few-shot learning accuracy
+    - Easy 5-minute contribution workflow
+    - See [Learning Folder Guide](learning/README.md) and [Quick Start](learning/QUICK_START.md)
 
-14. **Qorix Deviations Integration** - Automatically checks violations against Qorix_CP_Common_Deviations.xlsx
+14. **Auto-Generate Workflow** - Automatically generate MISRA/CERT report when Parasoft report unavailable
 
-15. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
+15. **AI-Powered Analysis** - Local LLM integration via Ollama for intelligent fix suggestions
 
-16. **Parasoft Suppress Comments** - Generates properly formatted suppress comments for justified violations
+16. **Qorix Deviations Integration** - Automatically checks violations against Qorix_CP_Common_Deviations.xlsx
 
-17. **Interactive Code Application** - Apply suppress comments to source code with user approval for each change
+17. **Knowledge Database** - Automatic creation and update of module-specific knowledge databases
 
-18. **Unique Violation Tracking** - Identifies and tracks unique violations across analyses
+18. **Parasoft Suppress Comments** - Generates properly formatted suppress comments for justified violations
 
-19. **Hybrid Fix Generation** - AI for complex cases, rule-based for standard violations (optimal performance)
+19. **Interactive Code Application** - Apply suppress comments to source code with user approval for each change
 
-20. **Parasoft Justifications** - Generates Parasoft-formatted justification comments
+20. **Unique Violation Tracking** - Identifies and tracks unique violations across analyses
 
-21. **Query Tool** - Comprehensive tool to analyze and export knowledge database
+21. **Hybrid Fix Generation** - AI for complex cases, rule-based for standard violations (optimal performance)
 
-22. **CERT & MISRA Report Generator (NEW! v3.0)** - Dedicated HTML report for CERT and MISRA violations from knowledge base
+22. **Parasoft Justifications** - Generates Parasoft-formatted justification comments
+
+23. **Query Tool** - Comprehensive tool to analyze and export knowledge database
+
+24. **CERT & MISRA Report Generator (NEW! v3.0)** - Dedicated HTML report for CERT and MISRA violations from knowledge base
    - Takes only module name as input
    - Auto-filters CERT and MISRA violations
    - Shows top 10 violations by occurrence
@@ -522,6 +540,7 @@ Parasoft_Analaysis_Tool/
 │   ├── Generate_Code_Fixes.bat   # Generate code fix suggestions (SEPARATE)
 │   ├── Apply_Suppressions.bat    # Interactive suppress comment applicator
 │   ├── Build_Parasoft_Rules_Database.bat  # Build official rules DB
+│   ├── Learn_Justification_Patterns.bat   # AI-powered pattern learning
 │   ├── Consolidate_Knowledge.bat  # Merge module knowledge bases
 │   └── Query_Master_Knowledge.bat # Query consolidated insights
 │
@@ -534,6 +553,18 @@ Parasoft_Analaysis_Tool/
 ├── knowledge_base/              # Generated knowledge databases
 │   ├── Mka_KnowledgeDatabase.json
 │   ├── ModuleB_KnowledgeDatabase.json
+│   ├── learned_patterns_db.json           # Rule-based learning database (NEW!)
+│   ├── justification_patterns_report.json # Pattern analysis report
+│   └── ...
+│
+├── learning/                    # AI training data from modules (NEW! v3.0)
+│   ├── README.md                # Complete learning folder guide
+│   ├── QUICK_START.md           # 5-minute contribution guide
+│   ├── ModuleName/
+│   │   └── ConfigName/
+│   │       ├── source/          # Module source code
+│   │       ├── reports/         # Parasoft reports
+│   │       └── README.md        # Module-specific documentation
 │   └── ...
 │
 ├── reports/                     # Analysis reports

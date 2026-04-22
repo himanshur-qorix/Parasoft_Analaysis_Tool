@@ -40,6 +40,8 @@ See [STRUCTURE.md](STRUCTURE.md) for complete details.
 | **RAG Learning System** | AI learns from resolution patterns with confidence scores | [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md#new-feature-2-rag-learning-system) |
 | **Comparison Reports** | Module timeline & cross-module matrix HTML reports | [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md#new-feature-3-comparison-report-generator) |
 | **Multi-line Comment Fix** | 99% false positive reduction (3000+ → 28) | [CHANGELOG.md](CHANGELOG.md#enhanced-static-analyzer) |
+| **Learning Database System** | Rule-based pattern learning without AI (NEW!) | [RULE_BASED_LEARNING.md](RULE_BASED_LEARNING.md) |
+| **AI Training Contributions** | Team contribution workflow to learning/ folder (NEW!) | [../learning/README.md](../learning/README.md) |
 | **6 Report Types** | HTML, Excel, KB, JSON, History, Cross-Module | [STRUCTURE.md](STRUCTURE.md#reports-reports) |
 
 **Key Benefits:**
@@ -48,6 +50,8 @@ See [STRUCTURE.md](STRUCTURE.md) for complete details.
 - 🔍 Cross-module intelligence and pattern recognition
 - 📈 Confidence-based recommendations (e.g., "85% of teams suppress this")
 - 🎯 Timeline and matrix visualizations
+- 📚 Automatic quality learning from team patterns (no AI required)
+- 🚀 5-minute team contribution workflow
 
 ---
 
@@ -127,7 +131,57 @@ python src\generate_cert_misra_report.py Tls
 
 ---
 
-## 📊 Direct Violation Capture (New!)
+## � Learning Database System (v3.0 - NEW!)
+
+| Document | Purpose | When to Read |
+|----------|---------|--------------|
+| [RULE_BASED_LEARNING.md](RULE_BASED_LEARNING.md) | Technical guide to pattern learning | Understanding how learning works |
+| [../learning/README.md](../learning/README.md) | Complete learning folder guide | Setting up team contributions |
+| [../learning/QUICK_START.md](../learning/QUICK_START.md) | 5-minute contribution guide | Contributing your module quickly |
+| [LEARNING_DATABASE_SUMMARY.md](LEARNING_DATABASE_SUMMARY.md) | Implementation summary | Overview of what was built |
+
+**What It Does:**
+- Learns from **human-written** vs **tool-generated** justifications
+- Calculates **quality scores** (0-10) for each justification
+- Detects **common mistakes** automatically (generic refs, too short, vague)
+- Works **completely offline** - no AI/Ollama required
+- Builds **persistent pattern database**: `knowledge_base/learned_patterns_db.json`
+
+**Team Contribution Workflow:**
+```bash
+# 1. Create module folder
+mkdir learning/YourModule/YourConfig/{source,reports}
+
+# 2. Copy files
+cp your_code/*.c learning/YourModule/YourConfig/source/
+cp parasoft_report.xml learning/YourModule/YourConfig/reports/
+
+# 3. Run learning
+scripts\Learn_Justification_Patterns.bat
+
+# 4. Commit
+git add learning/YourModule/
+git commit -m "Add YourModule to AI learning database"
+```
+
+**Quality Indicators Learned:**
+- ✅ **Specific details** - Function names, version numbers, DR references
+- ✅ **Adequate length** - >50 characters with context
+- ✅ **Explanation words** - "because", "required for", "validated"
+- ✅ **Technical context** - Hardware, API, legacy, ASIL levels
+- ❌ **Avoid** - Generic "_Parasoft_REF_NNN", too short, vague
+
+**Benefits:**
+- 📊 Automatic quality enforcement
+- 🔄 Persistent learning across runs
+- 🎯 Specific mistake identification
+- 📈 Standardized justification quality
+- 🤝 Cross-team knowledge sharing
+- ⚡ 5-minute contribution workflow
+
+---
+
+## �📊 Direct Violation Capture (New!)
 
 | Document | Purpose | When to Read |
 |----------|---------|--------------|

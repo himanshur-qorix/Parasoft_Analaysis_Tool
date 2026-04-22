@@ -60,7 +60,8 @@
       "base_url": "http://localhost:11434",
       "model": "qwen2.5-coder:1.5b-base",
       "timeout": 120,
-      "fallback_to_rules": true
+      "fallback_to_rules": true,
+      "use_few_shot_learning": true
     },
     "max_tokens": 1000,
     "temperature": 0.3,
