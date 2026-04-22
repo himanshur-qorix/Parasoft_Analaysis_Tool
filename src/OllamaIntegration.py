@@ -44,6 +44,11 @@ class OllamaIntegration:
             self.temperature = config.get('temperature', 0.3)
             self.use_ai_for = config.get('use_ai_for', {})
             
+            # Few-shot learning configuration
+            self.use_few_shot = ollama_config.get('use_few_shot_learning', True)
+            self.examples_dir = Path(__file__).parent.parent / 'justifications'
+            self.justification_examples = []
+            
             # Adjust behavior based on mode
             if self.ai_mode == 'rules_only':
                 self.enabled = False
@@ -57,6 +62,10 @@ class OllamaIntegration:
             # Test connection
             if self.enabled:
                 self._test_connection()
+                
+                # Load few-shot examples for justification learning
+                if self.use_few_shot:
+                    self._load_justification_examples()
         else:
             self.enabled = False
             logger.info(f"AI provider '{self.provider}' is not Ollama. AI features disabled.")
@@ -914,7 +923,63 @@ static int unusedVar = 0;
 /* Refactored code addressing the violation */
 /* Review specific requirements in rule documentation */"""
     
-    def suggest_justification(self, violation: Dict, cross_module_info: list) -> Optional[Dict]:
+    def _load_justification_examples(self) -> None:
+        """
+        Load justification examples from existing suppression comment files
+        for few-shot learning
+        """
+        try:
+            if not self.examples_dir.exists():
+                logger.warning(f"[WARNING] Justifications directory not found: {self.examples_dir}")
+                return
+            
+            # Find all suppress comment files
+            suppress_files = list(self.examples_dir.glob('*_suppress_comments_*.txt'))
+            
+            if not suppress_files:
+                logger.info("[INFO] No justification example files found for few-shot learning")
+                return
+            
+            # Load examples from up to 3 different files for diversity
+            sampled_files = suppress_files[:3] if len(suppress_files) >= 3 else suppress_files
+            
+            for file_path in sampled_files:
+                examples = self._parse_justification_examples(file_path)
+                self.justification_examples.extend(examples)
+            
+            # Limit to 10 most diverse examples
+            if len(self.justification_examples) > 10:
+                self.justification_examples = self._select_diverse_examples(self.justification_examples, 10)
+            
+            logger.info(f"[OK] Loaded {len(self.justification_examples)} justification examples for few-shot learning")
+            
+        except Exception as e:
+            logger.error(f"[ERROR] Failed to load justification examples: {str(e)}")
+            self.justification_examples = []
+    
+    def _parse_justification_examples(self, file_path: Path) -> list:
+        """
+        Parse justification examples from a suppress comments file
+        
+        Args:
+            file_path: Path to suppress comments file
+        
+        Returns:
+            List of example dictionaries
+        """
+        examples = []
+        
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            # Extract module name from filename (e.g., 'Mka_suppress_comments_...' -> 'Mka')
+            module_name = file_path.stem.split('_suppress_comments')[0]
+            
+            # Find all suppression entries using regex
+            import re
+            pattern = r'/\\*\\s*parasoft-begin-suppress\\s+([A-Z0-9_\\-\\s]+?)\\s+\"Reason:\\s*(.+?)\"\\s*\\*/'\n            matches = re.findall(pattern, content)\n            \n            # Sample up to 3 examples from this file\n            for match in matches[:3]:\n                rule_ids = match[0].strip()\n                reason = match[1].strip()\n                \n                examples.append({\n                    'module': module_name,\n                    'rules': rule_ids,\n                    'reason': reason,\n                    'format': f'/* parasoft-begin-suppress {rule_ids} \"Reason: {reason}\" */'\n                })\n        \n        except Exception as e:\n            logger.debug(f"Failed to parse examples from {file_path.name}: {str(e)}\")\n        \n        return examples\n    \n    def _select_diverse_examples(self, examples: list, max_count: int) -> list:\n        \"\"\"Select diverse examples covering different rule types\"\"\"\n        # Group by rule category (CERT, MISRA, etc.)\n        cert_examples = [ex for ex in examples if 'CERT' in ex['rules']]\n        misra_examples = [ex for ex in examples if 'MISRA' in ex['rules']]\n        other_examples = [ex for ex in examples if 'CERT' not in ex['rules'] and 'MISRA' not in ex['rules']]\n        \n        # Select proportionally\n        selected = []\n        \n        # Try to get balanced representation\n        cert_quota = min(len(cert_examples), max_count // 3)\n        misra_quota = min(len(misra_examples), max_count // 3)\n        other_quota = max_count - cert_quota - misra_quota\n        \n        selected.extend(cert_examples[:cert_quota])\n        selected.extend(misra_examples[:misra_quota])\n        selected.extend(other_examples[:other_quota])\n        \n        return selected[:max_count]\n    \n    def _build_examples_section(self, violation_id: str, category: str) -> str:\n        \"\"\"\n        Build few-shot examples section for the prompt\n        \n        Args:\n            violation_id: Current violation ID\n            category: Current violation category\n        \n        Returns:\n            Formatted examples section string\n        \"\"\"\n        if not self.justification_examples or not self.use_few_shot:\n            return \"\"\n        \n        # Filter examples relevant to current violation category\n        relevant_examples = []\n        for ex in self.justification_examples:\n            # Prioritize examples matching the category\n            if category in ex['rules']:\n                relevant_examples.append(ex)\n        \n        # If no category matches, use general examples\n        if not relevant_examples:\n            relevant_examples = self.justification_examples[:5]\n        else:\n            relevant_examples = relevant_examples[:5]\n        \n        if not relevant_examples:\n            return \"\"\n        \n        examples_text = \"\\n\\nEXAMPLE JUSTIFICATIONS FROM OTHER MODULES:\\n\"\n        examples_text += \"Learn from these examples - notice the format and how reasons are documented:\\n\\n\"\n        \n        for i, ex in enumerate(relevant_examples, 1):\n            examples_text += f\"Example {i} (Module: {ex['module']}):\\n\"\n            examples_text += f\"  Rule(s): {ex['rules']}\\n\"\n            examples_text += f\"  Format: {ex['format']}\\n\"\n            examples_text += f\"  Reason Pattern: {ex['reason'][:100]}...\\n\\n\"\n        \n        return examples_text
+    \n    def suggest_justification(self, violation: Dict, cross_module_info: list) -> Optional[Dict]:
         """
         Use AI to analyze whether a violation should be justified instead of fixed
         
@@ -979,7 +1044,7 @@ static int unusedVar = 0;
     def _build_justification_prompt(self, violation_id: str, violation_text: str,
                                    category: str, severity: str, cross_module_info: list) -> str:
         """
-        Build prompt for AI justification analysis
+        Build prompt for AI justification analysis with few-shot learning examples
         
         Args:
             violation_id: Violation ID
@@ -997,6 +1062,9 @@ static int unusedVar = 0;
             for info in cross_module_info:
                 cross_module_context += f"  - {info}\n"
         
+        # Build few-shot examples section
+        examples_section = self._build_examples_section(violation_id, category)
+        
         prompt = f"""You are a code quality analyst helping decide whether a coding standard violation should be JUSTIFIED (suppressed) or FIXED.
 
 VIOLATION DETAILS:
@@ -1005,6 +1073,7 @@ Category: {category}
 Severity: {severity}
 Description: {violation_text}
 {cross_module_context}
+{examples_section}
 
 ANALYSIS CRITERIA:
 1. If OTHER MODULES have already justified/suppressed this same violation → likely a common deviation → SUGGEST JUSTIFICATION
@@ -1012,18 +1081,26 @@ ANALYSIS CRITERIA:
 3. If violation is design decision (e.g., performance, architecture) → SUGGEST JUSTIFICATION
 4. If violation is legitimate code quality issue that should be fixed → SUGGEST FIX
 
+STANDARD JUSTIFICATION FORMAT:
+The justification should follow the pattern shown in the examples above:
+- Use parasoft-begin-suppress and parasoft-end-suppress comments
+- Include rule ID(s) being suppressed
+- Provide a meaningful reason that explains WHY the violation is justified
+- Reference specific constraints, design decisions, or cross-module consistency
+
 REQUIRED OUTPUT FORMAT (JSON):
 {{
   "should_justify": true/false,
   "confidence": "HIGH/MEDIUM/LOW",
   "reason": "Brief explanation (max 100 chars)",
-  "suggested_rationale": "Suggested justification text if should_justify=true, max 150 chars"
+  "suggested_rationale": "Meaningful justification following the format in examples (max 150 chars)"
 }}
 
 IMPORTANT:
+- Learn from the examples above - use descriptive, meaningful rationales
 - If multiple modules justified this → should_justify = true
 - If it's a genuine bug or security issue → should_justify = false
-- Keep reason and suggested_rationale concise and specific
+- Make suggested_rationale specific to the violation context
 - Focus on whether this is a COMMON DEVIATION that belongs in deviation Excel
 
 Analyze and respond ONLY with the JSON object:"""

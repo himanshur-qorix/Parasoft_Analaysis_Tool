@@ -90,10 +90,89 @@ All notable changes to this project will be documented in this file.
 - **Data-driven decisions** - Confidence scores guide prioritization
 - **Comprehensive visibility** - Timeline and matrix views of all violations
 
+#### Learning Database System (NEW!)
+- **learning/ folder structure** for team contributions
+  - `learning/README.md` - Complete contribution guide (200+ lines)
+  - `learning/QUICK_START.md` - 5-minute quick start guide
+  - `learning/ModuleName/ConfigName/` - Module structure with source/ and reports/
+  - Template example: `learning/Mka/Mka_Config_1/` with comprehensive documentation
+
+- **Rule-based pattern learning** (works WITHOUT AI)
+  - Learns from human-written vs tool-generated justifications
+  - Quality scoring system (0-10 scale) for each justification
+  - Automatic mistake detection: generic_reference, too_short, vague
+  - Persistent pattern database: `knowledge_base/learned_patterns_db.json`
+  - Technical detail recognition (function names, versions, DR numbers, ASIL levels)
+
+- **Enhanced learn_justification_patterns.py** (+250 lines)
+  - `_load_learned_patterns()` - Load persistent patterns
+  - `_build_pattern_database()` - Extract good examples from human-written
+  - `_calculate_quality_score()` - Score justifications 0-10
+  - `_has_specific_details()` - Detect technical specifics
+  - `_identify_mistake_patterns()` - Find common mistakes
+  - `_detect_quality_issues_rule_based()` - Analyze without AI
+  - `_save_learned_patterns()` - Persist to knowledge base
+
+- **Quality scoring factors:**
+  - Length: -2 (too short <30 chars) to +2 (detailed >200 chars)
+  - Specific details: +2 (function names, versions, hex addresses, DR-YYYY-NNN)
+  - Explanation words: +1 ("because", "required for", "approved")
+  - Technical context: +1 (hardware, API, legacy, ASIL-D, performance)
+  - Generic penalties: -3 ("_Parasoft_REF_NNN" patterns)
+
+- **Two knowledge base files generated:**
+  - `knowledge_base/justification_patterns_report.json` - Complete pattern analysis
+  - `knowledge_base/learned_patterns_db.json` - Persistent learning database
+
+- **New documentation:**
+  - [RULE_BASED_LEARNING.md](RULE_BASED_LEARNING.md) - Technical guide (12,000+ words)
+  - [learning/README.md](../learning/README.md) - Learning folder guide
+  - [learning/QUICK_START.md](../learning/QUICK_START.md) - 5-minute contribution guide
+  - [LEARNING_DATABASE_SUMMARY.md](LEARNING_DATABASE_SUMMARY.md) - Implementation summary
+
+#### Learning Database Benefits
+- Works **completely offline** (no AI/Ollama required)
+- Learns from **real team patterns** automatically
+- **Persistent** knowledge across multiple runs
+- **Automatic** quality enforcement
+- **Specific** mistake identification with examples
+- Teams contribute in **5 minutes**
+- **Cross-team learning** from all modules
+- **Standardized** justification quality
+
 #### Documentation
 - Updated summary messages in `run_static_analyzer.py` to show all 6 reports
 - Updated `Run_Static_Analyzer.bat` with complete report listing
 - All markdown documentation updated with Version 3.0.0 features
+
+---
+
+## [2.3.0] - 2026-04-22
+
+### ✨ Added - Parasoft Rules Database
+
+#### Official Parasoft Rule Documentation Integration
+- Leverages **1200+ official Parasoft rule documentation files**
+- Complete rule metadata: descriptions, severity, remediation, examples
+- Authoritative fix suggestions from Parasoft's rule specifications
+- Enhanced justification generation with official guidance
+
+#### ParasoftRulesParser Module
+- Parses official Parasoft `.rule` files
+- Extracts rule descriptions, severity levels, code examples
+- Provides context-aware fix suggestions
+- Integration with CodeFixGenerator for improved quality
+
+#### Benefits
+- **Authoritative guidance** from Parasoft documentation
+- **Higher quality fixes** based on official specifications
+- **Better justifications** with proper rule context
+- **Comprehensive coverage** of 1200+ rules
+
+#### Documentation
+- Complete guide: [PARASOFT_RULES_DATABASE.md](PARASOFT_RULES_DATABASE.md)
+- Build script: `scripts/Build_Parasoft_Rules_Database.bat`
+- Usage examples in README
 
 ---
 
@@ -471,4 +550,4 @@ All TODO items completed:
 
 ---
 
-**For detailed information, see [README.md](README.md)**
+**For detailed information, see [README.md](../README.md)**

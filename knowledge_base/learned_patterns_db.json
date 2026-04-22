@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-04-22T15:18:25.787190",
+  "source": "rule_based_learning",
+  "rule_patterns": {},
+  "mistake_patterns": [],
+  "quality_rules": [
+    {
+      "indicator": "specific_details",
+      "description": "Contains function names, version numbers, or technical specifics",
+      "examples": []
+    },
+    {
+      "indicator": "adequate_length",
+      "description": "Sufficient explanation (>50 chars)",
+      "threshold": 50,
+      "avg_human": 0.0
+    },
+    {
+      "indicator": "high_quality",
+      "description": "Quality score > 7.0",
+      "examples": []
+    }
+  ],
+  "statistics": {
+    "total_rules_learned": 0,
+    "total_mistakes_identified": 0,
+    "human_written_analyzed": 0,
+    "tool_generated_analyzed": 0
+  }
+}
