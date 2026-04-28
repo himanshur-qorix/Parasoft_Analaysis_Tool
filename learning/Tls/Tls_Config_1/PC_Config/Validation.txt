@@ -1,0 +1,19 @@
+##################################################		 
+#  Validation Report for TLS
+#  Run time = [22-Apr-2026 - 15:04:19]
+#  Total validation time = 125 msec
+#  Command line arguments =	Tls_Config_1.arxml Csm.arxml KeyM.arxml Variant_Handling.arxml 
+# 		
+##################################################
+INF000001: Command line arguments: 
+../../../170_Tls_TESTING/Code_Compliance/Config/Tls_Config_1/PC_Config/xml/Tls_Config_1.arxml
+../../../170_Tls_TESTING/Embedded/Bsw_Stubs/Csm/xml/Csm.arxml
+../../../170_Tls_TESTING/Embedded/Bsw_Stubs/KeyM/xml/KeyM.arxml
+../../../170_Tls_TESTING/Embedded/Swc_Stubs/Variant_Handling.arxml
+
+WRN170026:  The CsmKeys referred in TLS should be unique
+           --------------------------------------------------------------------------------------------
+           Path: /ARRoot/Tls_0
+INF000002: Configuration Variant chosen for module 
+INF000003: <0> Error(s) and <1> Warning(s) detected
+INF000004: Execution completed successfully with warnings.

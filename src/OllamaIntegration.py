@@ -978,8 +978,89 @@ static int unusedVar = 0;
             
             # Find all suppression entries using regex
             import re
-            pattern = r'/\\*\\s*parasoft-begin-suppress\\s+([A-Z0-9_\\-\\s]+?)\\s+\"Reason:\\s*(.+?)\"\\s*\\*/'\n            matches = re.findall(pattern, content)\n            \n            # Sample up to 3 examples from this file\n            for match in matches[:3]:\n                rule_ids = match[0].strip()\n                reason = match[1].strip()\n                \n                examples.append({\n                    'module': module_name,\n                    'rules': rule_ids,\n                    'reason': reason,\n                    'format': f'/* parasoft-begin-suppress {rule_ids} \"Reason: {reason}\" */'\n                })\n        \n        except Exception as e:\n            logger.debug(f"Failed to parse examples from {file_path.name}: {str(e)}\")\n        \n        return examples\n    \n    def _select_diverse_examples(self, examples: list, max_count: int) -> list:\n        \"\"\"Select diverse examples covering different rule types\"\"\"\n        # Group by rule category (CERT, MISRA, etc.)\n        cert_examples = [ex for ex in examples if 'CERT' in ex['rules']]\n        misra_examples = [ex for ex in examples if 'MISRA' in ex['rules']]\n        other_examples = [ex for ex in examples if 'CERT' not in ex['rules'] and 'MISRA' not in ex['rules']]\n        \n        # Select proportionally\n        selected = []\n        \n        # Try to get balanced representation\n        cert_quota = min(len(cert_examples), max_count // 3)\n        misra_quota = min(len(misra_examples), max_count // 3)\n        other_quota = max_count - cert_quota - misra_quota\n        \n        selected.extend(cert_examples[:cert_quota])\n        selected.extend(misra_examples[:misra_quota])\n        selected.extend(other_examples[:other_quota])\n        \n        return selected[:max_count]\n    \n    def _build_examples_section(self, violation_id: str, category: str) -> str:\n        \"\"\"\n        Build few-shot examples section for the prompt\n        \n        Args:\n            violation_id: Current violation ID\n            category: Current violation category\n        \n        Returns:\n            Formatted examples section string\n        \"\"\"\n        if not self.justification_examples or not self.use_few_shot:\n            return \"\"\n        \n        # Filter examples relevant to current violation category\n        relevant_examples = []\n        for ex in self.justification_examples:\n            # Prioritize examples matching the category\n            if category in ex['rules']:\n                relevant_examples.append(ex)\n        \n        # If no category matches, use general examples\n        if not relevant_examples:\n            relevant_examples = self.justification_examples[:5]\n        else:\n            relevant_examples = relevant_examples[:5]\n        \n        if not relevant_examples:\n            return \"\"\n        \n        examples_text = \"\\n\\nEXAMPLE JUSTIFICATIONS FROM OTHER MODULES:\\n\"\n        examples_text += \"Learn from these examples - notice the format and how reasons are documented:\\n\\n\"\n        \n        for i, ex in enumerate(relevant_examples, 1):\n            examples_text += f\"Example {i} (Module: {ex['module']}):\\n\"\n            examples_text += f\"  Rule(s): {ex['rules']}\\n\"\n            examples_text += f\"  Format: {ex['format']}\\n\"\n            examples_text += f\"  Reason Pattern: {ex['reason'][:100]}...\\n\\n\"\n        \n        return examples_text
-    \n    def suggest_justification(self, violation: Dict, cross_module_info: list) -> Optional[Dict]:
+            pattern = r'/\*\s*parasoft-begin-suppress\s+([A-Z0-9_\-\s]+?)\s+"Reason:\s*(.+?)"\s*\*/'
+            matches = re.findall(pattern, content)
+            
+            # Sample up to 3 examples from this file
+            for match in matches[:3]:
+                rule_ids = match[0].strip()
+                reason = match[1].strip()
+                
+                examples.append({
+                    'module': module_name,
+                    'rules': rule_ids,
+                    'reason': reason,
+                    'format': f'/* parasoft-begin-suppress {rule_ids} "Reason: {reason}" */'
+                })
+        
+        except Exception as e:
+            logger.debug(f"Failed to parse examples from {file_path.name}: {str(e)}")
+        
+        return examples
+    
+    def _select_diverse_examples(self, examples: list, max_count: int) -> list:
+        """Select diverse examples covering different rule types"""
+        # Group by rule category (CERT, MISRA, etc.)
+        cert_examples = [ex for ex in examples if 'CERT' in ex['rules']]
+        misra_examples = [ex for ex in examples if 'MISRA' in ex['rules']]
+        other_examples = [ex for ex in examples if 'CERT' not in ex['rules'] and 'MISRA' not in ex['rules']]
+        
+        # Select proportionally
+        selected = []
+        
+        # Try to get balanced representation
+        cert_quota = min(len(cert_examples), max_count // 3)
+        misra_quota = min(len(misra_examples), max_count // 3)
+        other_quota = max_count - cert_quota - misra_quota
+        
+        selected.extend(cert_examples[:cert_quota])
+        selected.extend(misra_examples[:misra_quota])
+        selected.extend(other_examples[:other_quota])
+        
+        return selected[:max_count]
+    
+    def _build_examples_section(self, violation_id: str, category: str) -> str:
+        """
+        Build few-shot examples section for the prompt
+        
+        Args:
+            violation_id: Current violation ID
+            category: Current violation category
+        
+        Returns:
+            Formatted examples section string
+        """
+        if not self.justification_examples or not self.use_few_shot:
+            return ""
+        
+        # Filter examples relevant to current violation category
+        relevant_examples = []
+        for ex in self.justification_examples:
+            # Prioritize examples matching the category
+            if category in ex['rules']:
+                relevant_examples.append(ex)
+        
+        # If no category matches, use general examples
+        if not relevant_examples:
+            relevant_examples = self.justification_examples[:5]
+        else:
+            relevant_examples = relevant_examples[:5]
+        
+        if not relevant_examples:
+            return ""
+        
+        examples_text = "\n\nEXAMPLE JUSTIFICATIONS FROM OTHER MODULES:\n"
+        examples_text += "Learn from these examples - notice the format and how reasons are documented:\n\n"
+        
+        for i, ex in enumerate(relevant_examples, 1):
+            examples_text += f"Example {i} (Module: {ex['module']}):\n"
+            examples_text += f"  Rule(s): {ex['rules']}\n"
+            examples_text += f"  Format: {ex['format']}\n"
+            examples_text += f"  Reason Pattern: {ex['reason'][:100]}...\n\n"
+        
+        return examples_text
+    
+    def suggest_justification(self, violation: Dict, cross_module_info: list) -> Optional[Dict]:
         """
         Use AI to analyze whether a violation should be justified instead of fixed
         

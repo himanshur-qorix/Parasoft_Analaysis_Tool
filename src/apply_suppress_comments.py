@@ -34,6 +34,7 @@ class SuppressCommentApplicator:
         self.already_justified_count = 0  # NEW: Track already justified lines
         self.skipped_in_comment_count = 0  # NEW: Track skipped due to comment blocks
         self.applied_violations = []  # Track successfully applied violations (file, line)
+        self.skipped_violations = []  # Track user-rejected violations (file, line)
         
         # Extract module name from suppress file (e.g., "Mka" from "Mka_suppress_comments_20260410_112659.txt")
         self.module_name = self.suppress_file.stem.split('_suppress_comments_')[0]
@@ -61,35 +62,81 @@ class SuppressCommentApplicator:
     
     def parse_suppress_file(self):
         """
-        Parse the suppress comments file
+        Parse the suppress comments file (NEW INLINE FORMAT)
         
         Returns:
-            List of dictionaries with file, line, begin_comment, end_comment
+            Dictionary with:
+                - 'files': Dict of {filename: {
+                    'reference_section': str,
+                    'suppressions': [{line: int, comment: str}, ...]
+                }}
         """
-        suppressions = []
+        suppressions_data = {}
         
         with open(self.suppress_file, 'r', encoding='utf-8') as f:
             content = f.read()
         
-        # Pattern to match each suppression block
-        pattern = r'File: (.+?), Line: (\d+)\s*-+\s*(/\* parasoft-begin-suppress .+? \*/)\s*.+?\s*(/\* parasoft-end-suppress .+? \*/)'
-        
-        matches = re.finditer(pattern, content, re.DOTALL)
-        
-        for match in matches:
-            file_name = match.group(1).strip()
-            line_num = int(match.group(2))
-            begin_comment = match.group(3).strip()
-            end_comment = match.group(4).strip()
+        # Check if this is new inline format or old format
+        if "NEW INLINE FORMAT:" in content:
+            # NEW FORMAT: Parse by file sections
+            file_sections = re.split(r'={80}\nFILE: (.+?)\n={80}\n', content)
             
-            suppressions.append({
-                'file': file_name,
-                'line': line_num,
-                'begin_comment': begin_comment,
-                'end_comment': end_comment
-            })
+            # Skip header (first element)
+            for i in range(1, len(file_sections), 2):
+                if i + 1 >= len(file_sections):
+                    break
+                    
+                file_name = file_sections[i].strip()
+                file_content = file_sections[i + 1]
+                
+                # Extract reference section
+                ref_match = re.search(
+                    r'--- VIOLATIONS REFERENCE SECTION.*?\n(.*?)(?=--- INLINE SUPPRESS COMMENTS|$)',
+                    file_content,
+                    re.DOTALL
+                )
+                reference_section = ref_match.group(1).strip() if ref_match else ""
+                
+                # Extract inline suppressions
+                suppressions = []
+                inline_pattern = r'Line (\d+):\n\s+// parasoft-suppress (.+)'
+                for match in re.finditer(inline_pattern, file_content):
+                    line_num = int(match.group(1))
+                    suppress_comment = f"// parasoft-suppress {match.group(2).strip()}"
+                    suppressions.append({
+                        'line': line_num,
+                        'comment': suppress_comment
+                    })
+                
+                suppressions_data[file_name] = {
+                    'reference_section': reference_section,
+                    'suppressions': suppressions
+                }
+        else:
+            # OLD FORMAT: Legacy support
+            pattern = r'File: (.+?), Line: (\d+)\s*-+\s*(/\* parasoft-begin-suppress .+? \*/)\s*.+?\s*(/\* parasoft-end-suppress .+? \*/)'
+            matches = re.finditer(pattern, content, re.DOTALL)
+            
+            for match in matches:
+                file_name = match.group(1).strip()
+                line_num = int(match.group(2))
+                begin_comment = match.group(3).strip()
+                end_comment = match.group(4).strip()
+                
+                if file_name not in suppressions_data:
+                    suppressions_data[file_name] = {
+                        'reference_section': '',
+                        'suppressions': []
+                    }
+                
+                suppressions_data[file_name]['suppressions'].append({
+                    'file': file_name,
+                    'line': line_num,
+                    'begin_comment': begin_comment,
+                    'end_comment': end_comment
+                })
         
-        return suppressions
+        return suppressions_data
     
     def find_source_file(self, file_name):
         """
@@ -284,6 +331,20 @@ class SuppressCommentApplicator:
             begin_comment: Begin suppress comment
             end_comment: End suppress comment
         
+        Note: This method is deprecated in favor of apply_inline_suppression for the new format
+        """
+        # This method is kept for backward compatibility but not used by new format
+        pass
+    
+    def apply_inline_suppression(self, file_path, line_num, suppress_comment):
+        """
+        Apply inline suppression comment to the end of a line
+        
+        Args:
+            file_path: Path to the file
+            line_num: Line number to apply suppression (1-indexed)
+            suppress_comment: Inline comment to add
+        
         Returns:
             True if successful, False otherwise
         """
@@ -293,22 +354,25 @@ class SuppressCommentApplicator:
                 lines = f.readlines()
             
             if line_num < 1 or line_num > len(lines):
-                print(f"[ERROR] Line number {line_num} is out of range for file with {len(lines)} lines")
+                print(f"[ERROR] Line number {line_num} is out of range")
                 return False
             
             # Create backup
             backup_path = self.create_backup(file_path)
-            try:
-                rel_backup = backup_path.relative_to(self.backup_folder)
-                print(f"[INFO] Backup created: {rel_backup}")
-            except ValueError:
-                print(f"[INFO] Backup created: {backup_path.name}")
+            print(f"[INFO] Backup created: {backup_path.name}")
             
-            # Insert comments
-            # Insert begin comment before the line
-            lines.insert(line_num - 1, begin_comment + '\n')
-            # Insert end comment after the line (now at line_num + 1 due to insertion)
-            lines.insert(line_num + 1, end_comment + '\n')
+            # Get the line (0-indexed)
+            line_idx = line_num - 1
+            line = lines[line_idx].rstrip('\n\r')
+            
+            # Check if already has suppress comment
+            if 'parasoft-suppress' in line:
+                print(f"[INFO] Line already has suppress comment - skipping")
+                return False
+            
+            # Add inline comment at the end of the line
+            modified_line = f"{line} {suppress_comment}\n"
+            lines[line_idx] = modified_line
             
             # Write modified file
             with open(file_path, 'w', encoding='utf-8', newline='') as f:
@@ -317,139 +381,278 @@ class SuppressCommentApplicator:
             return True
             
         except Exception as e:
-            print(f"[ERROR] Failed to apply suppression: {str(e)}")
+            print(f"[ERROR] Failed to apply inline suppression: {str(e)}")
+            return False
+    
+    def add_violations_reference_section(self, file_path, reference_section):
+        """
+        Add or update violations reference section at top of file
+        
+        Args:
+            file_path: Path to the file
+            reference_section: Reference section content to add
+        
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            # Read file
+            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                lines = f.readlines()
+            
+            # Find existing violations section
+            section_start = -1
+            section_end = -1
+            
+            for i, line in enumerate(lines):
+                if 'Parasoft violations Section' in line:
+                    # Find the start of the comment block
+                    for j in range(i, -1, -1):
+                        if '/*'  in lines[j] and'*****' in lines[j]:
+                            section_start = j
+                            break
+                    # Find the end (the closing */ of the section)
+                    for j in range(i, len(lines)):
+                        if '*/' in lines[j] and section_start == -1:
+                            continue
+                        if '*/' in lines[j]:
+                            section_end = j
+                            break
+                    break
+            
+            #  Parse and insert new reference section
+            new_section_lines = reference_section.split('\n')
+            new_section_lines = [line + '\n' if not line.endswith('\n') else line 
+                               for line in new_section_lines]
+            
+            if section_start != -1 and section_end != -1:
+                # Replace existing section
+                print("[INFO] Updating existing violations reference section")
+                lines[section_start:section_end+1] = new_section_lines
+            else:
+                # Add new section after existing header comments
+                print("[INFO] Adding new violations reference section")
+                insert_pos = 0
+                
+                # Find position after copyright/file header
+                in_header = False
+                for i, line in enumerate(lines):
+                    if '/*' in line and '***' in line:
+                        in_header = True
+                    if in_header and '*/' in line:
+                        insert_pos = i + 1
+                        break
+                
+                # Insert new section
+                new_section_lines.append('\n')  # Add blank line after
+                for line in reversed(new_section_lines):
+                    lines.insert(insert_pos, line)
+            
+            # Write modified file
+            with open(file_path, 'w', encoding='utf-8', newline='') as f:
+                f.writelines(lines)
+            
+            return True
+            
+        except Exception as e:
+            print(f"[ERROR] Failed to add reference section: {str(e)}")
             return False
     
     def run(self):
-        """Run the interactive application process"""
+        """Run the interactive application process (supports both old and new formats)"""
         
         # Parse suppress file
         print("Parsing suppress comments file...")
-        suppressions = self.parse_suppress_file()
+        suppressions_data = self.parse_suppress_file()
         
-        if not suppressions:
+        if not suppressions_data:
             print("\n[WARNING] No suppressions found in file")
             return
         
-        print(f"Found {len(suppressions)} suppression(s) to apply\n")
+        total_files = len(suppressions_data)
+        total_suppressions = sum(len(data['suppressions']) for data in suppressions_data.values())
+        print(f"Found {total_suppressions} suppression(s) across {total_files} file(s)\n")
         
-        # Process each suppression
-        for i, supp in enumerate(suppressions, 1):
+        # Process each file
+        for file_name, file_data in suppressions_data.items():
             print(f"\n{'='*80}")
-            print(f"Suppression {i} of {len(suppressions)}")
+            print(f"Processing File: {file_name}")
             print(f"{'='*80}")
             
             # Find source file
-            source_file = self.find_source_file(supp['file'])
+            source_file = self.find_source_file(file_name)
             
             if not source_file:
-                print(f"[ERROR] Could not find file: {supp['file']}")
-                self.failed_count += 1
+                print(f"[ERROR] Could not find file: {file_name}")
+                self.failed_count += len(file_data['suppressions'])
                 continue
             
-            # Show preview
-            current_line, is_in_comment, is_already_suppressed = self.show_preview(source_file, supp['line'], supp['begin_comment'], supp['end_comment'])
+            # Add violations reference section if present
+            if file_data['reference_section']:
+                print("\n[INFO] Adding violations reference section to file...")
+                if self.add_violations_reference_section(source_file, file_data['reference_section']):
+                    print("[SUCCESS] Reference section added/updated")
+                else:
+                    print("[WARNING] Failed to add reference section")
             
-            # Auto-skip if already suppressed
-            if is_already_suppressed:
-                print("\n[AUTO-SKIP] Already has suppress comments - skipping")
-                self.already_justified_count += 1
-                continue
+            # Process suppressions for this file
+            suppressions = file_data['suppressions']
             
-            # Auto-skip if inside comment block
-            if is_in_comment:
-                print("\n[AUTO-SKIP] This line is inside a comment block - cannot apply suppression here")
-                print("[INFO] The violation should be addressed in the actual code, not in comments")
-                self.skipped_in_comment_count += 1
-                continue
-            
-            # Ask user for confirmation
-            while True:
-                choice = input(f"\nApply this suppression? (y=yes, n=no, a=yes to all, q=quit): ").strip().lower()
+            for i, supp in enumerate(suppressions, 1):
+                print(f"\n{'-'*80}")
+                print(f"Suppression {i} of {len(suppressions)} in {file_name}")
+                print(f"{'-'*80}")
                 
-                if choice == 'y':
-                    # Apply this one
-                    if self.apply_suppression(source_file, supp['line'], supp['begin_comment'], supp['end_comment']):
-                        print("[SUCCESS] Suppression applied successfully")
-                        self.applied_count += 1
-                        # Track applied violation
-                        self.applied_violations.append({'file': supp['file'], 'line': supp['line']})
-                    else:
-                        self.failed_count += 1
-                    break
-                
-                elif choice == 'n':
-                    # Skip this one
-                    print("[INFO] Skipped")
-                    self.skipped_count += 1
-                    break
-                
-                elif choice == 'a':
-                    # Apply all remaining
-                    if self.apply_suppression(source_file, supp['line'], supp['begin_comment'], supp['end_comment']):
-                        print("[SUCCESS] Suppression applied successfully")
-                        self.applied_count += 1
-                        # Track applied violation
-                        self.applied_violations.append({'file': supp['file'], 'line': supp['line']})
-                    else:
-                        self.failed_count += 1
+                # Check if this is inline or old format
+                if 'comment' in supp:
+                    # NEW INLINE FORMAT
+                    line_num = supp['line']
+                    suppress_comment = supp['comment']
                     
-                    # Apply rest without asking (but still check for comment blocks and already suppressed)
-                    for remaining_supp in suppressions[i:]:
-                        remaining_file = self.find_source_file(remaining_supp['file'])
-                        if remaining_file:
-                            # Read file and check conditions
-                            with open(remaining_file, 'r', encoding='utf-8', errors='ignore') as f:
-                                lines = f.readlines()
-                            
-                            # Check if already suppressed
-                            if self.is_already_suppressed(lines, remaining_supp['line']):
-                                print(f"[AUTO-SKIP] {remaining_supp['file']}:{remaining_supp['line']} - already has suppress comments")
-                                self.already_justified_count += 1
-                            # Check if in comment block
-                            elif self.is_inside_comment_block(lines, remaining_supp['line']):
-                                print(f"[AUTO-SKIP] {remaining_supp['file']}:{remaining_supp['line']} - inside comment block")
-                                self.skipped_in_comment_count += 1
-                            # Apply suppression
-                            elif self.apply_suppression(remaining_file, remaining_supp['line'], 
-                                                     remaining_supp['begin_comment'], remaining_supp['end_comment']):
+                    # Show preview
+                    try:
+                        with open(source_file, 'r', encoding='utf-8', errors='ignore') as f:
+                            lines = f.readlines()
+                        
+                        if line_num < 1 or line_num > len(lines):
+                            print(f"[ERROR] Line {line_num} out of range")
+                            self.failed_count += 1
+                            continue
+                        
+                        # Show context
+                        start_idx = max(0, line_num - 3)
+                        end_idx = min(len(lines), line_num + 3)
+                        
+                        print(f"\nLine {line_num}:")
+                        for j in range(start_idx, end_idx):
+                            prefix = ">>> " if j == line_num - 1 else "    "
+                            print(f"{prefix}{j+1:4}: {lines[j].rstrip()}")
+                        
+                        print(f"\nWill add: {suppress_comment}")
+                        
+                        # Check if already has suppression
+                        if 'parasoft-suppress' in lines[line_num - 1]:
+                            print("\n[AUTO-SKIP] Line already has suppress comment")
+                            self.already_justified_count += 1
+                            continue
+                        
+                        # Ask for confirmation
+                        choice = input(f"\nApply inline suppression? (y/n/a=all/q=quit): ").strip().lower()
+                        
+                        if choice == 'y':
+                            if self.apply_inline_suppression(source_file, line_num, suppress_comment):
+                                print("[SUCCESS] Inline suppression applied")
                                 self.applied_count += 1
-                                # Track applied violation
-                                self.applied_violations.append({'file': remaining_supp['file'], 'line': remaining_supp['line']})
+                                self.applied_violations.append({'file': file_name, 'line': line_num})
                             else:
                                 self.failed_count += 1
+                        
+                        elif choice == 'a':
+                            # Apply this and all remaining in this file
+                            if self.apply_inline_suppression(source_file, line_num, suppress_comment):
+                                print("[SUCCESS] Inline suppression applied")
+                                self.applied_count += 1
+                                self.applied_violations.append({'file': file_name, 'line': line_num})
+                            else:
+                                self.failed_count += 1
+                            
+                            # Apply remaining
+                            for remaining_supp in suppressions[i:]:
+                                rem_line = remaining_supp['line']
+                                rem_comment = remaining_supp['comment']
+                                
+                                # Re-read file for fresh line check
+                                with open(source_file, 'r', encoding='utf-8', errors='ignore') as f:
+                                    fresh_lines = f.readlines()
+                                
+                                if rem_line >= len(fresh_lines) or 'parasoft-suppress' in fresh_lines[rem_line - 1]:
+                                    print(f"[AUTO-SKIP] Line {rem_line} - already has suppress comment")
+                                    self.already_justified_count += 1
+                                elif self.apply_inline_suppression(source_file, rem_line, rem_comment):
+                                    print(f"[SUCCESS] Applied suppression to line {rem_line}")
+                                    self.applied_count += 1
+                                    self.applied_violations.append({'file': file_name, 'line': rem_line})
+                                else:
+                                    self.failed_count += 1
+                            break  # Exit loop after applying all
+                        
+                        elif choice == 'q':
+                            print("\n[INFO] User quit")
+                            self.show_summary()
+                            return
+                        
                         else:
-                            self.failed_count += 1
+                            print("[INFO] Skipped")
+                            self.skipped_count += 1
+                            self.skipped_violations.append({'file': file_name, 'line': line_num})
                     
-                    return  # Exit function
-                
-                elif choice == 'q':
-                    # Quit
-                    print("\n[INFO] User quit. Exiting...")
-                    return
+                    except Exception as e:
+                        print(f"[ERROR] {str(e)}")
+                        self.failed_count += 1
                 
                 else:
-                    print("Invalid choice. Please enter y, n, a, or q.")
+                    # OLD FORMAT (Legacy support)
+                    line_num = supp['line']
+                    begin_comment = supp['begin_comment']
+                    end_comment = supp['end_comment']
+                    
+                    # Use old method
+                    current_line, is_in_comment, is_already_suppressed = self.show_preview(
+                        source_file, line_num, begin_comment, end_comment
+                    )
+                    
+                    if is_already_suppressed:
+                        print("\n[AUTO-SKIP] Already has suppress comments")
+                        self.already_justified_count += 1
+                        continue
+                    
+                    if is_in_comment:
+                        print("\n[AUTO-SKIP] Inside comment block")
+                        self.skipped_in_comment_count += 1
+                        continue
+                    
+                    choice = input(f"\nApply suppression? (y/n/q): ").strip().lower()
+                    
+                    if choice == 'y':
+                        if self.apply_suppression(source_file, line_num, begin_comment, end_comment):
+                            print("[SUCCESS] Suppression applied")
+                            self.applied_count += 1
+                            self.applied_violations.append({'file': file_name, 'line': line_num})
+                        else:
+                            self.failed_count += 1
+                    elif choice == 'q':
+                        print("\n[INFO] User quit")
+                        self.show_summary()
+                        return
+                    else:
+                        print("[INFO] Skipped")
+                        self.skipped_count += 1
+                        self.skipped_violations.append({'file': file_name, 'line': line_num})
         
-        # Update module-specific violations report and summary report
+        # Update reports and show summary
         self.update_module_violations_report()
         self.update_violations_report()
         self.show_summary()
     
     def update_module_violations_report(self):
         """Update the module-specific violations report with 'Justification updated' status"""
-        if not self.applied_violations:
-            print("\n[INFO] No violations were applied - skipping module report update")
+        if not self.applied_violations and not self.skipped_violations:
+            print("\n[INFO] No violations were applied or skipped - skipping module report update")
             return
         
         # Get the project root (parent of scripts folder)
         project_root = Path(__file__).parent.parent
         
-        # Construct module report filename
+        # Construct module report filename (check both regular and _UPDATED versions)
         module_report_name = f"{self.module_name}_violations_report.xlsx"
+        module_report_name_updated = f"{self.module_name}_violations_report_UPDATED.xlsx"
         
-        # Look for module-specific report
+        # Look for module-specific report (prioritize _UPDATED version)
         possible_paths = [
+            project_root / "reports" / module_report_name_updated,
+            Path.cwd() / "reports" / module_report_name_updated,
+            Path.cwd() / module_report_name_updated,
+            project_root / module_report_name_updated,
             project_root / "reports" / module_report_name,
             Path.cwd() / "reports" / module_report_name,
             Path.cwd() / module_report_name,
@@ -457,7 +660,7 @@ class SuppressCommentApplicator:
         ]
         
         report_file = None
-        print(f"\n[INFO] Searching for {module_report_name}...")
+        print(f"\n[INFO] Searching for {module_report_name} or {module_report_name_updated}...")
         for path in possible_paths:
             if path.exists():
                 report_file = path
@@ -465,7 +668,8 @@ class SuppressCommentApplicator:
                 break
         
         if not report_file:
-            print(f"[WARNING] {module_report_name} not found")
+            print(f"[WARNING] Module report not found")
+            print(f"[INFO] Searched for: {module_report_name} or {module_report_name_updated}")
             print(f"[INFO] Skipping module violations report update")
             return
         
@@ -520,19 +724,24 @@ class SuppressCommentApplicator:
                 tool_update_col = headers["Tool Update"]
                 print(f"[INFO] Using existing 'Tool Update' column at column {tool_update_col}")
             
-            # Get File and Line number column indices
+            # Get File, Line number, and Justification column indices
             file_col = headers.get("File")
             line_col = headers.get("Line number") or headers.get("Line")
+            justification_col = headers.get("Justification")
             
             if not file_col or not line_col:
                 print("[WARNING] Could not find 'File' or 'Line number' columns")
                 print(f"[DEBUG] Available columns: {list(headers.keys())}")
                 return
             
-            print(f"[DEBUG] File column: {file_col}, Line column: {line_col}, Tool Update column: {tool_update_col}")
+            if not justification_col:
+                print("[WARNING] Could not find 'Justification' column - will only update 'Tool Update'")
+            
+            print(f"[DEBUG] File column: {file_col}, Line column: {line_col}, Tool Update column: {tool_update_col}, Justification column: {justification_col}")
             
             # Update rows for applied violations
             updated_count = 0
+            rejected_count = 0
             print(f"[DEBUG] Checking {ws.max_row - 1} rows for matches...")
             print(f"[DEBUG] Looking for {len(self.applied_violations)} applied violations:")
             for av in self.applied_violations[:5]:  # Show first 5
@@ -540,30 +749,55 @@ class SuppressCommentApplicator:
             if len(self.applied_violations) > 5:
                 print(f"  ... and {len(self.applied_violations) - 5} more")
             
+            if self.skipped_violations:
+                print(f"[DEBUG] Looking for {len(self.skipped_violations)} skipped violations to mark as 'No'")
+            
             for row_idx in range(2, ws.max_row + 1):
                 file_val = ws.cell(row=row_idx, column=file_col).value
                 line_val = ws.cell(row=row_idx, column=line_col).value
                 
                 if file_val and line_val:
-                    # Check if this violation was applied
+                    # Check if this violation was applied (accepted)
                     for applied in self.applied_violations:
                         # Match by filename (not full path) and line number
                         if applied['file'] in str(file_val) and int(line_val) == int(applied['line']):
+                            # Update Tool Update column
                             ws.cell(row=row_idx, column=tool_update_col, value="Justification updated")
+                            
+                            # Update Justification column to "Yes" (accepted)
+                            if justification_col:
+                                ws.cell(row=row_idx, column=justification_col, value="Yes")
+                            
                             updated_count += 1
                             if updated_count <= 3:  # Show first 3 matches
-                                print(f"[DEBUG] Matched: {file_val}:{line_val} (Row {row_idx})")
+                                print(f"[DEBUG] Matched (Applied): {file_val}:{line_val} (Row {row_idx})")
+                            break
+                    
+                    # Check if this violation was skipped (rejected)
+                    for skipped in self.skipped_violations:
+                        if skipped['file'] in str(file_val) and int(line_val) == int(skipped['line']):
+                            # Update Justification column to "No" (rejected)
+                            if justification_col:
+                                ws.cell(row=row_idx, column=justification_col, value="No")
+                            
+                            rejected_count += 1
+                            if rejected_count <= 3:  # Show first 3 matches
+                                print(f"[DEBUG] Matched (Skipped): {file_val}:{line_val} (Row {row_idx})")
                             break
             
             # Save workbook
             workbook.save(report_file)
-            print(f"[SUCCESS] Updated {updated_count} violations in {module_report_name}")
+            print(f"[SUCCESS] Updated {updated_count} violations in {report_file.name}")
+            if justification_col:
+                print(f"[INFO] Set 'Justification' to 'Yes' for {updated_count} applied violations")
+                if rejected_count > 0:
+                    print(f"[INFO] Set 'Justification' to 'No' for {rejected_count} rejected violations")
             
         except PermissionError:
-            print(f"\n[ERROR] Cannot update {module_report_name} - file is open")
+            print(f"\n[ERROR] Cannot update {report_file.name if report_file else module_report_name} - file is open")
             print("[TIP] Please close the Excel file and run the tool again")
         except Exception as e:
-            print(f"\n[WARNING] Could not update {module_report_name}: {e}")
+            print(f"\n[WARNING] Could not update {report_file.name if report_file else module_report_name}: {e}")
             import traceback
             traceback.print_exc()
     
@@ -681,8 +915,8 @@ class SuppressCommentApplicator:
         if self.applied_count > 0:
             print(f"\nBackup files saved to: {self.backup_folder}")
             print("Review backups if you need to restore original files")
-            print(f"\nModule report updated: {self.module_name}_violations_report.xlsx")
-            print(f"  - {len(self.applied_violations)} violations marked as 'Justification updated'")
+            print(f"\nModule report status: Check console output above for update details")
+            print(f"  - {len(self.applied_violations)} violations applied and tracked")
         
         # Save summary to JSON for reporting
         summary_data = {
@@ -696,7 +930,8 @@ class SuppressCommentApplicator:
             "failed": self.failed_count,
             "total": total,
             "backup_folder": str(self.backup_folder) if self.applied_count > 0 else None,
-            "applied_violations": self.applied_violations
+            "applied_violations": self.applied_violations,
+            "skipped_violations": self.skipped_violations
         }
         
         # Save to justifications folder

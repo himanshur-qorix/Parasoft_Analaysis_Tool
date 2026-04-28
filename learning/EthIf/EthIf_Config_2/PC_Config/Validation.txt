@@ -1,0 +1,20 @@
+####################################################		 
+#  Validation Report for ETHIF
+#  Run time = [02-Apr-2026 - 13:41:46]
+#  Total validation time = 109 msec
+#  Command line arguments =	EthIf_Config_2.arxml KPIT_AUTOSAR_R24-11_EthIf_BSWMD.arxml Variant_Handling.arxml 
+# 		
+####################################################
+INF000001: Command line arguments: 
+../../../065_EthIf_TESTING/Code_Compliance/Config/EthIf_Config_2/PC_Config/xml/EthIf_Config_2.arxml
+../../../065_EthIf_DELIVERY/bundle/com.kpit.c4k.bsw.ethif/resources/BSWMD/KPIT_AUTOSAR_R24-11_EthIf_BSWMD.arxml
+../../../065_EthIf_TESTING/Embedded/Swc_Stubs/Variant_Handling.arxml
+
+INF065081: If any Pdu(s) with keepLocalBuffer as True and corresponding
+           EthCtrlEnableEgressHardwareSupportedDataTransfer is also true, for
+           EthIfFrameTxPdu_1 then EthIf Expects Driver APIs -
+           Eth_ImmediateTransmission and Eth_ReleaseRxBuffer
+           Path: /ARRoot/EthIf_0
+INF000002: Configuration Variant chosen for module 
+INF000003: <0> Error(s) and <0> Warning(s) detected
+INF000004: Execution completed successfully.

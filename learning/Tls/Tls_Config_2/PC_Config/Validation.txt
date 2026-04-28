@@ -1,0 +1,155 @@
+##################################################		 
+#  Validation Report for TLS
+#  Run time = [22-Apr-2026 - 15:04:32]
+#  Total validation time = 96 msec
+#  Command line arguments =	Tls_Config_2.arxml Csm.arxml KeyM.arxml Variant_Handling.arxml 
+# 		
+##################################################
+INF000001: Command line arguments: 
+../../../170_Tls_TESTING/Code_Compliance/Config/Tls_Config_2/PC_Config/xml/Tls_Config_2.arxml
+../../../170_Tls_TESTING/Embedded/Bsw_Stubs/Csm/xml/Csm.arxml
+../../../170_Tls_TESTING/Embedded/Bsw_Stubs/KeyM/xml/KeyM.arxml
+../../../170_Tls_TESTING/Embedded/Swc_Stubs/Variant_Handling.arxml
+
+WRN170013: As per Qorix Design ,The parameter tlsCsmKeyExchangeCalcPubValJobRef
+           in HandShake container TlsHandshake_0 For the connection :
+           TlsConnection_0 Should be ignored, Since Current Version of TLS only
+           supports PSK based Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter tlsCsmKeyExchangeCalcSecretJobRef
+           in HandShake container TlsHandshake_0 For the connection :
+           TlsConnection_0 Should be ignored, Since Current Version of TLS only
+           supports PSK based Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter tlsCsmKeyExchangeKeyRef in
+           HandShake container TlsHandshake_0 For the connection :
+           TlsConnection_0 Should be ignored, Since Current Version of TLS only
+           supports PSK based Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter
+           tlsCsmKeyExchangeSignatureGenerateJobRef in HandShake container
+           TlsHandshake_0 For the connection : TlsConnection_0 Should be
+           ignored, Since Current Version of TLS only supports PSK based
+           Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter
+           tlsCsmKeyExchangeSignatureGenerateKeyRef in HandShake container
+           TlsHandshake_0 For the connection : TlsConnection_0 Should be
+           ignored, Since Current Version of TLS only supports PSK based
+           Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter tlsCsmKeyExchangeCalcPubValJobRef
+           in HandShake container TlsHandshake_1 For the connection :
+           TlsConnection_0 Should be ignored, Since Current Version of TLS only
+           supports PSK based Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter tlsCsmKeyExchangeCalcSecretJobRef
+           in HandShake container TlsHandshake_1 For the connection :
+           TlsConnection_0 Should be ignored, Since Current Version of TLS only
+           supports PSK based Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter tlsCsmKeyExchangeKeyRef in
+           HandShake container TlsHandshake_1 For the connection :
+           TlsConnection_0 Should be ignored, Since Current Version of TLS only
+           supports PSK based Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter
+           tlsCsmKeyExchangeSignatureGenerateJobRef in HandShake container
+           TlsHandshake_1 For the connection : TlsConnection_0 Should be
+           ignored, Since Current Version of TLS only supports PSK based
+           Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter
+           tlsCsmKeyExchangeSignatureGenerateKeyRef in HandShake container
+           TlsHandshake_1 For the connection : TlsConnection_0 Should be
+           ignored, Since Current Version of TLS only supports PSK based
+           Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter tlsCsmKeyExchangeCalcPubValJobRef
+           in HandShake container TlsHandshake_2 For the connection :
+           TlsConnection_0 Should be ignored, Since Current Version of TLS only
+           supports PSK based Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter tlsCsmKeyExchangeCalcSecretJobRef
+           in HandShake container TlsHandshake_2 For the connection :
+           TlsConnection_0 Should be ignored, Since Current Version of TLS only
+           supports PSK based Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter tlsCsmKeyExchangeKeyRef in
+           HandShake container TlsHandshake_2 For the connection :
+           TlsConnection_0 Should be ignored, Since Current Version of TLS only
+           supports PSK based Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter
+           tlsCsmKeyExchangeSignatureGenerateJobRef in HandShake container
+           TlsHandshake_2 For the connection : TlsConnection_0 Should be
+           ignored, Since Current Version of TLS only supports PSK based
+           Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter
+           tlsCsmKeyExchangeSignatureGenerateKeyRef in HandShake container
+           TlsHandshake_2 For the connection : TlsConnection_0 Should be
+           ignored, Since Current Version of TLS only supports PSK based
+           Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter tlsCsmKeyExchangeCalcPubValJobRef
+           in HandShake container TlsHandshake_0 For the connection :
+           TlsConnection_1 Should be ignored, Since Current Version of TLS only
+           supports PSK based Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter tlsCsmKeyExchangeCalcSecretJobRef
+           in HandShake container TlsHandshake_0 For the connection :
+           TlsConnection_1 Should be ignored, Since Current Version of TLS only
+           supports PSK based Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter tlsCsmKeyExchangeKeyRef in
+           HandShake container TlsHandshake_0 For the connection :
+           TlsConnection_1 Should be ignored, Since Current Version of TLS only
+           supports PSK based Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter
+           tlsCsmKeyExchangeSignatureGenerateJobRef in HandShake container
+           TlsHandshake_0 For the connection : TlsConnection_1 Should be
+           ignored, Since Current Version of TLS only supports PSK based
+           Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           As per Qorix Design ,The parameter
+           tlsCsmKeyExchangeSignatureGenerateKeyRef in HandShake container
+           TlsHandshake_0 For the connection : TlsConnection_1 Should be
+           ignored, Since Current Version of TLS only supports PSK based
+           Authentication
+           /ARRoot/Tls_0/TlsConfig_0/TlsCiphersuites_0/TlsCiphersuiteDefinition_0
+           --------------------------------------------------------------------------------------------
+           Path: /ARRoot/Tls_0
+
+WRN170026:  The CsmJobs referred in TLS should be unique
+           --------------------------------------------------------------------------------------------
+            The CsmKeys referred in TLS should be unique
+           --------------------------------------------------------------------------------------------
+           Path: /ARRoot/Tls_0
+
+WRN170034: Tlsciphersuiteworkers configured in TlsConnection should not have
+           duplicate TlsHandshake References
+           Path: /ARRoot/Tls_0
+INF000002: Configuration Variant chosen for module 
+INF000003: <0> Error(s) and <3> Warning(s) detected
+INF000004: Execution completed successfully with warnings.
