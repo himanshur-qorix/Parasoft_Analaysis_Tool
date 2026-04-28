@@ -1,0 +1,13 @@
+{
+  "module": "EthIf",
+  "suppress_file": "EthIf_suppress_comments_20260422_180500.txt",
+  "timestamp": "2026-04-22 18:26:06",
+  "applied": 0,
+  "skipped_user": 0,
+  "already_justified": 0,
+  "skipped_in_comment": 2,
+  "failed": 6,
+  "total": 8,
+  "backup_folder": null,
+  "applied_violations": []
+}

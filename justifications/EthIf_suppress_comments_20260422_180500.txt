@@ -1,0 +1,3485 @@
+Parasoft Suppress Comments for EthIf
+Generated: 2026-04-22 18:05:00
+================================================================================
+
+Instructions:
+1. Add the 'parasoft-begin-suppress' comment BEFORE the line with the violation
+2. Add the 'parasoft-end-suppress' comment AFTER the line with the violation
+3. Update the reason reference as needed
+
+================================================================================
+
+File: EthIf.c, Line: 56
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-DIR_4_4-b-4 "Reason: EthIf_Parasoft_REF_56" */
+... (your code at line 56) ...
+/* parasoft-end-suppress MISRAC2012-DIR_4_4-b-4 */
+
+File: EthIf.c, Line: 161
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_161" */
+... (your code at line 161) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf.c, Line: 166
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_166" */
+... (your code at line 166) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf.c, Line: 167
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_167" */
+... (your code at line 167) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 170
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_170" */
+... (your code at line 170) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 179
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_179" */
+... (your code at line 179) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 180
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_180" */
+... (your code at line 180) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 184
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_184" */
+... (your code at line 184) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 189
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_189" */
+... (your code at line 189) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 190
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_190" */
+... (your code at line 190) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 196
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_196" */
+... (your code at line 196) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 201
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_201" */
+... (your code at line 201) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 202
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_202" */
+... (your code at line 202) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 207
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 "Reason: EthIf_Parasoft_REF_207" */
+... (your code at line 207) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 */
+
+File: EthIf.c, Line: 211
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 "Reason: EthIf_Parasoft_REF_211" */
+... (your code at line 211) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 */
+
+File: EthIf.c, Line: 212
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_212" */
+... (your code at line 212) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 216
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_216" */
+... (your code at line 216) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf.c, Line: 220
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_220" */
+... (your code at line 220) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf.c, Line: 221
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_221" */
+... (your code at line 221) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 225
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_225" */
+... (your code at line 225) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 227
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_227" */
+... (your code at line 227) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf.c, Line: 229
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_229" */
+... (your code at line 229) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 230
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_230" */
+... (your code at line 230) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 234
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_234" */
+... (your code at line 234) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 236
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_236" */
+... (your code at line 236) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf.c, Line: 238
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_238" */
+... (your code at line 238) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 239
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_239" */
+... (your code at line 239) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 242
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_242" */
+... (your code at line 242) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 247
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_247" */
+... (your code at line 247) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 248
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_248" */
+... (your code at line 248) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 252
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_252" */
+... (your code at line 252) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 254
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_254" */
+... (your code at line 254) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf.c, Line: 256
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_256" */
+... (your code at line 256) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 257
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_257" */
+... (your code at line 257) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 260
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_260" */
+... (your code at line 260) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 262
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_262" */
+... (your code at line 262) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf.c, Line: 265
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_265" */
+... (your code at line 265) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 266
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_266" */
+... (your code at line 266) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 269
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_269" */
+... (your code at line 269) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 271
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_271" */
+... (your code at line 271) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf.c, Line: 273
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_273" */
+... (your code at line 273) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 274
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_274" */
+... (your code at line 274) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 278
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_278" */
+... (your code at line 278) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf.c, Line: 281
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_2_8-a-4 "Reason: EthIf_Parasoft_REF_281" */
+... (your code at line 281) ...
+/* parasoft-end-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_2_8-a-4 */
+
+File: EthIf.c, Line: 282
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_282" */
+... (your code at line 282) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf.c, Line: 283
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_283" */
+... (your code at line 283) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 289
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_289" */
+... (your code at line 289) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf.c, Line: 293
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_293" */
+... (your code at line 293) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf.c, Line: 294
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_294" */
+... (your code at line 294) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 297
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_297" */
+... (your code at line 297) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 302
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_302" */
+... (your code at line 302) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 303
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_303" */
+... (your code at line 303) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 307
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_307" */
+... (your code at line 307) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 312
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_312" */
+... (your code at line 312) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 313
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_313" */
+... (your code at line 313) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 316
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_316" */
+... (your code at line 316) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 321
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_321" */
+... (your code at line 321) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 322
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_322" */
+... (your code at line 322) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 327
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_327" */
+... (your code at line 327) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 331
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_331" */
+... (your code at line 331) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 332
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_332" */
+... (your code at line 332) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 336
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_336" */
+... (your code at line 336) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 340
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_340" */
+... (your code at line 340) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 341
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_341" */
+... (your code at line 341) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 346
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_346" */
+... (your code at line 346) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 350
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_350" */
+... (your code at line 350) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 351
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_351" */
+... (your code at line 351) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 356
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_356" */
+... (your code at line 356) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 360
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_360" */
+... (your code at line 360) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 361
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_361" */
+... (your code at line 361) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 365
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_365" */
+... (your code at line 365) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 370
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_370" */
+... (your code at line 370) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 371
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_371" */
+... (your code at line 371) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 376
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_376" */
+... (your code at line 376) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf.c, Line: 380
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_380" */
+... (your code at line 380) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf.c, Line: 381
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_381" */
+... (your code at line 381) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 392
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_392" */
+... (your code at line 392) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 397
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_397" */
+... (your code at line 397) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 398
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_398" */
+... (your code at line 398) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 401
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_401" */
+... (your code at line 401) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 406
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_406" */
+... (your code at line 406) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 407
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_407" */
+... (your code at line 407) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 410
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_410" */
+... (your code at line 410) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 415
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_415" */
+... (your code at line 415) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 416
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_416" */
+... (your code at line 416) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 419
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_419" */
+... (your code at line 419) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 423
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_423" */
+... (your code at line 423) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 424
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_424" */
+... (your code at line 424) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 428
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_428" */
+... (your code at line 428) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 432
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_432" */
+... (your code at line 432) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 433
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_433" */
+... (your code at line 433) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 435
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_435" */
+... (your code at line 435) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 439
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_439" */
+... (your code at line 439) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 440
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_440" */
+... (your code at line 440) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 444
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_444" */
+... (your code at line 444) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 451
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_451" */
+... (your code at line 451) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 452
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_452" */
+... (your code at line 452) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 456
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_456" */
+... (your code at line 456) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 458
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_458" */
+... (your code at line 458) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf.c, Line: 459
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_459" */
+... (your code at line 459) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 460
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_460" */
+... (your code at line 460) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 464
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_464" */
+... (your code at line 464) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 466
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_466" */
+... (your code at line 466) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf.c, Line: 467
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_467" */
+... (your code at line 467) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 468
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_468" */
+... (your code at line 468) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 509
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_509" */
+... (your code at line 509) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 515
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_515" */
+... (your code at line 515) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 518
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_518" */
+... (your code at line 518) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 578
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: EthIf_Parasoft_REF_578" */
+... (your code at line 578) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: EthIf.c, Line: 591
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_591" */
+... (your code at line 591) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 592
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_592" */
+... (your code at line 592) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 623
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_623" */
+... (your code at line 623) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 627
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_627" */
+... (your code at line 627) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 666
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_666" */
+... (your code at line 666) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 667
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_667" */
+... (your code at line 667) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 693
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_693" */
+... (your code at line 693) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 698
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_698" */
+... (your code at line 698) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 863
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_863" */
+... (your code at line 863) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 864
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_864" */
+... (your code at line 864) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 898
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_898" */
+... (your code at line 898) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 904
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_904" */
+... (your code at line 904) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 907
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_907" */
+... (your code at line 907) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 908
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_908" */
+... (your code at line 908) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 909
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_909" */
+... (your code at line 909) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 910
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_910" */
+... (your code at line 910) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 915
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_915" */
+... (your code at line 915) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 1162
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1162" */
+... (your code at line 1162) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 1163
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_1163" */
+... (your code at line 1163) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 1197
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1197" */
+... (your code at line 1197) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 1202
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_1202" */
+... (your code at line 1202) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 1203
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_1203" */
+... (your code at line 1203) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 1206
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_1206" */
+... (your code at line 1206) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 1207
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_1207" */
+... (your code at line 1207) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 1315
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1315" */
+... (your code at line 1315) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 1316
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_1316" */
+... (your code at line 1316) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 1349
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1349" */
+... (your code at line 1349) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 1352
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_1352" */
+... (your code at line 1352) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 1353
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_1353" */
+... (your code at line 1353) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 1358
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_1358" */
+... (your code at line 1358) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 1463
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1463" */
+... (your code at line 1463) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 1464
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_1464" */
+... (your code at line 1464) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 1499
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1499" */
+... (your code at line 1499) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 1503
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_1503" */
+... (your code at line 1503) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 1504
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_1504" */
+... (your code at line 1504) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 1604
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1604" */
+... (your code at line 1604) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 1605
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_1605" */
+... (your code at line 1605) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 1639
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1639" */
+... (your code at line 1639) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 1642
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_1642" */
+... (your code at line 1642) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 1643
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_1643" */
+... (your code at line 1643) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 1739
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1739" */
+... (your code at line 1739) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 1740
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_1740" */
+... (your code at line 1740) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 1775
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1775" */
+... (your code at line 1775) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 1778
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_1778" */
+... (your code at line 1778) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 1779
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_1779" */
+... (your code at line 1779) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 1880
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1880" */
+... (your code at line 1880) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 1881
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_1881" */
+... (your code at line 1881) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 1915
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1915" */
+... (your code at line 1915) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 1919
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_1919" */
+... (your code at line 1919) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 1979
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1979" */
+... (your code at line 1979) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 1980
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_1980" */
+... (your code at line 1980) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 2017
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2017" */
+... (your code at line 2017) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2021
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_2021" */
+... (your code at line 2021) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 2022
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_2022" */
+... (your code at line 2022) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 2023
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_2023" */
+... (your code at line 2023) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 2031
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2031" */
+... (your code at line 2031) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2035
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2035" */
+... (your code at line 2035) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2037
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2037" */
+... (your code at line 2037) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2038
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2038" */
+... (your code at line 2038) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2040
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2040" */
+... (your code at line 2040) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2118
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: EthIf_Parasoft_REF_2118" */
+... (your code at line 2118) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: EthIf.c, Line: 2179
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: EthIf_Parasoft_REF_2179" */
+... (your code at line 2179) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: EthIf.c, Line: 2187
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: EthIf_Parasoft_REF_2187" */
+... (your code at line 2187) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: EthIf.c, Line: 2224
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2224" */
+... (your code at line 2224) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2225
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_2225" */
+... (your code at line 2225) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 2261
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2261" */
+... (your code at line 2261) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2264
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_2264" */
+... (your code at line 2264) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 2265
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_2265" */
+... (your code at line 2265) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 2266
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_2266" */
+... (your code at line 2266) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 2272
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2272" */
+... (your code at line 2272) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2275
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2275" */
+... (your code at line 2275) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2277
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2277" */
+... (your code at line 2277) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2278
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2278" */
+... (your code at line 2278) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2444
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2444" */
+... (your code at line 2444) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2445
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_2445" */
+... (your code at line 2445) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 2481
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2481" */
+... (your code at line 2481) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2483
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_2483" */
+... (your code at line 2483) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 2484
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_2484" */
+... (your code at line 2484) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 2496
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: EthIf_Parasoft_REF_2496" */
+... (your code at line 2496) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: EthIf.c, Line: 2515
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2515" */
+... (your code at line 2515) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2516
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_2516" */
+... (your code at line 2516) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 2546
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2546" */
+... (your code at line 2546) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2548
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_2548" */
+... (your code at line 2548) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 2549
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_2549" */
+... (your code at line 2549) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 2552
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2552" */
+... (your code at line 2552) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2553
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2553" */
+... (your code at line 2553) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2579
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: EthIf_Parasoft_REF_2579" */
+... (your code at line 2579) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: EthIf.c, Line: 2584
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: EthIf_Parasoft_REF_2584" */
+... (your code at line 2584) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: EthIf.c, Line: 2603
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2603" */
+... (your code at line 2603) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2604
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_2604" */
+... (your code at line 2604) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 2634
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2634" */
+... (your code at line 2634) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2636
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: EthIf_Parasoft_REF_2636" */
+... (your code at line 2636) ...
+/* parasoft-end-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 */
+
+File: EthIf.c, Line: 2649
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_17_8-a-4 "Reason: EthIf_Parasoft_REF_2649" */
+... (your code at line 2649) ...
+/* parasoft-end-suppress MISRAC2012-RULE_17_8-a-4 */
+
+File: EthIf.c, Line: 2655
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2655" */
+... (your code at line 2655) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2656
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_2656" */
+... (your code at line 2656) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 2686
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2686" */
+... (your code at line 2686) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2689
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: EthIf_Parasoft_REF_2689" */
+... (your code at line 2689) ...
+/* parasoft-end-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 */
+
+File: EthIf.c, Line: 2702
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 "Reason: EthIf_Parasoft_REF_2702" */
+... (your code at line 2702) ...
+/* parasoft-end-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 */
+
+File: EthIf.c, Line: 2705
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_17_8-a-4 "Reason: EthIf_Parasoft_REF_2705" */
+... (your code at line 2705) ...
+/* parasoft-end-suppress MISRAC2012-RULE_17_8-a-4 */
+
+File: EthIf.c, Line: 2712
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2712" */
+... (your code at line 2712) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2713
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_2713" */
+... (your code at line 2713) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 2748
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2748" */
+... (your code at line 2748) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2774
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2774" */
+... (your code at line 2774) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2775
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_2775" */
+... (your code at line 2775) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 2825
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_2825" */
+... (your code at line 2825) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 2827
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_2827" */
+... (your code at line 2827) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 2828
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_2828" */
+... (your code at line 2828) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 2832
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2832" */
+... (your code at line 2832) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2833
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2833" */
+... (your code at line 2833) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2834
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2834" */
+... (your code at line 2834) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2835
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2835" */
+... (your code at line 2835) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2836
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2836" */
+... (your code at line 2836) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2837
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2837" */
+... (your code at line 2837) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2838
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2838" */
+... (your code at line 2838) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2840
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2840" */
+... (your code at line 2840) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2841
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2841" */
+... (your code at line 2841) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2843
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2843" */
+... (your code at line 2843) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2852
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2852" */
+... (your code at line 2852) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2853
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2853" */
+... (your code at line 2853) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2856
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2856" */
+... (your code at line 2856) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2857
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2857" */
+... (your code at line 2857) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2858
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2858" */
+... (your code at line 2858) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 2861
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_2861" */
+... (your code at line 2861) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 3048
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_18_4-a-4 "Reason: EthIf_Parasoft_REF_3048" */
+... (your code at line 3048) ...
+/* parasoft-end-suppress MISRAC2012-RULE_18_4-a-4 */
+
+File: EthIf.c, Line: 3062
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_18_4-a-4 "Reason: EthIf_Parasoft_REF_3062" */
+... (your code at line 3062) ...
+/* parasoft-end-suppress MISRAC2012-RULE_18_4-a-4 */
+
+File: EthIf.c, Line: 3142
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3142" */
+... (your code at line 3142) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3143
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_3143" */
+... (your code at line 3143) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 3175
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3175" */
+... (your code at line 3175) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3179
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_3179" */
+... (your code at line 3179) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 3217
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3217" */
+... (your code at line 3217) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3218
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_3218" */
+... (your code at line 3218) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 3253
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3253" */
+... (your code at line 3253) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3262
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_9-b-2 "Reason: EthIf_Parasoft_REF_3262" */
+... (your code at line 3262) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_9-b-2 */
+
+File: EthIf.c, Line: 3296
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_9-b-2 "Reason: EthIf_Parasoft_REF_3296" */
+... (your code at line 3296) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_9-b-2 */
+
+File: EthIf.c, Line: 3320
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_9-b-2 "Reason: EthIf_Parasoft_REF_3320" */
+... (your code at line 3320) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_9-b-2 */
+
+File: EthIf.c, Line: 3330
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3330" */
+... (your code at line 3330) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3331
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_3331" */
+... (your code at line 3331) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 3366
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3366" */
+... (your code at line 3366) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3442
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3442" */
+... (your code at line 3442) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3443
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_3443" */
+... (your code at line 3443) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 3479
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3479" */
+... (your code at line 3479) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3577
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3577" */
+... (your code at line 3577) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3578
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_3578" */
+... (your code at line 3578) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 3614
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3614" */
+... (your code at line 3614) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3694
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3694" */
+... (your code at line 3694) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3695
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_3695" */
+... (your code at line 3695) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 3731
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3731" */
+... (your code at line 3731) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3812
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3812" */
+... (your code at line 3812) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3813
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_3813" */
+... (your code at line 3813) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 3841
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3841" */
+... (your code at line 3841) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3844
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_3844" */
+... (your code at line 3844) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 3846
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_3846" */
+... (your code at line 3846) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 3913
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3913" */
+... (your code at line 3913) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3914
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_3914" */
+... (your code at line 3914) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 3942
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3942" */
+... (your code at line 3942) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3945
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_3945" */
+... (your code at line 3945) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 3986
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_3986" */
+... (your code at line 3986) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 3987
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_3987" */
+... (your code at line 3987) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 4022
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_9-b-2 "Reason: EthIf_Parasoft_REF_4022" */
+... (your code at line 4022) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_9-b-2 */
+
+File: EthIf.c, Line: 4023
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4023" */
+... (your code at line 4023) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4087
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4087" */
+... (your code at line 4087) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4088
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_4088" */
+... (your code at line 4088) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 4124
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_9-b-2 "Reason: EthIf_Parasoft_REF_4124" */
+... (your code at line 4124) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_9-b-2 */
+
+File: EthIf.c, Line: 4125
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4125" */
+... (your code at line 4125) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4190
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4190" */
+... (your code at line 4190) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4191
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_4191" */
+... (your code at line 4191) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 4227
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_9-b-2 "Reason: EthIf_Parasoft_REF_4227" */
+... (your code at line 4227) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_9-b-2 */
+
+File: EthIf.c, Line: 4228
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4228" */
+... (your code at line 4228) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4275
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4275" */
+... (your code at line 4275) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4276
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_4276" */
+... (your code at line 4276) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 4312
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_9-b-2 "Reason: EthIf_Parasoft_REF_4312" */
+... (your code at line 4312) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_9-b-2 */
+
+File: EthIf.c, Line: 4313
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4313" */
+... (your code at line 4313) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4361
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4361" */
+... (your code at line 4361) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4362
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_4362" */
+... (your code at line 4362) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 4397
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4397" */
+... (your code at line 4397) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4400
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_4400" */
+... (your code at line 4400) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 4401
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_4401" */
+... (your code at line 4401) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 4464
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4464" */
+... (your code at line 4464) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4465
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_4465" */
+... (your code at line 4465) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 4499
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4499" */
+... (your code at line 4499) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4502
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_4502" */
+... (your code at line 4502) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 4577
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4577" */
+... (your code at line 4577) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4578
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_4578" */
+... (your code at line 4578) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 4612
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4612" */
+... (your code at line 4612) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4616
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_4616" */
+... (your code at line 4616) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 4617
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_4617" */
+... (your code at line 4617) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 4739
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4739" */
+... (your code at line 4739) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4740
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_4740" */
+... (your code at line 4740) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 4774
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4774" */
+... (your code at line 4774) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4778
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_4778" */
+... (your code at line 4778) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 4779
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_4779" */
+... (your code at line 4779) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 4780
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_4780" */
+... (your code at line 4780) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 4781
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_4781" */
+... (your code at line 4781) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 4926
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4926" */
+... (your code at line 4926) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 4927
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_4927" */
+... (your code at line 4927) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 4950
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_4950" */
+... (your code at line 4950) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5030
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5030" */
+... (your code at line 5030) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5031
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_5031" */
+... (your code at line 5031) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 5053
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5053" */
+... (your code at line 5053) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5136
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5136" */
+... (your code at line 5136) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5137
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_5137" */
+... (your code at line 5137) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 5161
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5161" */
+... (your code at line 5161) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5258
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5258" */
+... (your code at line 5258) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5259
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_5259" */
+... (your code at line 5259) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 5281
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5281" */
+... (your code at line 5281) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5364
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5364" */
+... (your code at line 5364) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5365
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_5365" */
+... (your code at line 5365) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 5386
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5386" */
+... (your code at line 5386) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5478
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5478" */
+... (your code at line 5478) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5479
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_5479" */
+... (your code at line 5479) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 5500
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5500" */
+... (your code at line 5500) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5592
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5592" */
+... (your code at line 5592) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5593
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_5593" */
+... (your code at line 5593) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 5615
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5615" */
+... (your code at line 5615) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5704
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5704" */
+... (your code at line 5704) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5705
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_5705" */
+... (your code at line 5705) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 5733
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5733" */
+... (your code at line 5733) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5736
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_5736" */
+... (your code at line 5736) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 5773
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5773" */
+... (your code at line 5773) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5774
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_5774" */
+... (your code at line 5774) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 5804
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5804" */
+... (your code at line 5804) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5808
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_5808" */
+... (your code at line 5808) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 5809
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_5809" */
+... (your code at line 5809) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 5813
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_5813" */
+... (your code at line 5813) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 5900
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5900" */
+... (your code at line 5900) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5901
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_5901" */
+... (your code at line 5901) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 5935
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_5935" */
+... (your code at line 5935) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 5938
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_5938" */
+... (your code at line 5938) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 5941
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_5941" */
+... (your code at line 5941) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 5943
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_5943" */
+... (your code at line 5943) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 5987
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_18_4-a-4 "Reason: EthIf_Parasoft_REF_5987" */
+... (your code at line 5987) ...
+/* parasoft-end-suppress MISRAC2012-RULE_18_4-a-4 */
+
+File: EthIf.c, Line: 5993
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_18_4-a-4 "Reason: EthIf_Parasoft_REF_5993" */
+... (your code at line 5993) ...
+/* parasoft-end-suppress MISRAC2012-RULE_18_4-a-4 */
+
+File: EthIf.c, Line: 6011
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_18_4-a-4 "Reason: EthIf_Parasoft_REF_6011" */
+... (your code at line 6011) ...
+/* parasoft-end-suppress MISRAC2012-RULE_18_4-a-4 */
+
+File: EthIf.c, Line: 6015
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_18_4-a-4 "Reason: EthIf_Parasoft_REF_6015" */
+... (your code at line 6015) ...
+/* parasoft-end-suppress MISRAC2012-RULE_18_4-a-4 */
+
+File: EthIf.c, Line: 6046
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_6046" */
+... (your code at line 6046) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 6047
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_6047" */
+... (your code at line 6047) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 6085
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_6085" */
+... (your code at line 6085) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 6087
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_6087" */
+... (your code at line 6087) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 6088
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_6088" */
+... (your code at line 6088) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 6089
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_6089" */
+... (your code at line 6089) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 6090
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_6090" */
+... (your code at line 6090) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 6097
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6097" */
+... (your code at line 6097) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6100
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6100" */
+... (your code at line 6100) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6101
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6101" */
+... (your code at line 6101) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6102
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6102" */
+... (your code at line 6102) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6103
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6103" */
+... (your code at line 6103) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6109
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6109" */
+... (your code at line 6109) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6111
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6111" */
+... (your code at line 6111) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6115
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6115" */
+... (your code at line 6115) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6120
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6120" */
+... (your code at line 6120) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6123
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6123" */
+... (your code at line 6123) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6124
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6124" */
+... (your code at line 6124) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6134
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6134" */
+... (your code at line 6134) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6135
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6135" */
+... (your code at line 6135) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6208
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT13-b-2 "Reason: EthIf_Parasoft_REF_6208" */
+... (your code at line 6208) ...
+/* parasoft-end-suppress CERT_C-INT13-b-2 */
+
+File: EthIf.c, Line: 6384
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-EXP05-a-2 CERT_C-EXP32-a-2 CERT_C-EXP40-a-3 MISRAC2012-RULE_11_8-a-2 "Reason: EthIf_Parasoft_REF_6384" */
+... (your code at line 6384) ...
+/* parasoft-end-suppress CERT_C-EXP05-a-2 CERT_C-EXP32-a-2 CERT_C-EXP40-a-3 MISRAC2012-RULE_11_8-a-2 */
+
+File: EthIf.c, Line: 6440
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_6440" */
+... (your code at line 6440) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 6441
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_6441" */
+... (your code at line 6441) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 6476
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_6476" */
+... (your code at line 6476) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 6479
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_6479" */
+... (your code at line 6479) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 6511
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_6511" */
+... (your code at line 6511) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 6512
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_6512" */
+... (your code at line 6512) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 6549
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_6549" */
+... (your code at line 6549) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 6552
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_6552" */
+... (your code at line 6552) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 6553
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_6553" */
+... (your code at line 6553) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 6557
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6557" */
+... (your code at line 6557) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6561
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6561" */
+... (your code at line 6561) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6562
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6562" */
+... (your code at line 6562) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6565
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6565" */
+... (your code at line 6565) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6566
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6566" */
+... (your code at line 6566) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6571
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6571" */
+... (your code at line 6571) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6632
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: EthIf_Parasoft_REF_6632" */
+... (your code at line 6632) ...
+/* parasoft-end-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 */
+
+File: EthIf.c, Line: 6694
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_6694" */
+... (your code at line 6694) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 6695
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_6695" */
+... (your code at line 6695) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 6727
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_6727" */
+... (your code at line 6727) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 6730
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_6730" */
+... (your code at line 6730) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 6733
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6733" */
+... (your code at line 6733) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6734
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6734" */
+... (your code at line 6734) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6737
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6737" */
+... (your code at line 6737) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6785
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_6785" */
+... (your code at line 6785) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 6786
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_6786" */
+... (your code at line 6786) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 6817
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_6817" */
+... (your code at line 6817) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 6820
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_6820" */
+... (your code at line 6820) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 6854
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_6854" */
+... (your code at line 6854) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 6855
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_6855" */
+... (your code at line 6855) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 6887
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_6887" */
+... (your code at line 6887) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 6890
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_6890" */
+... (your code at line 6890) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 6893
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_6893" */
+... (your code at line 6893) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 6925
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_6925" */
+... (your code at line 6925) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 6926
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_6926" */
+... (your code at line 6926) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 6956
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_6956" */
+... (your code at line 6956) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 7043
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_7043" */
+... (your code at line 7043) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 7044
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_7044" */
+... (your code at line 7044) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 7072
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_7072" */
+... (your code at line 7072) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 7152
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_7152" */
+... (your code at line 7152) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 7153
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_7153" */
+... (your code at line 7153) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 7182
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_7182" */
+... (your code at line 7182) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 7186
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_7186" */
+... (your code at line 7186) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 7187
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_7187" */
+... (your code at line 7187) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 7191
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_7191" */
+... (your code at line 7191) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 7266
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_7266" */
+... (your code at line 7266) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 7267
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_7267" */
+... (your code at line 7267) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 7296
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_7296" */
+... (your code at line 7296) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 7300
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_7300" */
+... (your code at line 7300) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 7301
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_7301" */
+... (your code at line 7301) ...
+/* parasoft-end-suppress CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 7306
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_7306" */
+... (your code at line 7306) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf.c, Line: 7360
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_7360" */
+... (your code at line 7360) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 7361
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_7361" */
+... (your code at line 7361) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 7388
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_7388" */
+... (your code at line 7388) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 7395
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_7395" */
+... (your code at line 7395) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 7396
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_7396" */
+... (your code at line 7396) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf.c, Line: 7421
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_7421" */
+... (your code at line 7421) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 7425
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_7425" */
+... (your code at line 7425) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 7426
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_7426" */
+... (your code at line 7426) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf.c, Line: 7434
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_7434" */
+... (your code at line 7434) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf.c, Line: 7435
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_7435" */
+... (your code at line 7435) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 32
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-DIR_4_4-b-4 "Reason: EthIf_Parasoft_REF_32" */
+... (your code at line 32) ...
+/* parasoft-end-suppress MISRAC2012-DIR_4_4-b-4 */
+
+File: EthIf_Cfg.c, Line: 96
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_96" */
+... (your code at line 96) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf_Cfg.c, Line: 98
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_98" */
+... (your code at line 98) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf_Cfg.c, Line: 106
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_106" */
+... (your code at line 106) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf_Cfg.c, Line: 107
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_107" */
+... (your code at line 107) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 111
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 "Reason: EthIf_Parasoft_REF_111" */
+... (your code at line 111) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 */
+
+File: EthIf_Cfg.c, Line: 113
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: EthIf_Parasoft_REF_113" */
+... (your code at line 113) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: EthIf_Cfg.c, Line: 118
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 "Reason: EthIf_Parasoft_REF_118" */
+... (your code at line 118) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 */
+
+File: EthIf_Cfg.c, Line: 119
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_119" */
+... (your code at line 119) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 122
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_122" */
+... (your code at line 122) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 125
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: EthIf_Parasoft_REF_125" */
+... (your code at line 125) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: EthIf_Cfg.c, Line: 129
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_129" */
+... (your code at line 129) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 130
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_130" */
+... (your code at line 130) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 133
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_133" */
+... (your code at line 133) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 136
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: EthIf_Parasoft_REF_136" */
+... (your code at line 136) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: EthIf_Cfg.c, Line: 142
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_142" */
+... (your code at line 142) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 143
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_143" */
+... (your code at line 143) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 147
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_147" */
+... (your code at line 147) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 149
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_149" */
+... (your code at line 149) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf_Cfg.c, Line: 163
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_163" */
+... (your code at line 163) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 164
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_164" */
+... (your code at line 164) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 169
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_169" */
+... (your code at line 169) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 171
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: EthIf_Parasoft_REF_171" */
+... (your code at line 171) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: EthIf_Cfg.c, Line: 246
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_246" */
+... (your code at line 246) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 247
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_247" */
+... (your code at line 247) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 250
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_250" */
+... (your code at line 250) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 252
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: EthIf_Parasoft_REF_252" */
+... (your code at line 252) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: EthIf_Cfg.c, Line: 423
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_423" */
+... (your code at line 423) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 424
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_424" */
+... (your code at line 424) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 427
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_427" */
+... (your code at line 427) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 429
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_429" */
+... (your code at line 429) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf_Cfg.c, Line: 451
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_451" */
+... (your code at line 451) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 452
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_452" */
+... (your code at line 452) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 455
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_455" */
+... (your code at line 455) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 457
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_457" */
+... (your code at line 457) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf_Cfg.c, Line: 478
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_478" */
+... (your code at line 478) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 479
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_479" */
+... (your code at line 479) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 482
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_482" */
+... (your code at line 482) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 484
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: EthIf_Parasoft_REF_484" */
+... (your code at line 484) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: EthIf_Cfg.c, Line: 518
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_518" */
+... (your code at line 518) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 519
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_519" */
+... (your code at line 519) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 522
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_522" */
+... (your code at line 522) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 533
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_533" */
+... (your code at line 533) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 534
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_534" */
+... (your code at line 534) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 537
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_537" */
+... (your code at line 537) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 557
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_557" */
+... (your code at line 557) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 558
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_558" */
+... (your code at line 558) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 563
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_563" */
+... (your code at line 563) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 565
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: EthIf_Parasoft_REF_565" */
+... (your code at line 565) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: EthIf_Cfg.c, Line: 573
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_573" */
+... (your code at line 573) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 574
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_574" */
+... (your code at line 574) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 576
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 "Reason: EthIf_Parasoft_REF_576" */
+... (your code at line 576) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 */
+
+File: EthIf_Cfg.c, Line: 578
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: EthIf_Parasoft_REF_578" */
+... (your code at line 578) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: EthIf_Cfg.c, Line: 590
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: EthIf_Parasoft_REF_590" */
+... (your code at line 590) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: EthIf_Cfg.c, Line: 605
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: EthIf_Parasoft_REF_605" */
+... (your code at line 605) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: EthIf_Cfg.c, Line: 611
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 "Reason: EthIf_Parasoft_REF_611" */
+... (your code at line 611) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 */
+
+File: EthIf_Cfg.c, Line: 612
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_612" */
+... (your code at line 612) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 614
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_614" */
+... (your code at line 614) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 616
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: EthIf_Parasoft_REF_616" */
+... (your code at line 616) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: EthIf_Cfg.c, Line: 643
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_643" */
+... (your code at line 643) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 644
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_644" */
+... (your code at line 644) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 647
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_647" */
+... (your code at line 647) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 649
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_649" */
+... (your code at line 649) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf_Cfg.c, Line: 670
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_670" */
+... (your code at line 670) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 671
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_671" */
+... (your code at line 671) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 674
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_674" */
+... (your code at line 674) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 677
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: EthIf_Parasoft_REF_677" */
+... (your code at line 677) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: EthIf_Cfg.c, Line: 723
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_723" */
+... (your code at line 723) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 724
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_724" */
+... (your code at line 724) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 726
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_726" */
+... (your code at line 726) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 728
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_728" */
+... (your code at line 728) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf_Cfg.c, Line: 755
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_755" */
+... (your code at line 755) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 756
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_756" */
+... (your code at line 756) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 758
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_758" */
+... (your code at line 758) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 760
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL06-a-3 CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_760" */
+... (your code at line 760) ...
+/* parasoft-end-suppress CERT_C-DCL06-a-3 CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf_Cfg.c, Line: 790
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_790" */
+... (your code at line 790) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 791
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_791" */
+... (your code at line 791) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 793
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_793" */
+... (your code at line 793) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 795
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_2_8-a-4 "Reason: EthIf_Parasoft_REF_795" */
+... (your code at line 795) ...
+/* parasoft-end-suppress MISRAC2012-RULE_2_8-a-4 */
+
+File: EthIf_Cfg.c, Line: 828
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_828" */
+... (your code at line 828) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 829
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_829" */
+... (your code at line 829) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 831
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_831" */
+... (your code at line 831) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 833
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_833" */
+... (your code at line 833) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf_Cfg.c, Line: 834
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_834" */
+... (your code at line 834) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 835
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_835" */
+... (your code at line 835) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 836
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_836" */
+... (your code at line 836) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 838
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_8_7-a-4 "Reason: EthIf_Parasoft_REF_838" */
+... (your code at line 838) ...
+/* parasoft-end-suppress MISRAC2012-RULE_8_7-a-4 */
+
+File: EthIf_Cfg.c, Line: 839
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_839" */
+... (your code at line 839) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_1_1-c-2 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 840
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_840" */
+... (your code at line 840) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 872
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_872" */
+... (your code at line 872) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf_Cfg.c, Line: 874
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_874" */
+... (your code at line 874) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf_Cfg.c, Line: 887
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_887" */
+... (your code at line 887) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf_Cfg.c, Line: 888
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_888" */
+... (your code at line 888) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 919
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_919" */
+... (your code at line 919) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 922
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: EthIf_Parasoft_REF_922" */
+... (your code at line 922) ...
+/* parasoft-end-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 */
+
+File: EthIf_Cfg.c, Line: 925
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_925" */
+... (your code at line 925) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Cfg.c, Line: 926
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_926" */
+... (your code at line 926) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Cfg.c, Line: 927
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_927" */
+... (your code at line 927) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Cfg.c, Line: 954
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 "Reason: EthIf_Parasoft_REF_954" */
+... (your code at line 954) ...
+/* parasoft-end-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 */
+
+File: EthIf_Cfg.c, Line: 961
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 "Reason: EthIf_Parasoft_REF_961" */
+... (your code at line 961) ...
+/* parasoft-end-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 */
+
+File: EthIf_Cfg.c, Line: 966
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-h-2 "Reason: EthIf_Parasoft_REF_966" */
+... (your code at line 966) ...
+/* parasoft-end-suppress CERT_C-INT31-h-2 */
+
+File: EthIf_Cfg.c, Line: 967
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 "Reason: EthIf_Parasoft_REF_967" */
+... (your code at line 967) ...
+/* parasoft-end-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 */
+
+File: EthIf_Cfg.c, Line: 984
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_984" */
+... (your code at line 984) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 985
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_985" */
+... (your code at line 985) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 1017
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1017" */
+... (your code at line 1017) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 1019
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_1019" */
+... (your code at line 1019) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf_Cfg.c, Line: 1032
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 "Reason: EthIf_Parasoft_REF_1032" */
+... (your code at line 1032) ...
+/* parasoft-end-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 */
+
+File: EthIf_Cfg.c, Line: 1035
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_17_8-a-4 "Reason: EthIf_Parasoft_REF_1035" */
+... (your code at line 1035) ...
+/* parasoft-end-suppress MISRAC2012-RULE_17_8-a-4 */
+
+File: EthIf_Cfg.c, Line: 1036
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_17_8-a-4 "Reason: EthIf_Parasoft_REF_1036" */
+... (your code at line 1036) ...
+/* parasoft-end-suppress MISRAC2012-RULE_17_8-a-4 */
+
+File: EthIf_Cfg.c, Line: 1040
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1040" */
+... (your code at line 1040) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 1041
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_1041" */
+... (your code at line 1041) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Cfg.c, Line: 1072
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1072" */
+... (your code at line 1072) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 1075
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_1075" */
+... (your code at line 1075) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf_Cfg.c, Line: 1079
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 "Reason: EthIf_Parasoft_REF_1079" */
+... (your code at line 1079) ...
+/* parasoft-end-suppress CERT_C-API00-a-3 CERT_C-DCL00-b-3 */
+
+File: EthIf_Cfg.c, Line: 1082
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_1082" */
+... (your code at line 1082) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Cfg.c, Line: 1083
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_1083" */
+... (your code at line 1083) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Cfg.c, Line: 1084
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_1084" */
+... (your code at line 1084) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Cfg.c, Line: 1102
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 "Reason: EthIf_Parasoft_REF_1102" */
+... (your code at line 1102) ...
+/* parasoft-end-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 */
+
+File: EthIf_Cfg.c, Line: 1105
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-INT31-i-2 "Reason: EthIf_Parasoft_REF_1105" */
+... (your code at line 1105) ...
+/* parasoft-end-suppress CERT_C-INT31-i-2 */
+
+File: EthIf_Cfg.c, Line: 1106
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 "Reason: EthIf_Parasoft_REF_1106" */
+... (your code at line 1106) ...
+/* parasoft-end-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 */
+
+File: EthIf_Cfg.c, Line: 1121
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_1121" */
+... (your code at line 1121) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Cfg.c, Line: 1122
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_1122" */
+... (your code at line 1122) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Main.c, Line: 44
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-DIR_4_4-b-4 "Reason: EthIf_Parasoft_REF_44" */
+... (your code at line 44) ...
+/* parasoft-end-suppress MISRAC2012-DIR_4_4-b-4 */
+
+File: EthIf_Main.c, Line: 110
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_110" */
+... (your code at line 110) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf_Main.c, Line: 114
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_114" */
+... (your code at line 114) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf_Main.c, Line: 115
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_115" */
+... (your code at line 115) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Main.c, Line: 158
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_158" */
+... (your code at line 158) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf_Main.c, Line: 170
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_170" */
+... (your code at line 170) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 171
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_171" */
+... (your code at line 171) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 173
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_173" */
+... (your code at line 173) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 174
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_174" */
+... (your code at line 174) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 175
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_175" */
+... (your code at line 175) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 289
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 "Reason: EthIf_Parasoft_REF_289" */
+... (your code at line 289) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 */
+
+File: EthIf_Main.c, Line: 290
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_290" */
+... (your code at line 290) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Main.c, Line: 326
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_326" */
+... (your code at line 326) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Main.c, Line: 333
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_333" */
+... (your code at line 333) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 335
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_335" */
+... (your code at line 335) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 336
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_336" */
+... (your code at line 336) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 343
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_343" */
+... (your code at line 343) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 436
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_436" */
+... (your code at line 436) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Main.c, Line: 437
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_437" */
+... (your code at line 437) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+
+File: EthIf_Main.c, Line: 469
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_469" */
+... (your code at line 469) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Main.c, Line: 474
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_474" */
+... (your code at line 474) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 482
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_482" */
+... (your code at line 482) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 483
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_483" */
+... (your code at line 483) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 484
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_484" */
+... (your code at line 484) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 486
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_486" */
+... (your code at line 486) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 487
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_487" */
+... (your code at line 487) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 488
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_488" */
+... (your code at line 488) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 489
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_489" */
+... (your code at line 489) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 490
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_490" */
+... (your code at line 490) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 491
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL19-a-3 "Reason: EthIf_Parasoft_REF_491" */
+... (your code at line 491) ...
+/* parasoft-end-suppress CERT_C-DCL19-a-3 */
+
+File: EthIf_Main.c, Line: 662
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 "Reason: EthIf_Parasoft_REF_662" */
+... (your code at line 662) ...
+/* parasoft-end-suppress CERT_C-DCL37-d-3 MISRAC2012-RULE_5_4-c-2 MISRAC2012-RULE_5_4-d-2 */
+
+File: EthIf_Main.c, Line: 663
+--------------------------------------------------------------------------------
+/* parasoft-begin-suppress MISRAC2012-RULE_20_1-a-4 "Reason: EthIf_Parasoft_REF_663" */
+... (your code at line 663) ...
+/* parasoft-end-suppress MISRAC2012-RULE_20_1-a-4 */
+

@@ -1,0 +1,14 @@
+####################################################		 
+#  Validation Report for ETHIF
+#  Run time = [02-Apr-2026 - 13:42:24]
+#  Total validation time = 125 msec
+#  Command line arguments =	EthIf_Config_4.arxml KPIT_AUTOSAR_R24-11_EthIf_BSWMD.arxml Variant_Handling.arxml 
+# 		
+####################################################
+INF000001: Command line arguments: 
+../../../065_EthIf_TESTING/Code_Compliance/Config/EthIf_Config_4/PC_Config/xml/EthIf_Config_4.arxml
+../../../065_EthIf_DELIVERY/bundle/com.kpit.c4k.bsw.ethif/resources/BSWMD/KPIT_AUTOSAR_R24-11_EthIf_BSWMD.arxml
+../../../065_EthIf_TESTING/Embedded/Swc_Stubs/Variant_Handling.arxml
+INF000002: Configuration Variant chosen for module 
+INF000003: <0> Error(s) and <0> Warning(s) detected
+INF000004: Execution completed successfully.

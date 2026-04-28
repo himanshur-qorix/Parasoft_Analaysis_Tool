@@ -1,0 +1,19 @@
+####################################################		 
+#  Validation Report for ETHIF
+#  Run time = [02-Apr-2026 - 13:41:27]
+#  Total validation time = 112 msec
+#  Command line arguments =	EthIf_Config_1.arxml KPIT_AUTOSAR_R24-11_EthIf_BSWMD.arxml Variant_Handling.arxml 
+# 		
+####################################################
+INF000001: Command line arguments: 
+../../../065_EthIf_TESTING/Code_Compliance/Config/EthIf_Config_1/PC_Config/xml/EthIf_Config_1.arxml
+../../../065_EthIf_DELIVERY/bundle/com.kpit.c4k.bsw.ethif/resources/BSWMD/KPIT_AUTOSAR_R24-11_EthIf_BSWMD.arxml
+../../../065_EthIf_TESTING/Embedded/Swc_Stubs/Variant_Handling.arxml
+
+INF065082: Length of MetadataItems MetaDataItem_1 of MetaDataType_0,
+           MetaDataItem_1 of MetaDataType_1 are expected to be matching CPU_TYPE
+           from Platform_Types.h
+           Path: /ARRoot/EthIf_0
+INF000002: Configuration Variant chosen for module 
+INF000003: <0> Error(s) and <0> Warning(s) detected
+INF000004: Execution completed successfully.

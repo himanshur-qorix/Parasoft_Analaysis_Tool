@@ -257,6 +257,7 @@ class ParasoftAIAgent:
     def _generate_suppress_comments(self, violations, module_name):
         """
         Generate Parasoft suppress comments for justified violations
+        NEW FORMAT: Inline suppressions with violations reference section
         
         Args:
             violations: List of violations with status
@@ -271,13 +272,17 @@ class ParasoftAIAgent:
             logger.info("No justified violations to suppress")
             return None
         
-        # Group by file and line number
+        # Group by file, then by line number
         from collections import defaultdict
-        violations_by_location = defaultdict(list)
+        violations_by_file = defaultdict(lambda: defaultdict(list))
         
         for v in justified_violations:
-            key = (v['File'], v['Line number'])
-            violations_by_location[key].append(v['Violation ID'])
+            file = v['File']
+            line = v['Line number']
+            violations_by_file[file][line].append({
+                'id': v['Violation ID'],
+                'description': v.get('Violation', 'No description')
+            })
         
         # Generate suppress comments file
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -287,28 +292,60 @@ class ParasoftAIAgent:
             f.write(f"Parasoft Suppress Comments for {module_name}\n")
             f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write("="*80 + "\n\n")
-            f.write("Instructions:\n")
-            f.write("1. Add the 'parasoft-begin-suppress' comment BEFORE the line with the violation\n")
-            f.write("2. Add the 'parasoft-end-suppress' comment AFTER the line with the violation\n")
-            f.write("3. Update the reason reference as needed\n\n")
+            f.write("NEW INLINE FORMAT:\n")
+            f.write("1. Add inline suppress comment on the SAME LINE as violation\n")
+            f.write("2. Add violations reference section at top of each file\n")
+            f.write("3. Update justification text as needed\n\n")
+            f.write("Example:\n")
+            f.write("  void func(const int param) // parasoft-suppress CERT_C-DCL00-b-3 \"Reason: Module_c_REF_1\"\n\n")
             f.write("="*80 + "\n\n")
             
-            for (file, line), rule_ids in sorted(violations_by_location.items()):
-                # Remove duplicates and sort
-                unique_ids = sorted(set(rule_ids))
-                ids_str = ' '.join(unique_ids)
+            # Generate for each file
+            for file in sorted(violations_by_file.keys()):
+                f.write(f"\n{'='*80}\n")
+                f.write(f"FILE: {file}\n")
+                f.write(f"{'='*80}\n\n")
                 
-                # Generate reason reference based on module and file
-                reason_ref = f"{module_name}_Parasoft_REF_{line}"
+                # Get base filename for REF generation
+                base_filename = Path(file).stem
                 
-                f.write(f"File: {file}, Line: {line}\n")
-                f.write("-" * 80 + "\n")
-                f.write(f"/* parasoft-begin-suppress {ids_str} \"Reason: {reason_ref}\" */\n")
-                f.write(f"... (your code at line {line}) ...\n")
-                f.write(f"/* parasoft-end-suppress {ids_str} */\n")
-                f.write("\n")
+                # Generate violations reference section
+                f.write("--- VIOLATIONS REFERENCE SECTION (Add at top of file) ---\n")
+                f.write("/*" + "*"*77 + "\n")
+                f.write("**                      Parasoft violations Section" + " "*27 + "**\n")
+                f.write("*" + "*"*78 + "*/\n\n")
+                f.write("/*\n")
+                
+                ref_counter = 1
+                line_to_ref = {}
+                
+                # Generate references in sequence
+                for line in sorted(violations_by_file[file].keys()):
+                    violations_list = violations_by_file[file][line]
+                    ref_id = f"{base_filename}_c_REF_{ref_counter}"
+                    line_to_ref[line] = ref_id
+                    
+                    f.write(f"* #section {ref_id}\n")
+                    for v_info in violations_list:
+                        f.write(f"* Violates {v_info['id']}: {v_info['description']}\n")
+                    f.write(f"* Justification: [Add your justification here]\n")
+                    f.write("*\n")
+                    ref_counter += 1
+                
+                f.write("*/\n\n")
+                
+                # Generate inline suppressions for each line
+                f.write("--- INLINE SUPPRESS COMMENTS (Add to each line with violation) ---\n\n")
+                for line in sorted(violations_by_file[file].keys()):
+                    violations_list = violations_by_file[file][line]
+                    unique_ids = sorted(set([v['id'] for v in violations_list]))
+                    ids_str = ' '.join(unique_ids)
+                    ref_id = line_to_ref[line]
+                    
+                    f.write(f"Line {line}:\n")
+                    f.write(f"  // parasoft-suppress {ids_str} \"Reason: {ref_id}\"\n\n")
         
-        logger.info(f"Generated suppress comments for {len(violations_by_location)} locations")
+        logger.info(f"Generated inline suppress comments for {sum(len(lines) for lines in violations_by_file.values())} locations across {len(violations_by_file)} files")
         return str(output_path)
     
     def _generate_excel_report(self, violations, output_path, module_name):
