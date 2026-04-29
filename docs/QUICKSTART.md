@@ -74,8 +74,8 @@ After analysis completes, choose:
 
 ## 30-Second Quick Start
 
-1. Place `report_dev1.html` in the tool folder
-2. Run `Run.bat`
+1. Place `report_dev1.html` in the `parasoftReport\` folder
+2. Run `batch_support\Run.bat`
 3. Enter your module name (e.g., "Mka")
 4. Check results in `knowledge_base/` and `fixes/` directories
 
@@ -135,7 +135,7 @@ python src\run_query.py knowledge_base --interactive
 ### Use Case 4: Track Progress Over Time
 ```bash
 # Run analysis periodically
-python src\run_agent.py report_dev1_latest.html Mka
+python src\run_agent.py parasoftReport\report_dev1_latest.html Mka
 
 # The knowledge database will automatically:
 # - Track new violations
@@ -191,13 +191,13 @@ python src\generate_cert_misra_report.py Tls
 
 ```bash
 # Full analysis with all features
-python src\run_agent.py report_dev1.html Mka
+python src\run_agent.py parasoftReport\report_dev1.html Mka
 
 # Analysis without fixes
-python src\run_agent.py report_dev1.html Mka --no-fixes
+python src\run_agent.py parasoftReport\report_dev1.html Mka --no-fixes
 
 # Analysis without justifications
-python src\run_agent.py report_dev1.html Mka --no-justifications
+python src\run_agent.py parasoftReport\report_dev1.html Mka --no-justifications
 
 # Interactive query tool
 python src\run_query.py knowledge_base --interactive
@@ -227,7 +227,7 @@ python src\run_query.py knowledge_base --excel output.xlsx
 |---------|----------|
 | Dependencies not found | `pip install -r requirements.txt` |
 | Git not found | Install from https://git-scm.com/ |
-| No violations found | Verify report_dev1.html is valid |
+| No violations found | Verify parasoftReport\report_dev1.html is valid |
 | Permission errors | Run as administrator or change workspace |
 
 ---

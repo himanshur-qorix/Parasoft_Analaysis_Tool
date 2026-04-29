@@ -8,6 +8,7 @@ Organization: Qorix India Pvt Ltd
 Version: 3.0.0
 """
 
+import sys
 import logging
 import json
 from pathlib import Path
@@ -16,6 +17,17 @@ from datetime import datetime
 from KnowledgeDatabaseManager import KnowledgeDatabaseManager
 from OllamaIntegration import OllamaIntegration
 from ParasoftRulesParser import ParasoftRulesParser
+
+# Configure UTF-8 encoding for Windows console
+if sys.platform == 'win32':
+    try:
+        import ctypes
+        kernel32 = ctypes.windll.kernel32
+        kernel32.SetConsoleOutputCP(65001)  # UTF-8
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+    except:
+        pass
 
 logger = logging.getLogger(__name__)
 

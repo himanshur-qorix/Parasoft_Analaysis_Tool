@@ -27,6 +27,16 @@ class KnowledgeDatabaseManager:
         self.current_module = None
         self.database = {}
     
+    @property
+    def kb_dir(self) -> Path:
+        """Alias for knowledge_base_dir for backward compatibility"""
+        return self.knowledge_base_dir
+    
+    @property
+    def module_name(self) -> Optional[str]:
+        """Alias for current_module for backward compatibility"""
+        return self.current_module
+    
     def get_database_path(self, module_name: str) -> Path:
         """Get the path to a module's knowledge database"""
         return self.knowledge_base_dir / f"{module_name}_KnowledgeDatabase.json"

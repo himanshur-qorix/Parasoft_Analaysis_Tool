@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-04-22T15:18:25.791471",
-  "ai_powered": false,
+  "timestamp": "2026-04-29T19:08:46.917805",
+  "ai_powered": true,
   "summary": {
     "total_modules": 0,
     "total_justifications": 0,
@@ -22,6 +22,6 @@
   "recommendations": [
     "\u2705 Good: Only 0/0 justifications use generic references. Most justifications provide meaningful context.",
     "\ud83d\udccc Most frequently justified rules: . Consider documenting these as accepted deviations in project standards.",
-    "\ud83d\udca1 Enable Ollama AI for deeper quality analysis and intelligent categorization."
+    "\ud83e\udd16 AI few-shot learning is analyzing 0 examples. Quality improvements in justifications will directly improve AI output."
   ]
 }

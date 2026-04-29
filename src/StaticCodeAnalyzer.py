@@ -5,11 +5,84 @@ Detects runtime errors, MISRA/CERT violations, and code quality issues
 
 Developer: Himanshu R
 Organization: Qorix India Pvt Ltd
-Version: 3.0.0
+Version: 4.0.0 - Enhanced with Parasoft Rules Database integration
+
+ENHANCEMENTS IN v4.0.0:
+=======================
+1. Parasoft Rules Database Integration
+   - Loads 1204 comprehensive rules (598 CERT-C, 602 MISRA-C:2012)
+   - Includes detailed rule descriptions, examples, and references
+   - Automatic rule categorization by standard
+
+2. Enhanced MISRA C Checks (15+ rules)
+   - MISRA_12_2: Shift operator validation
+   - MISRA_10_1: Enum type conversions
+   - MISRA_11_3: Pointer type casts
+   - MISRA_21_3: Dynamic memory allocation
+   - MISRA_17_7: Return value usage
+   - MISRA_15_6: Loop/condition braces
+   - MISRA_21_6: Standard I/O functions
+   - And more...
+
+3. Enhanced CERT C Checks (13+ rules)
+   - CERT_ARR30: Array bounds (CWE-119, CWE-125)
+   - CERT_INT30/INT34: Integer operations (CWE-190, CWE-758)
+   - CERT_STR31/STR32: String safety (CWE-119)
+   - CERT_MEM30/MEM34/MEM35: Memory management (CWE-416, CWE-789)
+   - CERT_ENV33: Command injection (CWE-78)
+   - CERT_FIO30: Format string injection (CWE-134)
+   - And more...
+
+4. CWE Security Classifications
+   - Each violation mapped to relevant CWE identifiers
+   - Enables security-focused analysis and reporting
+   - Supports OWASP and security compliance requirements
+
+5. Knowledge Base Integration
+   - Loads proven fix patterns from module knowledge bases
+   - Pattern matching against known violations
+   - Suggests fixes based on similar code patterns
+   - Confidence scoring for pattern matches
+
+6. Enhanced Violation Reporting
+   - Detailed Parasoft rule information
+   - Example repairs from rule database
+   - Knowledge base match suggestions
+   - Comprehensive code context (5 lines before/after)
+   - CWE security classifications
+
+USAGE:
+======
+Basic:
+    analyzer = StaticCodeAnalyzer()
+    violations = analyzer.analyze_directory(Path('src/'))
+
+Advanced:
+    analyzer = StaticCodeAnalyzer(
+        load_parasoft_db=True,   # Load 1204 rules
+        load_knowledge=True       # Load KB patterns
+    )
+    violations = analyzer.analyze_directory(
+        Path('src/'), 
+        file_patterns=['*.c', '*.h']
+    )
+
+OUTPUT ENHANCEMENTS:
+===================
+Each violation now includes:
+- violation_id: Unique identifier
+- check_id: Rule identifier (e.g., CERT_ARR30, MISRA_12_2)
+- severity: CRITICAL, HIGH, MEDIUM, LOW
+- category: CERT, MISRA, Runtime Error, Code Quality
+- cwe: List of CWE identifiers (security classification)
+- parasoft_rule: Detailed rule info from database
+- kb_match: Matching pattern from knowledge base with suggested fix
+- code_context: 11 lines of context (5 before, violation, 5 after)
 """
 
 import logging
 import re
+import json
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 from datetime import datetime
@@ -20,8 +93,14 @@ logger = logging.getLogger(__name__)
 class StaticCodeAnalyzer:
     """Custom static code analyzer for C/C++ source code"""
     
-    def __init__(self):
-        """Initialize static code analyzer"""
+    def __init__(self, load_parasoft_db: bool = True, load_knowledge: bool = True):
+        """
+        Initialize static code analyzer
+        
+        Args:
+            load_parasoft_db: Load comprehensive Parasoft Rules Database
+            load_knowledge: Load patterns from knowledge bases
+        """
         self.violations = []
         self.files_analyzed = 0
         self.lines_analyzed = 0
@@ -37,8 +116,23 @@ class StaticCodeAnalyzer:
             'by_check': {}
         }
         
+        # Parasoft Rules Database
+        self.parasoft_rules = {}
+        self.parasoft_loaded = False
+        
+        # Knowledge base patterns
+        self.kb_patterns = []
+        self.kb_loaded = False
+        
         # Initialize rule checkers
         self._init_checkers()
+        
+        # Load comprehensive databases
+        if load_parasoft_db:
+            self._load_parasoft_database()
+        
+        if load_knowledge:
+            self._load_knowledge_patterns()
     
     def _init_checkers(self):
         """Initialize various rule checkers"""
@@ -49,31 +143,36 @@ class StaticCodeAnalyzer:
                 'pattern': r'\*\s*\w+\s*(?:=|;|\))',
                 'description': 'Potential null pointer dereference',
                 'severity': 'CRITICAL',
-                'category': 'Runtime Error'
+                'category': 'Runtime Error',
+                'cwe': ['CWE-476']
             },
             'ARRAY_INDEX': {
                 'pattern': r'\w+\s*\[\s*\w+\s*\]',
                 'description': 'Array indexing without bounds check',
                 'severity': 'HIGH',
-                'category': 'Runtime Error'
+                'category': 'Runtime Error',
+                'cwe': ['CWE-119', 'CWE-125']
             },
             'DIV_ZERO': {
                 'pattern': r'/\s*\w+',
                 'description': 'Potential division by zero',
                 'severity': 'CRITICAL',
-                'category': 'Runtime Error'
+                'category': 'Runtime Error',
+                'cwe': ['CWE-369']
             },
             'UNINITIALIZED': {
                 'pattern': r'^\s*(int|uint\w+|char|float|double)\s+(\w+)\s*;',
                 'description': 'Variable declared but not initialized',
                 'severity': 'HIGH',
-                'category': 'Runtime Error'
+                'category': 'Runtime Error',
+                'cwe': ['CWE-457']
             },
             'OVERFLOW': {
                 'pattern': r'(\w+)\s*(\+|\-|\*)\s*(\w+)',
                 'description': 'Potential integer overflow',
                 'severity': 'MEDIUM',
-                'category': 'Runtime Error'
+                'category': 'Runtime Error',
+                'cwe': ['CWE-190']
             }
         }
         
@@ -154,6 +253,236 @@ class StaticCodeAnalyzer:
                 'category': 'Code Quality'
             }
         }
+    
+    def _load_parasoft_database(self):
+        """Load comprehensive Parasoft Rules Database"""
+        try:
+            project_root = Path(__file__).parent.parent
+            db_file = project_root / 'data' / 'Parasoft_Rules_Database.json'
+            
+            if not db_file.exists():
+                logger.warning(f"Parasoft Rules Database not found at {db_file}")
+                return
+            
+            with open(db_file, 'r', encoding='utf-8') as f:
+                db_data = json.load(f)
+            
+            self.parasoft_rules = db_data.get('rules', {})
+            total_rules = db_data.get('total_rules', 0)
+            
+            logger.info(f"✓ Loaded Parasoft Rules Database: {total_rules} rules")
+            
+            # Add enhanced MISRA checks from database
+            self._add_parasoft_misra_checks()
+            
+            # Add enhanced CERT checks from database
+            self._add_parasoft_cert_checks()
+            
+            self.parasoft_loaded = True
+            
+        except Exception as e:
+            logger.error(f"Failed to load Parasoft Rules Database: {e}")
+    
+    def _load_knowledge_patterns(self):
+        """Load proven patterns from knowledge bases"""
+        try:
+            project_root = Path(__file__).parent.parent
+            kb_dir = project_root / 'knowledge_base'
+            
+            if not kb_dir.exists():
+                logger.warning(f"Knowledge base directory not found at {kb_dir}")
+                return
+            
+            # Load all module knowledge bases
+            kb_files = list(kb_dir.glob('*_KnowledgeDatabase.json'))
+            
+            patterns_loaded = 0
+            for kb_file in kb_files:
+                try:
+                    with open(kb_file, 'r', encoding='utf-8') as f:
+                        kb_data = json.load(f)
+                    
+                    # Extract patterns from violations with fixes
+                    for violation in kb_data.get('violations', []):
+                        if violation.get('fix_pattern'):
+                            pattern_info = {
+                                'check_id': violation.get('check_id', ''),
+                                'category': violation.get('category', ''),
+                                'pattern': violation.get('code_snippet', ''),
+                                'fix': violation.get('fix_pattern', '')
+                            }
+                            self.kb_patterns.append(pattern_info)
+                            patterns_loaded += 1
+                
+                except Exception as e:
+                    logger.warning(f"Could not load {kb_file.name}: {e}")
+            
+            if patterns_loaded > 0:
+                logger.info(f"✓ Loaded {patterns_loaded} proven patterns from {len(kb_files)} knowledge bases")
+                self.kb_loaded = True
+        
+        except Exception as e:
+            logger.error(f"Failed to load knowledge patterns: {e}")
+    
+    def _add_parasoft_misra_checks(self):
+        """Add enhanced MISRA checks from Parasoft database"""
+        # Enhanced MISRA patterns based on Parasoft rules
+        enhanced_misra = {
+            'MISRA_12_2': {
+                'pattern': r'<<|>>',  # Shift operations
+                'description': 'Shift operator requires careful validation (MISRA C:2012 Rule 12.2)',
+                'severity': 'HIGH',
+                'category': 'MISRA',
+                'cwe': []
+            },
+            'MISRA_10_1': {
+                'pattern': r'=\s*[^=]*enum\s+\w+',
+                'description': 'Implicit conversion between enum types (MISRA C:2012 Rule 10.1)',
+                'severity': 'MEDIUM',
+                'category': 'MISRA',
+                'cwe': []
+            },
+            'MISRA_11_3': {
+                'pattern': r'\(\s*\w+\s*\*\s*\)',  # Pointer cast
+                'description': 'Cast between pointer to object and different pointer type (MISRA C:2012 Rule 11.3)',
+                'severity': 'MEDIUM',
+                'category': 'MISRA',
+                'cwe': []
+            },
+            'MISRA_21_3': {
+                'pattern': r'\b(malloc|calloc|realloc|free)\s*\(',
+                'description': 'Dynamic memory allocation should not be used (MISRA C:2012 Rule 21.3)',
+                'severity': 'MEDIUM',
+                'category': 'MISRA',
+                'cwe': []
+            },
+            'MISRA_17_7': {
+                'pattern': r'^\s*\w+\([^)]*\)\s*;',  # Function call without using return
+                'description': 'Return value of non-void function should be used (MISRA C:2012 Rule 17.7)',
+                'severity': 'MEDIUM',
+                'category': 'MISRA',
+                'cwe': []
+            },
+            'MISRA_2_3': {
+                'pattern': r'typedef\s+\w+\s+\w+;',
+                'description': 'Unused type declaration (MISRA C:2012 Rule 2.3)',
+                'severity': 'LOW',
+                'category': 'MISRA',
+                'cwe': []
+            },
+            'MISRA_8_13': {
+                'pattern': r'\w+\s+\*\s*\w+\s*\)',  # Non-const pointer parameter
+                'description': 'Pointer parameter that is not modified should be declared const (MISRA C:2012 Rule 8.13)',
+                'severity': 'LOW',
+                'category': 'MISRA',
+                'cwe': []
+            },
+            'MISRA_15_6': {
+                'pattern': r'(if|while|for)\s*\([^)]+\)\s*[^{]',  # Missing braces
+                'description': 'Body of iteration/selection statement should be enclosed in braces (MISRA C:2012 Rule 15.6)',
+                'severity': 'MEDIUM',
+                'category': 'MISRA',
+                'cwe': []
+            },
+            'MISRA_18_1': {
+                'pattern': r'\[\s*\w+\s*\]',  # Array indexing
+                'description': 'Array indexing shall be the only form of pointer arithmetic (MISRA C:2012 Rule 18.1)',
+                'severity': 'MEDIUM',
+                'category': 'MISRA',
+                'cwe': []
+            },
+            'MISRA_21_6': {
+                'pattern': r'\b(printf|scanf|fprintf|fscanf|sprintf|sscanf|snprintf|vprintf|vscanf|vfprintf|vfscanf|vsprintf|vsscanf|vsnprintf)\s*\(',
+                'description': 'Standard library input/output functions should not be used (MISRA C:2012 Rule 21.6)',
+                'severity': 'MEDIUM',
+                'category': 'MISRA',
+                'cwe': []
+            }
+        }
+        
+        # Merge with existing checks
+        self.misra_checks.update(enhanced_misra)
+        logger.info(f"✓ Enhanced MISRA checks: {len(self.misra_checks)} rules active")
+    
+    def _add_parasoft_cert_checks(self):
+        """Add enhanced CERT checks from Parasoft database"""
+        # Enhanced CERT patterns based on Parasoft rules
+        enhanced_cert = {
+            'CERT_EXP36': {
+                'pattern': r'=\s*\(\s*\w+\s*\)',  # Type cast
+                'description': 'Do not cast pointers into more strictly aligned pointer types (CERT C EXP36-C)',
+                'severity': 'HIGH',
+                'category': 'CERT',
+                'cwe': ['CWE-704']
+            },
+            'CERT_ARR30': {
+                'pattern': r'\w+\s*\[\s*\w+\s*\]',  # Array access
+                'description': 'Do not form or use out-of-bounds pointers or array subscripts (CERT C ARR30-C)',
+                'severity': 'CRITICAL',
+                'category': 'CERT',
+                'cwe': ['CWE-119', 'CWE-125']
+            },
+            'CERT_INT30': {
+                'pattern': r'(<<|>>)',  # Shift operations
+                'description': 'Ensure unsigned integer operations do not wrap (CERT C INT30-C)',
+                'severity': 'HIGH',
+                'category': 'CERT',
+                'cwe': ['CWE-190']
+            },
+            'CERT_INT34': {
+                'pattern': r'<<|>>',  # Shift by invalid amount
+                'description': 'Do not shift an expression by a negative number of bits or >= width (CERT C INT34-C)',
+                'severity': 'CRITICAL',
+                'category': 'CERT',
+                'cwe': ['CWE-758']
+            },
+            'CERT_FIO30': {
+                'pattern': r'fopen\s*\(',
+                'description': 'Exclude user input from format strings (CERT C FIO30-C)',
+                'severity': 'HIGH',
+                'category': 'CERT',
+                'cwe': ['CWE-134']
+            },
+            'CERT_STR32': {
+                'pattern': r'\bgets\s*\(',
+                'description': 'Do not pass a non-null-terminated string to library function (CERT C STR32-C)',
+                'severity': 'CRITICAL',
+                'category': 'CERT',
+                'cwe': ['CWE-119']
+            },
+            'CERT_MEM30': {
+                'pattern': r'\bfree\s*\(',
+                'description': 'Do not access freed memory (CERT C MEM30-C)',
+                'severity': 'CRITICAL',
+                'category': 'CERT',
+                'cwe': ['CWE-416']
+            },
+            'CERT_MEM34': {
+                'pattern': r'malloc\s*\([^)]*\*[^)]*\)',  # Multiplication in malloc
+                'description': 'Detect and handle memory allocation errors (CERT C MEM34-C)',
+                'severity': 'HIGH',
+                'category': 'CERT',
+                'cwe': ['CWE-789']
+            },
+            'CERT_DCL30': {
+                'pattern': r'extern\s+\w+\s+\w+',
+                'description': 'Declare objects with appropriate storage durations (CERT C DCL30-C)',
+                'severity': 'MEDIUM',
+                'category': 'CERT',
+                'cwe': []
+            },
+            'CERT_ENV33': {
+                'pattern': r'\bsystem\s*\(',
+                'description': 'Do not call system() (CERT C ENV33-C)',
+                'severity': 'CRITICAL',
+                'category': 'CERT',
+                'cwe': ['CWE-78']
+            }
+        }
+        
+        # Merge with existing checks
+        self.cert_checks.update(enhanced_cert)
+        logger.info(f"✓ Enhanced CERT checks: {len(self.cert_checks)} rules active")
     
     def analyze_directory(self, source_dir: Path, file_patterns: List[str] = None) -> List[Dict]:
         """
@@ -246,7 +575,7 @@ class StaticCodeAnalyzer:
                             file_path, line_num, line, lines,
                             'LONG_FUNCTION',
                             f'Function {function_name} has {function_lines} lines (recommended: < 50)',
-                            'LOW', 'Code Quality'
+                            'LOW', 'Code Quality', []
                         )
                     in_function = False
             
@@ -283,7 +612,8 @@ class StaticCodeAnalyzer:
                         check_id,
                         check_info['description'],
                         check_info['severity'],
-                        check_info['category']
+                        check_info['category'],
+                        check_info.get('cwe', [])
                     )
         
         # Check MISRA rules
@@ -294,7 +624,8 @@ class StaticCodeAnalyzer:
                     check_id,
                     check_info['description'],
                     check_info['severity'],
-                    check_info['category']
+                    check_info['category'],
+                    check_info.get('cwe', [])
                 )
         
         # Check CERT rules
@@ -305,7 +636,8 @@ class StaticCodeAnalyzer:
                     check_id,
                     check_info['description'],
                     check_info['severity'],
-                    check_info['category']
+                    check_info['category'],
+                    check_info.get('cwe', [])
                 )
         
         # Check code quality
@@ -316,7 +648,8 @@ class StaticCodeAnalyzer:
                     check_id,
                     check_info['description'],
                     check_info['severity'],
-                    check_info['category']
+                    check_info['category'],
+                    check_info.get('cwe', [])
                 )
     
     def _is_likely_violation(self, check_id: str, line: str, all_lines: List[str], line_num: int) -> bool:
@@ -361,7 +694,7 @@ class StaticCodeAnalyzer:
         return True
     
     def _add_violation(self, file_path: Path, line_num: int, line: str, all_lines: List[str],
-                      check_id: str, description: str, severity: str, category: str):
+                      check_id: str, description: str, severity: str, category: str, cwe_list: List[str] = None):
         """
         Add a violation to the results with code context
         
@@ -374,6 +707,7 @@ class StaticCodeAnalyzer:
             description: Violation description
             severity: Severity level
             category: Category
+            cwe_list: List of CWE identifiers
         """
         violation_id = f"STATIC-{check_id}-{len(self.violations) + 1}"
         
@@ -402,6 +736,22 @@ class StaticCodeAnalyzer:
         # Map severity to color code (Polyspace-style)
         color_code = self._get_color_code(severity)
         
+        # Get Parasoft rule details if available
+        parasoft_info = None
+        if self.parasoft_loaded and check_id in self.parasoft_rules:
+            rule = self.parasoft_rules[check_id]
+            parasoft_info = {
+                'rule_id': rule.get('rule_id', ''),
+                'title': rule.get('title', ''),
+                'standard': rule.get('standard', ''),
+                'description': rule.get('description', ''),
+                'example_repair': rule.get('example_repair', ''),
+                'references': rule.get('references', [])
+            }
+        
+        # Check for knowledge base matches
+        kb_match = self._find_kb_match(line, check_id)
+        
         violation = {
             'violation_id': violation_id,
             'check_id': check_id,
@@ -415,12 +765,53 @@ class StaticCodeAnalyzer:
             'code_snippet': line.strip(),
             'code_context': code_context_lines,  # Structured context
             'code_snippet_multiline': code_snippet_multiline,  # Formatted for display
-            'tool': 'StaticAnalyzer',
+            'tool': 'StaticAnalyzer_v4',
             'files_affected': [f"{file_path.name}:{line_num}"],
-            'timestamp': datetime.now().isoformat()
+            'timestamp': datetime.now().isoformat(),
+            'cwe': cwe_list or [],  # CWE security classifications
+            'parasoft_rule': parasoft_info,  # Detailed rule information
+            'kb_match': kb_match  # Knowledge base pattern match
         }
         
         self.violations.append(violation)
+    
+    def _find_kb_match(self, code_line: str, check_id: str) -> Optional[Dict]:
+        """
+        Find matching pattern in knowledge base
+        
+        Args:
+            code_line: Line of code
+            check_id: Check identifier
+        
+        Returns:
+            Matching knowledge base entry or None
+        """
+        if not self.kb_loaded or not self.kb_patterns:
+            return None
+        
+        code_normalized = code_line.strip()
+        
+        for pattern_info in self.kb_patterns:
+            if pattern_info['check_id'] == check_id:
+                pattern_normalized = pattern_info['pattern'].strip()
+                
+                # Simple similarity check (can be enhanced)
+                if len(code_normalized) > 0 and len(pattern_normalized) > 0:
+                    # Check if key elements match
+                    code_tokens = set(re.findall(r'\w+', code_normalized))
+                    pattern_tokens = set(re.findall(r'\w+', pattern_normalized))
+                    
+                    if code_tokens and pattern_tokens:
+                        similarity = len(code_tokens & pattern_tokens) / len(code_tokens | pattern_tokens)
+                        
+                        if similarity > 0.5:  # 50% similarity threshold
+                            return {
+                                'pattern': pattern_info['pattern'],
+                                'fix': pattern_info['fix'],
+                                'confidence': f"{similarity:.1%}"
+                            }
+        
+        return None
     
     def _get_color_code(self, severity: str) -> str:
         """

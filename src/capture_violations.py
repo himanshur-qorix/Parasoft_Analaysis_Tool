@@ -18,6 +18,19 @@ import os
 import sys
 import json
 from pathlib import Path
+
+# Configure UTF-8 encoding for Windows console to support emoji characters
+if sys.platform == 'win32':
+    try:
+        import ctypes
+        kernel32 = ctypes.windll.kernel32
+        kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except Exception:
+        import codecs
+        sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'replace')
+        sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'replace')
 from datetime import datetime
 from typing import List, Dict, Tuple
 import pandas as pd

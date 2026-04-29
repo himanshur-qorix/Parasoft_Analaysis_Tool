@@ -1,84 +1,84 @@
-# Parasoft AI Agent - Architecture & Design
+﻿# Parasoft AI Agent - Architecture & Design
 
 ## System Architecture
 
 ```
-┌───────────────────────────────────────────────────────────────────┐
-│                     PARASOFT AI AGENT v2.0.0                      │
-│                  (Intelligent Violation Analysis System)          │
-└───────────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                     PARASOFT AI AGENT v2.0.0                      â”‚
+â”‚                  (Intelligent Violation Analysis System)          â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 
-┌─────────────────────┐
-│   INPUT LAYER       │
-├─────────────────────┤
-│ • report_dev1.html  │ ◄─── Parasoft HTML Report
-│ • Module Name       │ ◄─── User Input (e.g., "Mka")
-│ • Config.json       │ ◄─── Configuration Settings
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    PROCESSING LAYER                             │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ┌────────────────────────────────────────────────────────┐    │
-│  │         ParasoftAIAgent.py (Orchestrator)              │    │
-│  │  • Initializes workspace                               │    │
-│  │  • Detects Git repository                              │    │
-│  │  • Coordinates all components                          │    │
-│  │  • Manages workflow                                    │    │
-│  └────────────┬───────────────────────────────────────────┘    │
-│               │                                                 │
-│    ┌──────────┼──────────┬─────────────────┬─────────────┐     │
-│    │          │          │                 │             │     │
-│    ▼          ▼          ▼                 ▼             ▼     │
-│  ┌──────┐ ┌──────┐ ┌──────────┐  ┌─────────────┐  ┌────────┐  │
-│  │ Git  │ │Parse │ │Knowledge │  │ Violation   │  │  Code  │  │
-│  │Check │ │Report│ │Database  │  │  Analyzer   │  │  Fix   │  │
-│  │      │ │      │ │Manager   │  │             │  │Generate│  │
-│  └──────┘ └───┬──┘ └────┬─────┘  └──────┬──────┘  └───┬────┘  │
-│               │         │               │              │        │
-│         ┌─────┴─────────┴───────────────┴──────────────┘        │
-│         │                                                        │
-└─────────┼────────────────────────────────────────────────────────┘
-          │
-          ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    STORAGE LAYER                                │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ┌────────────────────┐  ┌─────────────────┐  ┌─────────────┐  │
-│  │  knowledge_base/   │  │    reports/     │  │   fixes/    │  │
-│  │  ──────────────────│  │  ───────────────│  │  ────────────│  │
-│  │  • Mka_KB.json     │  │  • summary.json │  │  • Mka/     │  │
-│  │  • ModB_KB.json    │  │  • statistics   │  │    - fixes  │  │
-│  │  • Violations DB   │  │  • Git info     │  │    - justs  │  │
-│  └────────────────────┘  └─────────────────┘  └─────────────┘  │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-          │
-          ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    QUERY & OUTPUT LAYER                         │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│        ┌─────────────────────────────────────────┐              │
-│        │ KnowledgeDatabaseQueryTool.py           │              │
-│        │  • Interactive queries                  │              │
-│        │  • Filtering & searching                │              │
-│        │  • Statistics generation                │              │
-│        │  • Export capabilities                  │              │
-│        └────────────┬────────────────────────────┘              │
-│                     │                                           │
-│         ┌───────────┼───────────┐                              │
-│         │           │           │                              │
-│         ▼           ▼           ▼                              │
-│    ┌────────┐  ┌────────┐  ┌────────┐                         │
-│    │ Excel  │  │  JSON  │  │Console │                         │
-│    │ Export │  │ Report │  │ Output │                         │
-│    └────────┘  └────────┘  └────────┘                         │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚   INPUT LAYER       â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ â€¢ report_dev1.html  â”‚ â—„â”€â”€â”€ Parasoft HTML Report
+â”‚ â€¢ Module Name       â”‚ â—„â”€â”€â”€ User Input (e.g., "Mka")
+â”‚ â€¢ Config.json       â”‚ â—„â”€â”€â”€ Configuration Settings
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+           â”‚
+           â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                    PROCESSING LAYER                             â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚                                                                 â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”‚
+â”‚  â”‚         ParasoftAIAgent.py (Orchestrator)              â”‚    â”‚
+â”‚  â”‚  â€¢ Initializes workspace                               â”‚    â”‚
+â”‚  â”‚  â€¢ Detects Git repository                              â”‚    â”‚
+â”‚  â”‚  â€¢ Coordinates all components                          â”‚    â”‚
+â”‚  â”‚  â€¢ Manages workflow                                    â”‚    â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â”‚
+â”‚               â”‚                                                 â”‚
+â”‚    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”     â”‚
+â”‚    â”‚          â”‚          â”‚                 â”‚             â”‚     â”‚
+â”‚    â–¼          â–¼          â–¼                 â–¼             â–¼     â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â” â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+â”‚  â”‚ Git  â”‚ â”‚Parse â”‚ â”‚Knowledge â”‚  â”‚ Violation   â”‚  â”‚  Code  â”‚  â”‚
+â”‚  â”‚Check â”‚ â”‚Reportâ”‚ â”‚Database  â”‚  â”‚  Analyzer   â”‚  â”‚  Fix   â”‚  â”‚
+â”‚  â”‚      â”‚ â”‚      â”‚ â”‚Manager   â”‚  â”‚             â”‚  â”‚Generateâ”‚  â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”˜ â””â”€â”€â”€â”¬â”€â”€â”˜ â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”¬â”€â”€â”€â”€â”˜  â”‚
+â”‚               â”‚         â”‚               â”‚              â”‚        â”‚
+â”‚         â”Œâ”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜        â”‚
+â”‚         â”‚                                                        â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+          â”‚
+          â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                    STORAGE LAYER                                â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚                                                                 â”‚
+â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+â”‚  â”‚  knowledge_base/   â”‚  â”‚    reports/     â”‚  â”‚   fixes/    â”‚  â”‚
+â”‚  â”‚  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”‚  â”‚  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”‚  â”‚  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”‚  â”‚
+â”‚  â”‚  â€¢ Mka_KB.json     â”‚  â”‚  â€¢ summary.json â”‚  â”‚  â€¢ Mka/     â”‚  â”‚
+â”‚  â”‚  â€¢ ModB_KB.json    â”‚  â”‚  â€¢ statistics   â”‚  â”‚    - fixes  â”‚  â”‚
+â”‚  â”‚  â€¢ Violations DB   â”‚  â”‚  â€¢ Git info     â”‚  â”‚    - justs  â”‚  â”‚
+â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
+â”‚                                                                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+          â”‚
+          â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚                    QUERY & OUTPUT LAYER                         â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚                                                                 â”‚
+â”‚        â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”              â”‚
+â”‚        â”‚ KnowledgeDatabaseQueryTool.py           â”‚              â”‚
+â”‚        â”‚  â€¢ Interactive queries                  â”‚              â”‚
+â”‚        â”‚  â€¢ Filtering & searching                â”‚              â”‚
+â”‚        â”‚  â€¢ Statistics generation                â”‚              â”‚
+â”‚        â”‚  â€¢ Export capabilities                  â”‚              â”‚
+â”‚        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜              â”‚
+â”‚                     â”‚                                           â”‚
+â”‚         â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                              â”‚
+â”‚         â”‚           â”‚           â”‚                              â”‚
+â”‚         â–¼           â–¼           â–¼                              â”‚
+â”‚    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”                         â”‚
+â”‚    â”‚ Excel  â”‚  â”‚  JSON  â”‚  â”‚Console â”‚                         â”‚
+â”‚    â”‚ Export â”‚  â”‚ Report â”‚  â”‚ Output â”‚                         â”‚
+â”‚    â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”˜                         â”‚
+â”‚                                                                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
@@ -192,51 +192,51 @@
 ## Data Flow
 
 ```
-┌─────────────┐
-│   User      │
-└──────┬──────┘
-       │ Runs: python src\run_agent.py report.html Mka
-       ▼
-┌─────────────────────────┐
-│  ParasoftAIAgent        │
-│  1. Check Git           │
-│  2. Parse report        │◄── ParasoftAnalysisTool.py
-│  3. Analyze violations  │──► ViolationAnalyzer.py
-└────────┬────────────────┘
-         │
-         ▼
-┌────────────────────────────────────┐
-│  ViolationAnalyzer                 │
-│  • Categorize violations           │
-│  • Detect patterns                 │
-│  • Estimate complexity             │
-└────────┬───────────────────────────┘
-         │
-         ▼
-┌────────────────────────────────────┐
-│  KnowledgeDatabaseManager          │
-│  • Load existing DB                │
-│  • Add new violations              │
-│  • Update occurrence counts        │
-│  • Save updated DB                 │
-└────────┬───────────────────────────┘
-         │
-         ▼
-┌────────────────────────────────────┐
-│  CodeFixGenerator                  │
-│  • Generate fix suggestions        │
-│  • Create justifications           │
-│  • Save to files                   │
-└────────┬───────────────────────────┘
-         │
-         ▼
-┌─────────────────────────┐
-│  OUTPUT                 │
-│  • Knowledge DB         │
-│  • Analysis summary     │
-│  • Fixes file           │
-│  • Justifications file  │
-└─────────────────────────┘
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚   User      â”‚
+â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜
+       â”‚ Runs: python src\run_agent.py report.html Mka
+       â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  ParasoftAIAgent        â”‚
+â”‚  1. Check Git           â”‚
+â”‚  2. Parse report        â”‚â—„â”€â”€ ParasoftAnalysisTool.py
+â”‚  3. Analyze violations  â”‚â”€â”€â–º ViolationAnalyzer.py
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚
+         â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  ViolationAnalyzer                 â”‚
+â”‚  â€¢ Categorize violations           â”‚
+â”‚  â€¢ Detect patterns                 â”‚
+â”‚  â€¢ Estimate complexity             â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚
+         â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  KnowledgeDatabaseManager          â”‚
+â”‚  â€¢ Load existing DB                â”‚
+â”‚  â€¢ Add new violations              â”‚
+â”‚  â€¢ Update occurrence counts        â”‚
+â”‚  â€¢ Save updated DB                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚
+         â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  CodeFixGenerator                  â”‚
+â”‚  â€¢ Generate fix suggestions        â”‚
+â”‚  â€¢ Create justifications           â”‚
+â”‚  â€¢ Save to files                   â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚
+         â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  OUTPUT                 â”‚
+â”‚  â€¢ Knowledge DB         â”‚
+â”‚  â€¢ Analysis summary     â”‚
+â”‚  â€¢ Fixes file           â”‚
+â”‚  â€¢ Justifications file  â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
@@ -414,3 +414,227 @@ def test_violation_categorization():
 
 **For implementation details, refer to source code docstrings and inline comments.**
 
+
+- Database caching for repeated queries
+- Batch processing for large codebases
+
+---
+
+## Project Structure
+
+### Folder Organization
+
+```
+Parasoft_Analaysis_Tool/
+│
+├── scripts/                         # Scripts & Launchers
+│   └── Launch_GUI.bat                # GUI Launcher
+│
+├── batch_support/                   # Batch Files  
+│   ├── Run.bat                       # Main batch launcher
+│   ├── Generate_Code_Fixes.bat       # Fix generation
+│   ├── Apply_Suppressions.bat        # Suppress comment applicator
+│   ├── Run_Static_Analyzer.bat       # Static analyzer
+│   ├── Build_Parasoft_Rules_Database.bat
+│   ├── Consolidate_Knowledge.bat
+│   ├── Learn_Justification_Patterns.bat
+│   └── Query_Master_Knowledge.bat
+│
+├── src/                              # Source Code
+│   ├── parasoft_gui.py               # GUI Application
+│   ├── ParasoftAIAgent.py            # Main orchestrator
+│   ├── KnowledgeDatabaseManager.py   # Database management
+│   ├── ViolationAnalyzer.py          # Analysis engine
+│   ├── CodeFixGenerator.py           # Fix generation
+│   ├── StaticCodeAnalyzer.py         # Static analyzer
+│   ├── ViolationHistoryManager.py    # History & RAG
+│   └── run_agent.py                  # Main launcher
+│
+├── docs/                             # Documentation (6 core + 4 ref)
+│   ├── QUICKSTART.md                 # Getting started
+│   ├── GUI_GUIDE.md                  # GUI walkthrough
+│   ├── AI_GUIDE.md                   # AI features
+│   ├── KNOWLEDGE_BASE_GUIDE.md       # KB & learning
+│   ├── STATIC_ANALYSIS.md            # Analysis features
+│   ├── ARCHITECTURE.md               # This file
+│   ├── INDEX.md                      # Navigation
+│   ├── GUI_QUICK_REFERENCE.md        # Quick ref
+│   ├── BATCH_FILES_GUIDE.md          # Batch commands
+│   └── EXAMPLE_WORKFLOW.md           # Examples
+│
+├── parasoftReport/                   # Parasoft Reports
+│   ├── report_dev1.html              # Main input report
+│   └── README.md
+│
+├── knowledge_base/                   # Generated Databases
+│   ├── {Module}_KnowledgeDatabase.json
+│   ├── learned_patterns_db.json
+│   └── Master_KnowledgeDatabase.json
+│
+├── reports/                          # Analysis Reports
+│   ├── {Module}_static_analysis_report.html
+│   ├── {Module}_violations_report.xlsx
+│   └── {Module}_history_report.html
+│
+├── history/                          # Violation History
+│   ├── master_violation_history.json
+│   └── resolution_patterns.json
+│
+├── fixes/                            # Generated Fixes
+│   └── {Module}/
+│       ├── *_code_fixes_*.txt
+│       └── *_justifications_*.txt
+│
+├── justifications/                   # Suppress Comments
+│   └── *_suppress_comments_*.txt
+│
+├── learning/                         # AI Training Data
+│   ├── fixes_dataset/
+│   ├── justifications_dataset/
+│   └── violations_dataset/
+│
+├── data/                             # Data Files
+│   ├── Parasoft_Rules_Database.json
+│   └── Qorix_CP_Common_Deviations.xlsx
+│
+└── config/                           # Configuration
+    └── config.json
+```
+
+### Key Directories
+
+**Input:**
+- parasoftReport/ - Parasoft HTML reports
+- data/ - Rules database, deviation files
+
+**Processing:**
+- src/ - All Python source code
+- atch_support/ - Batch file automation
+
+**Output:**
+- eports/ - HTML, Excel, JSON reports
+- ixes/ - Generated code fixes
+- justifications/ - Suppress comments
+- knowledge_base/ - Violation databases
+
+**Documentation:**
+- docs/ - All markdown documentation (10 files, down from 41)
+
+---
+
+## Version History
+
+### [4.0.0] - 2026-04-29
+
+**Major Release - GUI & Documentation Consolidation**
+
+#### Graphical User Interface
+- Complete GUI application with 5 tabs
+- Real-time logging and process control
+- AI Chat integration with dynamic model loading
+- Help tab with documentation viewer
+- Startup system checks
+
+#### Documentation Consolidation
+- **Reduced from 41 to 10 MD files** (75% reduction)
+- **6 Core Guides:** QUICKSTART, GUI_GUIDE, AI_GUIDE, KNOWLEDGE_BASE_GUIDE, STATIC_ANALYSIS, ARCHITECTURE
+- **4 Reference Docs:** INDEX, GUI_QUICK_REFERENCE, BATCH_FILES_GUIDE, EXAMPLE_WORKFLOW
+- Comprehensive consolidation of related topics
+- Improved navigation with INDEX.md
+
+#### Project Reorganization
+- Moved batch files to atch_support/
+- Moved report to parasoftReport/ folder
+- Better folder structure and organization
+
+### [3.0.0] - 2026-04-16
+
+**Major Release - History Tracking & RAG Learning**
+
+#### Violation History Manager
+- Complete historical tracking across modules
+- Master history database consolidation
+- Trend analysis (improving/worsening/stable)
+- Cross-module intelligence
+
+#### RAG Learning System
+- Resolution pattern learning
+- Confidence-based recommendations
+- Common resolution tracking
+- Cross-module learning
+
+#### Comparison Reports
+- Module history reports (HTML)
+- Cross-module comparison matrix
+- Trend indicators and statistics
+
+### [2.3.0] - 2026-04-12
+
+**Parasoft Rules Database**
+
+- 1200+ official Parasoft rule fixes
+- MISRA C, CERT C, CWE coverage
+- Instant trusted recommendations
+- Batch file for database building
+
+### [2.2.0] - 2026-04-10
+
+**Cross-Module Knowledge & Reports**
+
+- Master knowledge database
+- Cross-module consolidation
+- HTML/Excel comparison reports
+- Knowledge base query tool
+
+### [2.1.0] - 2026-04-08
+
+**MISRA/CERT Static Analyzer**
+
+- Built-in C/C++ static analyzer
+- MISRA C:2012 compliance checking
+- CERT C secure coding standards
+- Color-coded reports (Polyspace-style)
+- Auto-generate workflow (no Parasoft needed)
+
+### [2.0.0] - 2026-04-05
+
+**AI Agent with Knowledge Database**
+
+- Ollama AI integration
+- Knowledge database system
+- AI/Hybrid/Rules modes
+- Violation history tracking
+
+### [1.0.0] - 2026-03-28
+
+**Initial Release**
+
+- Parasoft report parsing
+- Basic violation analysis
+- Fix generation
+- Justification creation
+
+---
+
+## Summary
+
+The Parasoft Analysis Tool provides:
+
+- ✅ **Complete AI System** - Ollama-powered analysis
+- ✅ **Knowledge Management** - Cross-module learning
+- ✅ **Static Analysis** - Built-in MISRA/CERT checker
+- ✅ **GUI Interface** - User-friendly point-and-click
+- ✅ **Documentation** - 10 comprehensive guides
+- ✅ **History Tracking** - RAG learning from resolutions
+- ✅ **Multiple Workflows** - Parasoft, static, auto-generate
+- ✅ **Batch Automation** - 10+ batch files for all operations
+
+For more information, see [INDEX.md](INDEX.md) for complete documentation navigation.
+
+---
+
+**Developer:** Himanshu R  
+**Organization:** Qorix India Pvt Ltd  
+**Version:** 4.0.0  
+**Platform:** Windows  
+**Language:** Python 3.8+

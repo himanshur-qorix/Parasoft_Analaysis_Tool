@@ -1,439 +1,219 @@
-# 📚 Documentation Index - Parasoft AI Agent
+# Documentation Index - Parasoft Analysis Tool v4.0.0
 
-Welcome to the Parasoft AI Agent documentation! This index helps you find the right document for your needs.
-
-## 📁 New Project Structure (v3.0.0)
-
-The project has been enhanced with violation history tracking and RAG learning:
-- **src/** - All Python source code (including new ViolationHistoryManager & ComparisonReportGenerator)
-- **docs/** - All documentation (you are here!)
-- **config/** - Configuration files
-- **scripts/** - Automation scripts (including Run_Static_Analyzer.bat)
-- **assets/** - Images and diagrams
-- **data/** - Reference data files and raw violation data
-- **history/** ⭐ NEW - Violation history tracking and RAG learning data
-
-See [STRUCTURE.md](STRUCTURE.md) for complete details.
+**Quick navigation to all project documentation**
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Getting Started (Start Here!)
 
-| Document | Purpose | When to Read |
-|----------|---------|--------------|
-| [README.md](../README.md) | Complete user documentation | First-time setup, comprehensive guide |
-| [QUICKSTART.md](QUICKSTART.md) | Quick start guide (v3.0 updated) | Want to start in 30 seconds |
-| [EXAMPLE_WORKFLOW.md](EXAMPLE_WORKFLOW.md) | Real-world usage example | Learning by example |
-| [STRUCTURE.md](STRUCTURE.md) | Project organization (v3.0) | Understanding project layout |
-| [CHANGELOG.md](CHANGELOG.md) | Version history (v3.0.0 added) | See what's new in v3.0.0 |
-| [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) | Complete project summary (v3.0) | Full feature overview |
+### Essential Guides
 
-**Recommendation:** Start with [QUICKSTART.md](QUICKSTART.md), then move to [README.md](../README.md) for details.
+1. **[QUICKSTART.md](QUICKSTART.md)** ⭐
+   - 30-second quick start
+   - 5-minute setup
+   - Command reference
+   - Batch file usage
+   - Example workflows
+   - **Start here if you're new!**
 
----
+2. **[GUI_GUIDE.md](GUI_GUIDE.md)** 🎨
+   - Complete GUI walkthrough
+   - Main operations tab
+   - Advanced features
+   - AI Chat interface
+   - Help tab usage
+   - Tips and tricks
+   - **Perfect for visual learners!**
 
-## 🆕 Version 3.0.0 Features (NEW!)
-
-| Feature | Description | Documentation |
-|---------|-------------|---------------|
-| **Violation History Tracking** | Complete timeline of all violations across modules | [CHANGELOG.md](CHANGELOG.md#300---2026-04-16) |
-| **RAG Learning System** | AI learns from resolution patterns with confidence scores | [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md#new-feature-2-rag-learning-system) |
-| **Comparison Reports** | Module timeline & cross-module matrix HTML reports | [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md#new-feature-3-comparison-report-generator) |
-| **Multi-line Comment Fix** | 99% false positive reduction (3000+ → 28) | [CHANGELOG.md](CHANGELOG.md#enhanced-static-analyzer) |
-| **Learning Database System** | Rule-based pattern learning without AI (NEW!) | [RULE_BASED_LEARNING.md](RULE_BASED_LEARNING.md) |
-| **AI Training Contributions** | Team contribution workflow to learning/ folder (NEW!) | [../learning/README.md](../learning/README.md) |
-| **6 Report Types** | HTML, Excel, KB, JSON, History, Cross-Module | [STRUCTURE.md](STRUCTURE.md#reports-reports) |
-
-**Key Benefits:**
-- 📊 Track violations over time (improving ↓, worsening ↑, stable →)
-- 🧠 Learn from how teams resolve violations
-- 🔍 Cross-module intelligence and pattern recognition
-- 📈 Confidence-based recommendations (e.g., "85% of teams suppress this")
-- 🎯 Timeline and matrix visualizations
-- 📚 Automatic quality learning from team patterns (no AI required)
-- 🚀 5-minute team contribution workflow
+3. **[ARCHITECTURE.md](ARCHITECTURE.md)** 🏗️
+   - System architecture diagrams
+   - Component details
+   - Project structure
+   - Version history (changelog)
+   - File organization
+   - Integration workflows
 
 ---
 
-## 🤖 AI Configuration
+## 📚 Feature Guides
 
-| Document | Purpose | When to Read |
-|----------|---------|--------------|
-| [AI_MODES.md](AI_MODES.md) | AI mode selection guide | Choosing AI vs rules |
-| [OLLAMA_SETUP.md](OLLAMA_SETUP.md) | Ollama installation guide | Setting up local AI |
-| [AI_QUICKSTART.md](AI_QUICKSTART.md) | Quick AI setup | Fast AI configuration |
+### AI & Learning
 
-**AI Modes Available:**
-- **AI Only** - Use Ollama for all violations (requires Ollama)
-- **Hybrid** - Smart: AI for complex, rules for standard (recommended)
-- **Rules Only** - Only rule-based fixes (no AI needed)
+4. **[AI_GUIDE.md](AI_GUIDE.md)** 🤖
+   - AI modes (AI Only / Hybrid / Rules Only)
+   - Ollama setup and configuration
+   - AI Chat feature
+   - Pattern learning
+   - Few-shot learning
+   - AI quality validation
+   - Model recommendations
 
----
+### Knowledge Base
 
-## 📊 Static Code Analyzer (v3.0 - Built-in Analysis)
+5. **[KNOWLEDGE_BASE_GUIDE.md](KNOWLEDGE_BASE_GUIDE.md)** 📊
+   - Knowledge base overview
+   - Cross-module knowledge consolidation
+   - Parasoft rules database (1200+ rules)
+   - Rule-based pattern learning
+   - Knowledge base queries
+   - Workflow integration
 
-| Document | Purpose | When to Read |
-|----------|---------|--------------|
-| [QUICKSTART.md](QUICKSTART.md#-static-code-analyzer-v30---built-in-cc-analysis) | Static analyzer quick start | Running built-in analyzer |
-| [STRUCTURE.md](STRUCTURE.md#source-code-src) | New source files | Understanding new components |
-| [CHANGELOG.md](CHANGELOG.md#300---2026-04-16) | v3.0.0 changes | Complete feature list |
+### Static Analysis
 
-**What It Detects:**
-- Runtime errors (null pointer, buffer overflow, div by zero)
-- MISRA C violations (20+ rules)
-- CERT C issues (15+ rules)
-- Code quality problems
-- Context-aware with multi-line comment detection
-
-**Output Reports:**
-1. Color-coded HTML (RED/ORANGE/GREY)
-2. Excel with 11-line code context
-3. Knowledge base JSON
-4. Raw violations JSON
-5. **Module history HTML** (timeline with trends) ⭐ NEW
-6. **Cross-module comparison HTML** (matrix view) ⭐ NEW
+6. **[STATIC_ANALYSIS.md](STATIC_ANALYSIS.md)** 🔍
+   - Built-in C/C++ analyzer
+   - MISRA C:2012 checking
+   - CERT C standards
+   - Auto-generate workflow
+   - Violation capture
+   - Polyspace integration
+   - Report formats (HTML, Excel, JSON)
 
 ---
 
-## 📊 CERT & MISRA Focused Reports (v3.0 - NEW!)
+## 📖 Reference Documentation
 
-| Tool | Purpose | Usage |
-|------|---------|-------|
-| **Generate_CERT_MISRA_Report.bat** | Compliance-focused HTML reports | `scripts\Generate_CERT_MISRA_Report.bat` |
-| **generate_cert_misra_report.py** | Python script for CERT/MISRA reports | `python src\generate_cert_misra_report.py ModuleName` |
+### Quick References
 
-**What's New:** Generate beautiful HTML reports focused exclusively on CERT and MISRA violations from your knowledge base. Perfect for compliance reviews and tracking standards adherence!
+- **[GUI Quick Reference](GUI_QUICK_REFERENCE.md)** - One-page GUI cheat sheet
+- **[Batch Files Guide](BATCH_FILES_GUIDE.md)** - Complete batch file reference
+- **[Example Workflow](EXAMPLE_WORKFLOW.md)** - Step-by-step real-world example
 
-**Features:**
-- Auto-filters CERT and MISRA violations from knowledge base
-- Top 10 violations by occurrence for each category
-- Severity breakdown statistics
-- Status summary (Open/Fixed/Justified)
-- Professional styled HTML with responsive design
-- Takes only module name as input (uses existing KB)
+### Technical Details
 
-**Quick Usage:**
-```bash
-# Using batch file (easiest)
-scripts\Generate_CERT_MISRA_Report.bat
-# Enter: Tls
-# Output: reports\Tls_CERT_MISRA_Report.html
-
-# Or direct Python
-python src\generate_cert_misra_report.py Tls
-```
-
-**When to use:**
-- Preparing compliance reports for code review
-- Tracking CERT/MISRA progress over time
-- Quick compliance status check
-- Presenting to stakeholders/management
+- **[Structure](STRUCTURE.md)** - Project folder organization
+- **[Architecture Diagrams](ARCHITECTURE_DIAGRAM.md)** - Visual system diagrams
+- **[Static Analyzer v4.0 Enhancements](STATIC_ANALYZER_V4_ENHANCEMENTS.md)** ⭐ NEW - Enhanced MISRA/CERT detection capabilities
 
 ---
 
-## � Learning Database System (v3.0 - NEW!)
+## 📋 What's Been Consolidated
 
-| Document | Purpose | When to Read |
-|----------|---------|--------------|
-| [RULE_BASED_LEARNING.md](RULE_BASED_LEARNING.md) | Technical guide to pattern learning | Understanding how learning works |
-| [../learning/README.md](../learning/README.md) | Complete learning folder guide | Setting up team contributions |
-| [../learning/QUICK_START.md](../learning/QUICK_START.md) | 5-minute contribution guide | Contributing your module quickly |
-| [LEARNING_DATABASE_SUMMARY.md](LEARNING_DATABASE_SUMMARY.md) | Implementation summary | Overview of what was built |
+**41 files reduced to 6 core guides!** The following topics are now integrated:
 
-**What It Does:**
-- Learns from **human-written** vs **tool-generated** justifications
-- Calculates **quality scores** (0-10) for each justification
-- Detects **common mistakes** automatically (generic refs, too short, vague)
-- Works **completely offline** - no AI/Ollama required
-- Builds **persistent pattern database**: `knowledge_base/learned_patterns_db.json`
+### Merged into AI_GUIDE.md:
+- AI_MODES.md
+- AI_QUICKSTART.md
+- AI_CHAT_QUICKSTART.md
+- AI_ENHANCEMENT_SUMMARY.md
+- AI_QUALITY_QUICK_REF.md
+- AI_JUSTIFICATION_QUALITY_ANALYSIS.md
+- OLLAMA_SETUP.md
+- FEW_SHOT_LEARNING_GUIDE.md
+- FEW_SHOT_LEARNING_IMPLEMENTATION.md
+- FEW_SHOT_QUICKSTART.md
+- JUSTIFICATION_PATTERN_LEARNING.md
+- JUSTIFICATION_VALIDATION_GUIDE.md
 
-**Team Contribution Workflow:**
-```bash
-# 1. Create module folder
-mkdir learning/YourModule/YourConfig/{source,reports}
+### Merged into KNOWLEDGE_BASE_GUIDE.md:
+- CROSS_MODULE_KNOWLEDGE.md
+- KNOWLEDGE_BASE_INTEGRATION.md
+- LEARNING_DATABASE_SUMMARY.md
+- PARASOFT_RULES_DATABASE.md
+- PARASOFT_RULES_DB_SUMMARY.md
+- RULE_BASED_LEARNING.md
 
-# 2. Copy files
-cp your_code/*.c learning/YourModule/YourConfig/source/
-cp parasoft_report.xml learning/YourModule/YourConfig/reports/
+### Merged into STATIC_ANALYSIS.md:
+- MISRA_CERT_INTEGRATION.md
+- MISRA_CERT_EXAMPLES.md
+- AUTO_GENERATE_WORKFLOW.md
+- VIOLATION_CAPTURE_GUIDE.md
+- IMPROVING_VIOLATION_CAPTURE.md
+- POLYSPACE_INTEGRATION.md
+- FIX_VIEWING_OPTIONS.md
+- EXCEL_REPORT_GUIDE.md
+- INTERACTIVE_VIEWER_SUMMARY.md
 
-# 3. Run learning
-scripts\Learn_Justification_Patterns.bat
-
-# 4. Commit
-git add learning/YourModule/
-git commit -m "Add YourModule to AI learning database"
-```
-
-**Quality Indicators Learned:**
-- ✅ **Specific details** - Function names, version numbers, DR references
-- ✅ **Adequate length** - >50 characters with context
-- ✅ **Explanation words** - "because", "required for", "validated"
-- ✅ **Technical context** - Hardware, API, legacy, ASIL levels
-- ❌ **Avoid** - Generic "_Parasoft_REF_NNN", too short, vague
-
-**Benefits:**
-- 📊 Automatic quality enforcement
-- 🔄 Persistent learning across runs
-- 🎯 Specific mistake identification
-- 📈 Standardized justification quality
-- 🤝 Cross-team knowledge sharing
-- ⚡ 5-minute contribution workflow
+### Merged into ARCHITECTURE.md:
+- ARCHITECTURE_DIAGRAM.md
+- PROJECT_SUMMARY.md
+- CHANGELOG.md
+- REORGANIZATION_SUMMARY.md
+- RELEASE_NOTES_v4.0.0.md
 
 ---
 
-## �📊 Direct Violation Capture (New!)
+## 🎯 Quick Navigation by Task
 
-| Document | Purpose | When to Read |
-|----------|---------|--------------|
-| [VIOLATION_CAPTURE_GUIDE.md](VIOLATION_CAPTURE_GUIDE.md) | Direct source code scanning | Scan code without Parasoft |
-| [EXCEL_REPORT_GUIDE.md](EXCEL_REPORT_GUIDE.md) | Excel report generation | Professional violation reports |
-| [capture_violations.py](../capture_violations.py) | Standalone scanning tool | Detect violations directly |
+**"I want to..."**
 
-**What's New:** The violation capture tool scans C/C++ source files directly to detect buffer overflows, memory leaks, MISRA/CERT violations - **without requiring Parasoft**. Generate reports in JSON, Text, CSV, or **Excel** format!
+### Get Started
+→ [QUICKSTART.md](QUICKSTART.md) - Fast 5-minute setup
 
-**Quick Usage:**
-```bash
-# Scan and generate Excel report
-python capture_violations.py src/ --format excel
+### Use the GUI
+→ [GUI_GUIDE.md](GUI_GUIDE.md) - Complete GUI walkthrough
 
-# Scan with knowledge base export
-python capture_violations.py src/ --module MyModule --kb
-```
+### Set up AI features
+→ [AI_GUIDE.md](AI_GUIDE.md) → Ollama Setup section
 
----
+### Run static analysis
+→ [STATIC_ANALYSIS.md](STATIC_ANALYSIS.md) - Built-in analyzer
 
-## �🏗️ Technical Documentation
+### Query violations
+→ [KNOWLEDGE_BASE_GUIDE.md](KNOWLEDGE_BASE_GUIDE.md) → Knowledge Base Queries
 
-| Document | Purpose | Audience |
-|----------|---------|----------|
-| [ARCHITECTURE.md](ARCHITECTURE.md) | System architecture & design | Developers, advanced users |
-| [CHANGELOG.md](CHANGELOG.md) | Version history & changes | Anyone tracking updates |
-| [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) | Project completion summary | Project managers, stakeholders |
+### Learn AI patterns
+→ [AI_GUIDE.md](AI_GUIDE.md) → Pattern Learning section
 
-**Recommendation:** Developers should read [ARCHITECTURE.md](ARCHITECTURE.md) to understand system design.
+### Consolidate knowledge across modules
+→ [KNOWLEDGE_BASE_GUIDE.md](KNOWLEDGE_BASE_GUIDE.md) → Cross-Module Knowledge
 
----
+### Understand the architecture
+→ [ARCHITECTURE.md](ARCHITECTURE.md) - System design
 
-## 📋 Configuration & Setup
+### Find batch files
+→ [BATCH_FILES_GUIDE.md](BATCH_FILES_GUIDE.md) - All batch commands
 
-| File | Purpose | Notes |
-|------|---------|-------|
-| [requirements.txt](requirements.txt) | Python dependencies | Run: `pip install -r requirements.txt` |
-| [config.json](config.json) | Agent configuration | Customize analysis behavior |
-| [.gitignore](.gitignore) | Git ignore rules | For repository integration |
-
-**Recommendation:** Review [config.json](config.json) to customize the agent for your needs.
+### View examples
+→ [EXAMPLE_WORKFLOW.md](EXAMPLE_WORKFLOW.md) - Real-world workflow
 
 ---
 
-## 🛠️ Source Code Files
+## 📞 Support & Resources
 
-### Core Components
+**Have Questions?**
 
-| File | Lines | Description |
-|------|-------|-------------|
-| [run_agent.py](run_agent.py) | 265 | Main orchestrator - entry point |
-| [KnowledgeDatabaseManager.py](KnowledgeDatabaseManager.py) | 374 | Knowledge database management |
-| [ViolationAnalyzer.py](ViolationAnalyzer.py) | 303 | Intelligent violation analysis |
-| [CodeFixGenerator.py](CodeFixGenerator.py) | 475 | Fix and justification generation |
-| [run_query.py](run_query.py) | 613 | Query and reporting tool |
+1. **Check the Quick Start**: [QUICKSTART.md](QUICKSTART.md)
+2. **Use the GUI Help Tab**: Launch GUI and click "Help" tab
+3. **Browse Examples**: [EXAMPLE_WORKFLOW.md](EXAMPLE_WORKFLOW.md)
+4. **AI Chat**: Ask questions in the AI Chat tab
 
-### Legacy/Support
-
-| File | Description |
-|------|-------------|
-| [ParasoftAnalysisTool.py](ParasoftAnalysisTool.py) | Original HTML parser (v1.0.0) |
-| [Run.bat](Run.bat) | Windows batch automation script |
+**Contact:**
+- Developer: Himanshu R
+- Organization: Qorix India Pvt Ltd
+- Version: 4.0.0
 
 ---
 
-## 📖 Usage by Scenario
+## 📌 Documentation Conventions
 
-### Scenario 1: First-Time User
-1. Read [QUICKSTART.md](QUICKSTART.md)
-2. Run [Run.bat](Run.bat)
-3. Check [EXAMPLE_WORKFLOW.md](EXAMPLE_WORKFLOW.md)
+**Symbols Used:**
+- ⭐ Essential / Start here
+- 🎨 Visual / GUI related
+- 🤖 AI / Machine learning
+- 📊 Data / Analytics
+- 🔍 Analysis / Inspection
+- 🚀 Quick / Fast
+- 📋 Reference / List
+- 🛠️ Configuration / Setup
 
-### Scenario 2: Command-Line User
-1. Read [README.md](README.md) - "Command Line Usage" section
-2. Review command options
-3. Use [run_query.py](run_query.py) for queries
-
-### Scenario 3: Developer/Integrator
-1. Read [ARCHITECTURE.md](ARCHITECTURE.md)
-2. Study source code files
-3. Review [config.json](config.json) for customization
-4. Check [CHANGELOG.md](CHANGELOG.md) for version info
-
-### Scenario 4: Team Lead/Manager
-1. Read [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md)
-2. Review [EXAMPLE_WORKFLOW.md](EXAMPLE_WORKFLOW.md)
-3. Use Excel export feature for team reports
-4. Check [README.md](README.md) - "Workflow Integration" section
+**File Types:**
+- **Guide** - Comprehensive documentation (multiple sections)
+- **Quick Reference** - One-page cheat sheet
+- **Workflow** - Step-by-step instructions
+- **Index** - Navigation / table of contents
 
 ---
 
-## 🎯 Common Tasks & Relevant Docs
+## 🔄 Version History
 
-### Task: Install and Run First Analysis
-- [QUICKSTART.md](QUICKSTART.md) - Full setup guide
-- [requirements.txt](requirements.txt) - Dependencies
-- [Run.bat](Run.bat) - Quick execution
+**Latest Version: 4.0.0** (April 2026)
+- Complete GUI application
+- Project reorganization
+- 6 consolidated guides (from 41 files)
 
-### Task: Query Knowledge Database
-- [README.md](README.md) - "Querying Knowledge Database" section
-- [run_query.py](run_query.py) - Tool usage
-
-### Task: Generate Reports
-- [README.md](README.md) - "Understanding the Analysis" section
-- [EXAMPLE_WORKFLOW.md](EXAMPLE_WORKFLOW.md) - Step 4: Export for Team Review
-- [EXCEL_REPORT_GUIDE.md](EXCEL_REPORT_GUIDE.md) - **NEW:** Excel report generation
-
-### Task: Scan Source Code Directly
-- [VIOLATION_CAPTURE_GUIDE.md](VIOLATION_CAPTURE_GUIDE.md) - Complete scanning guide
-- [EXCEL_REPORT_GUIDE.md](EXCEL_REPORT_GUIDE.md) - Excel output format
-- [capture_violations.py](../capture_violations.py) - Scanning tool
-
-### Task: Apply Fixes to Code
-- [EXAMPLE_WORKFLOW.md](EXAMPLE_WORKFLOW.md) - Step 6: Apply Fixes
-- [README.md](README.md) - "Automatic Fix Generation" section
-
-### Task: Add Justifications
-- [README.md](README.md) - "Parasoft Justification Format" section
-- [EXAMPLE_WORKFLOW.md](EXAMPLE_WORKFLOW.md) - Step 7: Add Justifications
-
-### Task: Understand System Architecture
-- [ARCHITECTURE.md](ARCHITECTURE.md) - Complete architecture
-- Source code docstrings
-
-### Task: Customize Agent Behavior
-- [config.json](config.json) - Configuration options
-- [README.md](README.md) - "Configuration Options" section
+For complete changelog, see [ARCHITECTURE.md](ARCHITECTURE.md) → Version History section.
 
 ---
 
-## 📊 File Size & Complexity Reference
-
-```
-Simple         Medium         Complex
-(< 100 lines)  (100-300)      (300+)
-─────────────────────────────────────────
-config.json    ParasoftAIAgent ViolationAnalyzer
-Run.bat        README.md      CodeFixGenerator
-               QUICKSTART.md  KnowledgeDatabaseManager
-                              KnowledgeDatabaseQueryTool
-                              ARCHITECTURE.md
-```
-
----
-
-## 🔍 Quick Reference
-
-### All Python Files
-```
-run_agent.py              - Main entry point
-KnowledgeDatabaseManager.py     - Database operations
-ViolationAnalyzer.py            - Analysis logic
-CodeFixGenerator.py             - Fix generation
-run_query.py   - Query interface
-ParasoftAnalysisTool.py         - HTML parser (legacy)
-```
-
-### All Documentation Files
-```
-README.md               - Complete documentation
-QUICKSTART.md          - Quick start guide
-EXAMPLE_WORKFLOW.md    - Real-world example
-ARCHITECTURE.md        - System architecture
-CHANGELOG.md           - Version history
-PROJECT_SUMMARY.md     - Project summary
-INDEX.md               - This file
-```
-
-### All Configuration Files
-```
-config.json        - Agent configuration
-requirements.txt   - Python dependencies
-.gitignore        - Git ignore rules
-```
-
-### All Scripts
-```
-Run.bat           - Windows automation script
-```
-
----
-
-## 📞 Document Maintenance
-
-### Last Updated
-- **Date:** April 9, 2026
-- **Version:** 2.0.0
-- **Author:** Himanshu R
-
-### Document Status
-All documents are current and synchronized with version 2.0.0.
-
----
-
-## 🗂️ Directory Structure
-
-```
-Parasoft_Analaysis_Tool/
-│
-├── 📄 Core Python Files
-│   ├── run_agent.py
-│   ├── KnowledgeDatabaseManager.py
-│   ├── ViolationAnalyzer.py
-│   ├── CodeFixGenerator.py
-│   ├── run_query.py
-│   └── ParasoftAnalysisTool.py
-│
-├── 📋 Configuration Files
-│   ├── config.json
-│   ├── requirements.txt
-│   └── .gitignore
-│
-├── 📚 Documentation
-│   ├── README.md
-│   ├── QUICKSTART.md
-│   ├── EXAMPLE_WORKFLOW.md
-│   ├── ARCHITECTURE.md
-│   ├── CHANGELOG.md
-│   ├── PROJECT_SUMMARY.md
-│   └── INDEX.md (this file)
-│
-├── 🔧 Scripts
-│   └── Run.bat
-│
-├── 📊 Data Files (auto-generated)
-│   ├── knowledge_base/
-│   ├── reports/
-│   ├── fixes/
-│   └── parasoft_agent.log
-│
-└── 🎨 Assets
-    └── FlowDiagram_V1.0.0.png
-```
-
----
-
-## 💡 Tips for Using This Index
-
-1. **New Users:** Start at the top, work down
-2. **Quick Lookup:** Use Ctrl+F to search
-3. **Developers:** Jump to "Source Code Files" section
-4. **Managers:** Check "Scenario 4" section
-
----
-
-## 🔗 External Resources
-
-- **Parasoft Documentation:** https://docs.parasoft.com/
-- **MISRA Guidelines:** https://www.misra.org.uk/
-- **CERT Secure Coding:** https://wiki.sei.cmu.edu/confluence/display/seccode
-- **Python Documentation:** https://docs.python.org/
-
----
-
-**Need help? Start with [QUICKSTART.md](QUICKSTART.md)!** 🚀
+**Qorix India Pvt Ltd** - Quality Code Analysis Tools

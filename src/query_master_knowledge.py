@@ -7,6 +7,7 @@ Version: 1.0.0
 
 import sys
 from pathlib import Path
+from datetime import datetime
 
 # Add src directory to path
 src_dir = Path(__file__).parent.parent / "src"
@@ -293,7 +294,24 @@ def export_to_html(master_kb):
 
 
 def main():
-    """Main interactive query function"""
+    """Main query function - supports both interactive and command-line modes"""
+    import argparse
+    
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description='Query Master Knowledge Base')
+    parser.add_argument('--summary', action='store_true', help='Show summary statistics')
+    parser.add_argument('--cross_module', action='store_true', help='View cross-module violations')
+    parser.add_argument('--violation_insights', type=str, help='Get insights for violation ID')
+    parser.add_argument('--top_violations', type=str, default='10', help='Show top N violations')
+    parser.add_argument('--by_category', type=str, help='Filter by category')
+    parser.add_argument('--by_severity', type=str, help='Filter by severity')
+    parser.add_argument('--proven_fixes', action='store_true', help='Show violations with proven fixes')
+    parser.add_argument('--recommendations', action='store_true', help='Show recommendations')
+    parser.add_argument('--export_excel', action='store_true', help='Export to Excel')
+    parser.add_argument('--export_html', action='store_true', help='Export to HTML')
+    
+    args = parser.parse_args()
+    
     workspace_path = Path(__file__).parent.parent
     knowledge_base_dir = workspace_path / "knowledge_base"
     master_db_path = knowledge_base_dir / "Master_KnowledgeDatabase.json"
@@ -313,7 +331,93 @@ def main():
     master_kb = MasterKnowledgeBaseManager(knowledge_base_dir)
     master_kb.load_master_database()
     
-    # Main interaction loop
+    # Check if any command-line arguments were provided
+    has_args = any([
+        args.summary, args.cross_module, args.violation_insights,
+        args.by_category, args.by_severity, args.proven_fixes,
+        args.recommendations, args.export_excel, args.export_html
+    ])
+    
+    if has_args:
+        # Non-interactive mode - execute requested action and exit
+        if args.summary:
+            show_summary(master_kb)
+        elif args.cross_module:
+            show_cross_module(master_kb)
+        elif args.violation_insights:
+            # Create temporary function to handle non-interactive insights
+            insights = master_kb.get_violation_insights(args.violation_insights)
+            if insights:
+                print("\n" + "="*60)
+                print(f"INSIGHTS FOR: {args.violation_insights}")
+                print("="*60)
+                print(f"  Category: {insights['category']}")
+                print(f"  Severity: {insights['severity']}")
+                print(f"  Modules Affected: {', '.join(insights['modules'])}")
+                print(f"  Total Occurrences: {insights['total_occurrences']}")
+                if insights.get('proven_fixes'):
+                    print(f"\n  ✅ Proven Fixes Available: {len(insights['proven_fixes'])}")
+            else:
+                print(f"\n[ERROR] Violation '{args.violation_insights}' not found")
+        elif args.top_violations:
+            try:
+                count = int(args.top_violations)
+                violations = master_kb.get_most_common_violations(count)
+                print("\n" + "="*60)
+                print(f"TOP {count} COMMON VIOLATIONS")
+                print("="*60)
+                for i, v in enumerate(violations, 1):
+                    print(f"\n{i}. {v['violation_id']}")
+                    print(f"   Occurrences: {v['total_occurrences']} across {v['modules_count']} modules")
+                    print(f"   Severity: {v['severity']}")
+            except ValueError:
+                print(f"[ERROR] Invalid number: {args.top_violations}")
+        elif args.by_category:
+            violations = master_kb.get_violations_by_category(args.by_category.upper())
+            print("\n" + "="*60)
+            print(f"VIOLATIONS IN CATEGORY: {args.by_category.upper()}")
+            print("="*60)
+            if violations:
+                for i, v in enumerate(violations[:20], 1):
+                    print(f"\n{i}. {v['violation_id']}")
+                    print(f"   Severity: {v['severity']}")
+                    print(f"   Occurrences: {v['total_occurrences']}")
+            else:
+                print(f"\n[INFO] No violations found in category: {args.by_category}")
+        elif args.by_severity:
+            violations = master_kb.get_violations_by_severity(args.by_severity.upper())
+            print("\n" + "="*60)
+            print(f"VIOLATIONS WITH SEVERITY: {args.by_severity.upper()}")
+            print("="*60)
+            if violations:
+                for i, v in enumerate(violations[:20], 1):
+                    print(f"\n{i}. {v['violation_id']}")
+                    print(f"   Category: {v.get('category', 'N/A')}")
+                    print(f"   Occurrences: {v['total_occurrences']}")
+            else:
+                print(f"\n[INFO] No violations found with severity: {args.by_severity}")
+        elif args.proven_fixes:
+            show_with_fixes(master_kb)
+        elif args.recommendations:
+            show_recommendations(master_kb)
+        elif args.export_excel:
+            # Auto-generate filename
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            output_path = f"Master_Knowledge_Report_{timestamp}.xlsx"
+            print(f"\n[INFO] Exporting to: {output_path}")
+            master_kb.export_to_excel(output_path)
+            print(f"[OK] Excel export complete: {output_path}")
+        elif args.export_html:
+            # Auto-generate filename
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            output_path = f"Master_Knowledge_Report_{timestamp}.html"
+            print(f"\n[INFO] Exporting to: {output_path}")
+            master_kb.export_to_html(output_path)
+            print(f"[OK] HTML export complete: {output_path}")
+        
+        sys.exit(0)
+    
+    # Interactive mode - original behavior
     while True:
         display_menu()
         choice = input("Select option: ").strip()

@@ -1,7 +1,31 @@
 # 📋 Batch Files Quick Reference
 
 **Organization:** Qorix India Pvt Ltd  
-**Version:** 2.3.0
+**Version:** 4.0.0
+
+---
+
+## 🖥️ GUI or Command Line?
+
+### **Prefer a Graphical Interface? 🎨**
+Run all these batch files from a simple GUI instead!
+
+```bash
+scripts\Launch_GUI.bat
+```
+
+**Benefits:**
+- ✅ Point-and-click interface
+- ✅ Real-time output log
+- ✅ No need to remember commands
+- ✅ Quick folder access
+- ✅ Process control (start/stop)
+
+See the **[GUI Guide](GUI_GUIDE.md)** and **[Quick Reference](GUI_QUICK_REFERENCE.md)** for details.
+
+### **Command Line Reference Below 👇**
+This guide shows the traditional batch file commands for automation and scripting.
+All batch files are now located in the **`batch_support/`** folder.
 
 ---
 

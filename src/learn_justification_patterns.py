@@ -5,10 +5,28 @@ Uses Ollama LLM to intelligently analyze patterns and identify tool-generated mi
 
 import json
 import re
+import sys
+import os
 from pathlib import Path
 from collections import defaultdict
 from datetime import datetime
 import logging
+
+# Configure UTF-8 encoding for Windows console to support emoji characters
+if sys.platform == 'win32':
+    try:
+        # Try to set console to UTF-8 mode (Windows 10+)
+        import ctypes
+        kernel32 = ctypes.windll.kernel32
+        kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
+        # Reconfigure stdout/stderr to UTF-8
+        sys.stdout.reconfigure(encoding='utf-8')
+        sys.stderr.reconfigure(encoding='utf-8')
+    except Exception:
+        # Fallback: wrap stdout/stderr with UTF-8 encoding
+        import codecs
+        sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'replace')
+        sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'replace')
 
 logging.basicConfig(
     level=logging.INFO,
@@ -105,7 +123,7 @@ class JustificationPatternAnalyzer:
     def _analyze_file(self, file_path: Path) -> int:
         """Analyze a single suppression comment file"""
         try:
-            with open(file_path, 'r', encoding='utf-8') as f:
+            with open(file_path, 'r', encoding='utf-8', errors='replace') as f:
                 content = f.read()
             
             # Extract module name
@@ -286,7 +304,7 @@ class JustificationPatternAnalyzer:
         try:
             config_path = Path('config/config.json')
             if config_path.exists():
-                with open(config_path, 'r') as f:
+                with open(config_path, 'r', encoding='utf-8') as f:
                     config = json.load(f)
                     return config.get('ai_integration', {})
         except Exception as e:

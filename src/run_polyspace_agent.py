@@ -14,6 +14,17 @@ import json
 from pathlib import Path
 from datetime import datetime
 
+# Configure UTF-8 encoding for Windows console
+if sys.platform == 'win32':
+    try:
+        import ctypes
+        kernel32 = ctypes.windll.kernel32
+        kernel32.SetConsoleOutputCP(65001)  # UTF-8
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+    except:
+        pass
+
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 

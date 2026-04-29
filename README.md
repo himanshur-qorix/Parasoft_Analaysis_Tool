@@ -11,20 +11,22 @@
 
 For comprehensive documentation, see the [`docs/`](docs/) folder:
 
-- **[Static Code Analysis](docs/STATIC_ANALYSIS.md)** - Built-in C/C++ static analyzer for runtime errors, MISRA, CERT (NEW! v3.0)
+- **[GUI Guide](docs/GUI_GUIDE.md)** - Graphical user interface walkthrough (NEW! v4.0)
+- **[GUI Quick Reference](docs/GUI_QUICK_REFERENCE.md)** - One-page GUI cheat sheet (NEW! v4.0)
+- **[Static Code Analysis](docs/STATIC_ANALYSIS.md)** - Built-in C/C++ static analyzer for runtime errors, MISRA, CERT (v3.0)
 - **[Fix Viewing Options](docs/FIX_VIEWING_OPTIONS.md)** - Interactive viewer, HTML reports, text files (v2.3)
 - **[Parasoft Rules Database](docs/PARASOFT_RULES_DATABASE.md)** - Official Parasoft-approved fix suggestions (v2.3)
 - **[Knowledge Base Integration](docs/KNOWLEDGE_BASE_INTEGRATION.md)** - Smart analysis with KB insights
 - **[Cross-Module Knowledge Base](docs/CROSS_MODULE_KNOWLEDGE.md)** - Consolidate learnings across modules
-- **[Rule-Based Learning](docs/RULE_BASED_LEARNING.md)** - Pattern learning without AI (NEW! v3.0)
-- **[Learning Folder Guide](learning/README.md)** - AI training data contribution (NEW! v3.0)
-- **[Learning Quick Start](learning/QUICK_START.md)** - 5-minute contribution guide (NEW! v3.0)
+- **[Rule-Based Learning](docs/RULE_BASED_LEARNING.md)** - Pattern learning without AI (v3.0)
+- **[Learning Folder Guide](learning/README.md)** - AI training data contribution (v3.0)
+- **[Learning Quick Start](learning/QUICK_START.md)** - 5-minute contribution guide (v3.0)
 - **[Auto-Generate Workflow](docs/AUTO_GENERATE_WORKFLOW.md)** - Use without Parasoft report
 - **[Quick Start Guide](docs/AI_QUICKSTART.md)** - Get started in 5 minutes
+- **[Batch Files Guide](docs/BATCH_FILES_GUIDE.md)** - Command-line batch file reference
 - **[MISRA/CERT Integration](docs/MISRA_CERT_INTEGRATION.md)** - Static analyzer integration
 - **[Architecture Diagram](docs/ARCHITECTURE_DIAGRAM.md)** - System architecture and workflow
 - **[Project Structure](docs/STRUCTURE.md)** - Complete folder organization
-- **[Reorganization Summary](docs/REORGANIZATION_SUMMARY.md)** - Latest structural changes
 - **[Documentation Index](docs/INDEX.md)** - Complete documentation catalog
 
 ---
@@ -33,6 +35,7 @@ For comprehensive documentation, see the [`docs/`](docs/) folder:
 
 | Version | Release | Features |
 |---------|---------|----------|
+| **4.0.0** | Apr 2026 | **GUI Support** - Graphical User Interface with point-and-click operations, real-time logging, process control, reorganized project structure (batch_support folder) |
 | **3.0.0** | Apr 2026 | Violation History Tracking, RAG Learning, Comparison Reports, Multi-line Comment Fix, Learning Database with Rule-Based Pattern Learning, AI Training Folder Structure |
 | 2.3.0 | Apr 2026 | Parasoft Rules Database - Official fix suggestions from 1200+ rules |
 | 2.2.1 | Apr 2026 | Knowledge Base Integration for Analyzers |
@@ -49,7 +52,37 @@ For comprehensive documentation, see the [`docs/`](docs/) folder:
 
 ---
 
-## 🚀 Features
+## �️ User Interface Options
+
+### Graphical User Interface (NEW! 🎉)
+Run the tool with a simple, user-friendly GUI:
+
+```bash
+scripts\Launch_GUI.bat
+```
+
+**Features:**
+- 🎯 **One-click operations** - All batch scripts accessible from GUI
+- 📝 **Real-time output log** - Watch progress as scripts execute
+- 🔍 **Quick folder access** - Instant access to reports, fixes, and knowledge base
+- 💾 **Log saving** - Save output logs for documentation
+- ⏹️ **Process control** - Stop running operations if needed
+- 📋 **Tabbed interface** - Main operations, advanced features, and info
+- 🔧 **Module configuration** - Simple input for module names
+
+See the **[GUI Guide](docs/GUI_GUIDE.md)** for detailed instructions.
+
+### Command Line Interface
+Traditional batch file execution for automation:
+```bash
+batch_support\Run.bat
+```
+
+Choose your preferred interface based on your workflow!
+
+---
+
+## �🚀 Features
 
 ### Core Capabilities
 1. **Built-in Static Code Analyzer (v3.0)** - Direct C/C++ source analysis without external tools. Detects runtime errors (null deref, buffer overflow), MISRA C violations, CERT C issues, code quality problems. Context-aware validation with multi-line comment detection eliminates false positives (reduced from 3000+ to 28 violations).
@@ -287,22 +320,22 @@ This **hybrid approach** keeps resource usage low while providing AI benefits wh
 ### Method 1: Quick Start with Run.bat (Windows)
 
 **Option A: With Parasoft Report**
-1. **Place your report**: Copy `report_dev1.html` from Parasoft to the project root folder
-2. **Run**: Double-click `scripts\Run.bat`
+1. **Place your report**: Copy `report_dev1.html` from Parasoft to the `parasoftReport\` folder
+2. **Run**: Double-click `batch_support\Run.bat`
 3. **Follow prompts**: Enter module name and options
 
 **Option B: Generate Report from Source Code (New!)**
 1. **No Parasoft report needed**: Skip placing report_dev1.html
-2. **Run**: Double-click `scripts\Run.bat`
+2. **Run**: Double-click `batch_support\Run.bat`
 3. **Provide source path**: When prompted, enter path to your C/C++ source code
 4. **Automatic generation**: Tool generates MISRA/CERT report and uses it for analysis
 
 The tool automatically:
-- Detects if report_dev1.html exists
+- Detects if parasoftReport\report_dev1.html exists
 - If not found but source code path provided → generates MISRA/CERT report
 - Uses the generated report for complete analysis workflow
 - Applies Qorix deviations and creates knowledge database
-2. **Run the batch file**: Double-click `scripts\Run.bat` (or run from project root)
+2. **Run the batch file**: Double-click `batch_support\Run.bat` (or run from project root)
 3. **Enter module name**: When prompted, enter the module name (e.g., "Mka")
 4. **Review results**: Check the generated directories for outputs
 
@@ -344,10 +377,10 @@ python src\run_agent.py report_dev1.html Mka --no-justifications --workspace D:/
 ### Step 1: Run Analysis (NO Code Fixes)
 ```bash
 # Option A: Using batch file (recommended for Windows)
-scripts\Run.bat
+batch_support\Run.bat
 
 # Option B: Using command line
-python src\run_agent.py report_dev1.html Mka
+python src\run_agent.py parasoftReport\report_dev1.html Mka
 ```
 
 **What it does:**
@@ -734,9 +767,9 @@ python src\run_query.py knowledge_base --excel violations.xlsx --module Mka
 #### Step 1: Analyze Multiple Modules
 ```powershell
 # Analyze each module separately
-scripts\Run.bat  # Enter: Mka
-scripts\Run.bat  # Enter: Mkb
-scripts\Run.bat  # Enter: Mkc
+batch_support\Run.bat  # Enter: Mka
+batch_support\Run.bat  # Enter: Mkb
+batch_support\Run.bat  # Enter: Mkc
 ```
 
 #### Step 2: Consolidate Knowledge
@@ -802,7 +835,7 @@ VIOLATIONS WITH PROVEN FIXES (34 total)
 When running analysis on a module (new or existing):
 
 ```powershell
-scripts\Run.bat
+batch_support\Run.bat
 # Enter module: Mka
 # Enter source: D:\MyProject\src
 
@@ -946,7 +979,7 @@ Generated justifications follow Parasoft standards:
 
 1. **Initial Analysis**
    ```bash
-   python src\run_agent.py report_dev1.html Mka
+   python src\run_agent.py parasoftReport\report_dev1.html Mka
    ```
 
 2. **Query High Priority Issues**
@@ -985,7 +1018,7 @@ Generated justifications follow Parasoft standards:
 - **Solution**: Install dependencies with `pip install -r requirements.txt`
 
 **Issue: "No violations found in the report"**
-- **Solution**: Verify the report_dev1.html file is a valid Parasoft report
+- **Solution**: Verify the parasoftReport\report_dev1.html file is a valid Parasoft report
 
 **Issue: "Permission denied" when creating directories**
 - **Solution**: Run with appropriate permissions or change workspace location
