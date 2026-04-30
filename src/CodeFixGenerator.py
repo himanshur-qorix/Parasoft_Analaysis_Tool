@@ -17,6 +17,7 @@ from datetime import datetime
 from KnowledgeDatabaseManager import KnowledgeDatabaseManager
 from OllamaIntegration import OllamaIntegration
 from ParasoftRulesParser import ParasoftRulesParser
+from JustificationFormatLearner import JustificationFormatLearner
 
 # Configure UTF-8 encoding for Windows console
 if sys.platform == 'win32':
@@ -114,6 +115,34 @@ class CodeFixGenerator:
         if self.source_code_path:
             self.source_code_path = Path(self.source_code_path)
             logger.info(f"[INFO] Source code path configured: {self.source_code_path}")
+        
+        # Initialize Justification Format Learner
+        try:
+            source_dirs = []
+            if self.source_code_path and self.source_code_path.exists():
+                source_dirs.append(self.source_code_path)
+            
+            # Also scan Inputs directory
+            inputs_dir = Path(__file__).parent.parent / 'Inputs'
+            if inputs_dir.exists():
+                source_dirs.append(inputs_dir)
+            
+            self.format_learner = JustificationFormatLearner(
+                source_dirs=source_dirs,
+                use_ai=status.get('enabled', False)
+            )
+            
+            # Scan for existing justification patterns
+            if source_dirs:
+                files_scanned = self.format_learner.scan_source_files()
+                if files_scanned > 0:
+                    logger.info(f"[OK] Learned justification formats from {files_scanned} source files")
+                else:
+                    logger.info(f"[INFO] No existing justification patterns found - will use default format")
+            
+        except Exception as e:
+            logger.warning(f"Could not initialize justification format learner: {e}")
+            self.format_learner = None
         
         # Store config for later use
         self.config = config
@@ -1618,7 +1647,8 @@ if (ptr != NULL) {
                 if not v.get('justification_added') and v.get('justifiable') == 'Yes'
             ]
         
-        logger.info(f"Generating justifications for {len(violations_to_justify)} violations")
+        logger.info(f"Generating justifications for module '{self.module_name}' - {len(violations_to_justify)} violations")
+        logger.info(f"Reference format will be: {self.module_name}_c_REF_1, {self.module_name}_c_REF_2, ...")
         
         justifications_generated = 0
         all_justifications = []
@@ -1628,6 +1658,7 @@ if (ptr != NULL) {
             if just_data:
                 all_justifications.append(just_data)
                 justifications_generated += 1
+                logger.debug(f"✓ Generated justification for {violation.get('violation_id', 'UNKNOWN')}")
         
         # Save justifications to file
         if all_justifications:
@@ -1671,7 +1702,7 @@ if (ptr != NULL) {
     
     def _format_parasoft_justification(self, violation: Dict) -> str:
         """
-        Format justification in Parasoft format
+        Format justification using learned format patterns and AI
         
         Args:
             violation: Violation dictionary
@@ -1679,11 +1710,38 @@ if (ptr != NULL) {
         Returns:
             Formatted justification text
         """
-        # Parasoft justification format:
-        # /* parasoft-begin-suppress RULE_ID "Reason for suppression" */
-        # ... code ...
-        # /* parasoft-end-suppress RULE_ID */
+        # Try to use learned format if available
+        if self.format_learner and self.format_learner.discovered_formats:
+            justification_data = self.format_learner.generate_justification(
+                violation, self.module_name
+            )
+            
+            module_prefix = justification_data.get('module_prefix', f"{self.module_name}_c")
+            ref_id = justification_data.get('ref_id', 'REF_X')
+            
+            # Return both header entry and inline comment with module name emphasis
+            return f"""
+================================================================================
+MODULE: {self.module_name}
+REFERENCE ID: {ref_id} (Format: {self.module_name}_c_REF_{{number}})
+================================================================================
+
+STEP 1: HEADER SECTION ENTRY
+Add to top of file under "Parasoft violations Section":
+{justification_data['header_entry']}
+
+STEP 2: INLINE COMMENT
+Add directly before or after the violating line:
+{justification_data['inline_comment']}
+
+JUSTIFICATION TEXT:
+{justification_data['justification_text']}
+
+NOTE: Reference format follows pattern {{ModuleName}}_c_REF_{{N}}
+      For module "{self.module_name}": {module_prefix}_REF_1, {module_prefix}_REF_2, etc.
+"""
         
+        # Fallback to traditional format
         violation_id = violation['violation_id']
         
         # Generate reason based on violation type
@@ -1703,7 +1761,7 @@ if (ptr != NULL) {
     
     def _generate_justification_reason(self, violation: Dict) -> str:
         """
-        Generate justification reason using Parasoft Rules Database (PRIORITY) -> Fallback to generic
+        Generate justification reason using AI (PRIORITY) -> Parasoft Rules Database -> Fallback to generic
         
         Args:
             violation: Violation dictionary
@@ -1713,8 +1771,23 @@ if (ptr != NULL) {
         """
         violation_id = violation['violation_id']
         violation_text = violation['violation_text'].upper()
+        code_snippet = violation.get('code_snippet', '')
         
-        # PRIORITY: Try to get official rationale from Parasoft Rules Database
+        # PRIORITY 1: Try AI-powered justification via format learner
+        if self.format_learner and self.format_learner.use_ai:
+            try:
+                ai_justification = self.format_learner._generate_ai_justification(
+                    violation_id, 
+                    violation.get('violation_text', ''),
+                    code_snippet
+                )
+                if ai_justification:
+                    logger.info(f"✓ AI-generated justification for {violation_id}")
+                    return ai_justification
+            except Exception as e:
+                logger.debug(f"AI justification failed for {violation_id}: {e}")
+        
+        # PRIORITY 2: Try to get official rationale from Parasoft Rules Database
         if self.use_rules_db and self.rules_parser:
             official_reason = self._get_parasoft_justification_rationale(violation_id)
             if official_reason:
