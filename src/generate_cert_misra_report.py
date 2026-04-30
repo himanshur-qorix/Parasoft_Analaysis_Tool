@@ -283,6 +283,23 @@ def generate_html_report(module_name, cert_violations, misra_violations, cert_st
             background: #f8f9fa;
         }}
         
+        tbody tr:nth-child(even) {{
+            background: #fafbfc;
+        }}
+        
+        tbody tr:nth-child(odd) {{
+            background: #ffffff;
+        }}
+        
+        code {{
+            background: #f1f3f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #495057;
+        }}
+        
         .severity-CRITICAL {{
             background: #ff4757;
             color: white;
@@ -422,7 +439,7 @@ def generate_html_report(module_name, cert_violations, misra_violations, cert_st
         # CERT Top Violations
         html_content += """
             <div class="subsection">
-                <div class="subsection-title">Top 10 CERT Violations</div>
+                <div class="subsection-title">Top 10 CERT Violations (Summary)</div>
                 <table>
                     <thead>
                         <tr>
@@ -443,6 +460,67 @@ def generate_html_report(module_name, cert_violations, misra_violations, cert_st
                             <td><span class="severity-{data['severity']}">{data['severity']}</span></td>
                             <td><strong>{data['count']}</strong></td>
                             <td>{data['message'][:100]}...</td>
+                        </tr>
+"""
+        html_content += """
+                    </tbody>
+                </table>
+            </div>
+"""
+        
+        # CERT All Violations
+        html_content += f"""
+            <div class="subsection">
+                <div class="subsection-title">All CERT Violations ({len(cert_violations)} Total)</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Rule ID</th>
+                            <th>Severity</th>
+                            <th>File</th>
+                            <th>Line</th>
+                            <th>Message</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+"""
+        for idx, violation in enumerate(cert_violations, 1):
+            rule_id = violation.get('violation_id', 'UNKNOWN')
+            severity = violation.get('severity', 'UNKNOWN')
+            message = violation.get('violation_text', '')[:100]
+            
+            # Get file information
+            files_affected = violation.get('files_affected', [])
+            if files_affected:
+                if isinstance(files_affected[0], dict):
+                    file_name = files_affected[0].get('file', 'UNKNOWN')
+                    line_number = files_affected[0].get('line_number', '-')
+                else:
+                    file_name = str(files_affected[0])
+                    line_number = '-'
+            else:
+                file_name = 'UNKNOWN'
+                line_number = '-'
+            
+            # Determine status
+            if violation.get('fix_applied'):
+                status = '<span style="color: #27ae60; font-weight: bold;">✓ Fixed</span>'
+            elif violation.get('justification') or violation.get('justified'):
+                status = '<span style="color: #f39c12; font-weight: bold;">⚠ Justified</span>'
+            else:
+                status = '<span style="color: #e74c3c; font-weight: bold;">✗ Open</span>'
+            
+            html_content += f"""
+                        <tr>
+                            <td>{idx}</td>
+                            <td><strong>{rule_id}</strong></td>
+                            <td><span class="severity-{severity}">{severity}</span></td>
+                            <td><code>{file_name}</code></td>
+                            <td>{line_number}</td>
+                            <td>{message}</td>
+                            <td>{status}</td>
                         </tr>
 """
         html_content += """
@@ -483,7 +561,7 @@ def generate_html_report(module_name, cert_violations, misra_violations, cert_st
         # MISRA Top Violations
         html_content += """
             <div class="subsection">
-                <div class="subsection-title">Top 10 MISRA Violations</div>
+                <div class="subsection-title">Top 10 MISRA Violations (Summary)</div>
                 <table>
                     <thead>
                         <tr>
@@ -511,6 +589,67 @@ def generate_html_report(module_name, cert_violations, misra_violations, cert_st
                 </table>
             </div>
 """
+        
+        # MISRA All Violations
+        html_content += f"""
+            <div class="subsection">
+                <div class="subsection-title">All MISRA Violations ({len(misra_violations)} Total)</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Rule ID</th>
+                            <th>Severity</th>
+                            <th>File</th>
+                            <th>Line</th>
+                            <th>Message</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+"""
+        for idx, violation in enumerate(misra_violations, 1):
+            rule_id = violation.get('violation_id', 'UNKNOWN')
+            severity = violation.get('severity', 'UNKNOWN')
+            message = violation.get('violation_text', '')[:100]
+            
+            # Get file information
+            files_affected = violation.get('files_affected', [])
+            if files_affected:
+                if isinstance(files_affected[0], dict):
+                    file_name = files_affected[0].get('file', 'UNKNOWN')
+                    line_number = files_affected[0].get('line_number', '-')
+                else:
+                    file_name = str(files_affected[0])
+                    line_number = '-'
+            else:
+                file_name = 'UNKNOWN'
+                line_number = '-'
+            
+            # Determine status
+            if violation.get('fix_applied'):
+                status = '<span style="color: #27ae60; font-weight: bold;">✓ Fixed</span>'
+            elif violation.get('justification') or violation.get('justified'):
+                status = '<span style="color: #f39c12; font-weight: bold;">⚠ Justified</span>'
+            else:
+                status = '<span style="color: #e74c3c; font-weight: bold;">✗ Open</span>'
+            
+            html_content += f"""
+                        <tr>
+                            <td>{idx}</td>
+                            <td><strong>{rule_id}</strong></td>
+                            <td><span class="severity-{severity}">{severity}</span></td>
+                            <td><code>{file_name}</code></td>
+                            <td>{line_number}</td>
+                            <td>{message}</td>
+                            <td>{status}</td>
+                        </tr>
+"""
+        html_content += """
+                    </tbody>
+                </table>
+            </div>
+"""
     else:
         html_content += '<div class="empty-state">No MISRA violations found in knowledge base</div>'
     
@@ -518,7 +657,12 @@ def generate_html_report(module_name, cert_violations, misra_violations, cert_st
         </div>
         
         <div class="footer">
-            Generated by Parasoft Analysis Tool v3.0.0 | Qorix India Pvt Ltd | CERT & MISRA Report Generator
+            <div style="margin-bottom: 10px;">
+                Generated by <strong>Parasoft Analysis Tool v4.0.0</strong> | Qorix India Pvt Ltd | CERT & MISRA Report Generator
+            </div>
+            <div style="font-size: 0.85em; color: #999;">
+                ✅ Showing ALL violations (Top 10 Summary + Complete Details) | Report generated on """ + datetime.now().strftime("%B %d, %Y at %I:%M %p") + """
+            </div>
         </div>
     </div>
 </body>

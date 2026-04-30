@@ -48,9 +48,18 @@
    - AI quality validation
    - Model recommendations
 
+5. **[REGRESSION_LEARNING_GUIDE.md](REGRESSION_LEARNING_GUIDE.md)** 🎯 **NEW in v4.0**
+   - Machine learning for accuracy improvement
+   - False positive/negative learning
+   - Pattern refinement system
+   - Interactive feedback GUI
+   - Suppression learning
+   - Confidence adjustment
+   - Learning data export and sharing
+
 ### Knowledge Base
 
-5. **[KNOWLEDGE_BASE_GUIDE.md](KNOWLEDGE_BASE_GUIDE.md)** 📊
+6. **[KNOWLEDGE_BASE_GUIDE.md](KNOWLEDGE_BASE_GUIDE.md)** 📊
    - Knowledge base overview
    - Cross-module knowledge consolidation
    - Parasoft rules database (1200+ rules)
@@ -60,7 +69,7 @@
 
 ### Static Analysis
 
-6. **[STATIC_ANALYSIS.md](STATIC_ANALYSIS.md)** 🔍
+7. **[STATIC_ANALYSIS.md](STATIC_ANALYSIS.md)** 🔍
    - Built-in C/C++ analyzer
    - MISRA C:2012 checking
    - CERT C standards

@@ -87,19 +87,28 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 from datetime import datetime
 
+# Import feedback learning system
+try:
+    from FeedbackLearner import FeedbackLearner, FeedbackType
+    FEEDBACK_AVAILABLE = True
+except ImportError:
+    FEEDBACK_AVAILABLE = False
+    logger.warning("[WARNING] FeedbackLearner not available. Regression learning disabled.")
+
 logger = logging.getLogger(__name__)
 
 
 class StaticCodeAnalyzer:
     """Custom static code analyzer for C/C++ source code"""
     
-    def __init__(self, load_parasoft_db: bool = True, load_knowledge: bool = True):
+    def __init__(self, load_parasoft_db: bool = True, load_knowledge: bool = True, enable_feedback_learning: bool = True):
         """
         Initialize static code analyzer
         
         Args:
             load_parasoft_db: Load comprehensive Parasoft Rules Database
             load_knowledge: Load patterns from knowledge bases
+            enable_feedback_learning: Enable feedback learning system
         """
         self.violations = []
         self.files_analyzed = 0
@@ -113,7 +122,8 @@ class StaticCodeAnalyzer:
             'medium': 0,        # Code quality
             'low': 0,           # Style/conventions
             'by_category': {},
-            'by_check': {}
+            'by_check': {},
+            'skipped_by_learning': 0  # Violations skipped due to learning
         }
         
         # Parasoft Rules Database
@@ -123,6 +133,18 @@ class StaticCodeAnalyzer:
         # Knowledge base patterns
         self.kb_patterns = []
         self.kb_loaded = False
+        
+        # Feedback Learning System
+        self.feedback_learner = None
+        self.feedback_enabled = False
+        if enable_feedback_learning and FEEDBACK_AVAILABLE:
+            try:
+                project_root = Path(__file__).parent.parent
+                self.feedback_learner = FeedbackLearner(project_root)
+                self.feedback_enabled = True
+                logger.info("[INFO] ✅ Feedback learning system enabled")
+            except Exception as e:
+                logger.warning(f"[WARNING] Could not initialize feedback learner: {e}")
         
         # Initialize rule checkers
         self._init_checkers()
@@ -709,6 +731,24 @@ class StaticCodeAnalyzer:
             category: Category
             cwe_list: List of CWE identifiers
         """
+        # ============================================================
+        # FEEDBACK LEARNING: Check if violation should be skipped
+        # ============================================================
+        if self.feedback_enabled and self.feedback_learner:
+            if self.feedback_learner.should_skip_detection(check_id, line.strip()):
+                self.summary['skipped_by_learning'] += 1
+                logger.debug(f"[LEARNING] Skipped {check_id} at {file_path}:{line_num} - matches learned false positive pattern")
+                return
+            
+            # Get confidence adjustment based on learning
+            confidence_adj = self.feedback_learner.get_confidence_adjustment(check_id)
+            if confidence_adj < -0.3:
+                # Significantly lower confidence - downgrade severity
+                severity_map = {'CRITICAL': 'HIGH', 'HIGH': 'MEDIUM', 'MEDIUM': 'LOW'}
+                original_severity = severity
+                severity = severity_map.get(severity, severity)
+                logger.debug(f"[LEARNING] Downgraded {check_id} severity {original_severity} -> {severity} (confidence: {confidence_adj:+.2f})")
+        
         violation_id = f"STATIC-{check_id}-{len(self.violations) + 1}"
         
         # Extract code context (5 lines before, violation line, 5 lines after)
@@ -875,6 +915,134 @@ class StaticCodeAnalyzer:
     def filter_by_file(self, filename: str) -> List[Dict]:
         """Filter violations by file"""
         return [v for v in self.violations if filename in v['file']]
+    
+    # ========================================================================
+    # FEEDBACK LEARNING METHODS
+    # ========================================================================
+    
+    def mark_false_positive(self, violation_id: str, reason: str) -> bool:
+        """
+        Mark a violation as false positive for learning
+        
+        Args:
+            violation_id: Violation identifier
+            reason: Reason why it's a false positive
+        
+        Returns:
+            True if feedback recorded successfully
+        """
+        if not self.feedback_enabled or not self.feedback_learner:
+            logger.warning("[WARNING] Feedback learning not enabled")
+            return False
+        
+        # Find violation
+        violation = None
+        for v in self.violations:
+            if v['violation_id'] == violation_id:
+                violation = v
+                break
+        
+        if not violation:
+            logger.error(f"[ERROR] Violation {violation_id} not found")
+            return False
+        
+        # Record feedback
+        feedback_id = self.feedback_learner.add_feedback(
+            feedback_type=FeedbackType.FALSE_POSITIVE,
+            rule_id=violation['check_id'],
+            code_snippet=violation['code_snippet'],
+            file_path=violation['full_path'],
+            line_number=violation['line'],
+            reason=reason,
+            module_name=Path(violation['full_path']).stem,
+            pattern_used="",
+            context={'category': violation['category'], 'severity': violation['severity']}
+        )
+        
+        logger.info(f"[FEEDBACK] Marked {violation_id} as false positive (ID: {feedback_id})")
+        return True
+    
+    def mark_false_negative(self, rule_id: str, code_snippet: str, file_path: str, 
+                           line_number: int, reason: str) -> bool:
+        """
+        Mark a missed violation (false negative) for learning
+        
+        Args:
+            rule_id: Rule that should have been triggered
+            code_snippet: Code that should have been flagged
+            file_path: File path
+            line_number: Line number
+            reason: Reason why it should have been detected
+        
+        Returns:
+            True if feedback recorded successfully
+        """
+        if not self.feedback_enabled or not self.feedback_learner:
+            logger.warning("[WARNING] Feedback learning not enabled")
+            return False
+        
+        feedback_id = self.feedback_learner.add_feedback(
+            feedback_type=FeedbackType.FALSE_NEGATIVE,
+            rule_id=rule_id,
+            code_snippet=code_snippet,
+            file_path=file_path,
+            line_number=line_number,
+            reason=reason,
+            module_name=Path(file_path).stem
+        )
+        
+        logger.info(f"[FEEDBACK] Marked false negative for {rule_id} (ID: {feedback_id})")
+        return True
+    
+    def mark_correct_detection(self, violation_id: str, reason: str = "") -> bool:
+        """
+        Mark a violation as correctly detected (for positive reinforcement)
+        
+        Args:
+            violation_id: Violation identifier
+            reason: Optional reason
+        
+        Returns:
+            True if feedback recorded successfully
+        """
+        if not self.feedback_enabled or not self.feedback_learner:
+            return False
+        
+        violation = None
+        for v in self.violations:
+            if v['violation_id'] == violation_id:
+                violation = v
+                break
+        
+        if not violation:
+            return False
+        
+        feedback_id = self.feedback_learner.add_feedback(
+            feedback_type=FeedbackType.CORRECT_DETECTION,
+            rule_id=violation['check_id'],
+            code_snippet=violation['code_snippet'],
+            file_path=violation['full_path'],
+            line_number=violation['line'],
+            reason=reason or "Correct detection",
+            module_name=Path(violation['full_path']).stem
+        )
+        
+        logger.info(f"[FEEDBACK] Marked {violation_id} as correct")
+        return True
+    
+    def generate_feedback_report(self) -> str:
+        """Generate feedback learning report"""
+        if not self.feedback_enabled or not self.feedback_learner:
+            return "Feedback learning not enabled"
+        
+        return self.feedback_learner.generate_feedback_report()
+    
+    def export_learning_data(self) -> Dict[str, Path]:
+        """Export learning data for backup/analysis"""
+        if not self.feedback_enabled or not self.feedback_learner:
+            return {}
+        
+        return self.feedback_learner.export_learning_data()
 
 
 if __name__ == '__main__':

@@ -469,8 +469,12 @@ class SuppressCommentApplicator:
             print(f"[ERROR] Failed to add reference section: {str(e)}")
             return False
     
-    def run(self):
-        """Run the interactive application process (supports both old and new formats)"""
+    def run(self, auto_apply=False):
+        """Run the interactive application process (supports both old and new formats)
+        
+        Args:
+            auto_apply: If True, apply all suppressions without prompting
+        """
         
         # Parse suppress file
         print("Parsing suppress comments file...")
@@ -483,6 +487,9 @@ class SuppressCommentApplicator:
         total_files = len(suppressions_data)
         total_suppressions = sum(len(data['suppressions']) for data in suppressions_data.values())
         print(f"Found {total_suppressions} suppression(s) across {total_files} file(s)\n")
+        
+        if auto_apply:
+            print("[INFO] 🚀 AUTO-APPLY MODE - Applying all suppressions without prompting\n")
         
         # Process each file
         for file_name, file_data in suppressions_data.items():
@@ -547,8 +554,11 @@ class SuppressCommentApplicator:
                             self.already_justified_count += 1
                             continue
                         
-                        # Ask for confirmation
-                        choice = input(f"\nApply inline suppression? (y/n/a=all/q=quit): ").strip().lower()
+                        # Ask for confirmation (unless auto_apply mode)
+                        if auto_apply:
+                            choice = 'y'  # Auto-apply
+                        else:
+                            choice = input(f"\nApply inline suppression? (y/n/a=all/q=quit): ").strip().lower()
                         
                         if choice == 'y':
                             if self.apply_inline_suppression(source_file, line_num, suppress_comment):
@@ -622,7 +632,11 @@ class SuppressCommentApplicator:
                         self.skipped_in_comment_count += 1
                         continue
                     
-                    choice = input(f"\nApply suppression? (y/n/q): ").strip().lower()
+                    # Ask for confirmation (unless auto_apply mode)
+                    if auto_apply:
+                        choice = 'y'  # Auto-apply
+                    else:
+                        choice = input(f"\nApply suppression? (y/n/q): ").strip().lower()
                     
                     if choice == 'y':
                         if self.apply_suppression(source_file, line_num, begin_comment, end_comment):
@@ -961,20 +975,41 @@ def main():
     """Main entry point"""
     
     if len(sys.argv) < 3:
-        print("Usage: python apply_suppress_comments.py <suppress_file> <target_repo>")
-        print("\nExample:")
-        print("  python apply_suppress_comments.py justifications\\Mka_suppress_comments_20260410_143022.txt D:\\MyProject\\src")
+        print("\n" + "="*80)
+        print("  PARASOFT SUPPRESSION COMMENT APPLICATOR")
+        print("="*80)
+        print("\nUsage: python apply_suppress_comments.py <suppress_file> <target_repo> [--auto-apply]")
+        print("\nArguments:")
+        print("  suppress_file : Path to suppression comments file (justifications/*.txt)")
+        print("  target_repo   : Path to target source code repository")
+        print("  --auto-apply  : (Optional) Apply all suppressions without prompting")
+        print("\nExamples:")
+        print("  Interactive mode (prompts y/n/a for each suppression):")
+        print("    python apply_suppress_comments.py justifications\\Mka_suppress_comments_20260410_143022.txt D:\\MyProject\\src")
+        print("\n  Auto-apply mode (applies all without prompting):")
+        print("    python apply_suppress_comments.py justifications\\Mka_suppress_comments_20260410_143022.txt D:\\MyProject\\src --auto-apply")
+        print("\n" + "="*80 + "\n")
         sys.exit(1)
     
     suppress_file = sys.argv[1]
     target_repo = sys.argv[2]
+    auto_apply = "--auto-apply" in sys.argv or "-a" in sys.argv
+    
+    if auto_apply:
+        print("\n[INFO] 🚀 AUTO-APPLY MODE: All suppressions will be applied without prompting")
+        print("[INFO] Press Ctrl+C within 2 seconds to cancel\n")
+        import time
+        time.sleep(2)  # Give user time to cancel
     
     try:
         applicator = SuppressCommentApplicator(suppress_file, target_repo)
-        applicator.run()
+        applicator.run(auto_apply=auto_apply)
     except FileNotFoundError as e:
         print(f"\n[ERROR] {str(e)}")
         sys.exit(1)
+    except KeyboardInterrupt:
+        print("\n\n[INFO] Operation cancelled by user")
+        sys.exit(0)
     except Exception as e:
         print(f"\n[ERROR] Unexpected error: {str(e)}")
         import traceback

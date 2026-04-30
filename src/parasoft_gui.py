@@ -499,6 +499,18 @@ For detailed documentation, see the docs/ folder.
         self.attached_file_path = None
         self.attached_file_content = None
         
+        # Help text for file attachments
+        help_frame = ttk.Frame(chat_frame)
+        help_frame.pack(fill=tk.X, pady=(2, 5))
+        
+        help_text = ttk.Label(
+            help_frame,
+            text="💡 Tip: Large files (>10KB) may take 2-5 minutes to analyze. Use 'qwen2.5:latest' model for best results.",
+            font=('Arial', 8),
+            foreground='#7F8C8D'
+        )
+        help_text.pack(anchor=tk.W, padx=(25, 0))
+        
         prompt_input_frame = ttk.Frame(chat_frame)
         prompt_input_frame.pack(fill=tk.X, pady=(5, 0))
         
@@ -860,7 +872,7 @@ For detailed documentation, see the docs/ folder.
             self.root.after(0, lambda: self.stop_btn.config(state='disabled'))
     
     def _apply_suppressions_dialog(self, module_name):
-        """Show dialog to select suppression file"""
+        """Show dialog to select suppression file and apply interactively"""
         justifications_dir = self.project_root / "justifications"
         
         file_path = filedialog.askopenfilename(
@@ -880,58 +892,336 @@ For detailed documentation, see the docs/ folder.
         if not target_repo:
             return
         
-        # Run apply_suppress_comments.py
-        thread = threading.Thread(
-            target=self._execute_apply_suppressions,
-            args=(file_path, target_repo),
-            daemon=True
-        )
-        thread.start()
+        # Load suppressions and show interactive dialog
+        self._show_interactive_suppression_dialog(file_path, target_repo)
     
-    def _execute_apply_suppressions(self, suppress_file, target_repo):
-        """Execute apply suppressions script"""
-        self.update_status("Applying suppressions...")
-        self.log_output(f"\n{'='*70}\n")
-        self.log_output(f"▶️ Applying Suppressions\n")
-        self.log_output(f"📄 File: {suppress_file}\n")
-        self.log_output(f"📁 Target: {target_repo}\n")
-        self.log_output(f"{'='*70}\n\n")
-        
+    def _show_interactive_suppression_dialog(self, suppress_file, target_repo):
+        """Show interactive dialog for applying suppressions one by one"""
         try:
-            script = self.project_root / "src" / "apply_suppress_comments.py"
-            cmd = [
-                sys.executable, str(script),
-                suppress_file, target_repo
-            ]
+            # Parse suppressions file
+            from apply_suppress_comments import SuppressCommentApplier
+            applier = SuppressCommentApplier(suppress_file, target_repo)
             
-            self.running_process = subprocess.Popen(
-                cmd,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                text=True,
-                encoding='utf-8',
-                errors='replace',
-                bufsize=1,
-                cwd=str(self.project_root)
-            )
+            # Parse the file
+            suppressions_data = applier.parse_suppress_file()
             
-            for line in iter(self.running_process.stdout.readline, ''):
-                if line:
-                    self.log_output(line)
+            if not suppressions_data:
+                messagebox.showinfo("No Suppressions", "No suppressions found in the selected file.")
+                return
             
-            return_code = self.running_process.wait()
+            # Count total suppressions
+            total_suppressions = sum(len(supps) for supps in suppressions_data.values())
             
-            self.log_output(f"\n{'='*70}\n")
-            if return_code == 0:
-                self.log_output("✅ Suppressions applied successfully!\n")
-            else:
-                self.log_output(f"⚠️ Process exited with code: {return_code}\n")
-            self.log_output(f"{'='*70}\n\n")
+            if total_suppressions == 0:
+                messagebox.showinfo("No Suppressions", "No suppressions to apply.")
+                return
+            
+            # Create interactive dialog
+            self._create_suppression_review_dialog(applier, suppressions_data, total_suppressions)
             
         except Exception as e:
-            self.log_output(f"\n❌ Error: {str(e)}\n")
-        finally:
-            self.running_process = None
+            messagebox.showerror("Error", f"Failed to load suppressions:\n{str(e)}")
+            self.log_output(f"❌ Error: {str(e)}\n")
+    
+    def _create_suppression_review_dialog(self, applier, suppressions_data, total_count):
+        """Create dialog for reviewing and applying suppressions"""
+        dialog = tk.Toplevel(self.root)
+        dialog.title("📝 Review & Apply Suppressions")
+        dialog.geometry("1000x700")
+        
+        # State
+        current_file_idx = [0]
+        current_supp_idx = [0]
+        files_list = list(suppressions_data.keys())
+        
+        # Stats
+        stats = {
+            'applied': 0,
+            'skipped': 0,
+            'already_justified': 0,
+            'failed': 0
+        }
+        
+        # Header
+        header_frame = ttk.Frame(dialog, padding="10")
+        header_frame.pack(fill=tk.X)
+        
+        title_label = ttk.Label(
+            header_frame,
+            text="📝 Review Suppressions",
+            font=('Arial', 14, 'bold')
+        )
+        title_label.pack(side=tk.LEFT)
+        
+        progress_var = tk.StringVar(value="0 / 0")
+        progress_label = ttk.Label(
+            header_frame,
+            textvariable=progress_var,
+            font=('Arial', 11)
+        )
+        progress_label.pack(side=tk.RIGHT)
+        
+        # Stats frame
+        stats_frame = ttk.LabelFrame(dialog, text="📊 Statistics", padding="10")
+        stats_frame.pack(fill=tk.X, padx=10, pady=(0, 10))
+        
+        stats_text = tk.StringVar(value="Applied: 0 | Skipped: 0 | Already Justified: 0 | Failed: 0")
+        stats_label = ttk.Label(stats_frame, textvariable=stats_text, font=('Arial', 10))
+        stats_label.pack()
+        
+        # Content frame
+        content_frame = ttk.LabelFrame(dialog, text="Suppression Details", padding="10")
+        content_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=(0, 10))
+        
+        # File info
+        file_info_var = tk.StringVar(value="File: -")
+        file_label = ttk.Label(content_frame, textvariable=file_info_var, font=('Arial', 11, 'bold'))
+        file_label.pack(anchor=tk.W, pady=(0, 5))
+        
+        line_info_var = tk.StringVar(value="Line: -")
+        line_label = ttk.Label(content_frame, textvariable=line_info_var, font=('Arial', 10))
+        line_label.pack(anchor=tk.W, pady=(0, 5))
+        
+        # Code preview
+        ttk.Label(content_frame, text="Code Preview:", font=('Arial', 10, 'bold')).pack(anchor=tk.W, pady=(10, 5))
+        
+        code_text = scrolledtext.ScrolledText(
+            content_frame,
+            wrap=tk.WORD,
+            font=('Courier New', 9),
+            height=10,
+            bg='#F5F5F5'
+        )
+        code_text.pack(fill=tk.BOTH, expand=True, pady=(0, 10))
+        
+        # Suppression comment
+        ttk.Label(content_frame, text="Suppression Comment:", font=('Arial', 10, 'bold')).pack(anchor=tk.W, pady=(10, 5))
+        
+        supp_text = scrolledtext.ScrolledText(
+            content_frame,
+            wrap=tk.WORD,
+            font=('Courier New', 9),
+            height=3,
+            bg='#E8F5E9'
+        )
+        supp_text.pack(fill=tk.X, pady=(0, 10))
+        
+        # Button frame
+        button_frame = ttk.Frame(dialog, padding="10")
+        button_frame.pack(fill=tk.X)
+        
+        def update_stats():
+            stats_text.set(
+                f"Applied: {stats['applied']} | Skipped: {stats['skipped']} | "
+                f"Already Justified: {stats['already_justified']} | Failed: {stats['failed']}"
+            )
+        
+        def load_current_suppression():
+            """Load and display current suppression"""
+            if current_file_idx[0] >= len(files_list):
+                # Done!
+                messagebox.showinfo(
+                    "Complete",
+                    f"All suppressions reviewed!\n\n"
+                    f"Applied: {stats['applied']}\n"
+                    f"Skipped: {stats['skipped']}\n"
+                    f"Already Justified: {stats['already_justified']}\n"
+                    f"Failed: {stats['failed']}"
+                )
+                dialog.destroy()
+                return False
+            
+            file_name = files_list[current_file_idx[0]]
+            suppressions = suppressions_data[file_name]
+            
+            if current_supp_idx[0] >= len(suppressions):
+                # Move to next file
+                current_file_idx[0] += 1
+                current_supp_idx[0] = 0
+                return load_current_suppression()
+            
+            supp = suppressions[current_supp_idx[0]]
+            
+            # Update progress
+            total_processed = sum(
+                len(suppressions_data[f]) for f in files_list[:current_file_idx[0]]
+            ) + current_supp_idx[0] + 1
+            progress_var.set(f"{total_processed} / {total_count}")
+            
+            # Find source file
+            source_file = applier.find_file_in_repo(file_name)
+            
+            if not source_file:
+                file_info_var.set(f"File: {file_name} (NOT FOUND)")
+                line_info_var.set("Line: -")
+                code_text.delete('1.0', tk.END)
+                code_text.insert('1.0', "[ERROR] File not found in target repository")
+                supp_text.delete('1.0', tk.END)
+                return True
+            
+            # Update file info
+            file_info_var.set(f"File: {file_name}")
+            line_num = supp['line']
+            line_info_var.set(f"Line: {line_num}")
+            
+            # Read and show code preview
+            try:
+                with open(source_file, 'r', encoding='utf-8', errors='ignore') as f:
+                    lines = f.readlines()
+                
+                # Show context (5 lines before and after)
+                start = max(0, line_num - 6)
+                end = min(len(lines), line_num + 5)
+                
+                code_text.delete('1.0', tk.END)
+                for i in range(start, end):
+                    line_content = lines[i].rstrip()
+                    if i == line_num - 1:
+                        code_text.insert(tk.END, f">>> {i+1:4d}: {line_content}\n", 'highlight')
+                    else:
+                        code_text.insert(tk.END, f"    {i+1:4d}: {line_content}\n")
+                
+                code_text.tag_config('highlight', background='yellow', font=('Courier New', 9, 'bold'))
+                
+                # Check if already has suppression
+                if 'parasoft-suppress' in lines[line_num - 1]:
+                    code_text.insert(tk.END, "\n⚠️ This line already has a suppression comment!", 'warning')
+                    code_text.tag_config('warning', foreground='orange', font=('Courier New', 9, 'bold'))
+                
+            except Exception as e:
+                code_text.delete('1.0', tk.END)
+                code_text.insert('1.0', f"[ERROR] Could not read file: {str(e)}")
+            
+            # Show suppression comment
+            supp_text.delete('1.0', tk.END)
+            suppress_comment = supp.get('comment', supp.get('begin_comment', ''))
+            supp_text.insert('1.0', suppress_comment)
+            
+            return True
+        
+        def apply_current():
+            """Apply current suppression"""
+            file_name = files_list[current_file_idx[0]]
+            supp = suppressions_data[file_name][current_supp_idx[0]]
+            source_file = applier.find_file_in_repo(file_name)
+            
+            if not source_file:
+                stats['failed'] += 1
+                update_stats()
+                messagebox.showerror("Error", f"File not found: {file_name}")
+                current_supp_idx[0] += 1
+                load_current_suppression()
+                return
+            
+            try:
+                # Check if already has suppression
+                with open(source_file, 'r', encoding='utf-8', errors='ignore') as f:
+                    lines = f.readlines()
+                
+                line_num = supp['line']
+                if 'parasoft-suppress' in lines[line_num - 1]:
+                    stats['already_justified'] += 1
+                    update_stats()
+                    messagebox.showinfo("Already Justified", "This line already has a suppression comment.")
+                    current_supp_idx[0] += 1
+                    load_current_suppression()
+                    return
+                
+                # Apply suppression
+                suppress_comment = supp.get('comment', '')
+                if applier.apply_inline_suppression(source_file, line_num, suppress_comment):
+                    stats['applied'] += 1
+                    update_stats()
+                    self.log_output(f"✅ Applied suppression to {file_name}:{line_num}\n")
+                else:
+                    stats['failed'] += 1
+                    update_stats()
+                    messagebox.showerror("Error", "Failed to apply suppression")
+                
+            except Exception as e:
+                stats['failed'] += 1
+                update_stats()
+                messagebox.showerror("Error", f"Failed to apply: {str(e)}")
+            
+            current_supp_idx[0] += 1
+            load_current_suppression()
+        
+        def skip_current():
+            """Skip current suppression"""
+            stats['skipped'] += 1
+            update_stats()
+            current_supp_idx[0] += 1
+            load_current_suppression()
+        
+        def apply_all_remaining():
+            """Apply all remaining suppressions"""
+            if not messagebox.askyesno(
+                "Apply All",
+                "Apply all remaining suppressions without prompting?\n\n"
+                "This will skip suppressions that already exist."
+            ):
+                return
+            
+            # Apply all remaining
+            while current_file_idx[0] < len(files_list):
+                file_name = files_list[current_file_idx[0]]
+                suppressions = suppressions_data[file_name]
+                source_file = applier.find_file_in_repo(file_name)
+                
+                if not source_file:
+                    stats['failed'] += len(suppressions) - current_supp_idx[0]
+                    current_file_idx[0] += 1
+                    current_supp_idx[0] = 0
+                    continue
+                
+                for i in range(current_supp_idx[0], len(suppressions)):
+                    supp = suppressions[i]
+                    line_num = supp['line']
+                    suppress_comment = supp.get('comment', '')
+                    
+                    try:
+                        # Check if already has suppression
+                        with open(source_file, 'r', encoding='utf-8', errors='ignore') as f:
+                            lines = f.readlines()
+                        
+                        if 'parasoft-suppress' in lines[line_num - 1]:
+                            stats['already_justified'] += 1
+                        elif applier.apply_inline_suppression(source_file, line_num, suppress_comment):
+                            stats['applied'] += 1
+                            self.log_output(f"✅ Applied suppression to {file_name}:{line_num}\n")
+                        else:
+                            stats['failed'] += 1
+                    except:
+                        stats['failed'] += 1
+                    
+                    update_stats()
+                
+                current_file_idx[0] += 1
+                current_supp_idx[0] = 0
+            
+            messagebox.showinfo(
+                "Complete",
+                f"All suppressions applied!\n\n"
+                f"Applied: {stats['applied']}\n"
+                f"Skipped: {stats['skipped']}\n"
+                f"Already Justified: {stats['already_justified']}\n"
+                f"Failed: {stats['failed']}"
+            )
+            dialog.destroy()
+        
+        # Buttons
+        ttk.Button(button_frame, text="✅ Apply", command=apply_current, width=15).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="⏭️ Skip", command=skip_current, width=15).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="⚡ Apply All Remaining", command=apply_all_remaining, width=20).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="❌ Cancel", command=dialog.destroy, width=15).pack(side=tk.RIGHT, padx=5)
+        
+        # Load first suppression
+        if not load_current_suppression():
+            return
+        
+        dialog.transient(self.root)
+        dialog.grab_set()
+    
     
     def _query_master_knowledge_dialog(self):
         """Show interactive dialog for querying master knowledge base"""
@@ -1491,9 +1781,15 @@ For detailed documentation, see the docs/ folder.
         
         # Build full prompt with attachment if present
         full_prompt = prompt
+        has_large_file = False
         if self.attached_file_content:
             filename = Path(self.attached_file_path).name
+            file_size = len(self.attached_file_content)
             full_prompt = f"{prompt}\n\n[Attached File: {filename}]\n```\n{self.attached_file_content}\n```"
+            
+            # Flag if file is large (>10KB) for extended timeout
+            if file_size > 10000:
+                has_large_file = True
         
         # Add user message to chat
         self.chat_text.config(state='normal')
@@ -1523,10 +1819,10 @@ For detailed documentation, see the docs/ folder.
         # Add to history
         self.chat_history.append({'role': 'user', 'content': full_prompt})
         
-        # Send request in thread
+        # Send request in thread with timeout flag
         thread = threading.Thread(
             target=self._execute_chat_request,
-            args=(full_prompt,),
+            args=(full_prompt, has_large_file),
             daemon=True
         )
         thread.start()
@@ -1535,7 +1831,7 @@ For detailed documentation, see the docs/ folder.
         """Stop ongoing chat generation"""
         self.chat_running = False
     
-    def _execute_chat_request(self, prompt):
+    def _execute_chat_request(self, prompt, large_file=False):
         """Execute chat request to Ollama (runs in thread)"""
         self.chat_running = True
         
@@ -1553,6 +1849,8 @@ For detailed documentation, see the docs/ folder.
             def add_assistant_header():
                 self.chat_text.config(state='normal')
                 self.chat_text.insert(tk.END, "🤖 Assistant:\n", 'assistant')
+                if large_file:
+                    self.chat_text.insert(tk.END, "\n[Processing large file... This may take 2-5 minutes]\n", 'system')
                 self.chat_text.see(tk.END)
             
             self.root.after(0, add_assistant_header)
@@ -1560,6 +1858,10 @@ For detailed documentation, see the docs/ folder.
             # Small delay to ensure UI updates
             import time
             time.sleep(0.1)
+            
+            # Determine timeout based on file size
+            # Large files need more time for model processing
+            timeout_seconds = 300 if large_file else 120
             
             # Stream response from Ollama
             response = requests.post(
@@ -1570,7 +1872,7 @@ For detailed documentation, see the docs/ folder.
                     'stream': True
                 },
                 stream=True,
-                timeout=120
+                timeout=timeout_seconds
             )
             
             full_response = ""
@@ -1615,6 +1917,33 @@ For detailed documentation, see the docs/ folder.
                 self.chat_text.config(state='disabled')
                 self.chat_text.see(tk.END)
             self.root.after(0, show_import_error)
+        except requests.exceptions.Timeout:
+            timeout_msg = (
+                "\n[ERROR] Request timed out. This can happen when:\n"
+                "  • File is too large for the current model\n"
+                "  • Model is processing slowly\n\n"
+                "Solutions:\n"
+                "  1. Use a larger model: qwen2.5:latest (4.7GB)\n"
+                "  2. Attach smaller file sections\n"
+                "  3. Simplify your prompt\n\n"
+            )
+            def show_timeout_error():
+                self.chat_text.insert(tk.END, timeout_msg, 'error')
+                self.chat_text.config(state='disabled')
+                self.chat_text.see(tk.END)
+            self.root.after(0, show_timeout_error)
+        except requests.exceptions.ConnectionError:
+            conn_msg = (
+                "\n[ERROR] Cannot connect to Ollama.\n\n"
+                "Make sure Ollama is running:\n"
+                "  • Open a terminal and run: ollama serve\n"
+                "  • Or start Ollama from the application menu\n\n"
+            )
+            def show_conn_error():
+                self.chat_text.insert(tk.END, conn_msg, 'error')
+                self.chat_text.config(state='disabled')
+                self.chat_text.see(tk.END)
+            self.root.after(0, show_conn_error)
         except Exception as e:
             error_msg = f"\n[ERROR] {str(e)}\n\nMake sure Ollama is running (ollama serve)\n"
             def show_error():

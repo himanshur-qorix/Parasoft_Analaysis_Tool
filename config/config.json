@@ -58,12 +58,12 @@
     "ai_mode": "hybrid",
     "ollama": {
       "base_url": "http://localhost:11434",
-      "model": "qwen2.5-coder:1.5b-base",
-      "timeout": 120,
+      "model": "qwen2.5:latest",
+      "timeout": 300,
       "fallback_to_rules": true,
       "use_few_shot_learning": true
     },
-    "max_tokens": 1000,
+    "max_tokens": 2000,
     "temperature": 0.3,
     "use_ai_for": {
       "complex_violations": true,
