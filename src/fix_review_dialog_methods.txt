@@ -1,0 +1,409 @@
+    def _show_interactive_fix_review_dialog(self, fix_generator, violations, kb_manager, module_name):
+        """Show interactive dialog for reviewing code fixes one by one"""
+        dialog = tk.Toplevel(self.root)
+        dialog.title("🛠️ Review & Apply Code Fixes")
+        dialog.geometry("1200x800")
+        
+        # State
+        current_idx = [0]
+        
+        # Stats
+        stats = {
+            'accepted': 0,
+            'rejected': 0,
+            'skipped': 0,
+            'failed': 0
+        }
+        
+        # Rejection feedback storage
+        rejection_feedback = []
+        
+        # Generate fix for current violation (lazy loading)
+        current_fix_data = [None]
+        
+        # Header
+        header_frame = ttk.Frame(dialog, padding="10")
+        header_frame.pack(fill=tk.X)
+        
+        title_label = ttk.Label(
+            header_frame,
+            text=f"🛠️ Code Fixes for {module_name}",
+            font=('Arial', 14, 'bold')
+        )
+        title_label.pack(side=tk.LEFT)
+        
+        progress_var = tk.StringVar(value="0 / 0")
+        progress_label = ttk.Label(
+            header_frame,
+            textvariable=progress_var,
+            font=('Arial', 11)
+        )
+        progress_label.pack(side=tk.RIGHT)
+        
+        # Stats frame
+        stats_frame = ttk.LabelFrame(dialog, text="📊 Statistics", padding="10")
+        stats_frame.pack(fill=tk.X, padx=10, pady=(0, 10))
+        
+        stats_text = tk.StringVar(value="Accepted: 0 | Rejected: 0 | Skipped: 0 | Failed: 0")
+        stats_label = ttk.Label(stats_frame, textvariable=stats_text, font=('Arial', 10))
+        stats_label.pack()
+        
+        # Content frame with notebook for tabs
+        content_frame = ttk.LabelFrame(dialog, text="Fix Details", padding="10")
+        content_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=(0, 10))
+        
+        # Notebook for tabs
+        notebook = ttk.Notebook(content_frame)
+        notebook.pack(fill=tk.BOTH, expand=True)
+        
+        # Tab 1: Violation Info
+        violation_frame = ttk.Frame(notebook, padding="10")
+        notebook.add(violation_frame, text="📋 Violation")
+        
+        violation_text = scrolledtext.ScrolledText(
+            violation_frame,
+            wrap=tk.WORD,
+            font=('Courier New', 9),
+            bg='#FFF5E1'
+        )
+        violation_text.pack(fill=tk.BOTH, expand=True)
+        
+        # Tab 2: Suggested Fix
+        fix_frame = ttk.Frame(notebook, padding="10")
+        notebook.add(fix_frame, text="✨ Suggested Fix")
+        
+        fix_text = scrolledtext.ScrolledText(
+            fix_frame,
+            wrap=tk.WORD,
+            font=('Courier New', 9),
+            bg='#E8F5E9'
+        )
+        fix_text.pack(fill=tk.BOTH, expand=True)
+        
+        # Tab 3: Context & Examples
+        context_frame = ttk.Frame(notebook, padding="10")
+        notebook.add(context_frame, text="💡 Context")
+        
+        context_text = scrolledtext.ScrolledText(
+            context_frame,
+            wrap=tk.WORD,
+            font=('Courier New', 9),
+            bg='#E3F2FD'
+        )
+        context_text.pack(fill=tk.BOTH, expand=True)
+        
+        # Button frame
+        button_frame = ttk.Frame(dialog, padding="10")
+        button_frame.pack(fill=tk.X)
+        
+        def update_stats():
+            stats_text.set(
+                f"Accepted: {stats['accepted']} | Rejected: {stats['rejected']} | "
+                f"Skipped: {stats['skipped']} | Failed: {stats['failed']}"
+            )
+        
+        def load_current_fix():
+            """Load and display current fix"""
+            if current_idx[0] >= len(violations):
+                # Done!
+                if rejection_feedback:
+                    self._save_fix_rejection_feedback(rejection_feedback)
+                
+                messagebox.showinfo(
+                    "Complete",
+                    f"All fixes reviewed!\n\n"
+                    f"Accepted: {stats['accepted']}\n"
+                    f"Rejected: {stats['rejected']}\n"
+                    f"Skipped: {stats['skipped']}\n"
+                    f"Failed: {stats['failed']}"
+                )
+                dialog.destroy()
+                return False
+            
+            violation = violations[current_idx[0]]
+            
+            # Update progress
+            progress_var.set(f"{current_idx[0] + 1} / {len(violations)}")
+            
+            # Load violation details
+            violation_text.delete('1.0', tk.END)
+            violation_info = f"""
+VIOLATION ID: {violation.get('violation_id', 'UNKNOWN')}
+RULE: {violation.get('rule', 'UNKNOWN')}
+SEVERITY: {violation.get('severity', 'UNKNOWN')}
+FILE: {violation.get('file', 'UNKNOWN')}
+LINE: {violation.get('line', 'UNKNOWN')}
+
+DESCRIPTION:
+{violation.get('violation_text', 'No description available')}
+
+CODE SNIPPET:
+{violation.get('code_snippet', 'No code snippet available')}
+            """.strip()
+            
+            violation_text.insert('1.0', violation_info)
+            
+            # Generate fix for this violation
+            fix_text.delete('1.0', tk.END)
+            fix_text.insert('1.0', "⏳ Generating fix suggestion...\n\nPlease wait...")
+            context_text.delete('1.0', tk.END)
+            
+            # Use thread to generate fix without blocking UI
+            import threading
+            def generate_fix_async():
+                try:
+                    fix_data = fix_generator._generate_fix(violation)
+                    current_fix_data[0] = fix_data
+                    
+                    # Update UI on main thread
+                    dialog.after(0, lambda: display_generated_fix(fix_data))
+                except Exception as e:
+                    dialog.after(0, lambda: show_fix_error(str(e)))
+            
+            thread = threading.Thread(target=generate_fix_async, daemon=True)
+            thread.start()
+            
+            return True
+        
+        def display_generated_fix(fix_data):
+            """Display the generated fix in UI"""
+            if not fix_data:
+                fix_text.delete('1.0', tk.END)
+                fix_text.insert('1.0', "❌ No fix could be generated for this violation.")
+                return
+            
+            # Display fix suggestion
+            fix_text.delete('1.0', tk.END)
+            fix_suggestion = fix_data.get('fix_suggestion', 'No fix suggestion available')
+            fix_text.insert('1.0', fix_suggestion)
+            
+            # Display context (Parasoft examples, CWEs, etc.)
+            context_text.delete('1.0', tk.END)
+            context_info = []
+            
+            if fix_data.get('parasoft_repair'):
+                context_info.append(f"PARASOFT REPAIR EXAMPLE:\n{fix_data['parasoft_repair']}\n")
+            
+            if fix_data.get('cwe_ids'):
+                context_info.append(f"CWE MAPPINGS: {', '.join(fix_data['cwe_ids'])}\n")
+            
+            if fix_data.get('fix_type'):
+                context_info.append(f"FIX TYPE: {fix_data['fix_type']}\n")
+            
+            if context_info:
+                context_text.insert('1.0', '\n'.join(context_info))
+            else:
+                context_text.insert('1.0', "No additional context available.")
+        
+        def show_fix_error(error_msg):
+            """Show error if fix generation failed"""
+            fix_text.delete('1.0', tk.END)
+            fix_text.insert('1.0', f"❌ Error generating fix:\n\n{error_msg}")
+        
+        def accept_current():
+            """Accept current fix"""
+            if current_fix_data[0]:
+                violation = violations[current_idx[0]]
+                violation_id = violation.get('violation_id')
+                
+                # Mark as fixed in knowledge base
+                kb_manager.mark_fix_applied(violation_id)
+                
+                stats['accepted'] += 1
+                update_stats()
+                self.log_output(f"✅ Accepted fix for {violation_id}\n")
+            else:
+                stats['failed'] += 1
+                update_stats()
+            
+            current_idx[0] += 1
+            load_current_fix()
+        
+        def skip_current():
+            """Skip current fix"""
+            stats['skipped'] += 1
+            update_stats()
+            current_idx[0] += 1
+            load_current_fix()
+        
+        def reject_current():
+            """Reject current fix with reason"""
+            violation = violations[current_idx[0]]
+            fix_data = current_fix_data[0]
+            
+            if not fix_data:
+                messagebox.showinfo("No Fix", "No fix was generated for this violation.")
+                return
+            
+            # Show reason dialog (reuse same pattern as suppression rejection)
+            reason_dialog = tk.Toplevel(dialog)
+            reason_dialog.title("🚫 Rejection Reason")
+            reason_dialog.geometry("600x400")
+            reason_dialog.transient(dialog)
+            
+            ttk.Label(
+                reason_dialog,
+                text=f"Why are you rejecting this fix for {violation.get('violation_id')}?",
+                font=('Arial', 11, 'bold')
+            ).pack(padx=10, pady=(10, 5))
+            
+            ttk.Label(
+                reason_dialog,
+                text="Your feedback will help improve future suggestions.",
+                font=('Arial', 9),
+                foreground='gray'
+            ).pack(padx=10, pady=(0, 10))
+            
+            # Reason categories
+            ttk.Label(reason_dialog, text="Select reason category:", font=('Arial', 9, 'bold')).pack(padx=10, anchor=tk.W)
+            
+            reason_category = tk.StringVar(value="incorrect_fix")
+            categories = [
+                ("incorrect_fix", "Fix doesn't solve the violation"),
+                ("breaks_code", "Fix would break existing functionality"),
+                ("poor_quality", "Fix quality is poor/incomplete"),
+                ("not_applicable", "Fix not applicable to this context"),
+                ("better_alternative", "I have a better solution"),
+                ("other", "Other (specify below)")
+            ]
+            
+            for value, label in categories:
+                ttk.Radiobutton(
+                    reason_dialog,
+                    text=label,
+                    variable=reason_category,
+                    value=value
+                ).pack(padx=20, anchor=tk.W)
+            
+            # Additional details
+            ttk.Label(reason_dialog, text="Additional details:", font=('Arial', 9, 'bold')).pack(padx=10, pady=(10, 5), anchor=tk.W)
+            reason_text = scrolledtext.ScrolledText(
+                reason_dialog,
+                wrap=tk.WORD,
+                font=('Arial', 9),
+                height=6
+            )
+            reason_text.pack(padx=10, pady=(0, 10), fill=tk.BOTH, expand=True)
+            
+            def submit_rejection():
+                category = reason_category.get()
+                details = reason_text.get('1.0', tk.END).strip()
+                
+                if not details and category == "other":
+                    messagebox.showwarning("Missing Details", "Please provide details for 'Other' category.")
+                    return
+                
+                # Store rejection feedback
+                feedback_entry = {
+                    'violation_id': violation.get('violation_id'),
+                    'rule': violation.get('rule'),
+                    'file': violation.get('file'),
+                    'line': violation.get('line'),
+                    'fix_suggestion': fix_data.get('fix_suggestion', '')[:200],
+                    'rejection_category': category,
+                    'rejection_reason': details,
+                    'timestamp': datetime.now().isoformat()
+                }
+                rejection_feedback.append(feedback_entry)
+                
+                # Log to GUI
+                self.log_output(f"🚫 Rejected fix for {violation.get('violation_id')}\n")
+                self.log_output(f"   Category: {category}\n")
+                self.log_output(f"   Reason: {details[:100]}...\n" if len(details) > 100 else f"   Reason: {details}\n")
+                
+                stats['rejected'] += 1
+                update_stats()
+                reason_dialog.destroy()
+                current_idx[0] += 1
+                load_current_fix()
+            
+            # Buttons
+            btn_frame = ttk.Frame(reason_dialog)
+            btn_frame.pack(fill=tk.X, padx=10, pady=10)
+            
+            ttk.Button(btn_frame, text="Submit Rejection", command=submit_rejection).pack(side=tk.LEFT, padx=5)
+            ttk.Button(btn_frame, text="Cancel", command=reason_dialog.destroy).pack(side=tk.LEFT, padx=5)
+            
+            reason_dialog.grab_set()
+        
+        # Buttons
+        ttk.Button(button_frame, text="✅ Accept", command=accept_current, width=15).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="⏭️ Skip", command=skip_current, width=15).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="🚫 Reject", command=reject_current, width=15).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="❌ Cancel", command=dialog.destroy, width=15).pack(side=tk.RIGHT, padx=5)
+        
+        # Load first fix
+        if not load_current_fix():
+            return
+        
+        dialog.transient(self.root)
+        dialog.grab_set()
+    
+    def _save_fix_rejection_feedback(self, rejection_feedback):
+        """Save fix rejection feedback for regression learning"""
+        try:
+            # Create learning directory if it doesn't exist
+            learning_dir = self.project_root / "learning"
+            learning_dir.mkdir(exist_ok=True)
+            
+            # Save to rejection feedback file
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            feedback_file = learning_dir / f"fix_rejection_feedback_{timestamp}.json"
+            
+            with open(feedback_file, 'w', encoding='utf-8') as f:
+                json.dump({
+                    'timestamp': datetime.now().isoformat(),
+                    'feedback_count': len(rejection_feedback),
+                    'rejections': rejection_feedback
+                }, f, indent=2)
+            
+            self.log_output(f"\n✅ Saved {len(rejection_feedback)} fix rejection feedback entries to:\n")
+            self.log_output(f"   {feedback_file}\n\n")
+            
+            # Also integrate with FeedbackLearner if available
+            try:
+                from FeedbackLearner import FeedbackLearner, FeedbackType
+                
+                learner = FeedbackLearner(
+                    learning_db_path=learning_dir / "fix_learning.json"
+                )
+                
+                for feedback in rejection_feedback:
+                    # Map rejection categories to feedback types
+                    category_map = {
+                        'incorrect_fix': FeedbackType.FALSE_POSITIVE,
+                        'breaks_code': FeedbackType.SUPPRESSION_ERROR,
+                        'poor_quality': FeedbackType.SUPPRESSION_ERROR,
+                        'not_applicable': FeedbackType.FALSE_POSITIVE,
+                        'better_alternative': FeedbackType.SUPPRESSION_ERROR,
+                        'other': FeedbackType.SUPPRESSION_ERROR
+                    }
+                    
+                    feedback_type = category_map.get(
+                        feedback['rejection_category'],
+                        FeedbackType.SUPPRESSION_ERROR
+                    )
+                    
+                    # Add to learning system
+                    learner.add_feedback(
+                        feedback_type=feedback_type,
+                        rule_id=feedback['rule'],
+                        file_path=feedback['file'],
+                        line_number=feedback['line'],
+                        code_snippet=feedback['fix_suggestion'],
+                        user_comment=f"{feedback['rejection_category']}: {feedback['rejection_reason']}",
+                        severity='medium'
+                    )
+                
+                # Save updated learning database
+                learner.save_databases()
+                
+                self.log_output(f"✅ Integrated {len(rejection_feedback)} rejections into FeedbackLearner\n\n")
+                
+            except ImportError:
+                self.log_output("⚠️ FeedbackLearner not available - feedback saved to JSON only\n\n")
+            except Exception as e:
+                self.log_output(f"⚠️ Could not integrate with FeedbackLearner: {str(e)}\n\n")
+        
+        except Exception as e:
+            self.log_output(f"❌ Error saving fix rejection feedback: {str(e)}\n\n")

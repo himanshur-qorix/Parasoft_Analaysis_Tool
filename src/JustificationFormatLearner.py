@@ -207,27 +207,31 @@ class JustificationFormatLearner:
         references = []
         
         # Pattern to match individual reference sections
-        # Example: #section Tls_c_REF_1
-        #          Violates CERT_C-DCL00-b-3: ...
-        #          Justification: ...
-        ref_pattern = r'#section\s+([A-Za-z0-9_\-]+)\s+\* Violates\s+([A-Z0-9_\-,\s]+):[^\n]*\n\* Justification:\s*(.+?)(?=\*\s+#section|\*+/|\Z)'
+        # Example: 
+        # * #section Tls_c_REF_1
+        # * Violates CERT_C-DCL00-b-3: Declare parameter '' as const
+        # * Justification: Standard Autosar Interface provided cannot be tailored
+        # * according to the violation.
         
-        matches = re.findall(ref_pattern, header_content, re.DOTALL)
+        # More flexible pattern that handles multi-line justifications
+        ref_pattern = r'\*\s*#section\s+([A-Za-z0-9_\-]+)\s*\n\s*\*\s*Violates\s+([A-Z0-9_\-]+):\s*(.+?)\n\s*\*\s*Justification:\s*(.+?)(?=\*\s*\n\s*\*\s*#section|\*+/|\Z)'
         
-        for ref_id, rule_ids_str, justification in matches:
-            # Parse multiple rule IDs
-            rule_ids = [rid.strip() for rid in re.split(r'[,\s]+', rule_ids_str) if rid.strip()]
-            
-            # Clean up justification text
-            justification = re.sub(r'\n\*\s*', ' ', justification).strip()
+        matches = re.findall(ref_pattern, header_content, re.DOTALL | re.MULTILINE)
+        
+        for ref_id, rule_id, violation_desc, justification in matches:
+            # Clean up text - remove asterisks and extra whitespace
+            justification = re.sub(r'\n\s*\*\s*', ' ', justification).strip()
+            violation_desc = violation_desc.strip()
             
             ref = JustificationReference(
-                ref_id=ref_id,
-                rule_ids=rule_ids,
+                ref_id=ref_id.strip(),
+                rule_ids=[rule_id.strip()],  # Single rule per reference
                 justification_text=justification,
                 module_prefix=module_prefix
             )
             references.append(ref)
+            
+            logger.debug(f"Parsed reference: {ref_id} → {rule_id}")
         
         return references
     
@@ -273,20 +277,16 @@ class JustificationFormatLearner:
         Note:
             Reference format follows pattern: {ModuleName}_c_REF_{number}
             Example: Tls → Tls_c_REF_1, EthIf → EthIf_c_REF_1
+            
+            IMPORTANT: Same violation rule reuses the same reference ID across the module
         """
         check_id = violation.get('check_id', violation.get('violation_id', 'UNKNOWN'))
         violation_text = violation.get('violation_text', '')
         code_snippet = violation.get('code_snippet', '')
         
-        # Generate AI-powered justification text if available
-        if self.use_ai:
-            justification_text = self._generate_ai_justification(
-                check_id, violation_text, code_snippet
-            )
-        else:
-            justification_text = self._generate_rule_based_justification(
-                check_id, violation_text
-            )
+        # DEBUG: Log what check_id we're working with
+        logger.info(f"🔍 Processing violation with check_id: {check_id}")
+        logger.info(f"   violation_text: {violation_text[:80]}...")
         
         # Construct module-specific reference prefix
         # Format: {ModuleName}_c (e.g., "Tls_c", "EthIf_c", "Mka_c")
@@ -296,34 +296,65 @@ class JustificationFormatLearner:
         else:
             module_prefix = f"{module_name}_c"
         
-        # Find next available reference number for this module
+        # Check if this rule already has a reference in this module (REUSE LOGIC)
         existing_refs = self.reference_patterns.get(module_prefix, [])
-        next_ref_num = len(existing_refs) + 1
-        ref_id = f"{module_prefix}_REF_{next_ref_num}"
+        existing_ref = None
         
-        logger.debug(f"Generating justification: Module={module_name}, Prefix={module_prefix}, RefID={ref_id}")
+        logger.info(f"   Checking {len(existing_refs)} existing references for module {module_prefix}")
+        for ref in existing_refs:
+            logger.info(f"      Checking ref {ref.ref_id} with rules: {ref.rule_ids}")
+            if check_id in ref.rule_ids:
+                existing_ref = ref
+                logger.info(f"♻️  MATCH! Reusing existing reference: {ref.ref_id} for {check_id}")
+                break
         
-        # Generate header entry following discovered format
-        header_entry = f"""/*
+        # If reference exists for this rule, reuse it
+        if existing_ref:
+            ref_id = existing_ref.ref_id
+            justification_text = existing_ref.justification_text
+            
+            # Header entry already exists, return empty to avoid duplication
+            header_entry = ""  # Don't add duplicate header entries
+            
+        else:
+            # Generate NEW reference for this rule
+            # Generate AI-powered justification text if available
+            if self.use_ai:
+                justification_text = self._generate_ai_justification(
+                    check_id, violation_text, code_snippet
+                )
+            else:
+                justification_text = self._generate_rule_based_justification(
+                    check_id, violation_text
+                )
+            
+            # Find next available reference number for this module
+            next_ref_num = len(existing_refs) + 1
+            ref_id = f"{module_prefix}_REF_{next_ref_num}"
+            
+            logger.info(f"✨ Creating NEW reference: {ref_id} for {check_id}")
+            
+            # Generate header entry following discovered format
+            header_entry = f"""/*
 * #section {ref_id}
 * Violates {check_id}: {violation_text[:80]}{"..." if len(violation_text) > 80 else ""}
 * Justification: {justification_text}
 */"""
+            
+            # Store this reference for future reference number tracking
+            new_ref = JustificationReference(
+                ref_id=ref_id,
+                rule_ids=[check_id],
+                justification_text=justification_text,
+                module_prefix=module_prefix
+            )
+            self.reference_patterns[module_prefix].append(new_ref)
         
-        # Generate inline comment with module-specific reference
+        # Generate inline comment with module-specific reference (ALWAYS generated)
         inline_comment = f'// parasoft-suppress {check_id} "Reason: {ref_id}."'
         
-        # Store this reference for future reference number tracking
-        new_ref = JustificationReference(
-            ref_id=ref_id,
-            rule_ids=[check_id],
-            justification_text=justification_text,
-            module_prefix=module_prefix
-        )
-        self.reference_patterns[module_prefix].append(new_ref)
-        
         return {
-            'header_entry': header_entry,
+            'header_entry': header_entry,  # Empty if reusing existing reference
             'inline_comment': inline_comment,
             'ref_id': ref_id,
             'justification_text': justification_text,

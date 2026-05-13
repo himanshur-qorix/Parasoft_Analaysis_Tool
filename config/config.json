@@ -68,8 +68,8 @@
     "use_ai_for": {
       "complex_violations": true,
       "unknown_patterns": true,
-      "cert_violations": false,
-      "misra_violations": false
+      "cert_violations": true,
+      "misra_violations": true
     }
   },
   "logging": {

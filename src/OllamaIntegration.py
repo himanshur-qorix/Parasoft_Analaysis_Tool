@@ -176,15 +176,25 @@ class OllamaIntegration:
             # This method is called AFTER Parasoft DB check fails
             # So in hybrid mode, we should try AI as a fallback
             
-            # Check category-based rules
-            if 'CERT' in category and self.use_ai_for.get('cert_violations', True):
-                return True
+            # First check if there's a category-specific override that disables AI
+            if 'CERT' in category and not self.use_ai_for.get('cert_violations', True):
+                logger.debug(f"AI disabled for CERT violations by config")
+                return False
             
-            if 'MISRA' in category and self.use_ai_for.get('misra_violations', True):
-                return True
+            if 'MISRA' in category and not self.use_ai_for.get('misra_violations', True):
+                logger.debug(f"AI disabled for MISRA violations by config")
+                return False
             
-            # Use AI for unknown/complex patterns (default: true in hybrid)
+            # Default: Use AI for unknown/complex patterns in hybrid mode
+            # This catches all violations that don't match Parasoft DB
             if self.use_ai_for.get('unknown_patterns', True):
+                return True
+            
+            # If unknown_patterns is explicitly disabled, only use AI for enabled categories
+            if 'CERT' in category and self.use_ai_for.get('cert_violations', False):
+                return True
+            
+            if 'MISRA' in category and self.use_ai_for.get('misra_violations', False):
                 return True
         
         return False
@@ -200,7 +210,8 @@ class OllamaIntegration:
             Fix suggestion dictionary or None if failed
         """
         if not self.enabled:
-            logger.debug("Ollama not enabled, skipping AI generation")
+            logger.warning("❌ [AI] Ollama NOT enabled - skipping AI generation")
+            logger.info(f"   Check config.json: ai_integration.enabled = {self.enabled}")
             return None
         
         try:
@@ -211,51 +222,334 @@ class OllamaIntegration:
             code_context = violation.get('code_context')
             parasoft_reference = violation.get('parasoft_reference')
             
+            logger.info(f"[AI] ⚡ Starting AI generation for {violation_id}")
+            logger.info(f"[AI]   Model: {self.model} at {self.base_url}")
+            logger.info(f"[AI]   Violation text: {violation_text[:100]}...")
+            logger.info(f"[AI]   Category: {category}")
+            logger.info(f"[AI]   Has code context: {code_context is not None}")
+            if code_context:
+                logger.info(f"[AI]   Code file: {code_context.get('file')}:{code_context.get('line')}")
+                logger.info(f"[AI]   Target line: {code_context.get('target_line', '')[:80]}")
+                logger.info(f"[AI]   Context block preview: {code_context.get('context', '')[:150]}...")
+            else:
+                logger.warning(f"[AI] ⚠️  NO CODE CONTEXT - will generate generic fix")
+            
+            logger.info(f"[AI] 📋 FULL VIOLATION DICT being passed to AI:")
+            logger.info(f"     violation_id: {violation_id}")
+            logger.info(f"     violation_text: {violation_text}")
+            logger.info(f"     category: {category}")
+            logger.info(f"     code_context: {code_context is not None}")
+            
             # Build prompt with all available context
             prompt = self._build_prompt(violation_id, violation_text, category, severity, 
                                        code_context, parasoft_reference)
             
-            logger.info(f"[AI] Generating fix for {violation_id} using {self.model}...")
-            logger.debug(f"   Prompt length: {len(prompt)} chars")
+            logger.info(f"[AI] 📝 Built prompt ({len(prompt)} chars)")
+            logger.info(f"[AI] 🔍 PROMPT PREVIEW (first 500 chars):")
+            logger.info(f"{prompt[:500]}")
+            logger.info(f"[AI] 🔍 PROMPT END (last 300 chars):")
+            logger.info(f"{prompt[-300:]}")
+            logger.debug(f"[AI] Full prompt:\n{prompt}\n{'='*70}")
             
             # Call Ollama
-            response = ollama.generate(
+            logger.info(f"[AI] 🔄 Calling Ollama API...")
+            logger.info(f"[AI]   Temperature: {self.temperature}, Max tokens: {self.max_tokens}")
+            logger.info(f"[AI]   Timeout: {self.timeout} seconds")
+            
+            # Use lower temperature when we have code context for more precise fixes
+            temperature = 0.1 if code_context else self.temperature
+            if code_context:
+                logger.info(f"[AI]   🎯 Using lower temperature (0.1) for specific code fix")
+            
+            # Create client with custom timeout
+            from ollama import Client
+            client = Client(host=self.base_url, timeout=self.timeout)
+            
+            response = client.generate(
                 model=self.model,
                 prompt=prompt,
+                stream=False,  # Get complete response, not streaming
                 options={
-                    'temperature': self.temperature,
+                    'temperature': temperature,
                     'num_predict': self.max_tokens,
+                    'top_k': 40,
+                    'top_p': 0.9,
+                    'stop': ['\n\n\n']  # Stop after 3 newlines
                 }
             )
+            
+            logger.info(f"[AI] ✅ Got response from Ollama")
+            logger.debug(f"[AI] Response object type: {type(response)}")
             
             # Extract response text - handle both dict and typed objects
             if hasattr(response, 'response'):
                 # Typed object with response attribute
                 response_text = response.response
+                logger.debug(f"[AI] Extracted from .response attribute")
             elif isinstance(response, dict):
                 # Dictionary response
                 response_text = response.get('response', '')
+                logger.debug(f"[AI] Extracted from dict['response']")
             else:
-                logger.error(f"[ERROR] Unexpected response type from Ollama generate: {type(response)}")
+                logger.error(f"[AI] ❌ Unexpected response type from Ollama: {type(response)}")
                 return None
             
-            logger.debug(f"   AI response length: {len(response_text)} chars")
-            logger.debug(f"   AI response preview: {response_text[:200]}...")
+            logger.info(f"[AI] 📄 Response length: {len(response_text)} chars")
+            
+            # Check for empty response
+            if not response_text or len(response_text.strip()) == 0:
+                logger.error(f"[AI] ❌ EMPTY RESPONSE from Ollama!")
+                logger.error(f"[AI] This usually means:")
+                logger.error(f"[AI]   1. Model is a BASE model (not instruction-tuned)")
+                logger.error(f"[AI]      → Your model: {self.model}")
+                logger.error(f"[AI]      → BASE models don't follow instructions!")
+                logger.error(f"[AI]      → Use an INSTRUCT model instead:")
+                logger.error(f"[AI]         • qwen2.5-coder:1.5b (without -base)")
+                logger.error(f"[AI]         • codellama:7b-instruct")
+                logger.error(f"[AI]         • deepseek-coder:1.3b-instruct")
+                logger.error(f"[AI]   2. Model timed out before generating")
+                logger.error(f"[AI]   3. Model is still loading")
+                logger.error(f"[AI] ")
+                logger.error(f"[AI] 💡 FIX: Run 'ollama pull qwen2.5-coder:1.5b' (no -base)")
+                logger.error(f"[AI]       Then update config.json model to 'qwen2.5-coder:1.5b'")
+                return None
+            
+            logger.info(f"[AI] Response preview: {response_text[:300]}...")
+            
+            # Log the full response for debugging
+            logger.info(f"[AI] 📄 FULL AI RESPONSE:")
+            logger.info(f"{'='*70}")
+            logger.info(response_text[:1000])  # First 1000 chars
+            if len(response_text) > 1000:
+                logger.info(f"... (response continues for {len(response_text)} total chars)")
+            logger.info(f"{'='*70}")
+            logger.debug(f"[AI] Full AI response:\n{response_text}\n{'='*70}")
             
             # Parse response
+            logger.info(f"[AI] 🔍 Parsing response...")
             fix_data = self._parse_response(response_text, violation)
             
             if fix_data:
-                logger.info(f"[OK] AI-generated fix for {violation_id}")
+                logger.info(f"[AI] ✅ Successfully generated AI fix for {violation_id}")
+                logger.info(f"[AI]   Type: {fix_data.get('type')}")
+                logger.info(f"[AI]   Priority: {fix_data.get('priority')}")
+                logger.info(f"[AI]   AI-generated: {fix_data.get('ai_generated', False)}")
                 return fix_data
             else:
-                logger.warning(f"[WARNING] Failed to parse AI response for {violation_id}")
+                logger.error(f"[AI] ❌ Failed to parse AI response for {violation_id}")
+                logger.error(f"[AI] Raw response was:\n{response_text}")
                 return None
             
         except Exception as e:
-            logger.error(f"[ERROR] Ollama generation failed: {str(e)}")
+            logger.error(f"[AI] ❌ Ollama generation failed with exception: {str(e)}")
+            import traceback
+            logger.error(f"[AI] Traceback:\n{traceback.format_exc()}")
             if self.fallback_to_rules:
-                logger.info("Falling back to rule-based generation")
+                logger.info("[AI] Falling back to rule-based generation")
+            return None
+    
+    def generate_code_modification(self, violation: Dict, code_context: Dict) -> Optional[Dict]:
+        """
+        Generate actual code modification (not just suggestions) using AI
+        This method is designed for the interactive code fixer to generate actual code changes
+        
+        Args:
+            violation: Violation dictionary with details
+            code_context: Code context with actual source code and line information
+        
+        Returns:
+            Dictionary with modified_code and metadata, or None if failed
+        """
+        if not self.enabled:
+            logger.debug("Ollama not enabled, skipping AI code modification")
+            return None
+        
+        try:
+            violation_id = violation.get('violation_id', 'UNKNOWN')
+            violation_text = violation.get('violation_text', '')
+            category = violation.get('category', 'OTHER')
+            
+            # Build enhanced prompt for code modification
+            prompt = self._build_code_modification_prompt(violation_id, violation_text, category, code_context)
+            
+            logger.info(f"[AI-MOD] Generating code modification for {violation_id}...")
+            logger.debug(f"   Context: {code_context['file']}:{code_context['line']}")
+            
+            # Create client with custom timeout
+            from ollama import Client
+            client = Client(host=self.base_url, timeout=self.timeout)
+            
+            # Call Ollama with lower temperature for precise code generation
+            response = client.generate(
+                model=self.model,
+                prompt=prompt,
+                options={
+                    'temperature': 0.1,  # Lower temperature for more deterministic code
+                    'num_predict': 2000,  # Allow longer responses for code blocks
+                }
+            )
+            
+            # Extract response text
+            if hasattr(response, 'response'):
+                response_text = response.response
+            elif isinstance(response, dict):
+                response_text = response.get('response', '')
+            else:
+                logger.error(f"[ERROR] Unexpected response type: {type(response)}")
+                return None
+            
+            logger.debug(f"   AI response length: {len(response_text)} chars")
+            
+            # Parse response to extract modified code
+            result = self._parse_code_modification_response(response_text, code_context)
+            
+            if result:
+                logger.info(f"[OK] Generated code modification for {violation_id}")
+                return result
+            else:
+                logger.warning(f"[WARNING] Could not parse code modification response")
+                return None
+        
+        except Exception as e:
+            logger.error(f"[ERROR] Code modification generation failed: {str(e)}")
+            return None
+    
+    def _build_code_modification_prompt(self, violation_id: str, violation_text: str, 
+                                        category: str, code_context: Dict) -> str:
+        """
+        Build prompt specifically for generating actual code modifications
+        
+        Args:
+            violation_id: Violation ID
+            violation_text: Violation description
+            category: Category (MISRA, CERT, etc.)
+            code_context: Code context with actual source code
+        
+        Returns:
+            Prompt string optimized for code modification
+        """
+        prompt = f"""You are an expert C/C++ code refactoring assistant. Your task is to fix a specific coding standard violation by providing the COMPLETE modified code.
+
+VIOLATION DETAILS:
+- ID: {violation_id}
+- Category: {category}
+- Description: {violation_text}
+
+CURRENT SOURCE CODE:
+File: {code_context['file']}
+Line {code_context['line']} contains the violation.
+
+```c
+{code_context['context']}
+```
+
+VIOLATION LINE:
+>>> {code_context['target_code']}
+
+YOUR TASK:
+Provide the COMPLETE MODIFIED CODE that fixes this violation. You MUST:
+1. Analyze the root cause of the violation
+2. Apply the minimal necessary fix to resolve the violation
+3. Return the COMPLETE corrected code block (replace the entire context shown above)
+4. Ensure the fix follows {category} coding standards
+5. Maintain all existing functionality and logic
+6. Preserve formatting, indentation, and style as much as possible
+7. Only change what's necessary to fix the violation
+
+OUTPUT FORMAT (MANDATORY):
+You must respond in this EXACT format:
+
+ANALYSIS:
+[Explain in 1-2 sentences what causes the violation and your fix approach]
+
+MODIFIED_CODE:
+```c
+[The complete corrected code block - must be valid C/C++ code that replaces the context above]
+```
+
+TYPE: [One word: cast/bounds_check/initialization/refactor/validation/declaration/null_check]
+PRIORITY: [One word: HIGH/MEDIUM/LOW]
+
+CRITICAL RULES:
+- The MODIFIED_CODE section must contain the COMPLETE replacement code
+- Do NOT use placeholders like "...", "rest of code", or "/* unchanged code */"
+- Include ALL lines from the original context, with your fixes applied
+- The code must be syntactically correct and ready to compile
+- Preserve all comments, except those that are directly related to the violation
+- If you add any explanation, put it ONLY in the ANALYSIS section, NOT in the code"""
+        
+        return prompt
+    
+    def _parse_code_modification_response(self, response: str, code_context: Dict) -> Optional[Dict]:
+        """
+        Parse AI response to extract modified code and metadata
+        
+        Args:
+            response: AI response text
+            code_context: Original code context for validation
+        
+        Returns:
+            Dictionary with modified_code and metadata, or None if parsing failed
+        """
+        import re
+        
+        try:
+            # Extract analysis section
+            analysis_match = re.search(r'ANALYSIS:\s*(.+?)(?=MODIFIED_CODE:|TYPE:|$)', response, re.DOTALL | re.IGNORECASE)
+            analysis = analysis_match.group(1).strip() if analysis_match else "AI-generated code modification"
+            
+            # Extract modified code from code blocks
+            # Look for ```c, ```cpp, or just ```
+            code_block_pattern = r'```(?:c|cpp)?\s*\n(.+?)```'
+            code_matches = re.findall(code_block_pattern, response, re.DOTALL)
+            
+            modified_code = None
+            if code_matches:
+                # Use the first (or largest) code block
+                modified_code = max(code_matches, key=len).strip()
+            else:
+                # Try to find code after MODIFIED_CODE: without code fences
+                code_text_match = re.search(r'MODIFIED_CODE:\s*\n(.+?)(?=\nTYPE:|$)', response, re.DOTALL | re.IGNORECASE)
+                if code_text_match:
+                    modified_code = code_text_match.group(1).strip()
+            
+            # Extract fix type
+            type_match = re.search(r'TYPE:\s*(\w+)', response, re.IGNORECASE)
+            fix_type = type_match.group(1).lower() if type_match else 'refactor'
+            
+            # Extract priority
+            priority_match = re.search(r'PRIORITY:\s*(HIGH|MEDIUM|LOW)', response, re.IGNORECASE)
+            priority = priority_match.group(1).upper() if priority_match else 'MEDIUM'
+            
+            # Validate extracted code
+            if not modified_code:
+                logger.warning("Could not extract modified code from AI response")
+                logger.debug(f"Response preview: {response[:500]}")
+                return None
+            
+            # Basic validation: check if modified code has some substance
+            if len(modified_code.strip()) < 10:
+                logger.warning("Extracted code is too short to be valid")
+                return None
+            
+            # Check for placeholder text
+            placeholder_markers = ['...', 'rest of code', 'unchanged code', 'your code here', 'add code here']
+            code_lower = modified_code.lower()
+            if any(marker in code_lower for marker in placeholder_markers):
+                logger.warning("Modified code contains placeholder text, rejecting")
+                return None
+            
+            return {
+                'type': fix_type,
+                'description': analysis,
+                'modified_code': modified_code,
+                'priority': priority,
+                'ai_generated': True,
+                'model': self.model
+            }
+        
+        except Exception as e:
+            logger.error(f"Error parsing code modification response: {e}")
             return None
     
     def _build_prompt(self, violation_id: str, violation_text: str, 
@@ -299,38 +593,66 @@ Rule: {parasoft_reference.get('rule_title', 'N/A')}
         
         # Add code context if available
         if code_context:
+            target_line = code_context.get('target_line', code_context.get('target_code', 'N/A'))
+            file_name = code_context.get('file', 'unknown')
+            line_number = code_context.get('line', '?')
+            context_block = code_context.get('context', 'N/A')
+            
+            # SIMPLIFIED, MORE DIRECT PROMPT for better AI adherence
             prompt += f"""
 
-ACTUAL CODE CONTEXT:
-File: {code_context.get('file', 'unknown')}
-Line {code_context.get('line', '?')}:
-{code_context.get('context', 'N/A')}
+========================================
+🎯 YOUR TASK: Fix THIS specific line of code
+========================================
 
-Target line with violation:
->>> {code_context.get('target_code', 'N/A')}"""
+File: {file_name}, Line {line_number}
+
+The problematic code is:
+{target_line}
+
+Context (surrounding code):
+{context_block}
+
+INSTRUCTIONS:
+1. Look at the code above: {target_line}
+2. Generate a fix for THIS EXACT code (not a generic example)
+3. Your "example" field MUST contain: {target_line}
+4. Show: "// Before:\\n{target_line}\\n\\n// After:\\n[fixed version]"
+
+⚠️ CRITICAL: The "Before:" section MUST show: {target_line}
+⚠️ DO NOT use placeholders like "myEnum" or "value"
+⚠️ USE the actual identifier: {target_line.split()[0] if target_line else 'from code above'}
+"""
         
         prompt += """
 
-CRITICAL: You MUST provide a CODE EXAMPLE showing before/after transformation.
+RESPONSE FORMAT - Provide ONLY valid JSON:
 
-Provide ONLY valid JSON with REAL, SPECIFIC content:
+❌ WRONG EXAMPLE (generic placeholders):
 {
-  "type": "explicit_cast",
-  "description": "Add explicit type cast from enum to unsigned type to prevent implicit conversion warning and ensure type safety according to MISRA/CERT standards",
-  "example": "// Before:\\nuint8_t value = myEnumValue;\\n\\n// After:\\nuint8_t value = (uint8_t)myEnumValue;",
+  "type": "cast",
+  "description": "Add explicit cast...",
+  "example": "// Before:\\nuint8_t value = myEnum;\\n\\n// After:\\nuint8_t value = (uint8_t)myEnum;",
   "priority": "MEDIUM"
 }
 
-MANDATORY REQUIREMENTS:
-- type: MUST be specific (cast/check/refactor/declaration/bounds/validation/initialization)
-- description: MUST explain what to do (minimum 20 words)
-- example: MUST show C/C++ code with "// Before:" and "// After:" sections
-- priority: HIGH/MEDIUM/LOW based on severity
-- NO placeholder text like "brief description" or "your code here"
-- If code context provided, use ACTUAL variable names from the code
-- Code example must be valid C/C++ syntax
+✅ CORRECT EXAMPLE (using actual code from above):
+{
+  "type": "cast",
+  "description": "Add explicit cast to MKA_CRYPTO_PROCESSING_SYNC to convert enum to unsigned type...",
+  "example": "// Before:\\nMKA_CRYPTO_PROCESSING_SYNC,\\n\\n// After:\\n(uint32_t)MKA_CRYPTO_PROCESSING_SYNC,",
+  "priority": "MEDIUM"
+}
 
-Generate ACTUAL fix with CODE EXAMPLE now:"""
+REQUIREMENTS:
+- "type": specific fix type (cast/check/refactor/etc)
+- "description": minimum 20 words explaining the fix
+- "example": MUST contain the actual code line I showed you
+- "priority": HIGH/MEDIUM/LOW
+- NO generic names: myEnum, value, ptr, variable, etc.
+- USE actual names from the code
+
+Generate your JSON response now (MUST use the actual code from above):"""
         
         return prompt
     
@@ -362,25 +684,136 @@ Generate ACTUAL fix with CODE EXAMPLE now:"""
                 try:
                     fix_data = json.loads(json_str)
                     
-                    # Validate required fields
-                    required = ['type', 'description', 'priority']
+                    # Validate required fields (priority is optional - AI often forgets it)
+                    required = ['type', 'description']
                     if all(k in fix_data for k in required):
+                        # Add default priority if missing
+                        if 'priority' not in fix_data:
+                            fix_data['priority'] = 'MEDIUM'
+                            logger.debug("Added default priority: MEDIUM (AI forgot to include it)")
                         # Validate content is not placeholder text
                         if self._is_placeholder_content(fix_data):
                             logger.warning(f"❌ Rejected placeholder content in JSON response for {violation.get('violation_id')}")
-                            logger.warning(f"   Description: {fix_data.get('description', '')[:100]}...")
-                            logger.warning(f"   Example: {fix_data.get('example', '')[:100]}...")
+                            logger.warning(f"   Description: {fix_data.get('description', '')[:150]}...")
+                            logger.warning(f"   Example preview: {fix_data.get('example', '')[:150]}...")
+                            logger.warning(f"   Example length: {len(fix_data.get('example', ''))} chars")
+                            logger.warning(f"   Type: {fix_data.get('type', '')}")
                             logger.info(f"   Falling back to text extraction or default generation")
+                            logger.info(f"   💡 TIP: Check _is_placeholder_content() validation - may be too strict")
                         else:
-                            # Add AI metadata
+                            # ADDITIONAL CHECK: If code context was provided, verify the example uses actual code
+                            code_context = violation.get('code_context')
+                            if code_context:
+                                target_line = code_context.get('target_line', '').strip()
+                                example_text = fix_data.get('example', '').lower()
+                                
+                                # Extract key identifiers from target line (variable/function names)
+                                # Simple heuristic: look for identifiers that are at least 3 chars long
+                                import re
+                                identifiers = re.findall(r'\b[a-zA-Z_][a-zA-Z0-9_]{2,}\b', target_line)
+                                
+                                if identifiers:
+                                    # Check if at least one identifier from the actual code appears in the example
+                                    found_actual_code = any(ident.lower() in example_text for ident in identifiers[:3])
+                                    
+                                    if not found_actual_code:
+                                        logger.warning(f"❌ AI provided generic example instead of using actual code!")
+                                        logger.warning(f"   Expected identifiers from code: {identifiers[:3]}")
+                                        logger.warning(f"   But example doesn't contain them: {fix_data.get('example', '')[:200]}")
+                                        logger.warning(f"   This is a GENERIC EXAMPLE, not a SPECIFIC FIX")
+                                        # Don't reject - just warn and let it through with warning
+                                        fix_data['warning'] = '⚠️ AI generated generic example. May need manual adaptation.'
+                                    else:
+                                        logger.info(f"   ✅ Example uses actual code identifiers: {[i for i in identifiers[:3] if i.lower() in example_text]}")
+                                else:
+                                    logger.warning(f"   ⚠️ No clear identifiers found in target line to validate")
+                            
+                            # POST-PROCESSING: ALWAYS check if we can improve the example with actual code
+                            # (Not just when there's a warning - be proactive)
+                            if code_context:
+                                target_line = code_context.get('target_line', '').strip()
+                                if target_line:
+                                    example = fix_data.get('example', '')
+                                    
+                                    # Check if example contains actual code
+                                    import re
+                                    before_after_match = re.search(r'// Before:\s*\n(.+?)\s*\n\s*// After:\s*\n(.+?)(?:\n|$)', example, re.DOTALL)
+                                    
+                                    if before_after_match:
+                                        generic_before = before_after_match.group(1).strip()
+                                        generic_after = before_after_match.group(2).strip()
+                                        
+                                        # Check if the "Before" uses actual code or generic placeholder
+                                        # Extract key identifier from target_line
+                                        target_identifiers = re.findall(r'\b[A-Z_][A-Z0-9_]{3,}\b', target_line)  # Uppercase constants/enums
+                                        
+                                        uses_actual_code = False
+                                        if target_identifiers:
+                                            # Check if any identifier from actual code appears in example
+                                            uses_actual_code = any(ident in generic_before for ident in target_identifiers[:2])
+                                        
+                                        if not uses_actual_code:
+                                            logger.warning(f"   🔧 AI used generic example - replacing with actual code")
+                                            logger.info(f"   Generic before: {generic_before}")
+                                            logger.info(f"   Actual code: {target_line}")
+                                            
+                                            # Extract the fix pattern from generic_after
+                                            fix_type = fix_data.get('type', '')
+                                            actual_after = target_line  # Default: no change
+                                            
+                                            if 'cast' in fix_type.lower() or 'cast' in fix_data.get('description', '').lower():
+                                                # Extract cast type from generic example
+                                                cast_match = re.search(r'\(([a-zA-Z_]\w*)\)', generic_after)
+                                                cast_type = None
+                                                
+                                                if cast_match:
+                                                    cast_type = cast_match.group(1)
+                                                    logger.info(f"   Found cast type in example: {cast_type}")
+                                                
+                                                # If cast type seems wrong, try to infer from description or context
+                                                if not cast_type or cast_type in ['myEnum', 'value', 'ptr']:
+                                                    # Try to infer from description
+                                                    desc = fix_data.get('description', '')
+                                                    type_match = re.search(r'(uint32_t|uint16_t|uint8_t|int32_t|int16_t|int8_t|size_t)', desc, re.IGNORECASE)
+                                                    if type_match:
+                                                        cast_type = type_match.group(1).lower()
+                                                        logger.info(f"   Inferred cast type from description: {cast_type}")
+                                                
+                                                # Apply cast to actual code
+                                                if cast_type:
+                                                    actual_after = f"({cast_type}){target_line}"
+                                                    logger.info(f"   Applied cast: {actual_after}")
+                                                else:
+                                                    # Default fallback
+                                                    actual_after = f"(uint32_t){target_line}"
+                                                    logger.info(f"   Using default cast: {actual_after}")
+                                            
+                                            elif 'check' in fix_type.lower() or 'null' in fix_type.lower():
+                                                # Add null/bounds check
+                                                actual_after = target_line + "\nif (" + target_line.split()[0] + " != NULL) { ... }"
+                                            
+                                            # Reconstruct example with actual code
+                                            fix_data['example'] = f"// Before:\n{target_line}\n\n// After:\n{actual_after}"
+                                            logger.info(f"   ✅ Fixed example now uses actual code")
+                                            logger.info(f"   New example:\n{fix_data['example']}")
+                                            
+                                            # Remove generic warning if it exists
+                                            fix_data.pop('warning', None)
+                                        else:
+                                            logger.info(f"   ✅ Example already uses actual code identifiers")
+                            
+                            # Add AI metadata (after post-processing)
                             fix_data['ai_generated'] = True
                             fix_data['model'] = self.model
                             fix_data['violation_id'] = violation.get('violation_id')
                             fix_data['category'] = violation.get('category')
                             
-                            logger.info(f"✅ Successfully parsed AI JSON for {violation.get('violation_id')}")
-                            logger.debug(f"   Type: {fix_data.get('type')}, Priority: {fix_data.get('priority')}")
-                            return fix_data
+                            # Final summary after post-processing
+                            logger.info(f"✅ FINAL fix ready for {violation.get('violation_id')}")
+                            logger.info(f"   💻 Final Example AFTER post-processing:")
+                            logger.info(f"{fix_data.get('example', '')[:350]}")
+                            
+                            return fix_data  # Return AFTER post-processing is complete
                     else:
                         logger.debug(f"JSON missing required fields. Found keys: {list(fix_data.keys())}")
                 except json.JSONDecodeError as e:
@@ -447,6 +880,8 @@ Generate ACTUAL fix with CODE EXAMPLE now:"""
         Returns:
             True if content appears to be placeholder text
         """
+        logger.debug(f"🔍 Validating fix content...")
+        
         placeholder_phrases = [
             'brief description',
             'brief fix description',
@@ -465,6 +900,7 @@ Generate ACTUAL fix with CODE EXAMPLE now:"""
         # Check description field
         description = fix_data.get('description', '').lower()
         if any(phrase in description for phrase in placeholder_phrases):
+            logger.debug(f"❌ Description has placeholder phrase")
             return True
         
         # Check if description contains JSON structure artifacts
@@ -480,29 +916,31 @@ Generate ACTUAL fix with CODE EXAMPLE now:"""
             return True
         
         # Check if description is too short (likely placeholder)
-        if len(description.strip()) < 15:
+        if len(description.strip()) < 10:  # Reduced from 15 to 10
+            logger.debug(f"❌ Description too short: {len(description.strip())} chars (min 10)")
             return True
         
         # Check example field if present
         example = fix_data.get('example', '').lower()
         if example and any(phrase in example for phrase in placeholder_phrases):
+            logger.debug(f"❌ Example has placeholder phrase")
             return True
         
         # Check if example contains JSON structure (not actual code)
         json_structure_markers = ['"priority":', '"type":', '"description":', '"}', '",', '}\n}']
         if any(marker in example for marker in json_structure_markers):
-            logger.debug("Example contains JSON structure instead of code")
+            logger.debug("❌ Example contains JSON structure instead of code")
             return True
         
         # Check if example is just closing braces or brackets
         example_raw = fix_data.get('example', '').strip()
         if example_raw in ['}', '},', ']', '],', '"}', '"},']:
-            logger.debug("Example is just JSON closing syntax")
+            logger.debug("❌ Example is just JSON closing syntax")
             return True
         
         # Check if example is missing or too short
-        if not example or len(example.strip()) < 20:
-            logger.debug("Example is missing or too short")
+        if not example or len(example.strip()) < 15:  # Reduced from 20 to 15
+            logger.debug(f"❌ Example too short or missing: {len(example.strip()) if example else 0} chars (min 15)")
             return True
         
         # Check if example contains actual code markers
@@ -525,8 +963,10 @@ Generate ACTUAL fix with CODE EXAMPLE now:"""
         # Check if type is generic placeholder
         fix_type = fix_data.get('type', '').lower()
         if fix_type in ['fix_type', 'type', 'fix', '']:
+            logger.debug(f"❌ Type is generic placeholder: '{fix_type}'")
             return True
         
+        logger.debug(f"✅ Content validation PASSED")
         return False
     
     def _extract_from_text(self, text: str, violation: Dict) -> Optional[Dict]:

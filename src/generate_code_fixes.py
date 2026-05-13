@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 
 
 def generate_code_fixes(module_name: str, specific_violations: list = None, ai_mode: str = 'hybrid', 
-                       source_code_path: str = None, interactive: bool = False):
+                       source_code_path: str = None, interactive: bool = False, apply_fixes: bool = False):
     """
     Generate code fix suggestions for violations
     
@@ -38,7 +38,8 @@ def generate_code_fixes(module_name: str, specific_violations: list = None, ai_m
         specific_violations: Optional list of specific violation IDs to fix
         ai_mode: AI mode ('ai_only', 'hybrid', 'rules_only')
         source_code_path: Path to source code directory for context-aware fixes
-        interactive: If True, prompt for each violation individually
+        interactive: If True, prompt for each violation individually (suggestions only)
+        apply_fixes: If True, use AI to actually apply fixes to source files (NEW!)
     """
     print("\n" + "="*80)
     print("  CODE FIX GENERATOR - Version 2.3.0")
@@ -95,7 +96,48 @@ def generate_code_fixes(module_name: str, specific_violations: list = None, ai_m
     
     # Generate fixes
     print()
+    NEW: AI-Powered Interactive Code Fixer Mode
+    if apply_fixes:
+        if not source_code_path:
+            logger.error("ERROR: --apply-fixes requires --source-code parameter")
+            logger.error("Please provide the path to your source code directory")
+            return False
+        
+        from InteractiveCodeFixer import run_interactive_fixer
+        from pathlib import Path
+        
+        print("\n" + "="*80)
+        print("  🚀 AI-POWERED INTERACTIVE CODE FIXER MODE")
+        print("  This will actually modify your source code files!")
+        print("="*80 + "\n")
+        
+        # Filter violations if specific ones requested
+        violations_to_fix = unfixed_violations
+        if specific_violations:
+            violations_to_fix = [v for v in unfixed_violations if v['violation_id'] in specific_violations]
+        
+        results = run_interactive_fixer(
+            module_name=module_name,
+            violations=violations_to_fix,
+            source_code_path=Path(source_code_path),
+            ollama_integration=fix_generator.ollama,
+            kb_manager=kb_manager
+        )
+        
+        if results.get('status') == 'aborted':
+            return False
+        
+        # Display summary
+        applied = results.get('applied', 0)
+        total = results.get('total', 0)
+        
+        if applied > 0:
+            print(f"\n✅ Successfully applied {applied}/{total} fixes!")
+            print("\nRecommendation: Re-run Parasoft analysis to verify fixes")
+        
+        return True
     
+    # Interactive mode (suggestions only)
     # Interactive mode
     if interactive:
         logger.info("Interactive mode enabled - you'll be prompted for each violation")
@@ -305,11 +347,17 @@ Examples:
   # Generate fixes for all unfixed violations in Mka module
   python src/generate_code_fixes.py Mka
   
+  # 🚀 NEW: AI-powered interactive fixer - actually applies fixes to source code!
+  python src/generate_code_fixes.py Mka --apply-fixes --source-code "path/to/source"
+  
   # Generate fixes with AI-only mode
   python src/generate_code_fixes.py Mka --ai-mode ai_only
   
   # Generate fixes for specific violations
   python src/generate_code_fixes.py Mka --violations CERT_C-STR31-a MISRAC2012-RULE_8_7-a
+  
+  # Interactive suggestions only (no source modification)
+  python src/generate_code_fixes.py Mka --interactive
   
   # Generate fixes using only rules (no AI)
   python src/generate_code_fixes.py Mka --ai-mode rules_only
@@ -318,6 +366,14 @@ AI Modes:
   ai_only     - Use Ollama AI for all violations (requires Ollama)
   hybrid      - Smart: AI for complex, rules for standard (recommended, default)
   rules_only  - Use only Parasoft DB + rule-based fixes (no AI)
+
+NEW FEATURE:
+  --apply-fixes  🚀 AI-powered interactive code fixer that actually modifies source files!
+                 - Shows before/after diffs for each fix
+                 - Allows you to review and approve each change
+                 - Creates automatic backups
+                 - Supports rollback
+                 - Requires --source-code parameter
         """
     )
     
@@ -341,7 +397,12 @@ AI Modes:
     parser.add_argument(
         '--interactive',
         action='store_true',
-        help='Interactive mode - prompt for each violation'
+        help='Interactive mode - prompt for each violation (suggestions only)'
+    )
+    parser.add_argument(
+        '--apply-fixes',
+        action='store_true',
+        help='🚀 NEW: AI-powered interactive code fixer - actually applies fixes to source files'
     )
     
     args = parser.parse_args()
@@ -352,7 +413,8 @@ AI Modes:
         specific_violations=args.violations,
         ai_mode=args.ai_mode,
         source_code_path=args.source_code,
-        interactive=args.interactive
+        interactive=args.interactive,
+        apply_fixes=args.apply_fixes
     )
     
     if success:

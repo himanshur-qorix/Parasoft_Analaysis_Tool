@@ -14,7 +14,20 @@ import threading
 import time
 import os
 import sys
+import re
+import json
+import logging
 from pathlib import Path
+from datetime import datetime
+
+# Configure logging to show INFO level messages
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout)
+    ]
+)
 
 # Optional PIL support for logo images
 try:
@@ -31,12 +44,18 @@ class ParasoftGUI:
         self.root.geometry("1000x750")
         self.root.resizable(True, True)
         
+        # Set up logger for this class
+        self.logger = logging.getLogger('ParasoftGUI')
+        
         # Set project root directory (parent of src)
         self.project_root = Path(__file__).parent.parent.absolute()
         self.scripts_dir = self.project_root / "batch_support"
         
         # Configure style
         self.setup_styles()
+        
+        # Create menu bar
+        self.create_menu_bar()
         
         # Create main layout
         self.create_widgets()
@@ -60,6 +79,199 @@ class ParasoftGUI:
         style.configure('Section.TLabel', font=('Arial', 12, 'bold'), foreground='#34495E')
         style.configure('Action.TButton', font=('Arial', 10), padding=10)
         style.configure('Primary.TButton', font=('Arial', 11, 'bold'), padding=12)
+    
+    def create_menu_bar(self):
+        """Create menu bar with File, Tools, and Help menus"""
+        menubar = tk.Menu(self.root)
+        self.root.config(menu=menubar)
+        
+        # File menu
+        file_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="File", menu=file_menu)
+        file_menu.add_command(label="Exit", command=self.root.quit)
+        
+        # Tools menu
+        tools_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="Tools", menu=tools_menu)
+        tools_menu.add_command(label="🔍 Check Knowledge Base", command=self.check_knowledge_base)
+        tools_menu.add_command(label="✨ Enrich Violations", command=self.enrich_violations_dialog)
+        tools_menu.add_separator()
+        tools_menu.add_command(label="🔄 Refresh Ollama Models", command=self.refresh_ollama_models)
+        
+        # Help menu
+        help_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="Help", menu=help_menu)
+        help_menu.add_command(label="📖 Documentation", command=self.show_documentation)
+        help_menu.add_command(label="ℹ️ About", command=self.show_about)
+    
+    def check_knowledge_base(self):
+        """Check knowledge base for enrichment status"""
+        module_name = self.module_entry.get().strip()
+        if not module_name:
+            messagebox.showwarning("Module Required", "Please enter a module name first")
+            return
+        
+        kb_path = self.project_root / "knowledge_base" / f"{module_name}_KnowledgeDatabase.json"
+        if not kb_path.exists():
+            messagebox.showerror("Knowledge Base Not Found", 
+                               f"Knowledge base for {module_name} not found.\n\n"
+                               "Please run 'Run Complete Analysis' first.")
+            return
+        
+        # Check KB status
+        try:
+            with open(kb_path, 'r', encoding='utf-8') as f:
+                kb_data = json.load(f)
+            
+            violations = kb_data.get('violations', {})
+            if not violations:
+                messagebox.showinfo("Empty Knowledge Base", 
+                                  "Knowledge base has no violations.")
+                return
+            
+            total = len(violations)
+            enriched = sum(1 for v in violations.values() if v.get('enriched'))
+            needs_enrichment = sum(1 for v in violations.values() 
+                                 if not v.get('code_snippet') or v.get('file_path') in ['UNKNOWN', 'N/A', ''])
+            
+            percentage = round(enriched / total * 100, 1) if total > 0 else 0
+            
+            message = f"Knowledge Base Status for {module_name}:\n\n"
+            message += f"Total Violations: {total}\n"
+            message += f"✅ Enriched: {enriched} ({percentage}%)\n"
+            message += f"⚠️  Needs Enrichment: {needs_enrichment}\n\n"
+            
+            if needs_enrichment > 0:
+                message += "💡 Tip: Use 'Tools > Enrich Violations' to add source code context"
+            else:
+                message += "✅ All violations are enriched and ready!"
+            
+            messagebox.showinfo("Knowledge Base Status", message)
+        
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to check knowledge base:\n{str(e)}")
+    
+    def enrich_violations_dialog(self):
+        """Show dialog to enrich violations with source code"""
+        module_name = self.module_entry.get().strip()
+        if not module_name:
+            messagebox.showwarning("Module Required", "Please enter a module name first")
+            return
+        
+        kb_path = self.project_root / "knowledge_base" / f"{module_name}_KnowledgeDatabase.json"
+        if not kb_path.exists():
+            messagebox.showerror("Knowledge Base Not Found", 
+                               f"Knowledge base for {module_name} not found.\n\n"
+                               "Please run 'Run Complete Analysis' first.")
+            return
+        
+        # Get source code path
+        source_path = self.input_path_entry.get().strip()
+        if not source_path:
+            messagebox.showinfo("Source Path Required", 
+                              "Please enter or browse to the source code directory first.\n\n"
+                              "The enricher needs to find your actual .c/.cpp/.h files.")
+            return
+        
+        if not Path(source_path).exists():
+            messagebox.showerror("Invalid Path", f"Source path does not exist:\n{source_path}")
+            return
+        
+        # Confirm enrichment
+        response = messagebox.askyesno(
+            "Enrich Violations",
+            f"Enrich violations in {module_name} with source code from:\n"
+            f"{source_path}\n\n"
+            "This will:\n"
+            "• Find source files\n"
+            "• Read code at violation lines\n"
+            "• Add code snippets and context\n\n"
+            "Continue?"
+        )
+        
+        if not response:
+            return
+        
+        # Run enrichment
+        self.run_enrichment(module_name, source_path)
+    
+    def run_enrichment(self, module_name, source_path):
+        """Run violation enrichment"""
+        # Create progress dialog
+        progress_dialog = tk.Toplevel(self.root)
+        progress_dialog.title("Enriching Violations")
+        progress_dialog.geometry("500x300")
+        progress_dialog.transient(self.root)
+        progress_dialog.grab_set()
+        
+        ttk.Label(progress_dialog, text="🔍 Enriching Violations", 
+                 font=('Arial', 14, 'bold')).pack(pady=10)
+        
+        output_text = scrolledtext.ScrolledText(progress_dialog, height=12, wrap=tk.WORD)
+        output_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        
+        button_frame = ttk.Frame(progress_dialog)
+        button_frame.pack(fill=tk.X, padx=10, pady=5)
+        
+        close_button = ttk.Button(button_frame, text="Close", command=progress_dialog.destroy)
+        close_button.pack(side=tk.RIGHT)
+        close_button.config(state='disabled')
+        
+        def run_enrichment_thread():
+            try:
+                output_text.insert(tk.END, f"Enriching violations for {module_name}...\n")
+                output_text.insert(tk.END, f"Source path: {source_path}\n\n")
+                output_text.see(tk.END)
+                
+                # Import and run enricher
+                sys.path.insert(0, str(self.project_root / "src"))
+                from ViolationEnricher import enrich_knowledge_base_violations
+                
+                kb_path = self.project_root / "knowledge_base" / f"{module_name}_KnowledgeDatabase.json"
+                
+                output_text.insert(tk.END, "Building file index...\n")
+                output_text.see(tk.END)
+                
+                count = enrich_knowledge_base_violations(kb_path, Path(source_path))
+                
+                output_text.insert(tk.END, f"\n✅ Enriched {count} violations!\n")
+                output_text.insert(tk.END, "\nYou can now:\n")
+                output_text.insert(tk.END, "• View violations with code snippets\n")
+                output_text.insert(tk.END, "• Generate better AI-powered fixes\n")
+                output_text.see(tk.END)
+                
+                progress_dialog.after(0, lambda: close_button.config(state='normal'))
+                
+                messagebox.showinfo("Enrichment Complete", 
+                                  f"Successfully enriched {count} violations!\n\n"
+                                  "Violations now have source code context.")
+            
+            except Exception as e:
+                output_text.insert(tk.END, f"\n❌ Error: {str(e)}\n")
+                output_text.see(tk.END)
+                progress_dialog.after(0, lambda: close_button.config(state='normal'))
+                messagebox.showerror("Enrichment Failed", f"Error:\n{str(e)}")
+        
+        thread = threading.Thread(target=run_enrichment_thread, daemon=True)
+        thread.start()
+    
+    def show_documentation(self):
+        """Show link to documentation"""
+        messagebox.showinfo("Documentation", 
+                          "Documentation available in docs/ folder:\n\n"
+                          "• AI_CODE_FIXER_GUIDE.md\n"
+                          "• VIOLATION_ENRICHMENT_GUIDE.md\n"
+                          "• GUI_GUIDE.md\n"
+                          "• And more...")
+    
+    def show_about(self):
+        """Show about dialog"""
+        messagebox.showinfo("About", 
+                          "Parasoft Analysis Tool v4.1.0\n\n"
+                          "AI-powered static analysis and code fixing\n\n"
+                          "Developer: Himanshu R\n"
+                          "Organization: Qorix India Pvt Ltd\n\n"
+                          "© 2026 Qorix India Pvt Ltd")
         
     def create_widgets(self):
         """Create all GUI widgets"""
@@ -420,6 +632,12 @@ For detailed documentation, see the docs/ folder.
             config_row,
             text="🔄 Refresh Models",
             command=self.refresh_ollama_models
+        ).pack(side=tk.LEFT, padx=(0, 5))
+        
+        ttk.Button(
+            config_row,
+            text="📥 Install Models",
+            command=self.show_install_models_dialog
         ).pack(side=tk.LEFT, padx=(0, 5))
         
         ttk.Button(
@@ -787,14 +1005,9 @@ For detailed documentation, see the docs/ folder.
                 ]
                 
             elif operation_name == "generate_code_fixes":
-                # Generate code fixes
-                script = src_dir / "generate_code_fixes.py"
-                ai_mode = self.ai_mode_var.get() if hasattr(self, 'ai_mode_var') else "hybrid"
-                cmd = [
-                    sys.executable, str(script),
-                    module_name,
-                    "--ai-mode", ai_mode
-                ]
+                # Show interactive code fix review dialog
+                self._generate_fixes_dialog(module_name)
+                return  # Don't use subprocess for this
                 
             elif operation_name == "apply_suppressions":
                 # Apply suppressions - needs user to select file
@@ -899,8 +1112,8 @@ For detailed documentation, see the docs/ folder.
         """Show interactive dialog for applying suppressions one by one"""
         try:
             # Parse suppressions file
-            from apply_suppress_comments import SuppressCommentApplier
-            applier = SuppressCommentApplier(suppress_file, target_repo)
+            from apply_suppress_comments import SuppressCommentApplicator
+            applier = SuppressCommentApplicator(suppress_file, target_repo)
             
             # Parse the file
             suppressions_data = applier.parse_suppress_file()
@@ -910,7 +1123,7 @@ For detailed documentation, see the docs/ folder.
                 return
             
             # Count total suppressions
-            total_suppressions = sum(len(supps) for supps in suppressions_data.values())
+            total_suppressions = sum(len(data['suppressions']) for data in suppressions_data.values())
             
             if total_suppressions == 0:
                 messagebox.showinfo("No Suppressions", "No suppressions to apply.")
@@ -934,13 +1147,20 @@ For detailed documentation, see the docs/ folder.
         current_supp_idx = [0]
         files_list = list(suppressions_data.keys())
         
+        # Extract just the suppressions from each file data
+        files_suppressions = {fname: fdata['suppressions'] for fname, fdata in suppressions_data.items()}
+        
         # Stats
         stats = {
             'applied': 0,
             'skipped': 0,
+            'rejected': 0,
             'already_justified': 0,
             'failed': 0
         }
+        
+        # Rejection feedback storage
+        rejection_feedback = []
         
         # Header
         header_frame = ttk.Frame(dialog, padding="10")
@@ -965,7 +1185,7 @@ For detailed documentation, see the docs/ folder.
         stats_frame = ttk.LabelFrame(dialog, text="📊 Statistics", padding="10")
         stats_frame.pack(fill=tk.X, padx=10, pady=(0, 10))
         
-        stats_text = tk.StringVar(value="Applied: 0 | Skipped: 0 | Already Justified: 0 | Failed: 0")
+        stats_text = tk.StringVar(value="Applied: 0 | Skipped: 0 | Rejected: 0 | Already Justified: 0 | Failed: 0")
         stats_label = ttk.Label(stats_frame, textvariable=stats_text, font=('Arial', 10))
         stats_label.pack()
         
@@ -1013,18 +1233,23 @@ For detailed documentation, see the docs/ folder.
         def update_stats():
             stats_text.set(
                 f"Applied: {stats['applied']} | Skipped: {stats['skipped']} | "
-                f"Already Justified: {stats['already_justified']} | Failed: {stats['failed']}"
+                f"Rejected: {stats['rejected']} | Already Justified: {stats['already_justified']} | Failed: {stats['failed']}"
             )
         
         def load_current_suppression():
             """Load and display current suppression"""
             if current_file_idx[0] >= len(files_list):
                 # Done!
+                # Save rejection feedback if any
+                if rejection_feedback:
+                    self._save_rejection_feedback(rejection_feedback)
+                
                 messagebox.showinfo(
                     "Complete",
                     f"All suppressions reviewed!\n\n"
                     f"Applied: {stats['applied']}\n"
                     f"Skipped: {stats['skipped']}\n"
+                    f"Rejected: {stats['rejected']}\n"
                     f"Already Justified: {stats['already_justified']}\n"
                     f"Failed: {stats['failed']}"
                 )
@@ -1032,7 +1257,7 @@ For detailed documentation, see the docs/ folder.
                 return False
             
             file_name = files_list[current_file_idx[0]]
-            suppressions = suppressions_data[file_name]
+            suppressions = files_suppressions[file_name]
             
             if current_supp_idx[0] >= len(suppressions):
                 # Move to next file
@@ -1044,12 +1269,12 @@ For detailed documentation, see the docs/ folder.
             
             # Update progress
             total_processed = sum(
-                len(suppressions_data[f]) for f in files_list[:current_file_idx[0]]
+                len(files_suppressions[f]) for f in files_list[:current_file_idx[0]]
             ) + current_supp_idx[0] + 1
             progress_var.set(f"{total_processed} / {total_count}")
             
             # Find source file
-            source_file = applier.find_file_in_repo(file_name)
+            source_file = applier.find_source_file(file_name)
             
             if not source_file:
                 file_info_var.set(f"File: {file_name} (NOT FOUND)")
@@ -1102,8 +1327,8 @@ For detailed documentation, see the docs/ folder.
         def apply_current():
             """Apply current suppression"""
             file_name = files_list[current_file_idx[0]]
-            supp = suppressions_data[file_name][current_supp_idx[0]]
-            source_file = applier.find_file_in_repo(file_name)
+            supp = files_suppressions[file_name][current_supp_idx[0]]
+            source_file = applier.find_source_file(file_name)
             
             if not source_file:
                 stats['failed'] += 1
@@ -1153,6 +1378,119 @@ For detailed documentation, see the docs/ folder.
             current_supp_idx[0] += 1
             load_current_suppression()
         
+        def reject_current():
+            """Reject current suppression with reason for learning"""
+            file_name = files_list[current_file_idx[0]]
+            supp = files_suppressions[file_name][current_supp_idx[0]]
+            suppress_comment = supp.get('comment', '')
+            
+            # Extract rule ID from suppression comment
+            rule_match = re.search(r'parasoft-suppress\s+([A-Z0-9_\-]+)', suppress_comment)
+            rule_id = rule_match.group(1) if rule_match else 'UNKNOWN'
+            
+            # Show reason dialog
+            reason_dialog = tk.Toplevel(dialog)
+            reason_dialog.title("🚫 Rejection Reason")
+            reason_dialog.geometry("600x400")
+            reason_dialog.transient(dialog)
+            
+            ttk.Label(
+                reason_dialog,
+                text=f"Why are you rejecting this suppression for {rule_id}?",
+                font=('Arial', 11, 'bold')
+            ).pack(padx=10, pady=(10, 5))
+            
+            ttk.Label(
+                reason_dialog,
+                text="Your feedback will help improve future suggestions.",
+                font=('Arial', 9),
+                foreground='gray'
+            ).pack(padx=10, pady=(0, 10))
+            
+            # Show suppression being rejected
+            ttk.Label(reason_dialog, text="Suppression:", font=('Arial', 9, 'bold')).pack(padx=10, anchor=tk.W)
+            supp_preview = scrolledtext.ScrolledText(
+                reason_dialog,
+                wrap=tk.WORD,
+                font=('Courier New', 9),
+                height=3,
+                bg='#FFE5E5'
+            )
+            supp_preview.pack(padx=10, pady=(0, 10), fill=tk.X)
+            supp_preview.insert('1.0', suppress_comment)
+            supp_preview.config(state='disabled')
+            
+            # Reason categories
+            ttk.Label(reason_dialog, text="Select reason category:", font=('Arial', 9, 'bold')).pack(padx=10, anchor=tk.W)
+            
+            reason_category = tk.StringVar(value="incorrect_justification")
+            categories = [
+                ("incorrect_justification", "Incorrect justification/reasoning"),
+                ("wrong_rule", "Wrong rule applied to this violation"),
+                ("false_positive", "This is not actually a violation"),
+                ("wrong_format", "Suppression format is incorrect"),
+                ("duplicate", "Already suppressed elsewhere"),
+                ("other", "Other (specify below)")
+            ]
+            
+            for value, label in categories:
+                ttk.Radiobutton(
+                    reason_dialog,
+                    text=label,
+                    variable=reason_category,
+                    value=value
+                ).pack(padx=20, anchor=tk.W)
+            
+            # Additional details
+            ttk.Label(reason_dialog, text="Additional details:", font=('Arial', 9, 'bold')).pack(padx=10, pady=(10, 5), anchor=tk.W)
+            reason_text = scrolledtext.ScrolledText(
+                reason_dialog,
+                wrap=tk.WORD,
+                font=('Arial', 9),
+                height=4
+            )
+            reason_text.pack(padx=10, pady=(0, 10), fill=tk.BOTH, expand=True)
+            
+            def submit_rejection():
+                category = reason_category.get()
+                details = reason_text.get('1.0', tk.END).strip()
+                
+                if not details and category == "other":
+                    messagebox.showwarning("Missing Details", "Please provide details for 'Other' category.")
+                    return
+                
+                # Store rejection feedback
+                feedback_entry = {
+                    'file': file_name,
+                    'line': supp.get('line', 0),
+                    'rule_id': rule_id,
+                    'suppression_comment': suppress_comment,
+                    'rejection_category': category,
+                    'rejection_reason': details,
+                    'timestamp': datetime.now().isoformat()
+                }
+                rejection_feedback.append(feedback_entry)
+                
+                # Log to GUI
+                self.log_output(f"🚫 Rejected suppression for {rule_id} at {file_name}:{supp.get('line')}\n")
+                self.log_output(f"   Category: {category}\n")
+                self.log_output(f"   Reason: {details[:100]}...\n" if len(details) > 100 else f"   Reason: {details}\n")
+                
+                stats['rejected'] += 1
+                update_stats()
+                reason_dialog.destroy()
+                current_supp_idx[0] += 1
+                load_current_suppression()
+            
+            # Buttons
+            btn_frame = ttk.Frame(reason_dialog)
+            btn_frame.pack(fill=tk.X, padx=10, pady=10)
+            
+            ttk.Button(btn_frame, text="Submit Rejection", command=submit_rejection).pack(side=tk.LEFT, padx=5)
+            ttk.Button(btn_frame, text="Cancel", command=reason_dialog.destroy).pack(side=tk.LEFT, padx=5)
+            
+            reason_dialog.grab_set()
+        
         def apply_all_remaining():
             """Apply all remaining suppressions"""
             if not messagebox.askyesno(
@@ -1165,8 +1503,8 @@ For detailed documentation, see the docs/ folder.
             # Apply all remaining
             while current_file_idx[0] < len(files_list):
                 file_name = files_list[current_file_idx[0]]
-                suppressions = suppressions_data[file_name]
-                source_file = applier.find_file_in_repo(file_name)
+                suppressions = files_suppressions[file_name]
+                source_file = applier.find_source_file(file_name)
                 
                 if not source_file:
                     stats['failed'] += len(suppressions) - current_supp_idx[0]
@@ -1199,11 +1537,16 @@ For detailed documentation, see the docs/ folder.
                 current_file_idx[0] += 1
                 current_supp_idx[0] = 0
             
+            # Save rejection feedback if any
+            if rejection_feedback:
+                self._save_rejection_feedback(rejection_feedback)
+            
             messagebox.showinfo(
                 "Complete",
                 f"All suppressions applied!\n\n"
                 f"Applied: {stats['applied']}\n"
                 f"Skipped: {stats['skipped']}\n"
+                f"Rejected: {stats['rejected']}\n"
                 f"Already Justified: {stats['already_justified']}\n"
                 f"Failed: {stats['failed']}"
             )
@@ -1212,6 +1555,7 @@ For detailed documentation, see the docs/ folder.
         # Buttons
         ttk.Button(button_frame, text="✅ Apply", command=apply_current, width=15).pack(side=tk.LEFT, padx=5)
         ttk.Button(button_frame, text="⏭️ Skip", command=skip_current, width=15).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="🚫 Reject", command=reject_current, width=15).pack(side=tk.LEFT, padx=5)
         ttk.Button(button_frame, text="⚡ Apply All Remaining", command=apply_all_remaining, width=20).pack(side=tk.LEFT, padx=5)
         ttk.Button(button_frame, text="❌ Cancel", command=dialog.destroy, width=15).pack(side=tk.RIGHT, padx=5)
         
@@ -1221,6 +1565,1016 @@ For detailed documentation, see the docs/ folder.
         
         dialog.transient(self.root)
         dialog.grab_set()
+    
+    def _generate_fixes_dialog(self, module_name):
+        """Show dialog to generate and review code fixes interactively"""
+        if not module_name:
+            messagebox.showwarning("Module Required", "Please enter a module name.")
+            return
+        
+        self.log_output(f"\n{'='*70}\n")
+        self.log_output(f"▶️ Generating Code Fixes for Module: {module_name}\n")
+        self.log_output(f"{'='*70}\n\n")
+        
+        try:
+            # Import required modules
+            from KnowledgeDatabaseManager import KnowledgeDatabaseManager
+            from CodeFixGenerator import CodeFixGenerator
+            
+            # Check if knowledge base exists
+            kb_path = self.project_root / 'knowledge_base' / f'{module_name}_KnowledgeDatabase.json'
+            if not kb_path.exists():
+                messagebox.showerror(
+                    "Knowledge Base Not Found",
+                    f"Knowledge base not found for module: {module_name}\n\n"
+                    f"Please run 'Run Complete Analysis' first to create the knowledge base."
+                )
+                return
+            
+            # Load knowledge base
+            self.log_output(f"📚 Loading knowledge base for module: {module_name}...\n")
+            kb_manager = KnowledgeDatabaseManager(self.project_root / 'knowledge_base')
+            kb_manager.load_knowledge_base(module_name)
+            
+            # Get unfixed violations
+            all_violations = kb_manager.get_all_violations()
+            unfixed_violations = [v for v in all_violations if not v.get('fix_applied')]
+            
+            if not unfixed_violations:
+                messagebox.showinfo(
+                    "No Fixes Needed",
+                    f"All violations have already been fixed for module: {module_name}"
+                )
+                return
+            
+            self.log_output(f"✓ Found {len(unfixed_violations)} violations needing fixes\n")
+            self.log_output(f"  Total violations: {len(all_violations)}\n")
+            self.log_output(f"  Already fixed: {len(all_violations) - len(unfixed_violations)}\n\n")
+            
+            # AUTO-CHECK: Do violations need enrichment?
+            needs_enrichment = sum(1 for v in unfixed_violations 
+                                 if not v.get('code_snippet') or v.get('file_path') in ['UNKNOWN', 'N/A', ''])
+            
+            if needs_enrichment > 0:
+                self.log_output(f"🔍 Checking enrichment status...\n")
+                self.log_output(f"  ⚠️  {needs_enrichment} violations need source code context\n")
+                
+                # Get source code path
+                source_path = self.input_path_entry.get().strip()
+                
+                if not source_path or not Path(source_path).exists():
+                    # Ask user for source path
+                    response = messagebox.askyesno(
+                        "Source Code Context Needed",
+                        f"{needs_enrichment} violations don't have source code context.\n\n"
+                        "For better AI-powered fixes, the tool needs to read your actual code.\n\n"
+                        "Would you like to select the source code directory now?\n\n"
+                        "(You can skip this and use generic fixes instead)"
+                    )
+                    
+                    if response:
+                        source_path = filedialog.askdirectory(
+                            title="Select Source Code Directory",
+                            initialdir=self.project_root / "Input"
+                        )
+                        
+                        if source_path:
+                            self.input_path_entry.delete(0, tk.END)
+                            self.input_path_entry.insert(0, source_path)
+                        else:
+                            self.log_output(f"  ⏭️  Skipping enrichment, using generic fixes\n\n")
+                            source_path = None
+                    else:
+                        source_path = None
+                
+                # AUTO-ENRICH if source path available
+                if source_path and Path(source_path).exists():
+                    self.log_output(f"  ✨ Auto-enriching violations with source code...\n")
+                    self.log_output(f"     Source: {source_path}\n")
+                    
+                    try:
+                        from ViolationEnricher import enrich_knowledge_base_violations
+                        
+                        count = enrich_knowledge_base_violations(kb_path, Path(source_path))
+                        
+                        self.log_output(f"  ✅ Enriched {count} violations with source code context!\n")
+                        self.log_output(f"     AI can now see your actual code for better fixes\n\n")
+                        
+                        # Reload knowledge base to get enriched data
+                        kb_manager.load_knowledge_base(module_name)
+                        all_violations = kb_manager.get_all_violations()
+                        unfixed_violations = [v for v in all_violations if not v.get('fix_applied')]
+                        
+                    except Exception as e:
+                        self.log_output(f"  ⚠️  Enrichment warning: {str(e)}\n")
+                        self.log_output(f"     Continuing with existing data...\n\n")
+                else:
+                    self.log_output(f"  ⏭️  Proceeding without enrichment\n\n")
+            else:
+                self.log_output(f"✅ Violations already have source code context\n\n")
+            
+            # Initialize Code Fix Generator
+            fixes_dir = self.project_root / f'{module_name}_code_suggestion'
+            fixes_dir.mkdir(exist_ok=True)
+            
+            ai_mode = self.ai_mode_var.get() if hasattr(self, 'ai_mode_var') else "hybrid"
+            
+            # Get source code path from input field (critical for AI code context)
+            source_path = self.input_path_entry.get().strip()
+            
+            # Load full config from config.json to preserve all settings
+            config_path = self.project_root / 'config' / 'config.json'
+            if config_path.exists():
+                with open(config_path, 'r') as f:
+                    config = json.load(f)
+            else:
+                config = {}
+            
+            # Update with GUI overrides
+            if 'ai_integration' not in config:
+                config['ai_integration'] = {}
+            config['ai_integration']['ai_mode'] = ai_mode
+            config['source_code_path'] = source_path if source_path else None
+            
+            if source_path:
+                self.log_output(f"📂 Source code path: {source_path}\n")
+            else:
+                self.log_output(f"⚠️  No source code path set - AI will use generic patterns\n")
+            
+            self.log_output(f"📋 Config loaded from: {config_path}\n")
+            self.log_output(f"   AI Integration enabled in config: {config.get('ai_integration', {}).get('enabled', False)}\n")
+            
+            fix_generator = CodeFixGenerator(module_name, kb_manager, fixes_dir, config)
+            
+            # Check Ollama status
+            self.log_output(f"🤖 AI Configuration:\n")
+            self.log_output(f"   Mode: {ai_mode}\n")
+            self.log_output(f"   Ollama enabled: {fix_generator.ollama.enabled}\n")
+            if fix_generator.ollama.enabled:
+                self.log_output(f"   Model: {fix_generator.ollama.model}\n")
+                self.log_output(f"   URL: {fix_generator.ollama.base_url}\n")
+            else:
+                self.log_output(f"   ⚠️  Ollama is NOT enabled - will use pattern-based fixes only\n")
+                if ai_mode in ['ai_only', 'hybrid']:
+                    self.log_output(f"   💡 TIP: To enable AI, install Ollama and run 'ollama serve'\n")
+            self.log_output(f"\n")
+            
+            # Show interactive review dialog
+            self._show_interactive_fix_review_dialog(fix_generator, unfixed_violations, kb_manager, module_name)
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to load code fixes:\n{str(e)}")
+            self.log_output(f"❌ Error: {str(e)}\n")
+    
+    def _show_interactive_fix_review_dialog(self, fix_generator, violations, kb_manager, module_name):
+        """Show interactive dialog for reviewing code fixes one by one"""
+        dialog = tk.Toplevel(self.root)
+        dialog.title("🛠️ Review & Apply Code Fixes")
+        dialog.geometry("1200x800")
+        
+        # State
+        current_idx = [0]
+        
+        # Stats
+        stats = {
+            'accepted': 0,
+            'rejected': 0,
+            'skipped': 0,
+            'failed': 0
+        }
+        
+        # Rejection feedback storage
+        rejection_feedback = []
+        
+        # Generate fix for current violation (lazy loading)
+        current_fix_data = [None]
+        
+        # Header
+        header_frame = ttk.Frame(dialog, padding="10")
+        header_frame.pack(fill=tk.X)
+        
+        title_label = ttk.Label(
+            header_frame,
+            text=f"🛠️ Code Fixes for {module_name}",
+            font=('Arial', 14, 'bold')
+        )
+        title_label.pack(side=tk.LEFT)
+        
+        progress_var = tk.StringVar(value="0 / 0")
+        progress_label = ttk.Label(
+            header_frame,
+            textvariable=progress_var,
+            font=('Arial', 11)
+        )
+        progress_label.pack(side=tk.RIGHT)
+        
+        # Stats frame
+        stats_frame = ttk.LabelFrame(dialog, text="📊 Statistics", padding="10")
+        stats_frame.pack(fill=tk.X, padx=10, pady=(0, 10))
+        
+        stats_text = tk.StringVar(value="Accepted: 0 | Rejected: 0 | Skipped: 0 | Failed: 0")
+        stats_label = ttk.Label(stats_frame, textvariable=stats_text, font=('Arial', 10))
+        stats_label.pack()
+        
+        # Content frame with notebook for tabs
+        content_frame = ttk.LabelFrame(dialog, text="Fix Details", padding="10")
+        content_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=(0, 10))
+        
+        # Notebook for tabs
+        notebook = ttk.Notebook(content_frame)
+        notebook.pack(fill=tk.BOTH, expand=True)
+        
+        # Tab 1: Violation Info
+        violation_frame = ttk.Frame(notebook, padding="10")
+        notebook.add(violation_frame, text="📋 Violation")
+        
+        violation_text = scrolledtext.ScrolledText(
+            violation_frame,
+            wrap=tk.WORD,
+            font=('Courier New', 9),
+            bg='#FFF5E1'
+        )
+        violation_text.pack(fill=tk.BOTH, expand=True)
+        
+        # Tab 2: Suggested Fix
+        fix_frame = ttk.Frame(notebook, padding="10")
+        notebook.add(fix_frame, text="✨ Suggested Fix")
+        
+        fix_text = scrolledtext.ScrolledText(
+            fix_frame,
+            wrap=tk.WORD,
+            font=('Courier New', 9),
+            bg='#E8F5E9'
+        )
+        fix_text.pack(fill=tk.BOTH, expand=True)
+        
+        # Tab 3: Context & Examples
+        context_frame = ttk.Frame(notebook, padding="10")
+        notebook.add(context_frame, text="💡 Context")
+        
+        context_text = scrolledtext.ScrolledText(
+            context_frame,
+            wrap=tk.WORD,
+            font=('Courier New', 9),
+            bg='#E3F2FD'
+        )
+        context_text.pack(fill=tk.BOTH, expand=True)
+        
+        # Button frame
+        button_frame = ttk.Frame(dialog, padding="10")
+        button_frame.pack(fill=tk.X)
+        
+        def update_stats():
+            stats_text.set(
+                f"Accepted: {stats['accepted']} | Rejected: {stats['rejected']} | "
+                f"Skipped: {stats['skipped']} | Failed: {stats['failed']}"
+            )
+        
+        def load_current_fix():
+            """Load and display current fix"""
+            if current_idx[0] >= len(violations):
+                # Done!
+                if rejection_feedback:
+                    self._save_fix_rejection_feedback(rejection_feedback)
+                
+                messagebox.showinfo(
+                    "Complete",
+                    f"All fixes reviewed!\n\n"
+                    f"Accepted: {stats['accepted']}\n"
+                    f"Rejected: {stats['rejected']}\n"
+                    f"Skipped: {stats['skipped']}\n"
+                    f"Failed: {stats['failed']}"
+                )
+                dialog.destroy()
+                return False
+            
+            violation = violations[current_idx[0]]
+            
+            # Update progress
+            progress_var.set(f"{current_idx[0] + 1} / {len(violations)}")
+            
+            # Load violation details
+            violation_text.delete('1.0', tk.END)
+            
+            # Extract file and line from files_affected (handles dict format)
+            file_info = 'UNKNOWN'
+            line_info = 'UNKNOWN'
+            
+            # Try direct fields first (enriched violations)
+            if violation.get('file'):
+                file_info = violation['file']
+            if violation.get('line'):
+                line_info = violation['line']
+            
+            # Fall back to files_affected
+            if file_info == 'UNKNOWN' or line_info == 'UNKNOWN':
+                files_affected = violation.get('files_affected', [])
+                if files_affected:
+                    first_file = files_affected[0]
+                    if isinstance(first_file, dict):
+                        file_info = first_file.get('file', 'UNKNOWN')
+                        line_info = first_file.get('line', 'UNKNOWN')
+                    elif isinstance(first_file, str):
+                        # Handle string format "file.c:123"
+                        if ':' in first_file:
+                            parts = first_file.rsplit(':', 1)
+                            file_info = parts[0]
+                            try:
+                                line_info = int(parts[1])
+                            except:
+                                pass
+                        else:
+                            file_info = first_file
+            
+            # Get code context (with surrounding lines for better understanding)
+            code_display = ""
+            code_context = violation.get('code_context')
+            code_context_lines = violation.get('code_context_lines', {})
+            
+            if code_context and code_context_lines:
+                # Display full context with line numbers
+                start_line = code_context_lines.get('start', 1)
+                violation_line = code_context_lines.get('violation', line_info)
+                
+                code_display = "CODE CONTEXT (with surrounding lines):\n"
+                code_display += "=" * 60 + "\n"
+                
+                for i, line in enumerate(code_context.split('\n')):
+                    current_line_num = start_line + i
+                    if current_line_num == violation_line:
+                        # Highlight the violation line
+                        code_display += f">>> {current_line_num:4d} | {line}\n"
+                    else:
+                        code_display += f"    {current_line_num:4d} | {line}\n"
+                
+                code_display += "=" * 60 + "\n"
+                code_display += f"(Line {violation_line} contains the violation)"
+            else:
+                # Fallback to single line snippet
+                code_snippet = violation.get('code_snippet', 'No code snippet available')
+                if code_snippet == 'No code snippet available':
+                    code_display = code_snippet + '\n\n💡 TIP: Set "Input Path" to your source code directory.\n   Enrichment will happen automatically when you generate fixes.'
+                else:
+                    code_display = f"CODE SNIPPET:\n{code_snippet}\n\n⚠️  Limited context. Enable enrichment for better context."
+            
+            violation_info = f"""
+VIOLATION ID: {violation.get('violation_id', 'UNKNOWN')}
+RULE: {violation.get('rule', 'UNKNOWN')}
+SEVERITY: {violation.get('severity', 'UNKNOWN')}
+FILE: {file_info}
+LINE: {line_info}
+
+DESCRIPTION:
+{violation.get('violation_text', 'No description available')}
+
+{code_display}
+            """.strip()
+            
+            violation_text.insert('1.0', violation_info)
+            
+            # Generate fix for this violation
+            fix_text.delete('1.0', tk.END)
+            fix_text.insert('1.0', "⏳ Generating fix suggestion...\n\nPlease wait...")
+            context_text.delete('1.0', tk.END)
+            
+            # Log to main window
+            self.log_output(f"\n{'='*70}\n")
+            self.log_output(f"🔧 Generating fix for: {violation.get('violation_id')}\n")
+            self.log_output(f"   Rule: {violation.get('rule', 'UNKNOWN')}\n")
+            self.log_output(f"   File: {file_info}:{line_info}\n")
+            
+            # Check if code context exists
+            has_code_context = bool(violation.get('code_context'))
+            self.log_output(f"   Code context available: {has_code_context}\n")
+            if has_code_context:
+                self.log_output(f"   ✅ AI will analyze your actual code\n")
+            else:
+                self.log_output(f"   ⚠️  No code context - will use generic patterns\n")
+            
+            # Use thread to generate fix without blocking UI
+            import threading
+            def generate_fix_async():
+                try:
+                    self.log_output(f"   Calling fix generator...\n")
+                    fix_data = fix_generator._generate_fix_for_violation(violation)
+                    
+                    if fix_data:
+                        self.log_output(f"   ✅ Fix generated successfully\n")
+                        fix_type = fix_data.get('fix_suggestion', {})
+                        if isinstance(fix_type, dict):
+                            self.log_output(f"      Type: {fix_type.get('type', 'unknown')}\n")
+                            self.log_output(f"      AI-generated: {fix_type.get('ai_generated', False)}\n")
+                    else:
+                        self.log_output(f"   ❌ No fix data returned (None)\n")
+                    
+                    current_fix_data[0] = fix_data
+                    
+                    # Update UI on main thread
+                    dialog.after(0, lambda: display_generated_fix(fix_data))
+                except Exception as e:
+                    self.log_output(f"   ❌ ERROR: {str(e)}\n")
+                    import traceback
+                    self.log_output(f"   Traceback:\n{traceback.format_exc()}\n")
+                    dialog.after(0, lambda: show_fix_error(str(e)))
+            
+            thread = threading.Thread(target=generate_fix_async, daemon=True)
+            thread.start()
+            
+            return True
+        
+        def display_generated_fix(fix_data):
+            """Display the generated fix in UI"""
+            # Get current violation first (needed for multiple places below)
+            violation = violations[current_idx[0]]
+            
+            if not fix_data:
+                fix_text.delete('1.0', tk.END)
+                fix_text.insert('1.0', "❌ No fix could be generated for this violation.\n\n")
+                fix_text.insert(tk.END, "=" * 70 + "\n\n")
+                fix_text.insert(tk.END, "POSSIBLE REASONS:\n\n")
+                fix_text.insert(tk.END, "1. ⚠️  Ollama AI is not running or not responding\n")
+                fix_text.insert(tk.END, "   - Start Ollama: 'ollama serve'\n")
+                fix_text.insert(tk.END, "   - Check model is installed: 'ollama list'\n\n")
+                fix_text.insert(tk.END, "2. ⚠️  No matching fix pattern found\n")
+                fix_text.insert(tk.END, "   - Check main log window for details\n\n")
+                fix_text.insert(tk.END, "3. ⚠️  Violation type not supported\n")
+                fix_text.insert(tk.END, "   - Try enabling Parasoft Rules Database\n\n")
+                fix_text.insert(tk.END, "💡 Check the main log window above for detailed error messages.\n")
+                return
+            
+            # Display fix suggestions (can be multiple)
+            fix_text.delete('1.0', tk.END)
+            
+            fix_suggestion = fix_data.get('fix_suggestion', 'No fix suggestion available')
+            
+            # Handle dict-based fix suggestion
+            if isinstance(fix_suggestion, dict):
+                fix_type = fix_suggestion.get('type', 'unknown')
+                description = fix_suggestion.get('description', 'No description')
+                example = fix_suggestion.get('example', '')
+                priority = fix_suggestion.get('priority', 'MEDIUM')
+                ai_generated = fix_suggestion.get('ai_generated', False)
+                warning = fix_suggestion.get('warning', '')
+                
+                # Header showing fix source
+                if ai_generated:
+                    fix_display = "🤖 AI-GENERATED SPECIFIC FIX\n"
+                    # Get line info from the current violation
+                    viol_line = 'UNKNOWN'
+                    if violation.get('line'):
+                        viol_line = violation['line']
+                    elif violation.get('files_affected'):
+                        files_affected = violation.get('files_affected', [])
+                        if files_affected:
+                            first_file = files_affected[0]
+                            if isinstance(first_file, dict):
+                                viol_line = first_file.get('line', 'UNKNOWN')
+                    fix_display += f"   (Analyzed your actual code at line {viol_line})\n"
+                else:
+                    fix_display = "📚 PARASOFT GENERIC EXAMPLES\n"
+                    if warning:
+                        fix_display += f"   ⚠️  {warning}\n"
+                    else:
+                        # Show why AI wasn't used
+                        fix_display += f"   ⚠️  AI fix generation failed or returned generic patterns\n"
+                        fix_display += f"   💡 Check main log window for AI debug messages\n"
+                
+                fix_display += "=" * 70 + "\n\n"
+                fix_display += f"FIX TYPE: {fix_type.upper()}\n"
+                fix_display += f"PRIORITY: {priority}\n\n"
+                fix_display += f"DESCRIPTION:\n{description}\n\n"
+                
+                if example:
+                    if ai_generated:
+                        fix_display += f"SPECIFIC FIX FOR YOUR CODE:\n{'-'*70}\n{example}\n\n"
+                    else:
+                        fix_display += f"GENERIC EXAMPLES (adapt to your code):\n{'-'*70}\n{example}\n\n"
+                
+                # If it's a justification recommendation
+                if fix_type == 'justification_recommended':
+                    fix_display += "\n⚠️  RECOMMENDATION:\n"
+                    fix_display += "This appears to be a common deviation across multiple modules.\n"
+                    fix_display += "Consider justifying instead of fixing.\n"
+                
+                fix_text.insert('1.0', fix_display)
+            else:
+                # String-based fix suggestion
+                fix_text.insert('1.0', str(fix_suggestion))
+            
+            # Display context (Parasoft examples, CWEs, rule documentation)
+            context_text.delete('1.0', tk.END)
+            context_info = []
+            
+            # Add Parasoft repair example
+            if fix_data.get('parasoft_repair'):
+                context_info.append(f"📚 PARASOFT REPAIR EXAMPLE:\n{'-'*70}\n{fix_data['parasoft_repair']}\n")
+            
+            # Add CWE mappings
+            if fix_data.get('cwe_ids'):
+                context_info.append(f"🔗 CWE MAPPINGS: {', '.join(fix_data['cwe_ids'])}\n")
+            
+            # Add fix type
+            if fix_data.get('fix_type'):
+                context_info.append(f"🛠️  FIX TYPE: {fix_data['fix_type']}\n")
+            
+            # Load HTML rule documentation (violation already loaded at top of function)
+            rule_id = violation.get('rule', 'UNKNOWN')
+            violation_id = violation.get('violation_id', 'UNKNOWN')
+            
+            html_doc = self._load_rule_html_documentation(rule_id, violation_id)
+            if html_doc:
+                context_info.append(f"\n📖 PARASOFT RULE DOCUMENTATION:\n{'-'*70}\n{html_doc}\n")
+            
+            if context_info:
+                context_text.insert('1.0', '\n'.join(context_info))
+            else:
+                context_text.insert('1.0', "ℹ️  No additional context available.\n\n"
+                                           "Enable Parasoft Rules Database for repair examples and documentation.")
+            
+            # ADD CODE SUGGESTION to the Violation tab
+            if isinstance(fix_suggestion, dict) and fix_suggestion.get('ai_generated'):
+                example_text = fix_suggestion.get('example', '')
+                self.logger.info(f"Attempting to extract code suggestion from AI example")
+                self.logger.info(f"Example text length: {len(example_text)} chars")
+                self.logger.info(f"Example preview: {example_text[:200] if example_text else 'EMPTY'}")
+                
+                # Extract the "After" code from the example
+                after_code = None
+                
+                # Try multiple patterns to find the fixed code
+                for pattern in ['// After:', 'After:']:
+                    if pattern in example_text:
+                        self.logger.info(f"Found pattern: {pattern}")
+                        parts = example_text.split(pattern)
+                        if len(parts) > 1:
+                            # Get everything after the pattern
+                            after_section = parts[1].strip()
+                            self.logger.info(f"After section: {after_section[:100]}")
+                            
+                            # Extract just the code line (first non-empty line)
+                            for line in after_section.split('\n'):
+                                line = line.strip()
+                                # Skip empty lines, comments, and markdown
+                                if line and not line.startswith('//') and not line.startswith('```'):
+                                    after_code = line
+                                    self.logger.info(f"Extracted after_code: {after_code}")
+                                    break
+                            
+                            if after_code:
+                                break
+                
+                self.logger.info(f"Final after_code: {after_code}")
+                
+                # Extract code context from violation for display
+                code_context_data = violation.get('code_context')
+                code_context = None
+                code_context_lines = None
+                
+                if code_context_data:
+                    code_context = code_context_data.get('context', '')
+                    code_context_lines = {
+                        'start': code_context_data.get('start_line', 1),
+                        'violation': code_context_data.get('line', line_info)
+                    }
+                
+                self.logger.info(f"code_context exists: {bool(code_context)}")
+                self.logger.info(f"code_context_lines exists: {bool(code_context_lines)}")
+                
+                # If we have code context and a fix suggestion, show the suggested code
+                if after_code and code_context and code_context_lines:
+                    self.logger.info("✅ Displaying CODE SUGGESTION in Violation tab")
+                    violation_text.insert(tk.END, "\n\n")
+                    violation_text.insert(tk.END, "CODE SUGGESTION (with surrounding lines):\n")
+                    violation_text.insert(tk.END, "=" * 60 + "\n")
+                    
+                    # Show the same context but with the fix applied to the violation line
+                    start_line = code_context_lines.get('start', 1)
+                    violation_line = code_context_lines.get('violation', line_info)
+                    
+                    for i, line in enumerate(code_context.split('\n')):
+                        current_line_num = start_line + i
+                        if current_line_num == violation_line:
+                            # Show the fixed line
+                            # Preserve indentation from original line
+                            original_line = line
+                            indent = len(original_line) - len(original_line.lstrip())
+                            indented_fix = ' ' * indent + after_code
+                            violation_text.insert(tk.END, f">>> {current_line_num:4d} | {indented_fix}\n")
+                        else:
+                            violation_text.insert(tk.END, f"    {current_line_num:4d} | {line}\n")
+                    
+                    violation_text.insert(tk.END, "=" * 60 + "\n")
+                    violation_text.insert(tk.END, f"(Line {violation_line} shows the suggested fix)\n")
+                else:
+                    self.logger.warning(f"⚠️ Cannot display CODE SUGGESTION - missing data:")
+                    self.logger.warning(f"  after_code: {bool(after_code)}")
+                    self.logger.warning(f"  code_context: {bool(code_context)}")
+                    self.logger.warning(f"  code_context_lines: {bool(code_context_lines)}")
+            else:
+                self.logger.info("No AI-generated fix to display in Violation tab")
+                if isinstance(fix_suggestion, dict):
+                    self.logger.info(f"  ai_generated flag: {fix_suggestion.get('ai_generated')}")
+        
+        def show_fix_error(error_msg):
+            """Show error if fix generation failed"""
+            fix_text.delete('1.0', tk.END)
+            fix_text.insert('1.0', f"❌ Error generating fix:\n\n{error_msg}\n\n")
+            fix_text.insert(tk.END, "=" * 70 + "\n\n")
+            fix_text.insert(tk.END, "💡 TROUBLESHOOTING:\n\n")
+            fix_text.insert(tk.END, "1. Check main log window for detailed error messages\n")
+            fix_text.insert(tk.END, "2. If using AI mode, ensure Ollama is running:\n")
+            fix_text.insert(tk.END, "   - Run 'ollama serve' in terminal\n")
+            fix_text.insert(tk.END, "   - Run 'ollama pull codellama' to download model\n")
+            fix_text.insert(tk.END, "3. Check config.json AI settings\n")
+            fix_text.insert(tk.END, "4. Try 'Rules Only' mode if AI is unavailable\n")
+        
+        def accept_current():
+            """Accept current fix"""
+            if current_fix_data[0]:
+                violation = violations[current_idx[0]]
+                violation_id = violation.get('violation_id')
+                fix_data = current_fix_data[0]
+                
+                # Mark as fixed in knowledge base
+                fix_details = {
+                    'fix_applied': True,
+                    'fix_type': fix_data.get('fix_suggestion', {}).get('type', 'unknown') if isinstance(fix_data.get('fix_suggestion'), dict) else 'unknown',
+                    'timestamp': datetime.now().isoformat(),
+                    'accepted_by': 'user'
+                }
+                kb_manager.update_fix_status(violation_id, fix_details, 'Fix accepted by user')
+                
+                stats['accepted'] += 1
+                update_stats()
+                self.log_output(f"✅ Accepted fix for {violation_id}\n")
+            else:
+                stats['failed'] += 1
+                update_stats()
+            
+            current_idx[0] += 1
+            current_fix_data[0] = None  # Clear cached fix to force regeneration
+            load_current_fix()
+        
+        def skip_current():
+            """Skip current fix"""
+            stats['skipped'] += 1
+            update_stats()
+            current_idx[0] += 1
+            current_fix_data[0] = None  # Clear cached fix to force regeneration
+            load_current_fix()
+        
+        def reject_current():
+            """Reject current fix with reason"""
+            violation = violations[current_idx[0]]
+            fix_data = current_fix_data[0]
+            
+            if not fix_data:
+                messagebox.showinfo("No Fix", "No fix was generated for this violation.")
+                return
+            
+            # Show reason dialog
+            reason_dialog = tk.Toplevel(dialog)
+            reason_dialog.title("🚫 Rejection Reason")
+            reason_dialog.geometry("600x400")
+            reason_dialog.transient(dialog)
+            
+            ttk.Label(
+                reason_dialog,
+                text=f"Why are you rejecting this fix for {violation.get('violation_id')}?",
+                font=('Arial', 11, 'bold')
+            ).pack(padx=10, pady=(10, 5))
+            
+            ttk.Label(
+                reason_dialog,
+                text="Your feedback will help improve future suggestions.",
+                font=('Arial', 9),
+                foreground='gray'
+            ).pack(padx=10, pady=(0, 10))
+            
+            # Reason categories
+            ttk.Label(reason_dialog, text="Select reason category:", font=('Arial', 9, 'bold')).pack(padx=10, anchor=tk.W)
+            
+            reason_category = tk.StringVar(value="incorrect_fix")
+            categories = [
+                ("incorrect_fix", "Fix doesn't solve the violation"),
+                ("breaks_code", "Fix would break existing functionality"),
+                ("poor_quality", "Fix quality is poor/incomplete"),
+                ("not_applicable", "Fix not applicable to this context"),
+                ("better_alternative", "I have a better solution"),
+                ("other", "Other (specify below)")
+            ]
+            
+            for value, label in categories:
+                ttk.Radiobutton(
+                    reason_dialog,
+                    text=label,
+                    variable=reason_category,
+                    value=value
+                ).pack(padx=20, anchor=tk.W)
+            
+            # Additional details
+            ttk.Label(reason_dialog, text="Additional details:", font=('Arial', 9, 'bold')).pack(padx=10, pady=(10, 5), anchor=tk.W)
+            reason_text = scrolledtext.ScrolledText(
+                reason_dialog,
+                wrap=tk.WORD,
+                font=('Arial', 9),
+                height=6
+            )
+            reason_text.pack(padx=10, pady=(0, 10), fill=tk.BOTH, expand=True)
+            
+            def submit_rejection():
+                category = reason_category.get()
+                details = reason_text.get('1.0', tk.END).strip()
+                
+                if not details and category == "other":
+                    messagebox.showwarning("Missing Details", "Please provide details for 'Other' category.")
+                    return
+                
+                # Store rejection feedback
+                feedback_entry = {
+                    'violation_id': violation.get('violation_id'),
+                    'rule': violation.get('rule'),
+                    'file': violation.get('file'),
+                    'line': violation.get('line'),
+                    'fix_suggestion': fix_data.get('fix_suggestion', '')[:200],
+                    'rejection_category': category,
+                    'rejection_reason': details,
+                    'timestamp': datetime.now().isoformat()
+                }
+                rejection_feedback.append(feedback_entry)
+                
+                # Log to GUI
+                self.log_output(f"🚫 Rejected fix for {violation.get('violation_id')}\n")
+                self.log_output(f"   Category: {category}\n")
+                self.log_output(f"   Reason: {details[:100]}...\n" if len(details) > 100 else f"   Reason: {details}\n")
+                
+                stats['rejected'] += 1
+                update_stats()
+                reason_dialog.destroy()
+                current_idx[0] += 1
+                current_fix_data[0] = None  # Clear cached fix to force regeneration
+                load_current_fix()
+            
+            # Buttons
+            btn_frame = ttk.Frame(reason_dialog)
+            btn_frame.pack(fill=tk.X, padx=10, pady=10)
+            
+            ttk.Button(btn_frame, text="Submit Rejection", command=submit_rejection).pack(side=tk.LEFT, padx=5)
+            ttk.Button(btn_frame, text="Cancel", command=reason_dialog.destroy).pack(side=tk.LEFT, padx=5)
+            
+            reason_dialog.grab_set()
+        
+        # Buttons
+        ttk.Button(button_frame, text="✅ Accept", command=accept_current, width=15).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="⏭️ Skip", command=skip_current, width=15).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="🚫 Reject", command=reject_current, width=15).pack(side=tk.LEFT, padx=5)
+        ttk.Button(button_frame, text="❌ Cancel", command=dialog.destroy, width=15).pack(side=tk.RIGHT, padx=5)
+        
+        # Load first fix
+        if not load_current_fix():
+            return
+        
+        dialog.transient(self.root)
+        dialog.grab_set()
+    
+    def _load_rule_html_documentation(self, rule_id: str, violation_id: str) -> str:
+        """
+        Load and parse HTML documentation for a Parasoft rule
+        
+        Args:
+            rule_id: The rule ID (e.g., 'CERT_C-INT31-i')
+            violation_id: Full violation ID (e.g., 'CERT_C-INT31-i-2')
+        
+        Returns:
+            Formatted text documentation or empty string if not found
+        """
+        try:
+            import re
+            from html.parser import HTMLParser
+            
+            # Extract base rule ID from violation_id if rule_id is UNKNOWN
+            if rule_id == 'UNKNOWN' and violation_id != 'UNKNOWN':
+                # Extract pattern like CERT_C-INT31-i from CERT_C-INT31-i-2
+                match = re.match(r'^([A-Z_]+-[A-Z0-9_]+-[a-z]+)', violation_id)
+                if match:
+                    rule_id = match.group(1)
+            
+            if rule_id == 'UNKNOWN':
+                return ""
+            
+            # Build HTML file path
+            html_file = self.project_root / 'data' / 'Parasoft_Enabled_Rules_List' / 'gendoc' / f'{rule_id}.html'
+            
+            if not html_file.exists():
+                # Try without the sub-rule letter (e.g., CERT_C-INT31 instead of CERT_C-INT31-i)
+                base_rule_id = re.sub(r'-[a-z]+$', '', rule_id)
+                html_file = self.project_root / 'data' / 'Parasoft_Enabled_Rules_List' / 'gendoc' / f'{base_rule_id}.html'
+                
+                if not html_file.exists():
+                    return ""
+            
+            # Simple HTML parser to extract text content
+            class SimpleHTMLParser(HTMLParser):
+                def __init__(self):
+                    super().__init__()
+                    self.text_parts = []
+                    self.in_title = False
+                    self.in_strong = False
+                    self.in_pre = False
+                    self.current_section = None
+                    
+                def handle_starttag(self, tag, attrs):
+                    if tag == 'title':
+                        self.in_title = True
+                    elif tag == 'strong':
+                        self.in_strong = True
+                    elif tag == 'pre':
+                        self.in_pre = True
+                    
+                def handle_endtag(self, tag):
+                    if tag == 'title':
+                        self.in_title = False
+                        self.text_parts.append('\n')
+                    elif tag == 'strong':
+                        self.in_strong = False
+                        self.text_parts.append('\n')
+                    elif tag == 'pre':
+                        self.in_pre = False
+                        self.text_parts.append('\n')
+                    elif tag == 'br':
+                        self.text_parts.append('\n')
+                
+                def handle_data(self, data):
+                    data = data.strip()
+                    if data:
+                        if self.in_strong:
+                            # Section headers
+                            if data in ['DESCRIPTION', 'BENEFITS', 'EXAMPLE', 'REPAIR', 'NOTES', 'SECURITY RELEVANCE']:
+                                self.text_parts.append(f"\n{'='*70}\n")
+                                self.text_parts.append(f"{data}\n")
+                                self.text_parts.append(f"{'='*70}\n")
+                                self.current_section = data
+                            else:
+                                self.text_parts.append(f"{data}\n")
+                        else:
+                            self.text_parts.append(f"{data}\n")
+            
+            # Read and parse HTML
+            with open(html_file, 'r', encoding='utf-8', errors='ignore') as f:
+                html_content = f.read()
+            
+            parser = SimpleHTMLParser()
+            parser.feed(html_content)
+            
+            # Join text parts and clean up
+            doc_text = ''.join(parser.text_parts)
+            
+            # Limit to first 2000 characters to avoid overwhelming the UI
+            if len(doc_text) > 2000:
+                doc_text = doc_text[:2000] + "\n\n... (documentation truncated, see HTML file for full details)"
+            
+            return doc_text
+            
+        except Exception as e:
+            return f"⚠️  Error loading rule documentation: {str(e)}"
+    
+    def _save_fix_rejection_feedback(self, rejection_feedback):
+        """Save fix rejection feedback for regression learning"""
+        try:
+            # Create learning directory if it doesn't exist
+            learning_dir = self.project_root / "learning"
+            learning_dir.mkdir(exist_ok=True)
+            
+            # Save to rejection feedback file
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            feedback_file = learning_dir / f"fix_rejection_feedback_{timestamp}.json"
+            
+            with open(feedback_file, 'w', encoding='utf-8') as f:
+                json.dump({
+                    'timestamp': datetime.now().isoformat(),
+                    'feedback_count': len(rejection_feedback),
+                    'rejections': rejection_feedback
+                }, f, indent=2)
+            
+            self.log_output(f"\n✅ Saved {len(rejection_feedback)} fix rejection feedback entries to:\n")
+            self.log_output(f"   {feedback_file}\n\n")
+            
+            # Also integrate with FeedbackLearner if available
+            try:
+                from FeedbackLearner import FeedbackLearner, FeedbackType
+                
+                learner = FeedbackLearner(
+                    learning_db_path=learning_dir / "fix_learning.json"
+                )
+                
+                for feedback in rejection_feedback:
+                    # Map rejection categories to feedback types
+                    category_map = {
+                        'incorrect_fix': FeedbackType.FALSE_POSITIVE,
+                        'breaks_code': FeedbackType.SUPPRESSION_ERROR,
+                        'poor_quality': FeedbackType.SUPPRESSION_ERROR,
+                        'not_applicable': FeedbackType.FALSE_POSITIVE,
+                        'better_alternative': FeedbackType.SUPPRESSION_ERROR,
+                        'other': FeedbackType.SUPPRESSION_ERROR
+                    }
+                    
+                    feedback_type = category_map.get(
+                        feedback['rejection_category'],
+                        FeedbackType.SUPPRESSION_ERROR
+                    )
+                    
+                    # Add to learning system
+                    learner.add_feedback(
+                        feedback_type=feedback_type,
+                        rule_id=feedback['rule'],
+                        file_path=feedback['file'],
+                        line_number=feedback['line'],
+                        code_snippet=feedback['fix_suggestion'],
+                        user_comment=f"{feedback['rejection_category']}: {feedback['rejection_reason']}",
+                        severity='medium'
+                    )
+                
+                # Save updated learning database
+                learner.save_databases()
+                
+                self.log_output(f"✅ Integrated {len(rejection_feedback)} rejections into FeedbackLearner\n\n")
+                
+            except ImportError:
+                self.log_output("⚠️ FeedbackLearner not available - feedback saved to JSON only\n\n")
+            except Exception as e:
+                self.log_output(f"⚠️ Could not integrate with FeedbackLearner: {str(e)}\n\n")
+        
+        except Exception as e:
+            self.log_output(f"❌ Error saving fix rejection feedback: {str(e)}\n\n")
+    
+    def _save_rejection_feedback(self, rejection_feedback):
+        """Save rejection feedback for regression learning"""
+        try:
+            # Create learning directory if it doesn't exist
+            learning_dir = self.project_root / "learning"
+            learning_dir.mkdir(exist_ok=True)
+            
+            # Save to rejection feedback file
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            feedback_file = learning_dir / f"suppression_rejection_feedback_{timestamp}.json"
+            
+            with open(feedback_file, 'w', encoding='utf-8') as f:
+                json.dump({
+                    'timestamp': datetime.now().isoformat(),
+                    'feedback_count': len(rejection_feedback),
+                    'rejections': rejection_feedback
+                }, f, indent=2)
+            
+            self.log_output(f"\n✅ Saved {len(rejection_feedback)} rejection feedback entries to:\n")
+            self.log_output(f"   {feedback_file}\n\n")
+            
+            # Also integrate with FeedbackLearner if available
+            try:
+                from FeedbackLearner import FeedbackLearner, FeedbackType
+                
+                learner = FeedbackLearner(
+                    learning_db_path=learning_dir / "suppression_learning.json"
+                )
+                
+                for feedback in rejection_feedback:
+                    # Map rejection categories to feedback types
+                    category_map = {
+                        'false_positive': FeedbackType.FALSE_POSITIVE,
+                        'incorrect_justification': FeedbackType.SUPPRESSION_ERROR,
+                        'wrong_rule': FeedbackType.FALSE_POSITIVE,
+                        'wrong_format': FeedbackType.SUPPRESSION_ERROR,
+                        'duplicate': FeedbackType.SUPPRESSION_ERROR,
+                        'other': FeedbackType.SUPPRESSION_ERROR
+                    }
+                    
+                    feedback_type = category_map.get(
+                        feedback['rejection_category'],
+                        FeedbackType.SUPPRESSION_ERROR
+                    )
+                    
+                    # Add to learning system
+                    learner.add_feedback(
+                        feedback_type=feedback_type,
+                        rule_id=feedback['rule_id'],
+                        file_path=feedback['file'],
+                        line_number=feedback['line'],
+                        code_snippet=feedback['suppression_comment'],
+                        user_comment=f"{feedback['rejection_category']}: {feedback['rejection_reason']}",
+                        severity='medium'
+                    )
+                
+                # Save updated learning database
+                learner.save_databases()
+                
+                self.log_output(f"✅ Integrated {len(rejection_feedback)} rejections into FeedbackLearner\n\n")
+                
+            except ImportError:
+                self.log_output("⚠️ FeedbackLearner not available - feedback saved to JSON only\n\n")
+            except Exception as e:
+                self.log_output(f"⚠️ Could not integrate with FeedbackLearner: {str(e)}\n\n")
+        
+        except Exception as e:
+            self.log_output(f"❌ Error saving rejection feedback: {str(e)}\n\n")
     
     
     def _query_master_knowledge_dialog(self):
@@ -1595,6 +2949,312 @@ For detailed documentation, see the docs/ folder.
             self.model_var.set(display_names[0])
         else:
             self.model_var.set(model_names[0] if model_names else "No models available")
+    
+    def show_install_models_dialog(self):
+        """Show dialog to install popular Ollama models"""
+        dialog = tk.Toplevel(self.root)
+        dialog.title("📥 Install Ollama Models")
+        dialog.geometry("700x550")
+        dialog.transient(self.root)
+        dialog.grab_set()
+        
+        # Center the dialog
+        dialog.update_idletasks()
+        x = (dialog.winfo_screenwidth() // 2) - (700 // 2)
+        y = (dialog.winfo_screenheight() // 2) - (550 // 2)
+        dialog.geometry(f'+{x}+{y}')
+        
+        # Main container
+        main_frame = ttk.Frame(dialog, padding="15")
+        main_frame.pack(fill=tk.BOTH, expand=True)
+        
+        # Header
+        header_label = ttk.Label(
+            main_frame,
+            text="📦 Install Ollama Models",
+            font=('Arial', 14, 'bold')
+        )
+        header_label.pack(pady=(0, 10))
+        
+        info_label = ttk.Label(
+            main_frame,
+            text="Select models to install. Installation may take several minutes depending on model size.",
+            font=('Arial', 9),
+            foreground='#7F8C8D',
+            wraplength=650
+        )
+        info_label.pack(pady=(0, 15))
+        
+        # Check if Ollama is running
+        ollama_running = self._check_ollama_service()
+        
+        if not ollama_running:
+            warning_frame = ttk.Frame(main_frame)
+            warning_frame.pack(fill=tk.X, pady=(0, 15))
+            
+            warning_label = ttk.Label(
+                warning_frame,
+                text="⚠️ WARNING: Ollama service is not running!",
+                font=('Arial', 11, 'bold'),
+                foreground='#E74C3C'
+            )
+            warning_label.pack(anchor=tk.W)
+            
+            help_label = ttk.Label(
+                warning_frame,
+                text="Please start Ollama by running 'ollama serve' in a terminal, then click 'Check Again'.",
+                font=('Arial', 9),
+                foreground='#E67E22'
+            )
+            help_label.pack(anchor=tk.W, pady=(5, 0))
+            
+            button_frame = ttk.Frame(warning_frame)
+            button_frame.pack(anchor=tk.W, pady=(10, 0))
+            
+            ttk.Button(
+                button_frame,
+                text="🔄 Check Again",
+                command=lambda: [dialog.destroy(), self.show_install_models_dialog()]
+            ).pack(side=tk.LEFT, padx=(0, 5))
+            
+            ttk.Button(
+                button_frame,
+                text="❌ Close",
+                command=dialog.destroy
+            ).pack(side=tk.LEFT)
+            
+            return
+        
+        # Model selection area
+        models_frame = ttk.LabelFrame(main_frame, text="Available Models", padding="10")
+        models_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 15))
+        
+        # Define popular models with descriptions
+        models = [
+            {
+                'name': 'qwen2.5:latest',
+                'size': '4.7GB',
+                'description': 'Qwen 2.5 (7B) - Best for code analysis, RECOMMENDED',
+                'recommended': True
+            },
+            {
+                'name': 'qwen2.5:1.5b',
+                'size': '986MB',
+                'description': 'Qwen 2.5 (1.5B) - Smaller, faster, good for quick tasks',
+                'recommended': False
+            },
+            {
+                'name': 'llama3.2:latest',
+                'size': '2.0GB',
+                'description': 'Llama 3.2 (3B) - Good alternative, balanced performance',
+                'recommended': False
+            },
+            {
+                'name': 'llama3.2:1b',
+                'size': '1.3GB',
+                'description': 'Llama 3.2 (1B) - Lightweight, fast responses',
+                'recommended': False
+            }
+        ]
+        
+        # Store checkbox variables
+        checkbox_vars = []
+        
+        for i, model in enumerate(models):
+            model_frame = ttk.Frame(models_frame)
+            model_frame.pack(fill=tk.X, pady=5)
+            
+            var = tk.BooleanVar(value=False)
+            checkbox_vars.append((var, model['name']))
+            
+            checkbox = ttk.Checkbutton(
+                model_frame,
+                variable=var,
+                text=""
+            )
+            checkbox.pack(side=tk.LEFT, padx=(0, 5))
+            
+            # Model name and size
+            name_label = ttk.Label(
+                model_frame,
+                text=f"{model['name']}",
+                font=('Consolas', 10, 'bold'),
+                foreground='#2C3E50'
+            )
+            name_label.pack(side=tk.LEFT, padx=(0, 10))
+            
+            size_label = ttk.Label(
+                model_frame,
+                text=f"({model['size']})",
+                font=('Arial', 9),
+                foreground='#7F8C8D'
+            )
+            size_label.pack(side=tk.LEFT, padx=(0, 10))
+            
+            # Recommended badge
+            if model.get('recommended'):
+                rec_label = ttk.Label(
+                    model_frame,
+                    text="⭐ RECOMMENDED",
+                    font=('Arial', 8, 'bold'),
+                    foreground='#27AE60'
+                )
+                rec_label.pack(side=tk.LEFT, padx=(0, 10))
+            
+            # Description
+            desc_label = ttk.Label(
+                model_frame,
+                text=model['description'],
+                font=('Arial', 9),
+                foreground='#555555'
+            )
+            desc_label.pack(side=tk.LEFT)
+        
+        # Progress area
+        progress_frame = ttk.LabelFrame(main_frame, text="Installation Progress", padding="10")
+        progress_frame.pack(fill=tk.X, pady=(0, 15))
+        
+        progress_text = scrolledtext.ScrolledText(
+            progress_frame,
+            height=6,
+            font=('Consolas', 9),
+            bg='#F8F9FA',
+            wrap=tk.WORD
+        )
+        progress_text.pack(fill=tk.BOTH, expand=True)
+        progress_text.config(state='disabled')
+        
+        # Buttons
+        button_frame = ttk.Frame(main_frame)
+        button_frame.pack(fill=tk.X)
+        
+        def start_installation():
+            selected_models = [model_name for var, model_name in checkbox_vars if var.get()]
+            
+            if not selected_models:
+                progress_text.config(state='normal')
+                progress_text.delete('1.0', tk.END)
+                progress_text.insert('1.0', "⚠️ Please select at least one model to install.\n")
+                progress_text.config(state='disabled')
+                return
+            
+            # Disable checkboxes and install button during installation
+            for widget in models_frame.winfo_children():
+                for child in widget.winfo_children():
+                    if isinstance(child, ttk.Checkbutton):
+                        child.config(state='disabled')
+            
+            install_btn.config(state='disabled')
+            
+            # Start installation
+            self._install_selected_models(selected_models, progress_text, dialog, install_btn, models_frame)
+        
+        install_btn = ttk.Button(
+            button_frame,
+            text="📥 Install Selected",
+            command=start_installation
+        )
+        install_btn.pack(side=tk.LEFT, padx=(0, 10))
+        
+        ttk.Button(
+            button_frame,
+            text="❌ Close",
+            command=dialog.destroy
+        ).pack(side=tk.LEFT)
+        
+        # Tip
+        tip_label = ttk.Label(
+            main_frame,
+            text="💡 Tip: After installation, click '🔄 Refresh Models' in the AI Chat tab to see new models.",
+            font=('Arial', 8),
+            foreground='#7F8C8D',
+            wraplength=650
+        )
+        tip_label.pack(side=tk.BOTTOM, pady=(10, 0))
+    
+    def _check_ollama_service(self):
+        """Check if Ollama service is running"""
+        try:
+            import requests
+            response = requests.get('http://localhost:11434/api/tags', timeout=2)
+            return response.status_code == 200
+        except:
+            return False
+    
+    def _install_selected_models(self, models, progress_widget, dialog, install_btn, models_frame):
+        """Install selected Ollama models"""
+        def update_progress(message):
+            """Thread-safe progress update"""
+            def _update():
+                progress_widget.config(state='normal')
+                progress_widget.insert(tk.END, message)
+                progress_widget.see(tk.END)
+                progress_widget.config(state='disabled')
+            self.root.after(0, _update)
+        
+        def install_models_thread():
+            total = len(models)
+            update_progress(f"📦 Starting installation of {total} model(s)...\n\n")
+            
+            for idx, model_name in enumerate(models, 1):
+                update_progress(f"[{idx}/{total}] Installing {model_name}...\n")
+                update_progress("=" * 60 + "\n")
+                
+                try:
+                    # Use PowerShell to run ollama pull
+                    import subprocess
+                    
+                    process = subprocess.Popen(
+                        ['ollama', 'pull', model_name],
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.STDOUT,
+                        text=True,
+                        bufsize=1,
+                        shell=True
+                    )
+                    
+                    # Stream output in real-time
+                    for line in process.stdout:
+                        update_progress(line)
+                    
+                    process.wait()
+                    
+                    if process.returncode == 0:
+                        update_progress(f"\n✅ Successfully installed {model_name}\n\n")
+                        self.root.after(0, lambda: self.log_output(f"[SUCCESS] ✅ Installed Ollama model: {model_name}\n"))
+                    else:
+                        update_progress(f"\n❌ Failed to install {model_name} (exit code: {process.returncode})\n\n")
+                        self.root.after(0, lambda m=model_name: self.log_output(f"[ERROR] ❌ Failed to install model: {m}\n"))
+                
+                except FileNotFoundError:
+                    update_progress(f"\n❌ ERROR: 'ollama' command not found!\n")
+                    update_progress("Make sure Ollama is installed and added to PATH.\n")
+                    update_progress("Download from: https://ollama.com/download\n\n")
+                    self.root.after(0, lambda: self.log_output("[ERROR] Ollama CLI not found in PATH\n"))
+                    break
+                
+                except Exception as e:
+                    update_progress(f"\n❌ ERROR installing {model_name}: {str(e)}\n\n")
+                    self.root.after(0, lambda m=model_name, e=str(e): self.log_output(f"[ERROR] Failed to install {m}: {e}\n"))
+            
+            # Installation complete
+            update_progress("\n" + "=" * 60 + "\n")
+            update_progress("🎉 Installation process completed!\n")
+            update_progress("\n💡 Click '🔄 Refresh Models' in AI Chat to see your new models.\n")
+            
+            # Re-enable UI elements
+            def enable_ui():
+                install_btn.config(state='normal')
+                for widget in models_frame.winfo_children():
+                    for child in widget.winfo_children():
+                        if isinstance(child, ttk.Checkbutton):
+                            child.config(state='normal')
+            
+            self.root.after(0, enable_ui)
+        
+        # Run installation in background thread
+        thread = threading.Thread(target=install_models_thread, daemon=True)
+        thread.start()
     
     def test_ollama_connection(self):
         """Test connection to Ollama server"""

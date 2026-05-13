@@ -318,12 +318,28 @@ class ParasoftAIAgent:
                 
                 ref_counter = 1
                 line_to_ref = {}
+                rule_to_ref = {}  # Track which rules already have references
                 
-                # Generate references in sequence
+                # Generate references in sequence with REUSE LOGIC
                 for line in sorted(violations_by_file[file].keys()):
                     violations_list = violations_by_file[file][line]
-                    ref_id = f"{base_filename}_c_REF_{ref_counter}"
-                    line_to_ref[line] = ref_id
+                    
+                    # Get the primary violation ID for this line
+                    primary_violation_id = violations_list[0]['id'] if violations_list else 'UNKNOWN'
+                    
+                    # Check if this violation rule already has a reference (REUSE LOGIC)
+                    if primary_violation_id in rule_to_ref:
+                        # Reuse existing reference
+                        ref_id = rule_to_ref[primary_violation_id]
+                        line_to_ref[line] = ref_id
+                        logger.info(f"♻️  Reusing {ref_id} for {primary_violation_id} at line {line}")
+                        continue  # Don't create duplicate header entry
+                    else:
+                        # Create new reference for this rule
+                        ref_id = f"{base_filename}_c_REF_{ref_counter}"
+                        line_to_ref[line] = ref_id
+                        rule_to_ref[primary_violation_id] = ref_id  # Remember for future reuse
+                        logger.info(f"✨ Created {ref_id} for {primary_violation_id} at line {line}")
                     
                     f.write(f"* #section {ref_id}\n")
                     for v_info in violations_list:

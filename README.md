@@ -7,12 +7,43 @@
 
 ---
 
-## 📖 Documentation
+## � NEW in v4.1.0: AI-Powered Interactive Code Fixer!
+
+**Now actually fixes your code!** Not just suggestions - the tool now uses AI to understand your code context and apply fixes directly to source files with interactive review.
+
+### Key Features:
+- ✅ **Actually modifies source files** - No more manual copy-paste
+- 🤖 **AI understands code context** - Generates precise, compilable fixes
+- 👁️ **Interactive review** - See before/after diffs for each fix
+- 🛡️ **Safe with backups** - Automatic backups before any changes
+- ↩️ **Rollback support** - Undo all changes if needed
+- 🔍 **Auto-enrichment** - Automatically adds source code context to violations
+
+### Quick Start:
+```batch
+# Apply AI-powered fixes to your source code (with auto-enrichment)
+Apply_Fixes.bat MODULE_NAME "PATH\TO\SOURCE"
+
+# Example
+Apply_Fixes.bat Mka "D:\Source\Mka"
+
+# Or manually enrich first (optional)
+Enrich_Violations.bat Mka "D:\Source\Mka"
+Apply_Fixes.bat Mka "D:\Source\Mka"
+```
+
+📘 **[Full Guide](docs/AI_CODE_FIXER_GUIDE.md)** - Complete documentation  
+📘 **[Enrichment Guide](docs/VIOLATION_ENRICHMENT_GUIDE.md)** - Fix missing code context
+
+---
+
+## �📖 Documentation
 
 For comprehensive documentation, see the [`docs/`](docs/) folder:
 
-- **[GUI Guide](docs/GUI_GUIDE.md)** - Graphical user interface walkthrough (NEW! v4.0)
-- **[GUI Quick Reference](docs/GUI_QUICK_REFERENCE.md)** - One-page GUI cheat sheet (NEW! v4.0)
+- **[AI Code Fixer Guide](docs/AI_CODE_FIXER_GUIDE.md)** - 🚀 NEW! Actually apply AI fixes to source code (v4.1)
+- **[Violation Enrichment](docs/VIOLATION_ENRICHMENT_GUIDE.md)** - 🚀 NEW! Add source code context for better fixes (v4.1)
+- **[GUI Guide](docs/GUI_GUIDE.md)** - Graphical user interface walkthrough (v4.0)
 - **[Static Code Analysis](docs/STATIC_ANALYSIS.md)** - Built-in C/C++ static analyzer for runtime errors, MISRA, CERT (v3.0)
 - **[Fix Viewing Options](docs/FIX_VIEWING_OPTIONS.md)** - Interactive viewer, HTML reports, text files (v2.3)
 - **[Parasoft Rules Database](docs/PARASOFT_RULES_DATABASE.md)** - Official Parasoft-approved fix suggestions (v2.3)
@@ -34,7 +65,8 @@ For comprehensive documentation, see the [`docs/`](docs/) folder:
 ## 📌 Version Information
 
 | Version | Release | Features |
-|---------|---------|----------|
+|-----1.0** | May 2026 | **🚀 AI-Powered Interactive Code Fixer** - Actually applies AI-generated fixes to source files with interactive review, before/after diffs, automatic backups, and rollback support |
+| **4.----|---------|----------|
 | **4.0.0** | Apr 2026 | **GUI Support** - Graphical User Interface with point-and-click operations, real-time logging, process control, reorganized project structure (batch_support folder) |
 | **3.0.0** | Apr 2026 | Violation History Tracking, RAG Learning, Comparison Reports, Multi-line Comment Fix, Learning Database with Rule-Based Pattern Learning, AI Training Folder Structure |
 | 2.3.0 | Apr 2026 | Parasoft Rules Database - Official fix suggestions from 1200+ rules |

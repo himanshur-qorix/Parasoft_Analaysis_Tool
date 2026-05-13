@@ -29,6 +29,19 @@ if errorlevel 1 (
 echo [INFO] Python found. Launching GUI...
 echo.
 
+REM Check if Ollama is running and start if needed
+echo [INFO] Checking Ollama AI service...
+powershell -Command "Get-Process -Name 'ollama' -ErrorAction SilentlyContinue" >nul 2>&1
+if errorlevel 1 (
+    echo [INFO] Starting Ollama AI service...
+    start "" /B ollama serve
+    timeout /t 3 /nobreak >nul
+    echo [INFO] Ollama service started
+) else (
+    echo [INFO] Ollama AI service already running
+)
+echo.
+
 REM Activate virtual environment if exists
 if exist "..\venv\Scripts\activate.bat" (
     call ..\venv\Scripts\activate.bat

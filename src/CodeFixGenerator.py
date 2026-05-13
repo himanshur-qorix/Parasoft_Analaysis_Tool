@@ -235,10 +235,30 @@ class CodeFixGenerator:
         Returns:
             Fix data dictionary
         """
-        violation_id = violation['violation_id']
-        violation_text = violation['violation_text']
-        severity = violation['severity']
-        category = violation['category']
+        violation_id = violation.get('violation_id', 'UNKNOWN')
+        violation_text = violation.get('violation_text', 'No description')
+        severity = violation.get('severity', 'MEDIUM')
+        category = violation.get('category', 'OTHER')
+        
+        logger.info(f"[FIX-GEN] Starting fix generation for {violation_id}")
+        logger.debug(f"  Category: {category}, Severity: {severity}")
+        logger.debug(f"  Description: {violation_text[:100]}...")
+        logger.info(f"  📋 VIOLATION DICT RECEIVED:")
+        logger.info(f"     violation_id: {violation_id}")
+        logger.info(f"     violation_text: {violation_text[:150]}...")
+        logger.info(f"     category: {category}")
+        
+        # Check for incomplete violation data
+        has_code_snippet = bool(violation.get('code_snippet') and 
+                                violation.get('code_snippet') != 'No code snippet available')
+        has_file_info = bool(violation.get('file_path') and 
+                           violation.get('file_path') not in ['UNKNOWN', 'N/A', ''])
+        
+        if not has_code_snippet or not has_file_info:
+            logger.warning(f"[FIX-GEN] Incomplete violation data for {violation_id}")
+            logger.warning(f"  Has code snippet: {has_code_snippet}")
+            logger.warning(f"  Has file info: {has_file_info}")
+            logger.info(f"[FIX-GEN] Will generate fix based on violation description only")
         
         # STEP 1: Check cross-module handling to see if this should be justified instead
         cross_module_info = self._check_cross_module_justifications(violation_id)
@@ -281,6 +301,8 @@ class CodeFixGenerator:
         code_context = None
         if self.source_code_path:
             code_context = self._extract_code_context(violation)
+            if not code_context:
+                logger.debug(f"No code context extracted for {violation_id}, checking files_affected format")
         
         # Generate fix based on violation type
         fix_suggestion = self._get_fix_suggestion(violation_id, violation_text, category, code_context)
@@ -374,28 +396,54 @@ class CodeFixGenerator:
             Dictionary with code context or None if not available
         """
         if not self.source_code_path:
+            logger.debug(f"[CODE-CONTEXT] No source_code_path configured")
             return None
         
         try:
             files_affected = violation.get('files_affected', [])
             if not files_affected:
+                logger.debug(f"[CODE-CONTEXT] No files_affected in violation")
                 return None
             
-            # Parse first file entry (format: "file.c:line")
+            # Parse first file entry - handle both dict and string formats
             file_entry = files_affected[0]
-            if ':' in file_entry:
-                file_name, line_str = file_entry.rsplit(':', 1)
-                try:
-                    line_number = int(line_str)
-                except ValueError:
+            
+            # Handle dict format (from KB storage)
+            if isinstance(file_entry, dict):
+                file_name = file_entry.get('file')
+                line_number = file_entry.get('line')
+                
+                if not file_name or not line_number:
+                    logger.debug(f"[CODE-CONTEXT] Dict entry missing file or line: {file_entry}")
+                    return None
+                
+                logger.debug(f"[CODE-CONTEXT] Parsed dict format: {file_name}:{line_number}")
+            
+            # Handle string format (legacy: "file.c:line")
+            elif isinstance(file_entry, str):
+                if ':' in file_entry:
+                    file_name, line_str = file_entry.rsplit(':', 1)
+                    try:
+                        line_number = int(line_str)
+                        logger.debug(f"[CODE-CONTEXT] Parsed string format: {file_name}:{line_number}")
+                    except ValueError:
+                        logger.debug(f"[CODE-CONTEXT] Could not parse line number from: {file_entry}")
+                        return None
+                else:
+                    logger.debug(f"[CODE-CONTEXT] String entry has no colon: {file_entry}")
                     return None
             else:
+                logger.debug(f"[CODE-CONTEXT] Unknown file_entry type: {type(file_entry)}")
                 return None
             
             # Search for the file in source code path
+            logger.debug(f"[CODE-CONTEXT] Searching for {file_name} in {self.source_code_path}")
             source_file = self._find_source_file(file_name)
             if not source_file:
+                logger.warning(f"[CODE-CONTEXT] Could not find source file: {file_name} in {self.source_code_path}")
                 return None
+            
+            logger.info(f"[CODE-CONTEXT] Found source file: {source_file}")
             
             # Read code context (5 lines before, target line, 5 lines after)
             context_lines = 5
@@ -409,17 +457,21 @@ class CodeFixGenerator:
             context_code = ''.join(all_lines[start_line:end_line])
             target_line_code = all_lines[line_number - 1] if 0 < line_number <= total_lines else ''
             
+            logger.info(f"[CODE-CONTEXT] Extracted context: lines {start_line+1}-{end_line}, target line {line_number}")
+            logger.debug(f"[CODE-CONTEXT] Target line: {target_line_code.strip()}")
+            
             return {
                 'file': file_name,
                 'line': line_number,
-                'target_code': target_line_code.strip(),
+                'target_line': target_line_code.strip(),
+                'target_code': target_line_code.strip(),  # Alias for compatibility
                 'context': context_code,
                 'start_line': start_line + 1,
                 'end_line': end_line
             }
         
         except Exception as e:
-            logger.debug(f"Error extracting code context: {e}")
+            logger.error(f"[CODE-CONTEXT] Error extracting code context: {e}", exc_info=True)
             return None
     
     def _find_source_file(self, filename: str) -> Optional[Path]:
@@ -472,7 +524,7 @@ class CodeFixGenerator:
             if self.use_rules_db and self.rules_parser:
                 parasoft_reference = self._get_parasoft_reference(violation_id, violation_text, category)
                 if parasoft_reference:
-                    logger.debug(f"[AI-ONLY] Found Parasoft reference for context")
+                    logger.debug(f"[AI-ONLY] Found Parasoft reference for AI context")
             
             # Try AI generation with enhanced context
             if self.ollama.enabled:
@@ -487,7 +539,10 @@ class CodeFixGenerator:
                 
                 ai_fix = self.ollama.generate_fix_suggestion(violation_dict)
                 if ai_fix:
-                    logger.info(f"[AI-ONLY] Using AI-generated fix for {violation_id}")
+                    if code_context:
+                        logger.info(f"[AI-ONLY] Generated contextual fix for actual code in {violation_id}")
+                    else:
+                        logger.info(f"[AI-ONLY] Generated generic fix (no code context) for {violation_id}")
                     return ai_fix
             
             # Fallback to rule-based only if AI fails
@@ -509,33 +564,79 @@ class CodeFixGenerator:
             logger.info(f"[RULES-ONLY] Using pattern-based fix for {violation_id}")
             return self._get_rule_based_fix(violation_id, violation_text, category)
         
-        # HYBRID MODE (default): Try all sources in priority order
+        # HYBRID MODE (default): Intelligent prioritization
         else:
             logger.debug(f"[HYBRID] Trying all sources for {violation_id}")
             
-            # PRIORITY 1: Try Parasoft Rules Database for official fix
+            # Get Parasoft reference info for context
+            parasoft_reference = None
             if self.use_rules_db and self.rules_parser:
-                parasoft_fix = self._get_parasoft_official_fix(violation_id, violation_text, category)
-                if parasoft_fix:
-                    logger.info(f"[PARASOFT-DB] Using official Parasoft fix for {violation_id}")
-                    return parasoft_fix
+                parasoft_reference = self._get_parasoft_reference(violation_id, violation_text, category)
             
-            # PRIORITY 2: Try AI generation (if appropriate)
-            if self.ollama.should_use_ai(category, violation_text):
+            # PRIORITY 1: If we have actual code context, ALWAYS use AI for specific fix
+            logger.debug(f"[HYBRID] Checking AI prerequisites for {violation_id}")
+            logger.debug(f"  code_context present: {code_context is not None}")
+            logger.debug(f"  ollama.enabled: {self.ollama.enabled}")
+            
+            if code_context and self.ollama.enabled:
+                logger.info(f"[HYBRID-AI] Code context available, generating AI-powered specific fix for {violation_id}")
+                logger.info(f"[HYBRID-AI] 📄 Passing code context to AI:")
+                logger.info(f"[HYBRID-AI]   File: {code_context.get('file')}")
+                logger.info(f"[HYBRID-AI]   Line: {code_context.get('line')}")
+                logger.info(f"[HYBRID-AI]   Target: {code_context.get('target_line', '')[:100]}")
+                logger.info(f"[HYBRID-AI]   Context lines: {code_context.get('start_line')}-{code_context.get('end_line')}")
+                logger.debug(f"[HYBRID-AI]   Full context:\n{code_context.get('context', '')}")
+                
                 violation_dict = {
                     'violation_id': violation_id,
                     'violation_text': violation_text,
                     'category': category,
                     'severity': 'MEDIUM',
-                    'code_context': code_context
+                    'code_context': code_context,
+                    'parasoft_reference': parasoft_reference  # Use Parasoft as reference, not answer
                 }
                 
                 ai_fix = self.ollama.generate_fix_suggestion(violation_dict)
                 if ai_fix:
-                    logger.info(f"[AI] Using AI-generated fix for {violation_id}")
+                    logger.info(f"[AI] Generated contextual fix for actual code in {violation_id}")
+                    # Add Parasoft references for documentation
+                    if parasoft_reference:
+                        ai_fix['parasoft_reference'] = parasoft_reference
+                    return ai_fix
+                else:
+                    logger.warning(f"[AI] AI generation returned None for {violation_id}, falling back")
+            else:
+                if not code_context:
+                    logger.debug(f"[HYBRID] Skipping AI - no code context for {violation_id}")
+                if not self.ollama.enabled:
+                    logger.debug(f"[HYBRID] Skipping AI - Ollama not enabled")
+            
+            # PRIORITY 2: No code context, use Parasoft generic examples (if available)
+            if not code_context and self.use_rules_db and self.rules_parser:
+                parasoft_fix = self._get_parasoft_official_fix(violation_id, violation_text, category)
+                if parasoft_fix:
+                    logger.info(f"[PARASOFT-DB] No code context, using generic Parasoft examples for {violation_id}")
+                    parasoft_fix['warning'] = "⚠️  Generic examples shown. Set 'Input Path' for AI-generated specific fixes."
+                    return parasoft_fix
+            
+            # PRIORITY 3: Try AI without code context (if appropriate)
+            if self.ollama.should_use_ai(category, violation_text):
+                logger.info(f"[HYBRID] Attempting AI generation without code context for {violation_id}")
+                violation_dict = {
+                    'violation_id': violation_id,
+                    'violation_text': violation_text,
+                    'category': category,
+                    'severity': 'MEDIUM',
+                    'code_context': None,
+                    'parasoft_reference': parasoft_reference
+                }
+                
+                ai_fix = self.ollama.generate_fix_suggestion(violation_dict)
+                if ai_fix:
+                    logger.info(f"[AI] Using AI-generated generic fix for {violation_id}")
                     return ai_fix
             
-            # PRIORITY 3: Fallback to rule-based patterns
+            # PRIORITY 4: Fallback to rule-based patterns
             logger.info(f"[HYBRID] Using pattern-based fix for {violation_id}")
             return self._get_rule_based_fix(violation_id, violation_text, category)
     
@@ -766,8 +867,78 @@ int* ptr = (int*)(uintptr_t)some_void_ptr;  // Use intermediate cast
     def _get_cert_fix(self, violation_id: str, text_upper: str, violation_text: str) -> Dict:
         """Get CERT-specific fix suggestions"""
         
+        # Type conversion issues (INT31-C, INT02-C, etc.)
+        if ('INT31' in violation_id.upper() or 'INT02' in violation_id.upper() or 
+            'CONVERSION' in text_upper or 'CAST' in text_upper or 
+            'ESSENTIALLY' in text_upper or 'TYPE' in text_upper):
+            
+            # Specific handling for enum to unsigned conversion
+            if 'ENUM' in text_upper and 'UNSIGNED' in text_upper:
+                return {
+                    'type': 'type_conversion',
+                    'description': 'Add explicit cast when assigning enum values to unsigned integer types',
+                    'example': '''
+// Before (Implicit conversion - CERT INT31-C violation):
+enum StatusCode {
+    STATUS_OK = 0,
+    STATUS_ERROR = 1
+};
+uint8_t status = STATUS_OK;  // Implicit conversion
+
+// After (Explicit cast - Compliant):
+uint8_t status = (uint8_t)STATUS_OK;  // Explicit cast
+
+// Or use proper type:
+enum StatusCode status = STATUS_OK;  // Type-safe
+''',
+                    'priority': 'MEDIUM',
+                    'cert_rule': 'INT31-C',
+                    'rationale': 'Explicit casting ensures type safety and prevents unintended integer conversions that could lead to value changes or undefined behavior.'
+                }
+            
+            # Signed/unsigned conversion
+            elif ('SIGNED' in text_upper and 'UNSIGNED' in text_upper) or 'SIGN' in text_upper:
+                return {
+                    'type': 'type_conversion',
+                    'description': 'Add explicit cast for signed/unsigned conversions',
+                    'example': '''
+// Before:
+int8_t signed_val = -5;
+uint8_t unsigned_val = signed_val;  // Implicit conversion - dangerous!
+
+// After:
+uint8_t unsigned_val = (uint8_t)signed_val;  // Explicit cast
+// Or better - validate before conversion:
+uint8_t unsigned_val = (signed_val >= 0) ? (uint8_t)signed_val : 0;
+''',
+                    'priority': 'HIGH',
+                    'cert_rule': 'INT31-C',
+                    'rationale': 'Prevents unexpected value changes due to sign conversion. Negative signed values become large unsigned values.'
+                }
+            
+            # General type conversion
+            else:
+                return {
+                    'type': 'type_conversion',
+                    'description': 'Use explicit casts for all type conversions to ensure type safety',
+                    'example': '''
+// Before:
+uint16_t value16 = 300;
+uint8_t value8 = value16;  // Implicit narrowing - data loss!
+
+// After (with explicit cast):
+uint8_t value8 = (uint8_t)value16;  // Explicit - but still data loss
+
+// Better (with range check):
+uint8_t value8 = (value16 <= 255) ? (uint8_t)value16 : 255;
+''',
+                    'priority': 'MEDIUM',
+                    'cert_rule': 'INT31-C',
+                    'rationale': 'Explicit casts make conversions visible and intentional, reducing risk of unintended value changes.'
+                }
+        
         # Buffer overflow issues
-        if 'BUFFER' in text_upper or 'OVERFLOW' in text_upper:
+        elif 'BUFFER' in text_upper or 'OVERFLOW' in text_upper:
             return {
                 'type': 'buffer_safety',
                 'description': 'Ensure buffer boundaries are checked before access',
@@ -1718,17 +1889,21 @@ if (ptr != NULL) {
             
             module_prefix = justification_data.get('module_prefix', f"{self.module_name}_c")
             ref_id = justification_data.get('ref_id', 'REF_X')
+            header_entry = justification_data.get('header_entry', '')
             
-            # Return both header entry and inline comment with module name emphasis
-            return f"""
+            # Build output based on whether this is a new or reused reference
+            if header_entry:
+                # NEW reference - show both header and inline
+                output = f"""
 ================================================================================
 MODULE: {self.module_name}
 REFERENCE ID: {ref_id} (Format: {self.module_name}_c_REF_{{number}})
+STATUS: ✨ NEW REFERENCE
 ================================================================================
 
 STEP 1: HEADER SECTION ENTRY
 Add to top of file under "Parasoft violations Section":
-{justification_data['header_entry']}
+{header_entry}
 
 STEP 2: INLINE COMMENT
 Add directly before or after the violating line:
@@ -1740,6 +1915,26 @@ JUSTIFICATION TEXT:
 NOTE: Reference format follows pattern {{ModuleName}}_c_REF_{{N}}
       For module "{self.module_name}": {module_prefix}_REF_1, {module_prefix}_REF_2, etc.
 """
+            else:
+                # REUSED reference - only show inline comment
+                output = f"""
+================================================================================
+MODULE: {self.module_name}
+REFERENCE ID: {ref_id} (Format: {self.module_name}_c_REF_{{number}})
+STATUS: ♻️  REUSING EXISTING REFERENCE
+================================================================================
+
+INLINE COMMENT
+Add directly before or after the violating line:
+{justification_data['inline_comment']}
+
+NOTE: This violation uses an existing reference already defined in the header section.
+      The same violation rule reuses the same reference ID to maintain consistency.
+      Header entry for {ref_id} is already defined at the top of the file.
+"""
+            
+            # Return both header entry and inline comment with module name emphasis
+            return output
         
         # Fallback to traditional format
         violation_id = violation['violation_id']
