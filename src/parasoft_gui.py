@@ -491,6 +491,35 @@ class ParasoftGUI:
         )
         mode_info.pack(anchor=tk.W, padx=5, pady=(0, 5))
         
+        # System Setup Section
+        setup_section = ttk.LabelFrame(advanced_frame, text="System Setup", padding="10")
+        setup_section.pack(fill=tk.X, pady=(0, 10))
+        
+        # Dependencies Installation
+        deps_frame = ttk.Frame(setup_section)
+        deps_frame.pack(fill=tk.X, pady=5)
+        
+        ttk.Button(
+            deps_frame,
+            text="📦 Install Python Dependencies",
+            command=self.install_dependencies
+        ).pack(side=tk.LEFT, padx=(0, 10))
+        
+        deps_info = ttk.Label(
+            deps_frame,
+            text="Install/Update packages from requirements.txt",
+            foreground="gray",
+            font=("Segoe UI", 9)
+        )
+        deps_info.pack(side=tk.LEFT)
+        
+        # Check Dependencies Status
+        ttk.Button(
+            setup_section,
+            text="🔍 Check Dependencies Status",
+            command=self.check_dependencies_status
+        ).pack(fill=tk.X, pady=5)
+        
         # Database operations
         db_section = ttk.LabelFrame(advanced_frame, text="Database Operations", padding="10")
         db_section.pack(fill=tk.X, pady=(0, 10))
@@ -3823,6 +3852,216 @@ DESCRIPTION:
             subprocess.run(['open', folder_path])
         else:
             subprocess.run(['xdg-open', folder_path])
+    
+    def check_dependencies_status(self):
+        """Check status of Python dependencies from requirements.txt"""
+        self.log_output("\n" + "="*70 + "\n")
+        self.log_output("🔍 CHECKING PYTHON DEPENDENCIES STATUS\n")
+        self.log_output("="*70 + "\n\n")
+        
+        requirements_file = self.project_root / "requirements.txt"
+        
+        if not requirements_file.exists():
+            self.log_output("❌ ERROR: requirements.txt not found!\n")
+            self.log_output(f"   Expected location: {requirements_file}\n")
+            return
+        
+        self.log_output(f"📄 Reading: {requirements_file}\n\n")
+        
+        def check_status():
+            try:
+                import pkg_resources
+                
+                # Read requirements.txt
+                with open(requirements_file, 'r') as f:
+                    lines = f.readlines()
+                
+                required_packages = []
+                for line in lines:
+                    line = line.strip()
+                    # Skip comments and empty lines
+                    if line and not line.startswith('#'):
+                        # Extract package name (before >= or ==)
+                        pkg_name = line.split('>=')[0].split('==')[0].split('<')[0].strip()
+                        required_packages.append((pkg_name, line))
+                
+                self.root.after(0, lambda: self.log_output(f"📦 Found {len(required_packages)} package(s) in requirements.txt\n\n"))
+                
+                installed = []
+                missing = []
+                
+                for pkg_name, full_spec in required_packages:
+                    try:
+                        version = pkg_resources.get_distribution(pkg_name).version
+                        installed.append((pkg_name, version, full_spec))
+                        self.root.after(0, lambda p=pkg_name, v=version: 
+                            self.log_output(f"  ✅ {p:20s} v{v}\n"))
+                    except pkg_resources.DistributionNotFound:
+                        missing.append((pkg_name, full_spec))
+                        self.root.after(0, lambda p=pkg_name: 
+                            self.log_output(f"  ❌ {p:20s} NOT INSTALLED\n"))
+                
+                self.root.after(0, lambda: self.log_output("\n" + "-"*70 + "\n"))
+                self.root.after(0, lambda: self.log_output(f"📊 SUMMARY:\n"))
+                self.root.after(0, lambda i=len(installed), m=len(missing): 
+                    self.log_output(f"   ✅ Installed: {i}\n   ❌ Missing: {m}\n"))
+                
+                if missing:
+                    self.root.after(0, lambda: self.log_output("\n💡 Click '📦 Install Python Dependencies' to install missing packages.\n"))
+                else:
+                    self.root.after(0, lambda: self.log_output("\n🎉 All required packages are installed!\n"))
+                
+                self.root.after(0, lambda: self.log_output("="*70 + "\n"))
+                
+            except Exception as e:
+                self.root.after(0, lambda err=str(e): self.log_output(f"❌ ERROR checking dependencies: {err}\n"))
+        
+        # Run check in background thread
+        thread = threading.Thread(target=check_status, daemon=True)
+        thread.start()
+    
+    def install_dependencies(self):
+        """Install Python dependencies from requirements.txt"""
+        requirements_file = self.project_root / "requirements.txt"
+        
+        if not requirements_file.exists():
+            messagebox.showerror(
+                "File Not Found",
+                f"requirements.txt not found!\n\nExpected location:\n{requirements_file}"
+            )
+            return
+        
+        # Show confirmation dialog
+        result = messagebox.askyesno(
+            "Install Dependencies",
+            "This will install/upgrade Python packages from requirements.txt.\n\n"
+            "The installation may take 1-5 minutes depending on your internet speed.\n\n"
+            "Do you want to continue?",
+            icon='question'
+        )
+        
+        if not result:
+            self.log_output("[INFO] Dependency installation cancelled by user.\n")
+            return
+        
+        # Show progress dialog
+        progress_dialog = tk.Toplevel(self.root)
+        progress_dialog.title("📦 Installing Dependencies")
+        progress_dialog.geometry("800x500")
+        progress_dialog.transient(self.root)
+        progress_dialog.grab_set()
+        
+        # Center dialog
+        progress_dialog.update_idletasks()
+        x = (progress_dialog.winfo_screenwidth() // 2) - (400)
+        y = (progress_dialog.winfo_screenheight() // 2) - (250)
+        progress_dialog.geometry(f'+{x}+{y}')
+        
+        # Dialog content
+        dialog_frame = ttk.Frame(progress_dialog, padding="15")
+        dialog_frame.pack(fill=tk.BOTH, expand=True)
+        
+        header_label = ttk.Label(
+            dialog_frame,
+            text="📦 Installing Python Dependencies",
+            font=('Arial', 12, 'bold')
+        )
+        header_label.pack(pady=(0, 10))
+        
+        info_label = ttk.Label(
+            dialog_frame,
+            text=f"Installing packages from: requirements.txt\nPlease wait, this may take a few minutes...",
+            font=('Arial', 9),
+            foreground='#7F8C8D'
+        )
+        info_label.pack(pady=(0, 10))
+        
+        # Progress output
+        progress_text = scrolledtext.ScrolledText(
+            dialog_frame,
+            font=('Consolas', 9),
+            bg='#F8F9FA',
+            wrap=tk.WORD,
+            height=20
+        )
+        progress_text.pack(fill=tk.BOTH, expand=True, pady=(0, 10))
+        progress_text.config(state='disabled')
+        
+        # Close button (initially disabled)
+        close_btn = ttk.Button(
+            dialog_frame,
+            text="Close",
+            command=progress_dialog.destroy,
+            state='disabled'
+        )
+        close_btn.pack()
+        
+        def update_progress(message):
+            """Thread-safe progress update"""
+            def _update():
+                progress_text.config(state='normal')
+                progress_text.insert(tk.END, message)
+                progress_text.see(tk.END)
+                progress_text.config(state='disabled')
+            self.root.after(0, _update)
+        
+        def install_thread():
+            """Background installation thread"""
+            update_progress("📦 Starting dependency installation...\n")
+            update_progress("="*70 + "\n\n")
+            update_progress(f"📄 Using: {requirements_file}\n\n")
+            
+            try:
+                # Get Python executable
+                python_exe = sys.executable
+                update_progress(f"🐍 Python: {python_exe}\n\n")
+                update_progress("="*70 + "\n")
+                update_progress("Running: pip install -r requirements.txt\n")
+                update_progress("="*70 + "\n\n")
+                
+                # Run pip install
+                process = subprocess.Popen(
+                    [python_exe, '-m', 'pip', 'install', '-r', str(requirements_file), '--upgrade'],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                    text=True,
+                    bufsize=1,
+                    cwd=str(self.project_root)
+                )
+                
+                # Stream output
+                for line in process.stdout:
+                    update_progress(line)
+                
+                process.wait()
+                
+                update_progress("\n" + "="*70 + "\n")
+                
+                if process.returncode == 0:
+                    update_progress("✅ SUCCESS! All dependencies installed successfully.\n")
+                    update_progress("="*70 + "\n\n")
+                    update_progress("💡 You can now use all features of the Parasoft Analysis Tool.\n")
+                    self.root.after(0, lambda: self.log_output("\n[SUCCESS] ✅ Python dependencies installed successfully!\n"))
+                else:
+                    update_progress(f"❌ Installation failed with exit code: {process.returncode}\n")
+                    update_progress("="*70 + "\n\n")
+                    update_progress("⚠️ Some packages may not have been installed correctly.\n")
+                    update_progress("💡 Check the output above for specific errors.\n")
+                    self.root.after(0, lambda: self.log_output("\n[ERROR] ❌ Dependency installation failed. Check progress dialog.\n"))
+                
+            except Exception as e:
+                update_progress(f"\n❌ ERROR: {str(e)}\n")
+                update_progress("\n💡 Try running manually from terminal:\n")
+                update_progress(f"   pip install -r requirements.txt\n")
+                self.root.after(0, lambda err=str(e): self.log_output(f"\n[ERROR] ❌ Installation failed: {err}\n"))
+            
+            finally:
+                # Enable close button
+                self.root.after(0, lambda: close_btn.config(state='normal'))
+        
+        # Start installation thread
+        thread = threading.Thread(target=install_thread, daemon=True)
+        thread.start()
 
 
 def main():
