@@ -2121,10 +2121,15 @@ DESCRIPTION:
                                            "Enable Parasoft Rules Database for repair examples and documentation.")
             
             # ADD CODE SUGGESTION to the Violation tab
-            if isinstance(fix_suggestion, dict) and fix_suggestion.get('ai_generated'):
+            # Show for ANY fix that has a proper example format (AI, Parasoft, or rule-based)
+            if isinstance(fix_suggestion, dict) and fix_suggestion.get('example'):
                 example_text = fix_suggestion.get('example', '')
-                self.logger.info(f"Attempting to extract code suggestion from AI example")
-                self.logger.info(f"Example text length: {len(example_text)} chars")
+                fix_type = fix_suggestion.get('type', 'unknown')
+                is_ai_generated = fix_suggestion.get('ai_generated', False)
+                
+                self.logger.info(f"Attempting to extract code suggestion from fix example")
+                self.logger.info(f"  Fix type: {fix_type}, AI: {is_ai_generated}")
+                self.logger.info(f"  Example text length: {len(example_text)} chars")
                 self.logger.info(f"Example preview: {example_text[:200] if example_text else 'EMPTY'}")
                 
                 # Extract the "After" code from the example
@@ -2169,9 +2174,9 @@ DESCRIPTION:
                 self.logger.info(f"code_context exists: {bool(code_context)}")
                 self.logger.info(f"code_context_lines exists: {bool(code_context_lines)}")
                 
-                # If we have code context and a fix suggestion, show the suggested code
+                # OPTION 1: If we have code context and a fix suggestion, show the suggested code with line numbers
                 if after_code and code_context and code_context_lines:
-                    self.logger.info("✅ Displaying CODE SUGGESTION in Violation tab")
+                    self.logger.info("✅ Displaying CODE SUGGESTION with context in Violation tab")
                     violation_text.insert(tk.END, "\n\n")
                     violation_text.insert(tk.END, "CODE SUGGESTION (with surrounding lines):\n")
                     violation_text.insert(tk.END, "=" * 60 + "\n")
@@ -2194,15 +2199,37 @@ DESCRIPTION:
                     
                     violation_text.insert(tk.END, "=" * 60 + "\n")
                     violation_text.insert(tk.END, f"(Line {violation_line} shows the suggested fix)\n")
+                
+                # OPTION 2: No code context, but we have a Before/After example - show it directly
+                elif example_text and ('Before:' in example_text or 'VIOLATION' in example_text.upper()):
+                    self.logger.info("✅ Displaying generic example (no code context) in Violation tab")
+                    violation_text.insert(tk.END, "\n\n")
+                    
+                    # Different header based on source
+                    if is_ai_generated:
+                        violation_text.insert(tk.END, "🤖 AI-GENERATED FIX EXAMPLE:\n")
+                    elif fix_type == 'parasoft_official':
+                        violation_text.insert(tk.END, "📚 PARASOFT OFFICIAL REPAIR EXAMPLE:\n")
+                    else:
+                        violation_text.insert(tk.END, "📋 SUGGESTED FIX EXAMPLE:\n")
+                    
+                    violation_text.insert(tk.END, "=" * 60 + "\n")
+                    violation_text.insert(tk.END, example_text.strip() + "\n")
+                    violation_text.insert(tk.END, "=" * 60 + "\n")
+                    
+                    if not code_context_data:
+                        violation_text.insert(tk.END, "\n💡 Tip: Set 'Input Path' for AI-generated fixes tailored to your actual code.\n")
+                
                 else:
                     self.logger.warning(f"⚠️ Cannot display CODE SUGGESTION - missing data:")
                     self.logger.warning(f"  after_code: {bool(after_code)}")
                     self.logger.warning(f"  code_context: {bool(code_context)}")
-                    self.logger.warning(f"  code_context_lines: {bool(code_context_lines)}")
+                    self.logger.warning(f"  example_text: {bool(example_text)}")
             else:
-                self.logger.info("No AI-generated fix to display in Violation tab")
+                self.logger.info("No fix example to display in Violation tab")
                 if isinstance(fix_suggestion, dict):
-                    self.logger.info(f"  ai_generated flag: {fix_suggestion.get('ai_generated')}")
+                    self.logger.info(f"  has example: {bool(fix_suggestion.get('example'))}")
+                    self.logger.info(f"  is dict: True")
         
         def show_fix_error(error_msg):
             """Show error if fix generation failed"""
