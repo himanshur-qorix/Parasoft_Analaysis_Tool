@@ -1,0 +1,1355 @@
+Parasoft Suppress Comments for Mka
+Generated: 2026-05-13 15:13:31
+================================================================================
+
+NEW INLINE FORMAT:
+1. Add inline suppress comment on the SAME LINE as violation
+2. Add violations reference section at top of each file
+3. Update justification text as needed
+
+Example:
+  void func(const int param) // parasoft-suppress CERT_C-DCL00-b-3 "Reason: Module_c_REF_1"
+
+================================================================================
+
+
+================================================================================
+FILE: Mka.c
+================================================================================
+
+--- VIOLATIONS REFERENCE SECTION (Add at top of file) ---
+/******************************************************************************
+**                      Parasoft violations Section                           **
+********************************************************************************/
+
+/*
+* #section Mka_c_REF_1
+* Violates MISRAC2012-RULE_2_8-a-4: The 'Mka_GaaICV' variable is not used in the testing scope
+* Justification: [Add your justification here]
+*
+* #section Mka_c_REF_2
+* Violates MISRAC2012-RULE_8_13-a-4: Pass parameter "VersionInfoPtr" with const specifier
+* Violates CERT_C-DCL13-a-3: Pass parameter "VersionInfoPtr" with const specifier
+* Justification: [Add your justification here]
+*
+* #section Mka_c_REF_3
+* Violates CERT_C-INT31-j-2: Operands of the '!=' operator have different essential types: 'ETag_Mka_PermissiveModeType' and 'unsigned char'
+* Violates MISRAC2012-RULE_10_4-a-2: Operands of the '!=' operator have different essential types: 'ETag_Mka_PermissiveModeType' and 'unsigned char'
+* Justification: [Add your justification here]
+*
+* #section Mka_c_REF_4
+* Violates CERT_C-MSC12-j-3: Condition "(unsigned int)LddReturnValue == 0" always evaluates to true
+* Justification: [Add your justification here]
+*
+*/
+
+--- INLINE SUPPRESS COMMENTS (Add to each line with violation) ---
+
+Line 224:
+  // parasoft-suppress MISRAC2012-RULE_2_8-a-4 "Reason: Mka_c_REF_1"
+
+Line 325:
+  // parasoft-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_c_REF_2"
+
+Line 414:
+  // parasoft-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_c_REF_2"
+
+Line 479:
+  // parasoft-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_c_REF_2"
+
+Line 511:
+  // parasoft-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_c_REF_2"
+
+Line 543:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_c_REF_3"
+
+Line 605:
+  // parasoft-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_c_REF_2"
+
+Line 664:
+  // parasoft-suppress CERT_C-MSC12-j-3 "Reason: Mka_c_REF_4"
+
+Line 681:
+  // parasoft-suppress CERT_C-MSC12-j-3 "Reason: Mka_c_REF_4"
+
+Line 682:
+  // parasoft-suppress CERT_C-MSC12-j-3 "Reason: Mka_c_REF_4"
+
+
+================================================================================
+FILE: Mka_Cbk.c
+================================================================================
+
+--- VIOLATIONS REFERENCE SECTION (Add at top of file) ---
+/******************************************************************************
+**                      Parasoft violations Section                           **
+********************************************************************************/
+
+/*
+* #section Mka_Cbk_c_REF_1
+* Violates CERT_C-API00-a-3: Parameter 'CtrlIdx' is not validated before use
+* Justification: [Add your justification here]
+*
+* #section Mka_Cbk_c_REF_2
+* Violates CERT_C-POS54-a-1: The value returned by the POSIX library function 'memcpy' should be used
+* Justification: [Add your justification here]
+*
+* #section Mka_Cbk_c_REF_3
+* Violates CERT_C-INT31-j-2: Operands of the '+' operator have different essential types: 'unsigned char' and 'signed char'
+* Violates MISRAC2012-RULE_10_4-a-2: Operands of the '+' operator have different essential types: 'unsigned char' and 'signed char'
+* Violates CERT_C-INT31-j-2: Operands of the '<=' operator have different essential types: 'int' and 'unsigned short'
+* Violates MISRAC2012-RULE_10_4-a-2: Operands of the '<=' operator have different essential types: 'int' and 'unsigned short'
+* Justification: [Add your justification here]
+*
+* #section Mka_Cbk_c_REF_4
+* Violates CERT_C-DCL15-a-3: Function 'Mka_MacSecAddTxSaNotification' has external linkage and is not declared in the header
+* Justification: [Add your justification here]
+*
+* #section Mka_Cbk_c_REF_5
+* Violates CERT_C-INT31-i-2: The expression of the 'essentially Enum' type is assigned to an object with different the 'essentially Enum' type
+* Justification: [Add your justification here]
+*
+*/
+
+--- INLINE SUPPRESS COMMENTS (Add to each line with violation) ---
+
+Line 264:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Cbk_c_REF_1"
+
+Line 265:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Cbk_c_REF_1"
+
+Line 267:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Cbk_c_REF_1"
+
+Line 314:
+  // parasoft-suppress CERT_C-POS54-a-1 "Reason: Mka_Cbk_c_REF_2"
+
+Line 399:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Cbk_c_REF_3"
+
+Line 562:
+  // parasoft-suppress CERT_C-DCL15-a-3 "Reason: Mka_Cbk_c_REF_4"
+
+Line 706:
+  // parasoft-suppress CERT_C-DCL15-a-3 "Reason: Mka_Cbk_c_REF_4"
+
+Line 769:
+  // parasoft-suppress CERT_C-DCL15-a-3 "Reason: Mka_Cbk_c_REF_4"
+
+Line 836:
+  // parasoft-suppress CERT_C-DCL15-a-3 "Reason: Mka_Cbk_c_REF_4"
+
+Line 875:
+  // parasoft-suppress CERT_C-DCL15-a-3 "Reason: Mka_Cbk_c_REF_4"
+
+Line 915:
+  // parasoft-suppress CERT_C-DCL15-a-3 "Reason: Mka_Cbk_c_REF_4"
+
+Line 955:
+  // parasoft-suppress CERT_C-DCL15-a-3 "Reason: Mka_Cbk_c_REF_4"
+
+Line 995:
+  // parasoft-suppress CERT_C-DCL15-a-3 "Reason: Mka_Cbk_c_REF_4"
+
+Line 1051:
+  // parasoft-suppress CERT_C-DCL15-a-3 "Reason: Mka_Cbk_c_REF_4"
+
+Line 1057:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cbk_c_REF_5"
+
+Line 1086:
+  // parasoft-suppress CERT_C-DCL15-a-3 "Reason: Mka_Cbk_c_REF_4"
+
+Line 1092:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cbk_c_REF_5"
+
+
+================================================================================
+FILE: Mka_Cfg.c
+================================================================================
+
+--- VIOLATIONS REFERENCE SECTION (Add at top of file) ---
+/******************************************************************************
+**                      Parasoft violations Section                           **
+********************************************************************************/
+
+/*
+* #section Mka_Cfg_c_REF_1
+* Violates CERT_C-INT31-i-2: The expression of the 'essentially Enum' type is assigned to an object with the 'essentially unsigned' type
+* Justification: [Add your justification here]
+*
+* #section Mka_Cfg_c_REF_2
+* Violates MISRAC2012-RULE_2_8-a-4: The 'Mka_GaaPaeConfigurations' variable is not used in the testing scope
+* Justification: [Add your justification here]
+*
+* #section Mka_Cfg_c_REF_3
+* Violates CERT_C-DCL15-a-3: Global variable 'Mka_GaaMkaBypassEtherType' has external linkage and is not declared in the header
+* Violates MISRAC2012-RULE_8_7-a-4: The object 'Mka_GaaMkaBypassEtherType' is referenced only in the translation unit where it is defined
+* Justification: [Add your justification here]
+*
+* #section Mka_Cfg_c_REF_4
+* Violates CERT_C-DCL06-a-3: Do not use the literal constant '6'
+* Violates CERT_C-DCL15-a-3: Global variable 'Mka_GaaMkaDstAddressType' has external linkage and is not declared in the header
+* Violates MISRAC2012-RULE_8_7-a-4: The object 'Mka_GaaMkaDstAddressType' is referenced only in the translation unit where it is defined
+* Justification: [Add your justification here]
+*
+* #section Mka_Cfg_c_REF_5
+* Violates MISRAC2012-RULE_9_3-a-2: The array of type 'const uint8 [6]' shall not be partially initialized
+* Justification: [Add your justification here]
+*
+*/
+
+--- INLINE SUPPRESS COMMENTS (Add to each line with violation) ---
+
+Line 109:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 115:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 121:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 127:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 133:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 139:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 145:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 166:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 169:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 172:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 196:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 202:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 208:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 214:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 220:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 226:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 232:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 253:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 256:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 259:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 283:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 289:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 295:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 301:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 307:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 313:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 319:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 343:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 346:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 370:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 376:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 382:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 388:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 394:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 400:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 406:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 427:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 430:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 433:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 457:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 463:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 469:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 475:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 481:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 487:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 493:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 514:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 517:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 520:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 544:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 550:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 556:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 562:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 568:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 574:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 580:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 601:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 604:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 607:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 631:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 637:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 643:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 649:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 655:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 661:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 667:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 688:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 691:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 694:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 711:
+  // parasoft-suppress MISRAC2012-RULE_2_8-a-4 "Reason: Mka_Cfg_c_REF_2"
+
+Line 723:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 726:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 729:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 741:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 744:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 747:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 759:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 762:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 765:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 773:
+  // parasoft-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Cfg_c_REF_3"
+
+Line 783:
+  // parasoft-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Cfg_c_REF_3"
+
+Line 793:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Cfg_c_REF_4"
+
+Line 796:
+  // parasoft-suppress MISRAC2012-RULE_9_3-a-2 "Reason: Mka_Cfg_c_REF_5"
+
+Line 797:
+  // parasoft-suppress MISRAC2012-RULE_9_3-a-2 "Reason: Mka_Cfg_c_REF_5"
+
+Line 798:
+  // parasoft-suppress MISRAC2012-RULE_9_3-a-2 "Reason: Mka_Cfg_c_REF_5"
+
+Line 807:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Cfg_c_REF_4"
+
+Line 810:
+  // parasoft-suppress MISRAC2012-RULE_9_3-a-2 "Reason: Mka_Cfg_c_REF_5"
+
+Line 811:
+  // parasoft-suppress MISRAC2012-RULE_9_3-a-2 "Reason: Mka_Cfg_c_REF_5"
+
+Line 812:
+  // parasoft-suppress MISRAC2012-RULE_9_3-a-2 "Reason: Mka_Cfg_c_REF_5"
+
+Line 821:
+  // parasoft-suppress MISRAC2012-RULE_2_8-a-4 "Reason: Mka_Cfg_c_REF_2"
+
+Line 866:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 869:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 926:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 929:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 986:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 989:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Cfg_c_REF_1"
+
+Line 1009:
+  // parasoft-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Cfg_c_REF_3"
+
+Line 1053:
+  // parasoft-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Cfg_c_REF_3"
+
+Line 1079:
+  // parasoft-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Cfg_c_REF_3"
+
+Line 1096:
+  // parasoft-suppress MISRAC2012-RULE_2_8-a-4 "Reason: Mka_Cfg_c_REF_2"
+
+
+================================================================================
+FILE: Mka_Internal.c
+================================================================================
+
+--- VIOLATIONS REFERENCE SECTION (Add at top of file) ---
+/******************************************************************************
+**                      Parasoft violations Section                           **
+********************************************************************************/
+
+/*
+* #section Mka_Internal_c_REF_1
+* Violates MISRAC2012-RULE_8_7-a-4: The object 'Mka_Eapol_parameterSet' is referenced only in the translation unit where it is defined
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_2
+* Violates CERT_C-DCL15-a-3: Global variable 'Mka_StorageMI' has external linkage and is not declared in the header
+* Violates MISRAC2012-RULE_8_7-a-4: The object 'Mka_StorageMI' is referenced only in the translation unit where it is defined
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_3
+* Violates CERT_C-API00-a-3: Parameter 'PaeIndx' is not validated before use
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_4
+* Violates CERT_C-DCL06-a-3: Do not use the literal constant '68U'
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_5
+* Violates CERT_C-EXP05-a-2: Cast from 'const uint8 *const *' removes 'const' qualifier
+* Violates CERT_C-EXP40-a-3: Cast from 'const uint8 *const *' removes 'const' qualifier
+* Violates CERT_C-EXP32-a-2: Cast from 'const uint8 *const *' removes 'const' qualifier
+* Violates MISRAC2012-RULE_11_8-a-2: Do not use a conversion from the 'const uint8 *const *' type to the 'uint8 *' type which removes the 'const' qualification
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_6
+* Violates CERT_C-POS54-a-1: The value returned by the POSIX library function 'memcpy' should be used
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_7
+* Violates MISRAC2012-RULE_18_4-a-4: The left hand side operand of the '+' operator has a pointer type
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_8
+* Violates CERT_C-INT13-a-2: The left-hand-side operand of bitwise operator '&' should be unsigned
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_9
+* Violates MISRAC2012-RULE_8_13-a-4: Pass parameter "Basic_pramtersetType" with const specifier
+* Violates CERT_C-DCL13-a-3: Pass parameter "Basic_pramtersetType" with const specifier
+* Violates MISRAC2012-RULE_8_7-a-4: The function 'Mka_CknMatching' is referenced only in the translation unit where it is defined
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_10
+* Violates CERT_C-INT31-j-2: Operands of the '<' operator have different essential types: 'unsigned char' and 'signed char'
+* Violates MISRAC2012-RULE_10_4-a-2: Operands of the '<' operator have different essential types: 'unsigned char' and 'signed char'
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_11
+* Violates MISRAC2012-RULE_17_8-a-4: Parameter 'data' is modified in function 'Mka_Intr_be7bit'
+* Violates MISRAC2012-RULE_18_4-a-4: The variable 'data' used as the left hand side operand of the '+=' operator has a pointer type
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_12
+* Violates CERT_C-DCL00-a-3: Declare local variable 'length' as const
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_13
+* Violates CERT_C-INT31-i-2: The expression of the 'essentially Enum' type in a switch statement's case label is converted to the 'essentially unsigned'
+type
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_14
+* Violates CERT_C-MSC12-j-3: Condition "LpPhyAddressptr != 0" always evaluates to true
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_15
+* Violates CERT_C-EXP33-a-1: Non-initialized "LddReturnValue" is used
+* Justification: [Add your justification here]
+*
+* #section Mka_Internal_c_REF_16
+* Violates CERT_C-EXP46-b-2: The LHS operand of binary operator is effectively boolean
+* Violates CERT_C-EXP46-b-2: The RHS operand of binary operator is effectively boolean
+* Violates MISRAC2012-RULE_10_1-b-2: The left hand operand of the '&' operator has essentially Boolean type
+* Violates CERT_C-INT31-b-2: The left hand operand of the '&' operator has essentially Boolean type
+* Violates CERT_C-INT13-a-2: The left-hand-side operand of bitwise operator '&' should be unsigned
+* Violates MISRAC2012-RULE_10_1-b-2: The right hand operand of the '&' operator has essentially Boolean type
+* Violates CERT_C-INT31-b-2: The right hand operand of the '&' operator has essentially Boolean type
+* Violates CERT_C-INT13-a-2: The right-hand-side operand of bitwise operator '&' should be unsigned
+* Justification: [Add your justification here]
+*
+*/
+
+--- INLINE SUPPRESS COMMENTS (Add to each line with violation) ---
+
+Line 156:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 162:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 168:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 174:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 180:
+  // parasoft-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_2"
+
+Line 187:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 193:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 199:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 211:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 230:
+  // parasoft-suppress CERT_C-DCL15-a-3 "Reason: Mka_Internal_c_REF_2"
+
+Line 242:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 249:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 255:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 276:
+  // parasoft-suppress CERT_C-DCL15-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_2"
+
+Line 312:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 356:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 357:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 384:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 386:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 396:
+  // parasoft-suppress CERT_C-EXP05-a-2 CERT_C-EXP32-a-2 CERT_C-EXP40-a-3 MISRAC2012-RULE_11_8-a-2 "Reason: Mka_Internal_c_REF_5"
+
+Line 399:
+  // parasoft-suppress CERT_C-POS54-a-1 "Reason: Mka_Internal_c_REF_6"
+
+Line 428:
+  // parasoft-suppress MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Internal_c_REF_7"
+
+Line 435:
+  // parasoft-suppress CERT_C-POS54-a-1 "Reason: Mka_Internal_c_REF_6"
+
+Line 494:
+  // parasoft-suppress CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_8"
+
+Line 513:
+  // parasoft-suppress CERT_C-POS54-a-1 "Reason: Mka_Internal_c_REF_6"
+
+Line 565:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 566:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 594:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 618:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 620:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 622:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 624:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 690:
+  // parasoft-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_9"
+
+Line 743:
+  // parasoft-suppress CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_9"
+
+Line 745:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 746:
+  // parasoft-suppress CERT_C-API00-a-3 CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 750:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 752:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 753:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 771:
+  // parasoft-suppress CERT_C-POS54-a-1 "Reason: Mka_Internal_c_REF_6"
+
+Line 772:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 774:
+  // parasoft-suppress MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Internal_c_REF_7"
+
+Line 777:
+  // parasoft-suppress CERT_C-POS54-a-1 MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Internal_c_REF_6"
+
+Line 778:
+  // parasoft-suppress CERT_C-POS54-a-1 MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Internal_c_REF_6"
+
+Line 780:
+  // parasoft-suppress CERT_C-POS54-a-1 MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Internal_c_REF_7"
+
+Line 869:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 980:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 981:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 1079:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 1080:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 1081:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 1090:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1097:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1100:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 1108:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1111:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1114:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1152:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 1153:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 1154:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 1177:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1180:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 1189:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 1244:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 1247:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1248:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 1249:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 1250:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 1252:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 1255:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 1287:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 1290:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1291:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1292:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1293:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1294:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1295:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1296:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1297:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1299:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1302:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1334:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 1337:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1338:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 1340:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 1343:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 1375:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 1376:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 1380:
+  // parasoft-suppress MISRAC2012-RULE_17_8-a-4 MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Internal_c_REF_11"
+
+Line 1382:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 1417:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 1418:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 1424:
+  // parasoft-suppress CERT_C-DCL00-a-3 "Reason: Mka_Internal_c_REF_12"
+
+Line 1519:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 1520:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 1556:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Internal_c_REF_13"
+
+Line 1584:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 1603:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Internal_c_REF_13"
+
+Line 1638:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 1662:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Internal_c_REF_13"
+
+Line 1670:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 1714:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Internal_c_REF_13"
+
+Line 1756:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 1757:
+  // parasoft-suppress CERT_C-API00-a-3 CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 1761:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1790:
+  // parasoft-suppress MISRAC2012-RULE_17_8-a-4 "Reason: Mka_Internal_c_REF_11"
+
+Line 1809:
+  // parasoft-suppress MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Internal_c_REF_7"
+
+Line 1816:
+  // parasoft-suppress CERT_C-POS54-a-1 "Reason: Mka_Internal_c_REF_6"
+
+Line 1819:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 1833:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1836:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1839:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1846:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 1848:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 1850:
+  // parasoft-suppress CERT_C-DCL06-a-3 CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_4"
+
+Line 1861:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1862:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1863:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 1866:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1867:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1868:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1869:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 1912:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 1913:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 1914:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 1921:
+  // parasoft-suppress CERT_C-EXP05-a-2 CERT_C-EXP32-a-2 CERT_C-EXP40-a-3 MISRAC2012-RULE_11_8-a-2 "Reason: Mka_Internal_c_REF_5"
+
+Line 1927:
+  // parasoft-suppress CERT_C-MSC12-j-3 "Reason: Mka_Internal_c_REF_14"
+
+Line 1961:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 1962:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 1963:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 1986:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 1987:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2002:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2022:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2024:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2028:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 2030:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 2043:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2047:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 2049:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 2062:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2066:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 2068:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 2085:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2153:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 2154:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 2197:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2198:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2236:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2237:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2249:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2250:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2287:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 2288:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 2291:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 2315:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2348:
+  // parasoft-suppress CERT_C-EXP33-a-1 "Reason: Mka_Internal_c_REF_15"
+
+Line 2349:
+  // parasoft-suppress CERT_C-EXP33-a-1 CERT_C-POS54-a-1 "Reason: Mka_Internal_c_REF_15"
+
+Line 2390:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 2391:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 2398:
+  // parasoft-suppress CERT_C-DCL00-a-3 "Reason: Mka_Internal_c_REF_12"
+
+Line 2491:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 2573:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 2574:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 2617:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 2651:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 2652:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 2673:
+  // parasoft-suppress CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_8"
+
+Line 2675:
+  // parasoft-suppress CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_8"
+
+Line 2709:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 2710:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 2752:
+  // parasoft-suppress CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_8"
+
+Line 2753:
+  // parasoft-suppress CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_8"
+
+Line 2754:
+  // parasoft-suppress CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_8"
+
+Line 2755:
+  // parasoft-suppress CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_8"
+
+Line 2756:
+  // parasoft-suppress CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_8"
+
+Line 2757:
+  // parasoft-suppress CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_8"
+
+Line 2758:
+  // parasoft-suppress CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_8"
+
+Line 2759:
+  // parasoft-suppress CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_8"
+
+Line 2760:
+  // parasoft-suppress CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_8"
+
+Line 2761:
+  // parasoft-suppress CERT_C-INT13-a-2 "Reason: Mka_Internal_c_REF_8"
+
+Line 2763:
+  // parasoft-suppress CERT_C-INT13-a-2 CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2876:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 2939:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 2942:
+  // parasoft-suppress CERT_C-DCL00-a-3 "Reason: Mka_Internal_c_REF_12"
+
+Line 2952:
+  // parasoft-suppress CERT_C-EXP33-a-1 "Reason: Mka_Internal_c_REF_15"
+
+Line 2983:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 2985:
+  // parasoft-suppress CERT_C-POS54-a-1 "Reason: Mka_Internal_c_REF_6"
+
+Line 3115:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 3266:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 3307:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 3358:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 3429:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 3443:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 3467:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 3509:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 3525:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 3548:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 3591:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 3629:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 3677:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 3699:
+  // parasoft-suppress CERT_C-EXP46-b-2 CERT_C-INT13-a-2 CERT_C-INT31-b-2 MISRAC2012-RULE_10_1-b-2 "Reason: Mka_Internal_c_REF_16"
+
+Line 3756:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 3757:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 3758:
+  // parasoft-suppress CERT_C-API00-a-3 CERT_C-DCL13-a-3 MISRAC2012-RULE_8_13-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 3831:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 3833:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 3856:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 3858:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 3881:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 3883:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 3906:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 3908:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+
+Line 3961:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 3997:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 4032:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 4067:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 4102:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 4137:
+  // parasoft-suppress CERT_C-API00-a-3 "Reason: Mka_Internal_c_REF_3"
+
+Line 4172:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 4184:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 4248:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 4290:
+  // parasoft-suppress MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Internal_c_REF_7"
+
+Line 4297:
+  // parasoft-suppress CERT_C-POS54-a-1 "Reason: Mka_Internal_c_REF_6"
+
+Line 4300:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 4347:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 4370:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 4394:
+  // parasoft-suppress CERT_C-POS54-a-1 "Reason: Mka_Internal_c_REF_6"
+
+Line 4439:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 4540:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 4558:
+  // parasoft-suppress CERT_C-INT31-i-2 "Reason: Mka_Internal_c_REF_13"
+
+Line 4607:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 4661:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 4716:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 4755:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 4793:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 4839:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 4883:
+  // parasoft-suppress MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Internal_c_REF_7"
+
+Line 4890:
+  // parasoft-suppress CERT_C-POS54-a-1 "Reason: Mka_Internal_c_REF_6"
+
+Line 4893:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 5032:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 5052:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 5076:
+  // parasoft-suppress CERT_C-POS54-a-1 "Reason: Mka_Internal_c_REF_6"
+
+Line 5122:
+  // parasoft-suppress CERT_C-API00-a-3 MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_3"
+
+Line 5166:
+  // parasoft-suppress MISRAC2012-RULE_18_4-a-4 "Reason: Mka_Internal_c_REF_7"
+
+Line 5173:
+  // parasoft-suppress CERT_C-POS54-a-1 "Reason: Mka_Internal_c_REF_6"
+
+Line 5176:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 5257:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 5280:
+  // parasoft-suppress CERT_C-INT31-j-2 MISRAC2012-RULE_10_4-a-2 "Reason: Mka_Internal_c_REF_10"
+
+Line 5304:
+  // parasoft-suppress CERT_C-POS54-a-1 "Reason: Mka_Internal_c_REF_6"
+
+Line 5352:
+  // parasoft-suppress MISRAC2012-RULE_8_7-a-4 "Reason: Mka_Internal_c_REF_1"
+
+Line 5362:
+  // parasoft-suppress CERT_C-DCL06-a-3 "Reason: Mka_Internal_c_REF_4"
+

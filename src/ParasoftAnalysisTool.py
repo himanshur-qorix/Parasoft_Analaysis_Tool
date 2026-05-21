@@ -70,6 +70,9 @@ def parse_misra_cert_report(report_path, soup=None):
     """
     Parse MISRA/CERT HTML report
     Format: Standard | Rule ID | Severity | Category | File | Line | Message | Snippet
+    
+    Returns:
+        List of violation dictionaries with standardized format
     """
     if soup is None:
         with open(report_path, "r", encoding="utf-8", errors="ignore") as f:
@@ -87,12 +90,15 @@ def parse_misra_cert_report(report_path, soup=None):
         tbody = table
     
     rows = tbody.find_all("tr")
+    print(f"[INFO] Found {len(rows)} rows in report table")
     
+    skipped_rows = 0
     for row in rows:
         tds = row.find_all("td")
         
         # Skip if not enough columns or "No violations" message
         if len(tds) < 7:
+            skipped_rows += 1
             continue
         
         try:
@@ -106,31 +112,55 @@ def parse_misra_cert_report(report_path, soup=None):
             line_str = tds[5].get_text(strip=True)
             message = tds[6].get_text(strip=True)
             
-            # Skip empty rows
+            # Extract code snippet if available (column 8)
+            code_snippet = tds[7].get_text(strip=True) if len(tds) > 7 else ""
+            
+            # Skip empty rows or header rows
             if not rule_id or not file_name or not line_str:
+                skipped_rows += 1
+                continue
+            
+            # Skip header rows (check if line is actually "Line" text)
+            if line_str.lower() in ['line', 'line number']:
+                skipped_rows += 1
                 continue
             
             # Parse line number
             try:
                 line_num = int(line_str)
             except ValueError:
+                print(f"[DEBUG] Skipping row with invalid line number: '{line_str}'")
+                skipped_rows += 1
                 continue
             
+            # Extract just the filename from path if full path provided
+            if '\\' in file_name or '/' in file_name:
+                file_name = Path(file_name).name
+            
             # Create violation message in Parasoft-like format
-            violation_msg = f"{message} [{category}]"
+            violation_msg = f"{message} [{category}]" if category else message
             
             records.append({
                 "Violation": violation_msg,
                 "Violation ID": rule_id,
                 "File": file_name,
-                "Line number": line_num
+                "Line number": line_num,
+                "Severity": severity,
+                "Standard": standard,
+                "Category": category,
+                "Code Snippet": code_snippet
             })
             
         except Exception as e:
             # Skip rows that can't be parsed
+            print(f"[DEBUG] Error parsing row: {e}")
+            skipped_rows += 1
             continue
     
     print(f"[INFO] Parsed {len(records)} violations from MISRA/CERT report")
+    if skipped_rows > 0:
+        print(f"[INFO] Skipped {skipped_rows} rows (headers or invalid data)")
+    
     return records
 
 

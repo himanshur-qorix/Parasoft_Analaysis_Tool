@@ -1,0 +1,190 @@
+{
+  "name": "parasoft-cert-misra-analyzer",
+  "displayName": "Parasoft CERT/MISRA Analyzer",
+  "description": "Real-time CERT and MISRA violation detection for C/C++ code",
+  "version": "1.0.0",
+  "publisher": "qorix",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Linters",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "parasoft",
+    "cert",
+    "misra",
+    "static analysis",
+    "c",
+    "c++"
+  ],
+  "activationEvents": [
+    "onLanguage:c",
+    "onLanguage:cpp",
+    "workspaceContains:**/*.c",
+    "workspaceContains:**/*.cpp"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "parasoft.analyzeCurrentFile",
+        "title": "Parasoft: Analyze Current File",
+        "icon": "$(bug)"
+      },
+      {
+        "command": "parasoft.analyzeWorkspace",
+        "title": "Parasoft: Analyze Entire Workspace",
+        "icon": "$(folder)"
+      },
+      {
+        "command": "parasoft.clearDiagnostics",
+        "title": "Parasoft: Clear All Violations",
+        "icon": "$(clear-all)"
+      },
+      {
+        "command": "parasoft.suppressViolation",
+        "title": "Parasoft: Suppress This Violation",
+        "icon": "$(exclude)"
+      },
+      {
+        "command": "parasoft.generateFix",
+        "title": "Parasoft: Generate AI Fix",
+        "icon": "$(sparkle)"
+      },
+      {
+        "command": "parasoft.openKnowledgeBase",
+        "title": "Parasoft: Open Knowledge Base",
+        "icon": "$(database)"
+      },
+      {
+        "command": "parasoft.openReport",
+        "title": "Parasoft: Open CERT/MISRA Report",
+        "icon": "$(file-pdf)"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "parasoft.suppressViolation",
+          "when": "editorHasSelection && resourceLangId =~ /^(c|cpp)$/",
+          "group": "1_parasoft@1"
+        },
+        {
+          "command": "parasoft.generateFix",
+          "when": "editorHasSelection && resourceLangId =~ /^(c|cpp)$/",
+          "group": "1_parasoft@2"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "parasoft.analyzeCurrentFile",
+          "when": "resourceLangId =~ /^(c|cpp)$/",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Parasoft CERT/MISRA Analyzer",
+      "properties": {
+        "parasoft.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable Parasoft analysis"
+        },
+        "parasoft.analyzeOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run analysis automatically when files are saved"
+        },
+        "parasoft.analyzeOnType": {
+          "type": "boolean",
+          "default": false,
+          "description": "Run analysis while typing (may impact performance)"
+        },
+        "parasoft.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "description": "Path to Python executable"
+        },
+        "parasoft.toolPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to Parasoft Analysis Tool directory (auto-detected if empty)"
+        },
+        "parasoft.moduleName": {
+          "type": "string",
+          "default": "Mka",
+          "description": "Module name for Knowledge Base"
+        },
+        "parasoft.severityFilter": {
+          "type": "array",
+          "default": [
+            "CRITICAL",
+            "HIGH",
+            "MEDIUM"
+          ],
+          "description": "Show only violations with these severity levels",
+          "items": {
+            "type": "string",
+            "enum": [
+              "CRITICAL",
+              "HIGH",
+              "MEDIUM",
+              "LOW"
+            ]
+          }
+        },
+        "parasoft.showCERT": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show CERT violations"
+        },
+        "parasoft.showMISRA": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show MISRA violations"
+        },
+        "parasoft.aiEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable AI-powered fix suggestions"
+        }
+      }
+    },
+    "problemMatchers": [
+      {
+        "name": "parasoft",
+        "owner": "parasoft",
+        "fileLocation": "absolute",
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)\\s+\\[(CERT|MISRA)\\-(.*)\\]$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5,
+          "code": 7
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "^16.x",
+    "eslint": "^8.41.0"
+  },
+  "dependencies": {},
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qorix/parasoft-analyzer"
+  },
+  "license": "MIT"
+}

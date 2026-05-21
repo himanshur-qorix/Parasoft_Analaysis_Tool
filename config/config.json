@@ -77,5 +77,6 @@
     "file": "parasoft_agent.log",
     "max_size_mb": 10,
     "backup_count": 3
-  }
+  },
+  "source_code_path": "D:/Task&Data/CY26Q2_SP2/ParsoftFixes/Parasoft_Analaysis_Tool/Inputs"
 }

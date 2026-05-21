@@ -1045,6 +1045,28 @@ For detailed documentation, see the docs/ folder.
                 
             elif operation_name == "generate_cert_misra_report":
                 # Generate CERT/MISRA report
+                # First, update config.json with current source_code_path from GUI
+                source_path = self.input_path_entry.get().strip()
+                config_path = self.project_root / 'config' / 'config.json'
+                
+                if config_path.exists():
+                    try:
+                        with open(config_path, 'r') as f:
+                            config = json.load(f)
+                        
+                        # Update source_code_path
+                        config['source_code_path'] = source_path if source_path else ""
+                        
+                        with open(config_path, 'w') as f:
+                            json.dump(config, f, indent=2)
+                        
+                        if source_path:
+                            self.log_output(f"✓ Using source code path: {source_path}\n")
+                        else:
+                            self.log_output(f"⚠️  No source code path set in GUI\n")
+                    except Exception as e:
+                        self.log_output(f"[WARNING] Could not update config.json: {e}\n")
+                
                 script = src_dir / "generate_cert_misra_report.py"
                 cmd = [sys.executable, str(script), module_name]
                 
@@ -1420,8 +1442,9 @@ For detailed documentation, see the docs/ folder.
             # Show reason dialog
             reason_dialog = tk.Toplevel(dialog)
             reason_dialog.title("🚫 Rejection Reason")
-            reason_dialog.geometry("600x400")
+            reason_dialog.geometry("600x520")
             reason_dialog.transient(dialog)
+            reason_dialog.resizable(False, False)
             
             ttk.Label(
                 reason_dialog,
@@ -1476,9 +1499,9 @@ For detailed documentation, see the docs/ folder.
                 reason_dialog,
                 wrap=tk.WORD,
                 font=('Arial', 9),
-                height=4
+                height=5
             )
-            reason_text.pack(padx=10, pady=(0, 10), fill=tk.BOTH, expand=True)
+            reason_text.pack(padx=10, pady=(0, 15), fill=tk.X)
             
             def submit_rejection():
                 category = reason_category.get()
@@ -1511,12 +1534,12 @@ For detailed documentation, see the docs/ folder.
                 current_supp_idx[0] += 1
                 load_current_suppression()
             
-            # Buttons
+            # Buttons (always visible at bottom)
             btn_frame = ttk.Frame(reason_dialog)
-            btn_frame.pack(fill=tk.X, padx=10, pady=10)
+            btn_frame.pack(side=tk.BOTTOM, fill=tk.X, padx=10, pady=(0, 15))
             
-            ttk.Button(btn_frame, text="Submit Rejection", command=submit_rejection).pack(side=tk.LEFT, padx=5)
-            ttk.Button(btn_frame, text="Cancel", command=reason_dialog.destroy).pack(side=tk.LEFT, padx=5)
+            ttk.Button(btn_frame, text="✅ Submit Rejection", command=submit_rejection, width=20).pack(side=tk.LEFT, padx=5)
+            ttk.Button(btn_frame, text="❌ Cancel", command=reason_dialog.destroy, width=15).pack(side=tk.LEFT, padx=5)
             
             reason_dialog.grab_set()
         
@@ -1984,7 +2007,9 @@ DESCRIPTION:
             import threading
             def generate_fix_async():
                 try:
-                    self.log_output(f"   Calling fix generator...\n")
+                    self.log_output(f"   📍 Starting fix generation thread...\n")
+                    self.log_output(f"   Calling fix generator._generate_fix_for_violation()...\n")
+                    
                     fix_data = fix_generator._generate_fix_for_violation(violation)
                     
                     if fix_data:
@@ -1994,20 +2019,51 @@ DESCRIPTION:
                             self.log_output(f"      Type: {fix_type.get('type', 'unknown')}\n")
                             self.log_output(f"      AI-generated: {fix_type.get('ai_generated', False)}\n")
                     else:
-                        self.log_output(f"   ❌ No fix data returned (None)\n")
+                        self.log_output(f"   ⚠️ No fix data returned (None)\n")
                     
                     current_fix_data[0] = fix_data
                     
                     # Update UI on main thread
+                    self.log_output(f"   📤 Updating UI with fix data...\n")
                     dialog.after(0, lambda: display_generated_fix(fix_data))
+                    
                 except Exception as e:
-                    self.log_output(f"   ❌ ERROR: {str(e)}\n")
+                    self.log_output(f"   ❌ EXCEPTION in fix generation: {str(e)}\n")
+                    self.log_output(f"   Exception type: {type(e).__name__}\n")
                     import traceback
-                    self.log_output(f"   Traceback:\n{traceback.format_exc()}\n")
-                    dialog.after(0, lambda: show_fix_error(str(e)))
+                    tb_str = traceback.format_exc()
+                    self.log_output(f"   Traceback:\n{tb_str}\n")
+                    dialog.after(0, lambda err=str(e): show_fix_error(err))
             
-            thread = threading.Thread(target=generate_fix_async, daemon=True)
+            # Start thread with timeout monitoring
+            thread = threading.Thread(target=generate_fix_async, daemon=True, name="FixGenThread")
             thread.start()
+            
+            # Add a timeout checker (runs in main thread)
+            timeout_seconds = 30  # 30 second timeout for rule-based fixes
+            start_time = [datetime.now()]
+            
+            def check_timeout():
+                elapsed = (datetime.now() - start_time[0]).total_seconds()
+                if thread.is_alive():
+                    if elapsed > timeout_seconds:
+                        self.log_output(f"\n⚠️ WARNING: Fix generation timeout after {timeout_seconds}s\n")
+                        self.log_output(f"   The background thread is still running but may be stuck.\n")
+                        self.log_output(f"   Thread name: {thread.name}, alive: {thread.is_alive()}\n")
+                        dialog.after(0, lambda: show_fix_error(
+                            f"Fix generation timeout after {timeout_seconds} seconds.\n\n"
+                            "This may indicate:\n"
+                            "1. Large Parasoft DB taking time to parse\n"
+                            "2. Network issues with AI service\n"
+                            "3. A bug in the fix generator\n\n"
+                            "Check the main log window for details."
+                        ))
+                    else:
+                        # Check again in 1 second
+                        dialog.after(1000, check_timeout)
+            
+            # Start timeout monitoring after 1 second
+            dialog.after(1000, check_timeout)
             
             return True
         
@@ -2291,8 +2347,9 @@ DESCRIPTION:
             # Show reason dialog
             reason_dialog = tk.Toplevel(dialog)
             reason_dialog.title("🚫 Rejection Reason")
-            reason_dialog.geometry("600x400")
+            reason_dialog.geometry("600x550")
             reason_dialog.transient(dialog)
+            reason_dialog.resizable(False, False)
             
             ttk.Label(
                 reason_dialog,
@@ -2336,7 +2393,7 @@ DESCRIPTION:
                 font=('Arial', 9),
                 height=6
             )
-            reason_text.pack(padx=10, pady=(0, 10), fill=tk.BOTH, expand=True)
+            reason_text.pack(padx=10, pady=(0, 15), fill=tk.X)
             
             def submit_rejection():
                 category = reason_category.get()
@@ -2371,12 +2428,12 @@ DESCRIPTION:
                 current_fix_data[0] = None  # Clear cached fix to force regeneration
                 load_current_fix()
             
-            # Buttons
+            # Buttons (always at bottom)
             btn_frame = ttk.Frame(reason_dialog)
-            btn_frame.pack(fill=tk.X, padx=10, pady=10)
+            btn_frame.pack(side=tk.BOTTOM, fill=tk.X, padx=10, pady=(0, 15))
             
-            ttk.Button(btn_frame, text="Submit Rejection", command=submit_rejection).pack(side=tk.LEFT, padx=5)
-            ttk.Button(btn_frame, text="Cancel", command=reason_dialog.destroy).pack(side=tk.LEFT, padx=5)
+            ttk.Button(btn_frame, text="✅ Submit Rejection", command=submit_rejection, width=20).pack(side=tk.LEFT, padx=5)
+            ttk.Button(btn_frame, text="❌ Cancel", command=reason_dialog.destroy, width=15).pack(side=tk.LEFT, padx=5)
             
             reason_dialog.grab_set()
         

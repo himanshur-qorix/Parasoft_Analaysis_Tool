@@ -33,6 +33,144 @@ def load_knowledge_base(kb_path):
         print(f"[ERROR] Invalid JSON in knowledge base: {e}")
         return None
 
+
+def count_suppressions_from_files(module_name):
+    """Count suppressions from justification files for this module"""
+    justifications_dir = Path("justifications")
+    if not justifications_dir.exists():
+        return 0
+    
+    total_suppressions = 0
+    
+    # Find all suppression files for this module
+    pattern = f"{module_name}_suppress_comments_*.txt"
+    suppression_files = list(justifications_dir.glob(pattern))
+    
+    print(f"[INFO] Found {len(suppression_files)} suppression files for {module_name}")
+    
+    for file_path in suppression_files:
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+                # Count parasoft-suppress comments
+                count = content.count('parasoft-suppress')
+                total_suppressions += count
+        except Exception as e:
+            print(f"[WARNING] Error reading {file_path}: {e}")
+            continue
+    
+    return total_suppressions
+
+
+def count_suppressions_from_source_code(module_name, kb_data):
+    """
+    Count suppression comments from actual source code files
+    
+    Args:
+        module_name: Module name
+        kb_data: Knowledge base data (to get source file paths)
+    
+    Returns:
+        Count of parasoft-suppress comments found in source code
+    """
+    # Try to find source code path from various locations
+    source_paths = []
+    
+    # 1. PRIORITY: Check config.json for configured source_code_path
+    config_path = Path("config") / "config.json"
+    if config_path.exists():
+        try:
+            with open(config_path, 'r') as f:
+                config = json.load(f)
+                
+            # Check root level source_code_path (set by GUI)
+            source_path_str = config.get('source_code_path')
+            if source_path_str and source_path_str.strip():
+                source_path = Path(source_path_str.strip())
+                if source_path.exists():
+                    source_paths.append(source_path)
+                    print(f"[INFO] Using configured source path from config.json: {source_path}")
+                else:
+                    print(f"[WARNING] Configured source path does not exist: {source_path}")
+            
+            # Fallback: Check workspace.source_code_path
+            if not source_paths:
+                workspace_path = config.get('workspace', {}).get('source_code_path')
+                if workspace_path and workspace_path.strip():
+                    source_path = Path(workspace_path.strip())
+                    if source_path.exists():
+                        source_paths.append(source_path)
+                        print(f"[INFO] Using workspace source path: {source_path}")
+        except Exception as e:
+            print(f"[WARNING] Error reading config.json: {e}")
+    
+    # 2. Check KB metadata
+    if not source_paths:
+        metadata = kb_data.get('metadata', {})
+        source_path_str = metadata.get('source_code_path')
+        if source_path_str:
+            source_path = Path(source_path_str)
+            if source_path.exists():
+                source_paths.append(source_path)
+                print(f"[INFO] Using source path from KB metadata: {source_path}")
+    
+    # 3. Fallback: Check Input folder
+    if not source_paths:
+        print(f"[INFO] No configured source path found, checking Input/ folder...")
+        input_dir = Path("Input")
+        if input_dir.exists():
+            # Look for module-specific folder
+            module_patterns = [
+                f"{module_name}_Config_*",
+                f"{module_name}_*",
+                module_name
+            ]
+            
+            for pattern in module_patterns:
+                matches = list(input_dir.glob(pattern))
+                source_paths.extend(matches)
+    
+    if not source_paths:
+        print(f"[ERROR] No source code directory found!")
+        print(f"[INFO] Please set the source code path in the GUI (Input Path field)")
+        print(f"[INFO] Or place source code in: Input/{module_name}_*, Input/{module_name}")
+        return 0
+    
+    # Count suppressions in source files
+    total_suppressions = 0
+    files_scanned = 0
+    
+    for source_path in source_paths[:1]:  # Use first matching path
+        if not source_path.is_dir():
+            continue
+            
+        print(f"[INFO] Scanning source code in: {source_path}")
+        
+        # Scan all C/C++ files
+        source_extensions = ['.c', '.cpp', '.h', '.hpp', '.cc', '.cxx']
+        
+        for ext in source_extensions:
+            for file_path in source_path.rglob(f'*{ext}'):
+                files_scanned += 1
+                try:
+                    with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                        content = f.read()
+                        # Count parasoft-suppress comments (case-insensitive)
+                        count = content.lower().count('parasoft-suppress')
+                        if count > 0:
+                            total_suppressions += count
+                            print(f"  Found {count} suppression(s) in: {file_path.name}")
+                except Exception as e:
+                    # Skip files that can't be read
+                    continue
+        
+        print(f"[INFO] Scanned {files_scanned} source files")
+        print(f"[INFO] Found {total_suppressions} suppression comments in source code")
+        
+        return total_suppressions
+    
+    return 0
+
 def filter_cert_misra_violations(kb_data):
     """Filter violations to only include CERT and MISRA"""
     cert_violations = []
@@ -85,10 +223,10 @@ def analyze_violations(violations):
         for file_name in unique_files:
             stats['by_file'][file_name] += 1
         
-        # Status
+        # Status - check for fix or justification
         if v.get('fix_applied'):
             stats['fixed'] += 1
-        elif v.get('justification') or v.get('justified'):
+        elif v.get('justification_added') or v.get('justification') or v.get('justified'):
             stats['justified'] += 1
         else:
             stats['open'] += 1
@@ -112,13 +250,14 @@ def get_top_violations(violations, top_n=10):
     sorted_rules = sorted(rule_counts.items(), key=lambda x: x[1]['count'], reverse=True)
     return sorted_rules[:top_n]
 
-def generate_html_report(module_name, cert_violations, misra_violations, cert_stats, misra_stats, output_path):
+def generate_html_report(module_name, cert_violations, misra_violations, cert_stats, misra_stats, output_path, total_suppressions=0):
     """Generate comprehensive HTML report"""
     
     cert_top = get_top_violations(cert_violations, 10)
     misra_top = get_top_violations(misra_violations, 10)
     
     total_violations = len(cert_violations) + len(misra_violations)
+    total_justified = cert_stats['justified'] + misra_stats['justified'] + total_suppressions
     
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
@@ -405,8 +544,37 @@ def generate_html_report(module_name, cert_violations, misra_violations, cert_st
             </div>
             <div class="card">
                 <div class="card-title">Justified</div>
-                <div class="card-value" style="color: #95a5a6;">{cert_stats['justified'] + misra_stats['justified']}</div>
+                <div class="card-value" style="color: #95a5a6;">{total_justified}</div>
                 <div class="card-subtitle">With Rationale</div>
+            </div>
+        </div>
+"""
+    
+    # Add info note if suppressions were found
+    if total_suppressions > 0:
+        html_content += f"""
+        <div class="section" style="padding: 15px 30px;">
+            <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 15px; border-radius: 4px;">
+                <strong>ℹ️ Justified Count Details:</strong><br>
+                • {cert_stats['justified'] + misra_stats['justified']} violations marked as justified in Knowledge Base<br>
+                • {total_suppressions} parasoft-suppress comments found in source code files<br>
+                • <strong>Total Justified: {total_justified}</strong>
+            </div>
+        </div>
+"""
+    else:
+        html_content += f"""
+        <div class="section" style="padding: 15px 30px;">
+            <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; border-radius: 4px;">
+                <strong>⚠️ No Suppression Comments Found:</strong><br>
+                No parasoft-suppress comments were detected in the source code files.<br>
+                <br>
+                <strong>How to fix:</strong><br>
+                1. Open the GUI and check the <strong>Input Path</strong> field<br>
+                2. Make sure it points to your actual source code directory<br>
+                3. Regenerate this report after setting the correct path<br>
+                <br>
+                Alternatively, place source code in: <code>Input/{module_name}*/</code>
             </div>
         </div>
 """
@@ -496,7 +664,7 @@ def generate_html_report(module_name, cert_violations, misra_violations, cert_st
             if files_affected:
                 if isinstance(files_affected[0], dict):
                     file_name = files_affected[0].get('file', 'UNKNOWN')
-                    line_number = files_affected[0].get('line_number', '-')
+                    line_number = files_affected[0].get('line', '-')  # Fixed: use 'line' not 'line_number'
                 else:
                     file_name = str(files_affected[0])
                     line_number = '-'
@@ -618,7 +786,7 @@ def generate_html_report(module_name, cert_violations, misra_violations, cert_st
             if files_affected:
                 if isinstance(files_affected[0], dict):
                     file_name = files_affected[0].get('file', 'UNKNOWN')
-                    line_number = files_affected[0].get('line_number', '-')
+                    line_number = files_affected[0].get('line', '-')  # Fixed: use 'line' not 'line_number'
                 else:
                     file_name = str(files_affected[0])
                     line_number = '-'
@@ -724,12 +892,30 @@ def main():
     cert_stats = analyze_violations(cert_violations)
     misra_stats = analyze_violations(misra_violations)
     
+    # Count suppressions from actual source code files
+    print(f"\n✓ Scanning source code for parasoft-suppress comments...")
+    total_suppressions = count_suppressions_from_source_code(module_name, kb_data)
+    
+    if total_suppressions > 0:
+        print(f"  ✓ Found {total_suppressions} suppression comments in source code")
+    else:
+        print(f"  ⚠️  No suppressions found in source code")
+        print(f"  💡 Make sure source code is in Input/{module_name}*/ folder")
+    
+    # Add suppression count to stats (this represents justified violations)
+    kb_justified = cert_stats['justified'] + misra_stats['justified']
+    total_justified = kb_justified + total_suppressions
+    
+    if kb_justified > 0:
+        print(f"  Justifications in KB: {kb_justified}")
+    print(f"  Total justified violations: {total_justified}")
+    
     # Generate HTML report
     output_path = reports_dir / f"{module_name}_CERT_MISRA_Report.html"
     
     print(f"\n✓ Generating HTML report...")
     generate_html_report(module_name, cert_violations, misra_violations, 
-                         cert_stats, misra_stats, output_path)
+                         cert_stats, misra_stats, output_path, total_suppressions)
     
     print(f"\n{'='*80}")
     print(f"SUCCESS: Report generated successfully!")

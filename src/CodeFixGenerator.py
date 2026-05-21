@@ -652,18 +652,24 @@ class CodeFixGenerator:
         Returns:
             Fix suggestion dictionary
         """
+        logger.debug(f"[RULE-BASED] Generating pattern-based fix for {violation_id}")
+        logger.debug(f"[RULE-BASED]   Category: {category}")
+        
         text_upper = violation_text.upper()
         
         # Common MISRA fixes
         if 'MISRA' in category:
+            logger.debug(f"[RULE-BASED] Using MISRA patterns")
             return self._get_misra_fix(violation_id, text_upper, violation_text)
         
         # Common CERT fixes
         elif 'CERT' in category:
+            logger.debug(f"[RULE-BASED] Using CERT patterns")
             return self._get_cert_fix(violation_id, text_upper, violation_text)
         
         # Generic fixes
         else:
+            logger.debug(f"[RULE-BASED] Using generic patterns")
             return self._get_generic_fix(text_upper, violation_text)
     
     def _get_parasoft_official_fix(self, violation_id: str, violation_text: str, category: str) -> Optional[Dict]:
@@ -679,11 +685,14 @@ class CodeFixGenerator:
             Fix suggestion dictionary with official Parasoft repair example, or None
         """
         try:
+            logger.debug(f"[PARASOFT-DB] Looking up official fix for {violation_id}")
+            
             # Extract base rule ID from violation ID
             # Example: "CERT_C-STR31-a-2" -> "CERT_C-STR31-a"
             # Example: "MISRAC2012-RULE_8_7-a" -> "MISRAC2012-RULE_8_7-a"
             
             # Try exact match first
+            logger.debug(f"[PARASOFT-DB] Trying exact match: {violation_id}")
             rule = self.rules_parser.get_rule(violation_id)
             
             # If not found, try extracting base rule (remove trailing numbers/variant)
@@ -691,10 +700,14 @@ class CodeFixGenerator:
                 import re
                 # Try removing trailing -\d+ suffix
                 base_id = re.sub(r'-\d+$', '', violation_id)
+                logger.debug(f"[PARASOFT-DB] Trying base ID: {base_id}")
                 rule = self.rules_parser.get_rule(base_id)
             
             if not rule:
+                logger.debug(f"[PARASOFT-DB] No rule found in database for {violation_id}")
                 return None
+            
+            logger.debug(f"[PARASOFT-DB] Found rule: {rule.title}")
             
             # Build fix suggestion from official Parasoft documentation
             fix_parts = []
