@@ -160,7 +160,7 @@ class ParasoftAIAgent:
         analyzer = ViolationAnalyzer(module_name, kb_manager)
         
         # Parse the report
-        from ParasoftAnalysisTool import parse_parasoft_report
+        from ParasoftAnalysisTool import parse_parasoft_report, parse_suppressions_section
         violations = parse_parasoft_report(report_path)
         
         if not violations:
@@ -168,6 +168,29 @@ class ParasoftAIAgent:
             return {'status': 'no_violations', 'module': module_name}
         
         logger.info(f"Found {len(violations)} total violations")
+        
+        # Parse already-suppressed violations straight from the report's Suppressions section
+        suppressions = parse_suppressions_section(report_path)
+        logger.info(f"Found {len(suppressions)} already-suppressed violations in report")
+        
+        # Merge suppressions into the violations list (they are usually absent from
+        # the main findings table once suppressed, so must be added explicitly)
+        existing_keys = {(Path(v.get('File', '')).name, v.get('Line number'), v.get('Violation ID')) for v in violations}
+        merged_count = 0
+        for s in suppressions:
+            key = (s['File'], s['Line number'], s['Violation ID'])
+            if key not in existing_keys:
+                violations.append({
+                    'Violation': s['Violation'],
+                    'Violation ID': s['Violation ID'],
+                    'File': s['File'],
+                    'Line number': s['Line number'],
+                    '_already_suppressed': True,
+                    'Justification Reason': s.get('Reason', '')
+                })
+                existing_keys.add(key)
+                merged_count += 1
+        logger.info(f"Merged {merged_count} suppressed violations into the violations list (total: {len(violations)})")
         
         # Load justifiable mapping from Qorix file
         justifiable_mapping = {}
@@ -179,7 +202,9 @@ class ParasoftAIAgent:
             logger.warning(f"Qorix file not found: {self.qorix_file}")
         
         # Apply justifiable status to violations
-        violations_with_status = self._apply_justifiable_status(violations, justifiable_mapping)
+        # (uses report Suppressions section, falling back to source code scan, to detect already-justified violations)
+        source_root = Path(self.config.get('source_code_path')) if self.config.get('source_code_path') else None
+        violations_with_status = self._apply_justifiable_status(violations, justifiable_mapping, source_root, suppressions)
         
         # Generate Excel report
         excel_path = self.reports_dir / f"{module_name}_violations_report.xlsx"
@@ -214,31 +239,110 @@ class ParasoftAIAgent:
             'timestamp': datetime.now().isoformat()
         }
     
-    def _apply_justifiable_status(self, violations, justifiable_mapping):
+    def _apply_justifiable_status(self, violations, justifiable_mapping, source_root=None, suppressions=None):
         """
         Apply justifiable status to violations based on Qorix mapping
         
         Args:
             violations: List of violation dictionaries
             justifiable_mapping: Mapping from violation ID to justifiable status
+            source_root: Optional path to source code root, used to detect
+                violations that already have a parasoft-suppress comment applied
+            suppressions: Optional list of already-suppressed violations parsed
+                from the report's Suppressions section (authoritative source)
         
         Returns:
             List of violations with status field added
         """
         from ParasoftAnalysisTool import resolve_justifiable
         
+        file_index = self._build_source_file_index(source_root) if source_root else {}
+        suppressed_lookup = {}
+        for s in (suppressions or []):
+            key = (s['File'], s['Line number'], s['Violation ID'])
+            suppressed_lookup[key] = s.get('Reason', '')
+        
         for v in violations:
+            # Violations merged in from the Suppressions section are already justified
+            if v.get('_already_suppressed'):
+                v['Status'] = "Justified"
+                continue
+            
             justifiable = resolve_justifiable(v['Violation ID'], justifiable_mapping)
             
             # Map to final status
             if justifiable == "Yes":
-                v['Status'] = "Justified"
+                key = (Path(v.get('File', '')).name, v.get('Line number'), v.get('Violation ID'))
+                if key in suppressed_lookup:
+                    v['Status'] = "Justified"
+                    v['Justification Reason'] = suppressed_lookup[key]
+                elif self._is_already_justified(v, file_index):
+                    v['Status'] = "Justified"
+                else:
+                    v['Status'] = "To be justified"
             elif justifiable == "No":
                 v['Status'] = "Needs Code Update"
             else:  # "Analyse"
                 v['Status'] = "Analysis Required"
         
         return violations
+    
+    def _build_source_file_index(self, source_root):
+        """
+        Build an index mapping base filenames to their full paths under source_root
+        
+        Args:
+            source_root: Path to search for source files
+        
+        Returns:
+            Dictionary mapping filename -> Path
+        """
+        file_index = {}
+        
+        if not source_root or not Path(source_root).exists():
+            return file_index
+        
+        for ext in ('*.c', '*.h', '*.cpp', '*.hpp'):
+            for path in Path(source_root).rglob(ext):
+                file_index.setdefault(path.name, path)
+        
+        return file_index
+    
+    def _is_already_justified(self, violation, file_index):
+        """
+        Check whether a violation already has a parasoft-suppress comment applied
+        in the source code (i.e. it was already justified in a previous run)
+        
+        Args:
+            violation: Violation dictionary with 'File', 'Line number', 'Violation ID'
+            file_index: Mapping of filename -> full path, built by _build_source_file_index
+        
+        Returns:
+            True if the violation's line already contains a matching suppress comment
+        """
+        file_name = violation.get('File')
+        line_number = violation.get('Line number')
+        violation_id = violation.get('Violation ID')
+        
+        if not file_index or not file_name or not line_number:
+            return False
+        
+        file_path = file_index.get(Path(file_name).name)
+        if not file_path:
+            return False
+        
+        try:
+            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                lines = f.readlines()
+        except Exception as e:
+            logger.debug(f"Could not read {file_path} for justification check: {e}")
+            return False
+        
+        if line_number < 1 or line_number > len(lines):
+            return False
+        
+        line_text = lines[line_number - 1]
+        return 'parasoft-suppress' in line_text and (not violation_id or violation_id in line_text)
     
     def _get_status_statistics(self, violations):
         """
@@ -266,10 +370,10 @@ class ParasoftAIAgent:
         Returns:
             Path to generated suppress comments file or None
         """
-        justified_violations = [v for v in violations if v.get('Status') == 'Justified']
+        justified_violations = [v for v in violations if v.get('Status') == 'To be justified']
         
         if not justified_violations:
-            logger.info("No justified violations to suppress")
+            logger.info("No violations pending justification")
             return None
         
         # Group by file, then by line number
@@ -382,6 +486,8 @@ class ParasoftAIAgent:
         columns = ["Violation", "Violation ID", "File", "Line number"]
         if 'Status' in df.columns:
             columns.append("Status")
+        if 'Justification Reason' in df.columns:
+            columns.append("Justification Reason")
         
         detailed_df = df[columns].sort_values(by=["File", "Line number"])
         
@@ -421,11 +527,18 @@ class ParasoftAIAgent:
         }
         stats_df = pd.DataFrame(stats_data)
         
+        # Create already-justified violations sheet
+        already_justified_df = None
+        if 'Status' in df.columns:
+            already_justified_df = detailed_df[detailed_df['Status'] == 'Justified'].copy()
+        
         # Write to Excel with multiple sheets
         with pd.ExcelWriter(output_path, engine="openpyxl") as writer:
             stats_df.to_excel(writer, sheet_name="Summary", index=False)
             unique_df.to_excel(writer, sheet_name="Unique Violations", index=False)
             detailed_df.to_excel(writer, sheet_name="Detailed Violations", index=False)
+            if already_justified_df is not None and not already_justified_df.empty:
+                already_justified_df.to_excel(writer, sheet_name="Already Justified", index=False)
         
         logger.info(f"Excel report created with {len(violations)} violations across {df['File'].nunique()} files")
     

@@ -66,6 +66,88 @@ def parse_parasoft_html(soup):
     return records
 
 
+# -------------------------------------------------
+# 1b. Parse Suppressions section (already-justified violations)
+# -------------------------------------------------
+def parse_suppressions_section(report_path):
+    """
+    Parse the 'Suppressions' section of a Parasoft HTML report.
+    This section lists violations that already have suppress/justification
+    comments applied in the source code.
+
+    Returns:
+        List of dicts: {File, Line number, Violation, Violation ID, Reason}
+    """
+    with open(report_path, "r", encoding="utf-8", errors="ignore") as f:
+        soup = BeautifulSoup(f, "lxml")
+
+    suppressions = []
+
+    # Find the heading cell that contains "Suppressions" - it directly wraps a
+    # bold author name followed by the literal word "Suppressions" with a short
+    # text length (avoid matching outer container tds with nested tables)
+    heading_td = None
+    for td in soup.find_all("td"):
+        bold = td.find("b")
+        text = td.get_text(strip=True)
+        if bold and "Suppressions" in text and len(text) < 100:
+            heading_td = td
+            break
+
+    if heading_td is None:
+        return suppressions
+
+    # Walk all <tr> rows that appear after the heading row in document order
+    # (the suppressions data table is nested inside the heading's table, not a sibling)
+    heading_row = heading_td.find_parent("tr")
+    if heading_row is None:
+        return suppressions
+
+    all_rows = soup.find_all("tr")
+    try:
+        start_idx = all_rows.index(heading_row) + 1
+    except ValueError:
+        return suppressions
+
+    current_file = None
+    for row in all_rows[start_idx:]:
+        tds = row.find_all("td")
+
+        # File header row: single td with a <b> containing the file path
+        if len(tds) == 1:
+            bold = tds[0].find("b")
+            if bold:
+                file_text = bold.get_text(strip=True)
+                if file_text.endswith((".c", ".cpp", ".h", ".hpp")):
+                    current_file = Path(file_text).name
+            continue
+
+        # Violation row: line | message | reason | rule id
+        if len(tds) == 4 and current_file:
+            line_font = tds[0].find("font", class_="gray")
+            rule_font = tds[3].find("font", class_="gray")
+
+            if not line_font or not rule_font:
+                continue
+
+            line_text = line_font.get_text(strip=True).replace(":", "")
+            if not line_text.isdigit():
+                continue
+
+            reason_text = tds[2].get_text(strip=True)
+            reason_text = reason_text[len("Reason:"):].strip() if reason_text.startswith("Reason:") else reason_text
+
+            suppressions.append({
+                "File": current_file,
+                "Line number": int(line_text),
+                "Violation": tds[1].get_text(" ", strip=True),
+                "Violation ID": rule_font.get_text(strip=True),
+                "Reason": reason_text
+            })
+
+    return suppressions
+
+
 def parse_misra_cert_report(report_path, soup=None):
     """
     Parse MISRA/CERT HTML report
